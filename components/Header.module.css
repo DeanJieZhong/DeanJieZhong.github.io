@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  min-height: 88px;
+  min-height: calc(88px * var(--header-height-scale, 0.75));
   gap: 24px;
   color: #fff;
 }
@@ -76,6 +76,9 @@
 .navItem {
   --item-width: 128px;
   --unit: 7px;
+  --label-line-height: 24px;
+  --label-offset: 10px;
+  --group-height: calc(var(--label-offset) + var(--label-line-height));
   position: relative;
   width: var(--item-width);
   height: 48px;
@@ -102,17 +105,18 @@
 .label,
 .revealedLabel {
   position: absolute;
-  top: 17px;
+  /* Center the square-to-label group within the 48px navigation target. */
+  top: calc(50% - var(--group-height) / 2 + var(--label-offset));
   left: 25px;
   font-size: 16px;
   font-weight: 400;
-  line-height: 24px;
+  line-height: var(--label-line-height);
   white-space: nowrap;
 }
 
 .reveal {
   position: absolute;
-  top: 7px;
+  top: calc(50% - var(--group-height) / 2);
   left: 12px;
   width: calc(var(--item-width) - 12px);
   pointer-events: none;
@@ -133,7 +137,7 @@
 }
 
 .revealedLabel {
-  top: 10px;
+  top: var(--label-offset);
   left: 13px;
   color: #000;
   font-weight: 700;
@@ -209,7 +213,7 @@
 
 @media (min-width: 1280px) {
   .header {
-    min-height: 96px;
+    min-height: calc(96px * var(--header-height-scale, 0.75));
   }
 
   .controls {
@@ -219,7 +223,7 @@
 
 @media (max-width: 767px) {
   .header {
-    min-height: 80px;
+    min-height: calc(80px * var(--header-height-scale, 0.75));
   }
 
   .logo {

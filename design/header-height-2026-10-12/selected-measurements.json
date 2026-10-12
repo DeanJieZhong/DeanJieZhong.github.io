@@ -1,0 +1,250 @@
+[
+  {
+    "reduction": 25,
+    "groups": [
+      {
+        "centerOffset": 0,
+        "height": 34,
+        "name": "research"
+      },
+      {
+        "centerOffset": 0,
+        "height": 34,
+        "name": "blog"
+      },
+      {
+        "centerOffset": 0,
+        "height": 34,
+        "name": "news"
+      },
+      {
+        "centerOffset": 0,
+        "height": 34,
+        "name": "about"
+      }
+    ],
+    "height": 72,
+    "icons": [
+      {
+        "centerOffset": 0,
+        "height": 24,
+        "name": "svg"
+      },
+      {
+        "centerOffset": 0,
+        "height": 48,
+        "name": "Search"
+      },
+      {
+        "centerOffset": 0,
+        "height": 24,
+        "name": "svg"
+      }
+    ],
+    "overflow": false,
+    "width": 1440
+  },
+  {
+    "reduction": 25,
+    "groups": [
+      {
+        "centerOffset": 0,
+        "height": 34,
+        "name": "research"
+      },
+      {
+        "centerOffset": 0,
+        "height": 34,
+        "name": "blog"
+      },
+      {
+        "centerOffset": 0,
+        "height": 34,
+        "name": "news"
+      },
+      {
+        "centerOffset": 0,
+        "height": 34,
+        "name": "about"
+      }
+    ],
+    "height": 72,
+    "icons": [
+      {
+        "centerOffset": 0,
+        "height": 24,
+        "name": "svg"
+      },
+      {
+        "centerOffset": 0,
+        "height": 48,
+        "name": "Search"
+      },
+      {
+        "centerOffset": 0,
+        "height": 24,
+        "name": "svg"
+      }
+    ],
+    "overflow": false,
+    "width": 1280
+  },
+  {
+    "reduction": 25,
+    "groups": [
+      {
+        "centerOffset": 0,
+        "height": 34,
+        "name": "research"
+      },
+      {
+        "centerOffset": 0,
+        "height": 34,
+        "name": "blog"
+      },
+      {
+        "centerOffset": 0,
+        "height": 34,
+        "name": "news"
+      },
+      {
+        "centerOffset": 0,
+        "height": 34,
+        "name": "about"
+      }
+    ],
+    "height": 66,
+    "icons": [
+      {
+        "centerOffset": 0,
+        "height": 24,
+        "name": "svg"
+      },
+      {
+        "centerOffset": 0,
+        "height": 48,
+        "name": "Search"
+      },
+      {
+        "centerOffset": 0,
+        "height": 24,
+        "name": "svg"
+      }
+    ],
+    "overflow": false,
+    "width": 1024
+  },
+  {
+    "reduction": 25,
+    "groups": [
+      {
+        "centerOffset": 0,
+        "height": 34,
+        "name": "research"
+      },
+      {
+        "centerOffset": 0,
+        "height": 34,
+        "name": "blog"
+      },
+      {
+        "centerOffset": 0,
+        "height": 34,
+        "name": "news"
+      },
+      {
+        "centerOffset": 0,
+        "height": 34,
+        "name": "about"
+      }
+    ],
+    "height": 66,
+    "icons": [
+      {
+        "centerOffset": 0,
+        "height": 24,
+        "name": "svg"
+      },
+      {
+        "centerOffset": 0,
+        "height": 48,
+        "name": "Search"
+      },
+      {
+        "centerOffset": 0,
+        "height": 24,
+        "name": "svg"
+      }
+    ],
+    "overflow": false,
+    "width": 768
+  },
+  {
+    "reduction": 25,
+    "groups": [],
+    "height": 60,
+    "icons": [
+      {
+        "centerOffset": 0,
+        "height": 21.328125,
+        "name": "svg"
+      },
+      {
+        "centerOffset": 0,
+        "height": 48,
+        "name": "Search"
+      },
+      {
+        "centerOffset": 0,
+        "height": 24,
+        "name": "svg"
+      },
+      {
+        "centerOffset": 0,
+        "height": 48,
+        "name": "Open navigation"
+      },
+      {
+        "centerOffset": 0,
+        "height": 28,
+        "name": "svg"
+      }
+    ],
+    "overflow": false,
+    "width": 390
+  },
+  {
+    "reduction": 25,
+    "groups": [],
+    "height": 60,
+    "icons": [
+      {
+        "centerOffset": 0,
+        "height": 21.328125,
+        "name": "svg"
+      },
+      {
+        "centerOffset": 0,
+        "height": 48,
+        "name": "Search"
+      },
+      {
+        "centerOffset": 0,
+        "height": 24,
+        "name": "svg"
+      },
+      {
+        "centerOffset": 0,
+        "height": 48,
+        "name": "Open navigation"
+      },
+      {
+        "centerOffset": 0,
+        "height": 28,
+        "name": "svg"
+      }
+    ],
+    "overflow": false,
+    "width": 320
+  }
+]

@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState, type CSSProperties } from 'react'
 import { usePathname } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import siteMetadata from '@/data/siteMetadata'
@@ -12,9 +13,23 @@ const MobileNav = dynamic(() => import('./MobileNav'), { ssr: false })
 
 const Header = () => {
   const pathname = usePathname().replace(/\/$/, '') || '/'
+  const [heightScale, setHeightScale] = useState(0.75)
+
+  useEffect(() => {
+    // Local comparisons only; production keeps the selected default height.
+    if (process.env.NODE_ENV !== 'development') return
+
+    const reduction = new URLSearchParams(window.location.search).get('headerReduction')
+    if (reduction !== null && ['0', '10', '20', '25', '30'].includes(reduction)) {
+      setHeightScale(1 - Number(reduction) / 100)
+    }
+  }, [])
 
   return (
-    <header className={`${styles.header} ${siteMetadata.stickyNav ? styles.sticky : ''}`}>
+    <header
+      className={`${styles.header} ${siteMetadata.stickyNav ? styles.sticky : ''}`}
+      style={{ '--header-height-scale': heightScale } as CSSProperties}
+    >
       <div className={styles.background} aria-hidden="true" />
 
       <Link

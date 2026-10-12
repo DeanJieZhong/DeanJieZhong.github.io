@@ -1,4 +1,24 @@
 const { withContentlayer } = require('next-contentlayer2')
+const { execFileSync } = require('node:child_process')
+
+// GitHub Pages supplies the exact deployed source revision. Local previews use
+// HEAD with an explicit local suffix, including builds with uncommitted edits.
+const deploymentRevision = /^[a-f0-9]{40}$/i.test(process.env.GITHUB_SHA || '')
+  ? process.env.GITHUB_SHA
+  : ''
+let siteRevision = deploymentRevision
+if (!siteRevision) {
+  try {
+    siteRevision = execFileSync('git', ['rev-parse', 'HEAD'], {
+      cwd: __dirname,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim()
+  } catch {
+    // Source archives may not contain Git metadata; do not invent a version.
+    siteRevision = ''
+  }
+}
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
@@ -38,6 +58,10 @@ module.exports = () => {
   const plugins = [withContentlayer, withBundleAnalyzer]
 
   const nextConfig = {
+    env: {
+      SITE_REVISION: siteRevision,
+      SITE_LOCAL_PREVIEW: String(!deploymentRevision),
+    },
     output,
     basePath,
     reactStrictMode: true,
