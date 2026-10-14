@@ -6,7 +6,6 @@ export interface HeaderNavLink {
 }
 
 const headerNavLinks: HeaderNavLink[] = [
-  { href: '/', title: 'Home' },
   {
     href: '/research',
     title: 'Research',
@@ -22,9 +21,8 @@ const headerNavLinks: HeaderNavLink[] = [
     children: [{ href: '/tags', title: 'Tags' }],
   },
   {
-    href: '/news',
-    title: 'News',
-    children: [],
+    href: '/static/files/cv.pdf',
+    title: 'CV',
   },
   {
     href: '/about',

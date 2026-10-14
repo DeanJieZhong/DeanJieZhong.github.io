@@ -104,6 +104,11 @@ export const Blog = defineDocumentType(() => ({
     lastmod: { type: 'date' },
     draft: { type: 'boolean' },
     summary: { type: 'string' },
+    location: {
+      type: 'string',
+      description:
+        'Optional plain text: venue on the first line, city and country on the next line.',
+    },
     images: { type: 'json' },
     authors: { type: 'list', of: { type: 'string' } },
     layout: { type: 'string' },

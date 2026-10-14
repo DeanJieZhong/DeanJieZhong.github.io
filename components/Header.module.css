@@ -160,8 +160,7 @@
   list-style: none;
 }
 
-.submenu a,
-.placeholder {
+.submenu a {
   display: block;
   padding: 11px 0;
   color: #000;

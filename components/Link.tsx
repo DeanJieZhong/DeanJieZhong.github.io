@@ -6,12 +6,14 @@ import { AnchorHTMLAttributes } from 'react'
 const CustomLink = ({ href, ...rest }: LinkProps & AnchorHTMLAttributes<HTMLAnchorElement>) => {
   const isInternalLink = href && href.startsWith('/')
   const isAnchorLink = href && href.startsWith('#')
+  const isStaticFile = href && href.startsWith('/static/files/')
 
-  if (isInternalLink) {
+  if (isInternalLink && !isStaticFile) {
     return <Link className="break-words" href={href} {...rest} />
   }
 
-  if (isAnchorLink) {
+  // Let the browser handle files natively, including inline PDF previews.
+  if (isAnchorLink || isStaticFile) {
     return <a className="break-words" href={href} {...rest} />
   }
 

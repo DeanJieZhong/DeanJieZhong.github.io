@@ -5,8 +5,6 @@ import headerNavLinks from '@/data/headerNavLinks'
 import Link from './Link'
 import styles from './Header.module.css'
 
-const navigation = headerNavLinks.filter((link) => link.href !== '/')
-
 export default function HeaderNavigation({ pathname }: { pathname: string }) {
   const [openItem, setOpenItem] = useState<string | null>(null)
   const navRef = useRef<HTMLElement>(null)
@@ -42,8 +40,9 @@ export default function HeaderNavigation({ pathname }: { pathname: string }) {
   return (
     <nav ref={navRef} className={styles.desktopNav} aria-label="Main navigation">
       <ul className={styles.navList}>
-        {navigation.map((link) => {
+        {headerNavLinks.map((link) => {
           const isOpen = openItem === link.href
+          const hasChildren = Boolean(link.children?.length)
           const id = `header-${link.title.toLowerCase()}`
 
           return (
@@ -66,11 +65,12 @@ export default function HeaderNavigation({ pathname }: { pathname: string }) {
                 id={`${id}-trigger`}
                 href={link.href}
                 className={styles.trigger}
-                aria-expanded={isOpen}
-                aria-controls={`${id}-panel`}
+                aria-expanded={hasChildren ? isOpen : undefined}
+                aria-controls={hasChildren ? `${id}-panel` : undefined}
                 aria-current={pathname === link.href ? 'page' : undefined}
                 onClick={() => setOpenItem(null)}
                 onKeyDown={(event) => {
+                  if (!hasChildren) return
                   closeWithEscape(event)
                   if (event.key === ' ') {
                     event.preventDefault()
@@ -98,16 +98,16 @@ export default function HeaderNavigation({ pathname }: { pathname: string }) {
                 <div className={styles.titleSurface} aria-hidden="true">
                   <span className={styles.revealedLabel}>{link.title}</span>
                 </div>
-                <div
-                  id={`${id}-panel`}
-                  className={styles.dropdown}
-                  aria-labelledby={`${id}-trigger`}
-                  aria-hidden={!isOpen}
-                  inert={!isOpen}
-                >
-                  <ul className={styles.submenu}>
-                    {link.children?.length ? (
-                      link.children.map((child) => (
+                {hasChildren && (
+                  <div
+                    id={`${id}-panel`}
+                    className={styles.dropdown}
+                    aria-labelledby={`${id}-trigger`}
+                    aria-hidden={!isOpen}
+                    inert={!isOpen}
+                  >
+                    <ul className={styles.submenu}>
+                      {link.children?.map((child) => (
                         <li key={child.href}>
                           <Link
                             href={child.href}
@@ -119,12 +119,10 @@ export default function HeaderNavigation({ pathname }: { pathname: string }) {
                             <span className={styles.navigationLabel}>{child.title}</span>
                           </Link>
                         </li>
-                      ))
-                    ) : (
-                      <li className={styles.placeholder}>Coming soon</li>
-                    )}
-                  </ul>
-                </div>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             </li>
           )

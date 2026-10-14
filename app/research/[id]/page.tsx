@@ -1,13 +1,4 @@
-import 'css/prism.css'
-import 'katex/dist/katex.css'
-
 import { notFound } from 'next/navigation'
-import { allAuthors, allBlogs } from 'contentlayer/generated'
-import { coreContent } from 'pliny/utils/contentlayer'
-import { MDXLayoutRenderer } from 'pliny/mdx-components'
-import { components } from '@/components/MDXComponents'
-import Link from '@/components/Link'
-import PostLayout from '@/layouts/PostLayout'
 import { researchDetailEntries } from '@/data/researchData'
 import trogenData from '@/data/trogenData'
 import TrogenProject from '@/components/TrogenProject'
@@ -60,7 +51,7 @@ export async function generateMetadata({ params }: ResearchPageProps) {
 
   return genPageMetadata({
     title: entry.researchTitle?.trim() || entry.name,
-    description: 'Temporary preview using The Time Machine as placeholder content.',
+    description: entry.summary || 'Research project details coming soon.',
     robots: { index: false, follow: false },
   })
 }
@@ -73,43 +64,6 @@ export default async function ResearchPage({ params }: ResearchPageProps) {
   if (id === 'fj-gliding') return <FjProject />
   if (entry.photo) return <PhotoResearchProject entry={entry} photo={entry.photo} />
 
-  const placeholder = allBlogs.find((post) => post.slug === 'the-time-machine')
-  if (!placeholder) notFound()
-
-  const authorDetails = (placeholder.authors || ['default']).flatMap((slug) => {
-    const author = allAuthors.find((item) => item.slug === slug)
-    return author ? [coreContent(author)] : []
-  })
-
-  return (
-    <PostLayout
-      content={coreContent(placeholder)}
-      authorDetails={authorDetails}
-      backLink={{ href: '/research', label: 'Back to Research' }}
-      alignTitleWithContent
-      headerContent={
-        <div className="mb-6 border-b border-gray-200 pb-6 break-words dark:border-gray-700">
-          <Link
-            href="/research"
-            className="text-sm text-gray-700 underline underline-offset-4 dark:text-gray-300"
-          >
-            &larr; Back to Research
-          </Link>
-          <p className="mt-4 font-semibold text-gray-900 dark:text-gray-100">
-            {entry.researchTitle?.trim() || entry.name}
-          </p>
-          <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">
-            Placeholder page. The Time Machine below is sample content, not a description of this
-            research entry.
-          </p>
-        </div>
-      }
-    >
-      <MDXLayoutRenderer
-        code={placeholder.body.code}
-        components={components}
-        toc={placeholder.toc}
-      />
-    </PostLayout>
-  )
+  // Keep unfinished research routes blank until their own content is ready.
+  return null
 }

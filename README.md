@@ -235,7 +235,9 @@ Edit the layout in `app` or content in `data`. With live reloading, the pages au
 
 `data/projectsData.js` - data used to generate styled card on the projects page.
 
-`data/headerNavLinks.js` - navigation links.
+`data/headerNavLinks.ts` - shared desktop and mobile navigation links. The CV entry opens
+`public/static/files/cv.pdf` in the current tab using the browser's PDF viewer. Replace that
+placeholder with the official PDF at the same path; no navigation code change is needed.
 
 `data/logo.svg` - replace with your own logo.
 
@@ -277,11 +279,45 @@ tags (optional)
 lastmod (optional)
 draft (optional)
 summary (optional)
+location (optional plain text; see the formatting rule below)
 images (optional)
 authors (optional list which should correspond to the file names in `data/authors`. Uses `default` if none is specified)
 layout (optional list which should correspond to the file names in `data/layouts`)
 canonicalUrl (optional, canonical url for the post for SEO)
 ```
+
+For Blog list locations, put the venue or institution on the first line and `City, Country`
+on a separate line. Use a YAML literal block to preserve this required line break:
+
+```yaml
+location: |-
+  Xi’an Jiaotong-Liverpool University
+  Suzhou, China
+```
+
+When there is no venue, use a single line such as `location: 'Abu Dhabi, UAE'`.
+Long names wrap automatically within their own line group. Keep map links in the article body;
+the list displays the location as plain text. Older posts without a location remain supported.
+
+The Blog category bar is a single selection: All, Research, Travel, Reflection, and Side quests.
+Its labels and tag mapping are maintained together in `layouts/blogFilters.ts`:
+
+- Research: `research`, `math`, `ols` (the existing OLS derivation).
+- Travel: `travel`, `holiday`, `canada` (the existing Canada photo gallery).
+- Reflection: `reflection` (the existing tag on The Time Machine).
+- Side quests: `side-quests` (no matching published articles yet).
+
+New posts can use the category's tag directly, e.g. `tags: ['side-quests']`, alongside finer tags.
+Matching ignores case and treats spaces/underscores as hyphens. Add specific tag aliases to the
+central mapping only after reviewing the corresponding content. Generic template tags such as
+`guide`, `code`, and `images` are deliberately unmapped; currently eight tutorial, sample, and
+placeholder posts appear only in All. Missing or unmatched tags never hide a post from All.
+Original tags and tag-page URLs remain unchanged.
+
+Selection is saved in the `category` URL parameter; All omits it. Refresh and browser history
+preserve the selection. Filtering applies to the full collection before showing the first ten
+posts in date order; scrolling reveals the next ten. Switching categories resets that batch.
+The header image is `public/static/images/mountains.png`, with its dark transition supplied by CSS.
 
 Here's an example of a post's frontmatter:
 
