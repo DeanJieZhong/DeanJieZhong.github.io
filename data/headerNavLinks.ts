@@ -27,7 +27,10 @@ const headerNavLinks: HeaderNavLink[] = [
   {
     href: '/about',
     title: 'About',
-    children: [{ href: '/about#contact', title: 'Contact' }],
+    children: [
+      { href: '/lego', title: 'Lego Archive' },
+      { href: '/about#contact', title: 'Contact' },
+    ],
   },
 ]
 
