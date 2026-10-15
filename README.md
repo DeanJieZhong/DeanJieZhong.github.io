@@ -274,6 +274,7 @@ Please refer to `contentlayer.config.ts` for an up to date list of supported fie
 
 ```
 title (required)
+subtitle (optional, displayed below the title in the PostSimple layout)
 date (required)
 tags (optional)
 lastmod (optional)

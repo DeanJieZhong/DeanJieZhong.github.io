@@ -4,7 +4,6 @@ import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog } from 'contentlayer/generated'
 import Comments from '@/components/Comments'
 import Link from '@/components/Link'
-import PageTitle from '@/components/PageTitle'
 import SectionContainer from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
@@ -17,25 +16,43 @@ interface LayoutProps {
 }
 
 export default function PostLayout({ content, next, prev, children }: LayoutProps) {
-  const { path, slug, date, title } = content
+  const { slug, date, title, subtitle, location } = content
 
   return (
     <SectionContainer>
       <ScrollTopAndComment />
       <article>
         <div>
-          <header>
+          <header className="pt-8 sm:pt-12">
             <div className="space-y-1 border-b border-gray-200 pb-10 text-center dark:border-gray-700">
               <dl>
                 <div>
                   <dt className="sr-only">Published on</dt>
                   <dd className="text-base leading-6 font-medium text-gray-500 dark:text-gray-400">
                     <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
+                    {location && <p className="mt-1 text-sm whitespace-pre-line">{location}</p>}
                   </dd>
                 </div>
               </dl>
               <div>
-                <PageTitle>{title}</PageTitle>
+                <h1 className="text-2xl leading-[1.8rem] font-extrabold tracking-tight text-gray-900 sm:text-[1.8rem] sm:leading-8 md:text-[2.4rem] md:leading-[2.8rem] dark:text-gray-100">
+                  {title}
+                </h1>
+                {subtitle && (
+                  <p className="mx-auto max-w-2xl pt-3 text-base leading-7 text-gray-600 dark:text-gray-400">
+                    {subtitle}
+                  </p>
+                )}
+                <p className="pt-4 text-sm leading-6 text-gray-600 dark:text-gray-400">
+                  By{' '}
+                  <Link
+                    href="/about"
+                    rel="author"
+                    className="rounded-sm underline decoration-gray-300 underline-offset-4 hover:text-gray-900 hover:decoration-gray-900 focus-visible:outline-2 focus-visible:outline-offset-4 dark:hover:text-gray-100"
+                  >
+                    {siteMetadata.author}
+                  </Link>
+                </p>
               </div>
             </div>
           </header>
