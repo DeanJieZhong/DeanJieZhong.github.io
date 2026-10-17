@@ -1,0 +1,99 @@
+---
+title: 'Clustering Says I Give Off a #1D2D8E Vibe'
+subtitle: '30 friends chose 30 colors they associate with me.'
+date: '2026-06-04'
+tags: ['design', 'color', 'personal-website']
+draft: false
+summary: '30 friends chose 30 colors they associate with me.'
+authors: ['default']
+layout: PostSimple
+---
+
+<div className="accent-story mx-auto max-w-prose">
+
+I'll keep this short, so you can spend more time playing with the colors.
+
+## Part 1: Why
+
+One day, I read an article about how religion and social background influence people's perceptions of color. I wondered what color came to mind when my friends thought of me.
+
+So I asked 30 friends I'd spent time with over the previous two years to each choose a color. I plotted their choices in the [OKLab color space](https://bottosson.github.io/posts/oklab/) to look at their distances and distribution (Fig. 1).
+
+<figure id="color-matrix" className="color-figure">
+
+<iframe
+  src="/static/blog/why-blue-as-the-accent-colour/oklab-color-matrix.html"
+  title="Interactive OKLab color space showing 30 color choices and their clusters"
+  loading="lazy"
+/>
+
+<figcaption>
+
+**Figure 1. Distribution of the 30 colors in OKLab.** L represents lightness, while a and b describe the green–red and blue–yellow directions; distances between colors approximate their visual differences. Wireframes outline the clusters, tetrahedra mark their centers, and translucent sample points are unassigned colors. The faint background shows the sRGB gamut. Have fun exploring the colors.
+
+</figcaption>
+
+</figure>
+
+## Part 2: Analysis
+
+I grouped the colors in OKLab using [DBSCAN](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html), choosing eps = 0.12 and min_samples = 3 after testing several settings.
+
+This produced four clusters and five unassigned colors. I averaged the OKLab coordinates of the 13 colors in the largest cluster and converted the result to sRGB: #1D2D8E.
+
+Somehow, this blue feels like a reflection of how my friends see me. ChatGPT described it as a deep, highly saturated blue with a hint of violet, calling it Deep Royal Blue and associating it with rationality, calm, and order. I wasn’t going to argue with that, so I decided to use it as this website's accent color.
+
+## Part 3: On this site
+
+For links and buttons, I use this blue and two slightly darker shades:
+
+| Color                                                                                                                                                                                                                                        | Use          |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#1D2D8E' }} /><span>#1D2D8E</span></span> | Main accent  |
+| <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#192679' }} /><span>#192679</span></span> | On hover     |
+| <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#141F63' }} /><span>#141F63</span></span> | When pressed |
+
+This blue carries a trace of how my friends see me.
+
+## Part 4: Data
+
+Here are all 30 choices, sorted alphabetically by the names shown. Thank you, everyone.
+
+| Name            | Color                                                                                                                                                                                                                                        |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Fangying Xiang  | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#6082B6' }} /><span>#6082B6</span></span> |
+| Fenghua Meng    | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#CFF536' }} /><span>#CFF536</span></span> |
+| Hanming Hu      | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#6F2DA8' }} /><span>#6F2DA8</span></span> |
+| Haotian Zheng   | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#FB7DA8' }} /><span>#FB7DA8</span></span> |
+| Hidetoshi Kochi | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#003153' }} /><span>#003153</span></span> |
+| Hongling Ding   | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#BAE100' }} /><span>#BAE100</span></span> |
+| Jiaxing Ye      | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#FFF5EE' }} /><span>#FFF5EE</span></span> |
+| Jiaying Gu      | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#A7E3EB' }} /><span>#A7E3EB</span></span> |
+| Jingchen Gong   | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#3457D5' }} /><span>#3457D5</span></span> |
+| Liyang Fang     | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#4D371F' }} /><span>#4D371F</span></span> |
+| Mingchen Wang   | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#000080' }} /><span>#000080</span></span> |
+| Pinyi Wu        | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#81D8D0' }} /><span>#81D8D0</span></span> |
+| Queue Wang      | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#5D8AA8' }} /><span>#5D8AA8</span></span> |
+| Rui Chen        | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#6495ED' }} /><span>#6495ED</span></span> |
+| Shihao Zhong    | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#89CFF0' }} /><span>#89CFF0</span></span> |
+| Shulei He       | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#FF847C' }} /><span>#FF847C</span></span> |
+| Shuning Dong    | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#6300F2' }} /><span>#6300F2</span></span> |
+| Tianran Chen    | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#E56334' }} /><span>#E56334</span></span> |
+| Xihe Yang       | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#010080' }} /><span>#010080</span></span> |
+| Yang Zhong      | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#00F5FF' }} /><span>#00F5FF</span></span> |
+| Yaqi Zhang      | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#270B3A' }} /><span>#270B3A</span></span> |
+| Ye Zhou         | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#191970' }} /><span>#191970</span></span> |
+| Yifan Hou       | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#002FA7' }} /><span>#002FA7</span></span> |
+| Yinren Zhao     | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#002395' }} /><span>#002395</span></span> |
+| Yuying Xun      | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#225395' }} /><span>#225395</span></span> |
+| Zhenyayuan Cao  | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#A7C7E7' }} /><span>#A7C7E7</span></span> |
+| Zhicheng Yang   | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#00416A' }} /><span>#00416A</span></span> |
+| Zhiyuan Zhong   | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#00FFFF' }} /><span>#00FFFF</span></span> |
+| Ziyang Lu       | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#1F51FF' }} /><span>#1F51FF</span></span> |
+| Ziyao Geng      | <span className="inline-flex items-center gap-2 whitespace-nowrap"><span aria-hidden="true" className="inline-block h-6 w-8 shrink-0 rounded-sm border border-black/10" style={{ backgroundColor: '#1F0954' }} /><span>#1F0954</span></span> |
+
+[**Full sample data (CSV)**](/static/blog/why-blue-as-the-accent-colour/data/samples_with_oklab_oklch_dbscan_clusters.csv) contains all 30 names and chosen colors, together with their sRGB, OKLab and OKLCH coordinates and cluster assignments. This is the table to use if you'd like to explore the colors yourself.
+
+[**Parameter tests (CSV)**](/static/blog/why-blue-as-the-accent-colour/data/dbscan_settings_summary.csv) compares the three DBSCAN settings I tested, including their parameters, cluster sizes and the number of unassigned colors. The plot above uses the medium setting (eps = 0.12, min_samples = 3).
+
+</div>

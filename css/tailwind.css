@@ -232,6 +232,58 @@
     }
   }
 
+  /* Keep the color essay's text, tables and figure on one spacing rhythm. */
+  .prose .accent-story {
+    display: flow-root;
+
+    & > * {
+      margin-block: 0;
+    }
+
+    & > * + * {
+      margin-top: 1.25rem;
+    }
+
+    & > h2 {
+      margin-top: 2em;
+      margin-bottom: 1em;
+    }
+
+    & > h2 + * {
+      margin-top: 0;
+    }
+
+    & > :first-child {
+      margin-top: 0;
+    }
+
+    & table {
+      margin-block: 0;
+    }
+
+    & > .color-figure {
+      margin-top: 1.75rem;
+    }
+
+    & .color-figure iframe {
+      display: block;
+      width: 100%;
+      height: clamp(420px, 85vw, 580px);
+      border: 0;
+    }
+
+    & .color-figure figcaption {
+      margin-top: 1rem;
+      font-size: 0.875rem;
+      line-height: 1.75;
+      color: var(--color-gray-600);
+    }
+
+    & .color-figure figcaption p {
+      margin: 0;
+    }
+  }
+
   /* Pliny's newsletter buttons share the site's interaction colors. */
   button.bg-primary-500:enabled:hover {
     background-color: var(--color-primary-600);

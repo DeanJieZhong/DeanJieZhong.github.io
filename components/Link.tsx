@@ -6,7 +6,7 @@ import { AnchorHTMLAttributes } from 'react'
 const CustomLink = ({ href, ...rest }: LinkProps & AnchorHTMLAttributes<HTMLAnchorElement>) => {
   const isInternalLink = href && href.startsWith('/')
   const isAnchorLink = href && href.startsWith('#')
-  const isStaticFile = href && href.startsWith('/static/files/')
+  const isStaticFile = href && href.startsWith('/static/')
 
   if (isInternalLink && !isStaticFile) {
     return <Link className="break-words" href={href} {...rest} />

@@ -24,6 +24,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
+// Same-origin frames support embedded articles after client-side navigation too.
 // You might need to insert additional domains in script-src if you are using external services
 const ContentSecurityPolicy = `
   default-src 'self';
@@ -33,7 +34,7 @@ const ContentSecurityPolicy = `
   media-src *.s3.amazonaws.com;
   connect-src *;
   font-src 'self';
-  frame-src giscus.app
+  frame-src 'self' giscus.app
 `
 
 const securityHeaders = [
@@ -95,6 +96,10 @@ module.exports = () => {
       {
         source: '/(.*)',
         headers: securityHeaders,
+      },
+      {
+        source: '/static/blog/why-blue-as-the-accent-colour/oklab-color-matrix.html',
+        headers: [{ key: 'X-Frame-Options', value: 'SAMEORIGIN' }],
       },
     ]
   }
