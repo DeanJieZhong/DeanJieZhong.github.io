@@ -2,15 +2,75 @@ import { Fragment } from 'react'
 import Image from 'next/image'
 import Link from '@/components/Link'
 import trogen from '@/data/trogenData'
-import styles from './TrogenProject.module.css'
+import type { TrogenFigure } from '@/data/trogenData'
+import styles from './TrogenArticle.module.css'
+import projectStyles from './TrogenProject.module.css'
 
 const contentWidth = 'mx-auto max-w-4xl px-4 sm:px-6'
 const headingStyle = 'text-2xl font-semibold tracking-tight sm:text-3xl'
 const linkStyle = 'underline underline-offset-4 decoration-gray-400 focus-visible:outline-offset-4'
 
+function ProjectText({ children }: { children: string }) {
+  return children
+    .split(/(\*[^*]+\*)/g)
+    .map((part, index) => (
+      <Fragment key={index}>
+        {part.startsWith('*') && part.endsWith('*') ? <em>{part.slice(1, -1)}</em> : part}
+      </Fragment>
+    ))
+}
+
+function Paragraphs({ paragraphs }: { paragraphs: string[] }) {
+  return paragraphs.map((paragraph) => (
+    <p key={paragraph}>
+      <ProjectText>{paragraph}</ProjectText>
+    </p>
+  ))
+}
+
+function ProjectFigure({ figure, priority = false }: { figure: TrogenFigure; priority?: boolean }) {
+  return (
+    <figure className={styles.figure} aria-labelledby={`${figure.id}-caption`}>
+      <p className={styles.figureLabel}>{figure.label}</p>
+      <div className={figure.layout === 'comparison' ? styles.comparison : undefined}>
+        {figure.images.map((image) => (
+          <div
+            key={image.src}
+            className={figure.layout === 'comparison' ? styles.panel : undefined}
+          >
+            {image.label && <p className={styles.panelLabel}>{image.label}</p>}
+            <div className={figure.layout === 'design' ? styles.designWindow : undefined}>
+              <Image
+                src={image.src}
+                alt={image.alt}
+                width={image.width}
+                height={image.height}
+                sizes={
+                  figure.layout === 'comparison'
+                    ? '(max-width: 600px) 360px, 300px'
+                    : '(min-width: 1024px) 896px, 100vw'
+                }
+                priority={priority}
+                unoptimized
+                className={styles.figureImage}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+      <figcaption id={`${figure.id}-caption`} className={`${styles.reading} ${styles.caption}`}>
+        <p>
+          <strong>{figure.captionTitle}</strong> <ProjectText>{figure.caption}</ProjectText>
+        </p>
+        <p className={styles.credit}>{figure.credit}</p>
+      </figcaption>
+    </figure>
+  )
+}
+
 export default function TrogenProject() {
   return (
-    <article className={`${styles.page} break-words`} aria-labelledby="trogen-title">
+    <article className={`${projectStyles.page} break-words`} aria-labelledby="trogen-title">
       <div className="interaction-dark bg-black text-gray-300">
         <div className="relative">
           <div className="relative">
@@ -25,14 +85,14 @@ export default function TrogenProject() {
             />
             <div
               aria-hidden="true"
-              className={`${styles.gradient} pointer-events-none absolute inset-0`}
+              className={`${projectStyles.gradient} pointer-events-none absolute inset-0`}
             />
           </div>
           <div className="relative -mt-6 pb-6 sm:absolute sm:inset-x-0 sm:bottom-0 sm:mt-0 sm:pb-10 lg:pb-14">
             <div className={contentWidth}>
               <h1
                 id="trogen-title"
-                className={`${styles.title} font-bold tracking-tight text-white`}
+                className={`${projectStyles.title} font-bold tracking-tight text-white`}
               >
                 {trogen.title}
               </h1>
@@ -92,36 +152,70 @@ export default function TrogenProject() {
       </div>
 
       <div className="bg-white text-gray-700">
-        <div className={`${contentWidth} space-y-10 py-12 sm:space-y-12 sm:py-16`}>
-          {trogen.sections.map((section) => (
-            <section key={section.id} aria-labelledby={section.id}>
-              <h2 id={section.id} className={`${headingStyle} text-gray-900`}>
+        <div className={`${styles.article} px-4 sm:px-6`}>
+          <nav className={`${styles.reading} ${styles.sectionNav}`} aria-label="On this page">
+            {trogen.sections.map((section) => (
+              <Link key={section.id} href={`#${section.id}`}>
                 {section.title}
-              </h2>
-              {section.subtitle && (
-                <h3 className="mt-5 text-lg leading-7 font-semibold text-gray-900">
-                  {section.subtitle}
-                </h3>
-              )}
-              <p className="mt-4 text-base leading-8 sm:text-lg">{section.body}</p>
+              </Link>
+            ))}
+          </nav>
+          <section aria-labelledby="research-question">
+            <div className={`${styles.reading} ${styles.prose}`}>
+              <h2 id="research-question">Research question &amp; approach</h2>
+              <Paragraphs paragraphs={trogen.overview} />
+            </div>
+            <ProjectFigure figure={trogen.conceptFigure} />
+          </section>
+          {trogen.sections.map((section) => (
+            <section
+              key={section.id}
+              className={`${styles.section} ${section.id === 'reflection' ? styles.reflection : ''}`}
+              aria-labelledby={section.id}
+            >
+              <div className={`${styles.reading} ${styles.prose}`}>
+                <h2 id={section.id}>{section.title}</h2>
+                {section.paragraphs && <Paragraphs paragraphs={section.paragraphs} />}
+                {section.items && (
+                  <ul className={styles.contributions}>
+                    {section.items.map((item) => (
+                      <li key={item.title}>
+                        <strong>{item.title}</strong> <ProjectText>{item.body}</ProjectText>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              {section.figure && <ProjectFigure figure={section.figure} />}
+              {section.subsections?.map((subsection) => (
+                <section
+                  key={subsection.id}
+                  className={styles.subsection}
+                  aria-labelledby={subsection.id}
+                >
+                  <div className={`${styles.reading} ${styles.prose}`}>
+                    <h3 id={subsection.id}>{subsection.title}</h3>
+                    <Paragraphs paragraphs={subsection.paragraphs} />
+                  </div>
+                  {subsection.figure && <ProjectFigure figure={subsection.figure} />}
+                </section>
+              ))}
               {section.links && (
-                <ul className="mt-4 space-y-2 text-base leading-7 text-gray-900">
+                <nav
+                  className={`${styles.reading} ${styles.resources}`}
+                  aria-label="Project resources"
+                >
                   {section.links.map((link) => (
-                    <li key={link.url}>
-                      <Link href={link.url} className={linkStyle}>
-                        {link.label}
-                      </Link>
-                    </li>
+                    <Link key={link.url} href={link.url}>
+                      {link.label}
+                    </Link>
                   ))}
-                </ul>
+                </nav>
               )}
             </section>
           ))}
-
-          <nav aria-label="Research navigation" className="text-base leading-7 text-gray-900">
-            <Link href="/research" className={linkStyle}>
-              Back to Research
-            </Link>
+          <nav className={`${styles.reading} ${styles.returnNav}`} aria-label="Research navigation">
+            <Link href="/research">Back to Research</Link>
           </nav>
         </div>
       </div>

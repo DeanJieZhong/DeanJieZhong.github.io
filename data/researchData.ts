@@ -152,10 +152,8 @@ const researchData: ResearchEntry[] = [
     level: 'primary',
     name: 'TroGen',
     listTitle: 'TroGen: A commensal bacterial platform for intracellular drug delivery in TNBC',
-    listSummary:
-      'We engineered commensal bacteria and demonstrated their entry into TNBC cells in vitro, laying the groundwork for intracellular drug delivery.',
-    summary:
-      'A Top 10 undergraduate project at iGEM 2025. We engineered commensal bacteria and demonstrated their entry into TNBC cells in vitro, laying the groundwork for intracellular drug delivery.',
+    listSummary: 'Exploring tumor-associated bacteria for intracellular drug delivery.',
+    summary: 'Exploring tumor-associated bacteria for intracellular drug delivery.',
     role: 'Research lead',
     participationPeriod: 'Feb–Nov 2025',
   },
