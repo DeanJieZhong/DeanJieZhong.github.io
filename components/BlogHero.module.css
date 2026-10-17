@@ -13,6 +13,7 @@
 }
 
 .hero {
+  --interaction-focus-halo: var(--color-primary-100);
   width: 100cqw;
   margin-inline: calc(50% - 50cqw);
   background: #000;
@@ -91,24 +92,31 @@
   font-weight: 400;
   line-height: 1.5;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.filterButton:hover {
-  background: #262626;
+.filterButton:is(:hover, :focus-visible) {
+  background: var(--color-primary-600);
   color: #fff;
 }
 
 .filterButton[aria-pressed='true'] {
-  background: #fff;
-  color: #000;
+  background: var(--color-primary-500);
+  color: #fff;
 }
 
 .filterButton[aria-pressed='true']:hover {
-  background: #e4e4e7;
+  background: var(--color-primary-600);
+}
+
+.filterButton:active,
+.filterButton[aria-pressed='true']:active {
+  background: var(--color-primary-700);
+  color: #fff;
 }
 
 .filterButton:focus-visible {
-  outline: 2px solid #fff;
+  outline: 2px solid var(--color-primary-500);
   outline-offset: 3px;
 }
 

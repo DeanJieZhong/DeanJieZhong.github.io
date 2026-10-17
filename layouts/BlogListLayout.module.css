@@ -81,8 +81,9 @@
   text-underline-offset: 0.15em;
 }
 
-.titleLink:hover {
+.titleLink:is(:hover, :focus-visible, :active) {
   text-decoration: underline;
+  text-decoration-color: var(--interaction-underline-color);
   text-decoration-thickness: 1px;
 }
 
@@ -143,7 +144,7 @@
 }
 
 .empty button:focus-visible {
-  outline: 2px solid currentColor;
+  outline: 2px solid var(--color-primary-500);
   outline-offset: 4px;
 }
 

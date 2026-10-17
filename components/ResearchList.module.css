@@ -36,7 +36,10 @@
 
 .projectName {
   /* Clone the underline onto each wrapped text fragment, never the full row. */
-  background-image: linear-gradient(var(--color-gray-500), var(--color-gray-500));
+  background-image: linear-gradient(
+    var(--interaction-underline-color),
+    var(--interaction-underline-color)
+  );
   background-repeat: no-repeat;
   background-position: left bottom;
   background-size: 0% 1px;
@@ -45,12 +48,8 @@
   transition: background-size 150ms ease-out;
 }
 
-.projectLink:is(:hover, :focus-visible) .projectName {
+.projectLink:is(:hover, :focus-visible, :active) .projectName {
   background-size: 100% 1px;
-}
-
-:global(.dark) .projectName {
-  background-image: linear-gradient(var(--color-gray-400), var(--color-gray-400));
 }
 
 @media (prefers-reduced-motion: reduce) {

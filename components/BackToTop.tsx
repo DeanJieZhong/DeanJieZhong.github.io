@@ -13,7 +13,7 @@ export default function BackToTop() {
       onClick={scrollToTop}
       aria-label="Back to top"
       title="Back to top"
-      className="flex size-12 shrink-0 items-center justify-center text-neutral-300 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-white"
+      className="interaction-icon interaction-dark flex size-12 shrink-0 items-center justify-center text-neutral-300 transition-colors"
     >
       <svg aria-hidden="true" viewBox="0 0 20 20" className="size-6" fill="none">
         <path

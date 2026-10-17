@@ -48,7 +48,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                   <Link
                     href="/about"
                     rel="author"
-                    className="rounded-sm underline decoration-gray-300 underline-offset-4 hover:text-gray-900 hover:decoration-gray-900 focus-visible:outline-2 focus-visible:outline-offset-4 dark:hover:text-gray-100"
+                    className="rounded-sm underline decoration-gray-300 underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4"
                   >
                     {siteMetadata.author}
                   </Link>
@@ -71,7 +71,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                   <div className="pt-4 xl:pt-8">
                     <Link
                       href={`/${prev.path}`}
-                      className="text-primary-500 hover:text-primary-600 active:text-primary-700 dark:hover:text-primary-400"
+                      className="text-primary-500"
                       aria-label={`Previous post: ${prev.title}`}
                     >
                       &larr; {prev.title}
@@ -82,7 +82,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                   <div className="pt-4 xl:pt-8">
                     <Link
                       href={`/${next.path}`}
-                      className="text-primary-500 hover:text-primary-600 active:text-primary-700 dark:hover:text-primary-400"
+                      className="text-primary-500"
                       aria-label={`Next post: ${next.title}`}
                     >
                       {next.title} &rarr;

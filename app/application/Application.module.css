@@ -45,9 +45,12 @@
   mask-repeat: no-repeat;
 }
 
-.materialCard:hover::before,
-.materialCard:focus-visible::before {
-  background: var(--color-primary-300);
+.materialCard:is(:hover, :focus-visible, :active)::before {
+  background: var(--interaction-color);
+}
+
+.materialCard:active {
+  background: var(--color-primary-100);
 }
 
 .materialCard:focus-visible {

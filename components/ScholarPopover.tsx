@@ -182,9 +182,11 @@ export default function ScholarPopover({ scholar }: { scholar: ScholarProfile })
       openOnHover
       delay={180}
       closeDelay={220}
-      className="max-w-full cursor-pointer rounded-sm p-0 text-left text-inherit underline decoration-gray-400 decoration-dotted underline-offset-4 hover:decoration-solid focus-visible:outline-offset-4"
+      className={styles.trigger}
     >
-      {scholar.name}, {scholar.degree}
+      <span className={styles.triggerLabel}>
+        {scholar.name}, {scholar.degree}
+      </span>
     </Popover.Trigger>
   )
 }

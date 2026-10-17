@@ -141,11 +141,6 @@
   text-underline-offset: 0.2em;
 }
 
-.body a:hover,
-.biography a:hover {
-  color: var(--color-primary-600);
-}
-
 .body > .entries {
   margin-top: 0;
 }

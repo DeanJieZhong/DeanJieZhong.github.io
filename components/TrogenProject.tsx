@@ -6,13 +6,12 @@ import styles from './TrogenProject.module.css'
 
 const contentWidth = 'mx-auto max-w-4xl px-4 sm:px-6'
 const headingStyle = 'text-2xl font-semibold tracking-tight sm:text-3xl'
-const linkStyle =
-  'underline underline-offset-4 decoration-gray-400 hover:decoration-current focus-visible:outline-offset-4'
+const linkStyle = 'underline underline-offset-4 decoration-gray-400 focus-visible:outline-offset-4'
 
 export default function TrogenProject() {
   return (
     <article className={`${styles.page} break-words`} aria-labelledby="trogen-title">
-      <div className="[&_a:focus-visible]:outline-primary-300 bg-black text-gray-300">
+      <div className="interaction-dark bg-black text-gray-300">
         <div className="relative">
           <div className="relative">
             <Image

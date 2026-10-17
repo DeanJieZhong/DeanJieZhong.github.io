@@ -11,6 +11,7 @@
 
 .header,
 .toolbar {
+  --interaction-focus-halo: var(--color-primary-100);
   --lego-muted: #aaaab4;
   --lego-line: #3c3c42;
   position: relative;
@@ -112,12 +113,30 @@
 
 .sortChoice:hover span,
 .directionChoice:hover span {
-  color: #fff;
+  background: var(--color-primary-100);
+  border-color: var(--color-primary-600);
+  color: var(--color-primary-600);
 }
 
 .sortChoice input:checked + span,
 .directionChoice input:checked + span {
-  border-color: #fff;
+  background: var(--color-primary-500);
+  border-color: var(--color-primary-500);
+  color: #fff;
+}
+
+.sortChoice:hover input:checked + span,
+.directionChoice:hover input:checked + span {
+  background: var(--color-primary-600);
+  border-color: var(--color-primary-600);
+}
+
+.sortChoice:active span,
+.directionChoice:active span,
+.sortChoice:active input:checked + span,
+.directionChoice:active input:checked + span {
+  background: var(--color-primary-700);
+  border-color: var(--color-primary-700);
   color: #fff;
 }
 
@@ -131,8 +150,9 @@
 
 .sortChoice input:focus-visible + span,
 .directionChoice input:focus-visible + span {
-  outline: 2px solid var(--color-primary-300);
+  outline: 2px solid var(--color-primary-500);
   outline-offset: 3px;
+  box-shadow: 0 0 0 5px var(--color-primary-100);
 }
 
 .visuallyHidden {
@@ -182,6 +202,12 @@
   width: fit-content;
   padding: 8px 0;
   cursor: pointer;
+}
+
+.collectionReview summary:is(:hover, :focus-visible, :active),
+.collectionReview details[open] summary {
+  text-decoration: underline;
+  text-decoration-color: var(--interaction-underline-color);
 }
 
 .collectionReview ul {
@@ -239,6 +265,10 @@
 
 .imageButton:hover .image {
   transform: scale(1.025);
+}
+
+.imageButton:is(:hover, :active) {
+  box-shadow: inset 0 0 0 1px var(--interaction-color);
 }
 
 .name {
@@ -328,9 +358,10 @@
   cursor: pointer;
 }
 
-.close:hover {
+.close:is(:hover, :focus-visible, :active) {
   color: #1d1d1f;
   text-decoration: underline;
+  text-decoration-color: var(--interaction-underline-color);
   text-underline-offset: 4px;
 }
 

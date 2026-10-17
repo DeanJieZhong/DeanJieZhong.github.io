@@ -2,11 +2,13 @@
 
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import Link from './Link'
 import headerNavLinks from '@/data/headerNavLinks'
 import styles from './Header.module.css'
 
 const MobileNav = () => {
+  const pathname = usePathname().replace(/\/$/, '') || '/'
   const [navShow, setNavShow] = useState(false)
 
   useEffect(() => {
@@ -25,14 +27,14 @@ const MobileNav = () => {
         aria-label="Open navigation"
         aria-expanded={navShow}
         onClick={() => setNavShow(true)}
-        className="grid h-12 w-10 place-items-center md:hidden"
+        className="interaction-icon grid h-12 w-10 place-items-center text-white md:hidden"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
           aria-hidden="true"
-          className="h-7 w-7 text-white"
+          className="h-7 w-7"
         >
           <path d="M3 5h14v2H3zm0 4h14v2H3zm0 4h14v2H3z" />
         </svg>
@@ -46,7 +48,7 @@ const MobileNav = () => {
           <DialogTitle className="sr-only">Navigation</DialogTitle>
           <button
             type="button"
-            className="absolute top-4 right-4 grid h-12 w-12 place-items-center"
+            className="interaction-icon absolute top-4 right-4 grid h-12 w-12 place-items-center"
             aria-label="Close navigation"
             onClick={() => setNavShow(false)}
           >
@@ -66,6 +68,7 @@ const MobileNav = () => {
                 <li key={link.href}>
                   <Link
                     href={link.href}
+                    aria-current={pathname === link.href ? 'page' : undefined}
                     className={`${styles.navigationLink} flex min-h-11 items-center gap-3 text-xl font-bold`}
                     onClick={() => setNavShow(false)}
                   >
@@ -78,6 +81,7 @@ const MobileNav = () => {
                         <li key={child.href}>
                           <Link
                             href={child.href}
+                            aria-current={pathname === child.href ? 'page' : undefined}
                             className={`${styles.navigationLink} block py-3 text-sm text-black`}
                             onClick={() => setNavShow(false)}
                           >

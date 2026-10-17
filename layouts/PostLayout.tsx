@@ -92,10 +92,7 @@ export default function PostLayout({
                         <dt className="sr-only">Twitter</dt>
                         <dd>
                           {author.twitter && (
-                            <Link
-                              href={author.twitter}
-                              className="text-primary-500 hover:text-primary-600 active:text-primary-700 dark:hover:text-primary-400"
-                            >
+                            <Link href={author.twitter} className="text-primary-500">
                               {author.twitter
                                 .replace('https://twitter.com/', '@')
                                 .replace('https://x.com/', '@')}
@@ -147,7 +144,7 @@ export default function PostLayout({
                         <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
                           Previous Article
                         </h2>
-                        <div className="text-primary-500 hover:text-primary-600 active:text-primary-700 dark:hover:text-primary-400">
+                        <div className="text-primary-500">
                           <Link href={`/${prev.path}`}>{prev.title}</Link>
                         </div>
                       </div>
@@ -157,7 +154,7 @@ export default function PostLayout({
                         <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
                           Next Article
                         </h2>
-                        <div className="text-primary-500 hover:text-primary-600 active:text-primary-700 dark:hover:text-primary-400">
+                        <div className="text-primary-500">
                           <Link href={`/${next.path}`}>{next.title}</Link>
                         </div>
                       </div>
@@ -168,7 +165,7 @@ export default function PostLayout({
               <div className="pt-4 xl:pt-8">
                 <Link
                   href={backLink?.href || `/${basePath}`}
-                  className="text-primary-500 hover:text-primary-600 active:text-primary-700 dark:hover:text-primary-400"
+                  className="text-primary-500"
                   aria-label={backLink?.label || 'Back to the blog'}
                 >
                   &larr; {backLink?.label || 'Back to the blog'}

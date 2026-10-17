@@ -79,18 +79,117 @@
     border-color: var(--color-gray-200, currentColor);
   }
 
-  a,
-  button {
+  :where(a[href], button, input, textarea, select, summary, [role='option']) {
+    --interaction-color: var(--color-primary-500);
+    /* Underlines stay brighter: base blue on hover, one shade deeper when pressed. */
+    --interaction-underline-color: var(--color-primary-500);
+    accent-color: var(--color-primary-500);
     outline-color: var(--color-primary-500);
     outline-offset: 3px;
   }
 
-  a:focus-visible,
-  button:focus-visible {
-    outline: 2px solid;
-    border-radius: var(--radius-sm);
-    outline-color: var(--color-primary-500);
+  :where(
+    a[href],
+    button:enabled,
+    input:enabled,
+    textarea:enabled,
+    select:enabled,
+    summary,
+    [role='option']
+  ):hover {
+    --interaction-color: var(--color-primary-600);
   }
+
+  :where(
+    a[href],
+    button:enabled,
+    input:enabled,
+    textarea:enabled,
+    select:enabled,
+    summary,
+    [role='option']
+  ):focus-visible {
+    --interaction-color: var(--color-primary-500);
+    outline: 2px solid var(--color-primary-500);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 0 0 5px var(--interaction-focus-halo, transparent);
+  }
+
+  :where(
+    a[href],
+    button:enabled,
+    input:enabled,
+    textarea:enabled,
+    select:enabled,
+    summary,
+    [role='option']
+  ):active {
+    --interaction-color: var(--color-primary-700);
+    --interaction-underline-color: var(--color-primary-600);
+  }
+
+  /* Plain text links get a static underline; component animations override this. */
+  a:is(:hover, :focus-visible, :active),
+  .interaction-text:is(:hover, :focus-visible, :active) {
+    text-decoration-line: underline;
+  }
+
+  input:enabled:hover,
+  textarea:enabled:hover,
+  select:enabled:hover {
+    border-color: var(--color-primary-600);
+  }
+}
+
+/* Change the underline ink independently of the text, including MDX links. */
+:root :where(a[href], button:enabled, summary):is(:hover, :focus-visible, :active),
+:root :where(a[aria-current='page'], button[aria-pressed='true'], button[data-popup-open]) {
+  text-decoration-color: var(--interaction-underline-color);
+}
+
+.interaction-dark {
+  --interaction-focus-halo: var(--color-primary-100);
+}
+
+/* Light feedback keeps the exact blue palette legible on dark surfaces. */
+.interaction-dark :is(a, button).underline:is(:hover, :focus-visible, :active),
+.interaction-dark button[data-popup-open] {
+  background-color: var(--color-primary-100);
+  color: var(--color-gray-950);
+}
+
+.interaction-icon:where(a[href], button:enabled):is(:hover, :focus-visible, :active) {
+  color: var(--interaction-color);
+  background-color: var(--color-primary-100);
+  text-decoration: none;
+}
+
+/* The linked image stays untouched; feedback belongs to its clickable frame. */
+.interaction-image:is(:hover, :focus-visible, :active) {
+  outline: 2px solid var(--interaction-color);
+  outline-offset: 2px;
+}
+
+/* Pliny's search results expose standard option/selection semantics. */
+#kbar-listbox [role='option'][aria-selected='true']:has(.cursor-pointer) {
+  background-color: var(--color-primary-500);
+  color: white;
+}
+
+#kbar-listbox [role='option']:has(.cursor-pointer):hover {
+  background-color: var(--color-primary-600);
+  color: white;
+}
+
+#kbar-listbox [role='option']:has(.cursor-pointer):active {
+  background-color: var(--color-primary-700);
+  color: white;
+}
+
+/* Pliny paints the row inside the option; let the shared state surface show through. */
+#kbar-listbox [role='option']:is([aria-selected='true'], :hover, :active) .cursor-pointer {
+  background-color: transparent;
+  color: inherit;
 }
 
 @layer utilities {
@@ -105,12 +204,6 @@
   .prose {
     & a {
       color: var(--color-primary-500);
-      &:hover {
-        color: var(--color-primary-600);
-      }
-      &:active {
-        color: var(--color-primary-700);
-      }
       & code {
         color: inherit;
       }
@@ -130,9 +223,6 @@
   .prose-invert {
     & a {
       color: var(--color-primary-500);
-      &:hover {
-        color: var(--color-primary-400);
-      }
       & code {
         color: var(--color-primary-400);
       }
@@ -200,7 +290,8 @@ input:-webkit-autofill:focus {
 }
 
 .content-header:hover .content-header-link,
-.content-header-link:hover {
+.content-header-link:hover,
+.content-header-link:focus-visible {
   opacity: 1;
 }
 

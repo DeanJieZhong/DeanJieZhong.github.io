@@ -7,8 +7,7 @@ import type { ResearchEntry, ResearchPhoto } from '@/data/researchData'
 import styles from './TrogenProject.module.css'
 
 const contentWidth = 'mx-auto max-w-4xl px-4 sm:px-6'
-const linkStyle =
-  'underline underline-offset-4 decoration-gray-400 hover:decoration-current focus-visible:outline-offset-4'
+const linkStyle = 'underline underline-offset-4 decoration-gray-400 focus-visible:outline-offset-4'
 
 export default function PhotoResearchProject({
   entry,
@@ -21,7 +20,7 @@ export default function PhotoResearchProject({
 
   return (
     <article className={`${styles.page} break-words`} aria-labelledby="project-title">
-      <div className="[&_a:focus-visible]:outline-primary-300 [&_button:focus-visible]:outline-primary-300 bg-black text-gray-300">
+      <div className="interaction-dark bg-black text-gray-300">
         <div className="relative">
           <div className="relative">
             <Image

@@ -1,4 +1,5 @@
 .header {
+  --interaction-focus-halo: var(--color-primary-100);
   position: relative;
   z-index: 40;
   display: flex;
@@ -30,6 +31,8 @@
   flex: 0 0 auto;
   align-items: center;
   min-height: 48px;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .logo {
@@ -58,7 +61,7 @@
 
 .header a:focus-visible,
 .header button:focus-visible {
-  outline-color: var(--color-primary-300);
+  outline-color: var(--color-primary-500);
 }
 
 .desktopNav {
@@ -176,7 +179,10 @@
 .label,
 .revealedLabel,
 .navigationLabel {
-  background-image: linear-gradient(currentColor, currentColor);
+  background-image: linear-gradient(
+    var(--interaction-underline-color),
+    var(--interaction-underline-color)
+  );
   background-repeat: no-repeat;
   background-position: left bottom;
   background-size: 0% 1px;
@@ -185,19 +191,27 @@
   transition: background-size 150ms ease-out;
 }
 
-.navigationLabel {
-  background-image: linear-gradient(var(--color-gray-500), var(--color-gray-500));
+.revealedLabel {
+  --interaction-underline-color: var(--color-primary-500);
 }
 
-.trigger:is(:hover, :focus-visible) .label,
-.trigger:is(:hover, :focus-visible) ~ .reveal .revealedLabel,
-.navigationLink:is(:hover, :focus-visible) .navigationLabel {
+.trigger:active ~ .reveal .revealedLabel {
+  --interaction-underline-color: var(--color-primary-600);
+}
+
+.trigger:is(:hover, :focus-visible, :active) .label,
+.trigger:is(:hover, :focus-visible, :active) ~ .reveal .revealedLabel,
+.navigationLink:is(:hover, :focus-visible, :active) .navigationLabel {
   background-size: 100% 1px;
 }
 
 .navigationLink:focus-visible {
-  outline-color: #000;
+  outline-color: var(--color-primary-500);
   outline-offset: -2px;
+}
+
+.navigationLink[aria-current='page'] {
+  background-color: var(--color-primary-100);
 }
 
 @media (min-width: 768px) {

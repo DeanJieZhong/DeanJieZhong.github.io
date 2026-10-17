@@ -1,3 +1,46 @@
+.trigger {
+  max-width: 100%;
+  padding: 0;
+  border-radius: var(--radius-sm);
+  color: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.trigger:focus-visible {
+  outline-offset: 4px;
+}
+
+.triggerLabel {
+  position: relative;
+  padding-bottom: 2px;
+  border-bottom: 1px dotted var(--color-gray-400);
+}
+
+/* Cover the resting dots from left to right, then retract along the same path. */
+.triggerLabel::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 1px;
+  background: var(--interaction-underline-color);
+  content: '';
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 150ms ease-out;
+}
+
+.trigger:is(:hover, :focus-visible, :active, [data-popup-open]) .triggerLabel::after {
+  transform: scaleX(1);
+}
+
+:global(.interaction-dark) .trigger:is(:hover, :focus-visible, :active, [data-popup-open]) {
+  background-color: var(--color-primary-100);
+  color: var(--color-gray-950);
+}
+
 .positioner {
   z-index: 60;
 }
@@ -110,8 +153,13 @@
 
 .links a:focus-visible {
   border-radius: 1px;
-  outline: 2px solid currentColor;
+  outline: 2px solid var(--color-primary-500);
   outline-offset: 4px;
+}
+
+.links a:is(:hover, :focus-visible, :active) {
+  background-color: var(--color-primary-100);
+  color: var(--color-gray-950);
 }
 
 .portrait {
@@ -226,6 +274,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .triggerLabel::after,
   .card,
   .card[data-ending-style] {
     transition: none;

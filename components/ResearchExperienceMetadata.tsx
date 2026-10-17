@@ -4,8 +4,7 @@ import ScholarPopover from '@/components/ScholarPopover'
 import scholarsData from '@/data/scholarsData'
 import type { ResearchExperienceDetails } from '@/data/researchData'
 
-const linkStyle =
-  'underline decoration-gray-400 underline-offset-4 hover:decoration-current focus-visible:outline-offset-4'
+const linkStyle = 'underline decoration-gray-400 underline-offset-4 focus-visible:outline-offset-4'
 
 export default function ResearchExperienceMetadata({
   experience,
