@@ -2,6 +2,16 @@
 // Add release notes after the corresponding source revision is known.
 const siteUpdates = [
   {
+    revision: '560dc06f5eb7334029190488fbc20407d8829ad4',
+    date: '2026-10-18',
+    title: 'Consistent blue interaction feedback',
+    changes: [
+      'Unified hover, pressed, selected, and keyboard focus feedback with the existing blue palette.',
+      'Preserved the existing animated underlines and added a left-to-right underline to scholar names.',
+      'Removed pale flashes when selecting Blog categories and kept the logo unchanged on hover and press.',
+    ],
+  },
+  {
     revision: 'f00892d96b3a60f7c41d337c13317a2a7dc2858d',
     date: '2026-10-18',
     title: 'Avenir Next typography',
