@@ -15,10 +15,10 @@ export default function Colophon() {
 
       <h2>Design</h2>
       <p>
-        A white reading surface, dark header, and blue link accents keep the layout simple. Body
-        text uses system sans-serif fonts; the footer version uses monospace. Research pages pair
-        full-width photographs with dark gradients. A fine divider and two links define the footer,
-        with underlines on hover and clear keyboard focus outlines.
+        A white reading surface, dark header, and blue link accents keep the layout simple.
+        Typography uses Avenir Next throughout, with system sans-serif fallbacks where it is
+        unavailable. Research pages pair full-width photographs with dark gradients. A fine divider
+        and two links define the footer, with underlines on hover and clear keyboard focus outlines.
       </p>
 
       <h2>Development and technology</h2>

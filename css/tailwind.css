@@ -6,10 +6,13 @@
 
 /* Core theme configuration */
 @theme {
-  /* Font families */
+  /* Font choice and retained alternative: design/typography.md */
   --font-sans:
-    ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-    'Noto Color Emoji';
+    'Avenir Next', Avenir, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  /* Keep text utilities and code on the same site-wide family. */
+  --font-serif: var(--font-sans);
+  --font-mono: var(--font-sans);
 
   /* Colors */
   /* Color_Matrix blue: 50–200 surfaces, 300–400 accents on dark surfaces,
