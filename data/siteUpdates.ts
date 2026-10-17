@@ -2,6 +2,16 @@
 // Add release notes after the corresponding source revision is known.
 const siteUpdates = [
   {
+    revision: 'f00892d96b3a60f7c41d337c13317a2a7dc2858d',
+    date: '2026-10-18',
+    title: 'Avenir Next typography',
+    changes: [
+      'Unified the site typography with Avenir Next, including navigation, headings, body text, and the footer.',
+      'Kept system sans-serif fallbacks for devices without Avenir Next.',
+      'Documented the font decision and retained Inter as an alternative for future use.',
+    ],
+  },
+  {
     revision: '521eebf6a2a4ac57d5e18b299daac9a2a9f3219a',
     date: '2026-10-13',
     title: 'Simpler footer and a more compact header',
