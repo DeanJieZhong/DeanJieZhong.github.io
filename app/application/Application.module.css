@@ -1,0 +1,77 @@
+.materialCard {
+  position: relative;
+  background: white;
+  border-radius: 24px;
+}
+
+/*
+ * 24px corners with 60% smoothing: short cubic transitions meet a circular arc.
+ * See https://www.figma.com/blog/desperately-seeking-squircles/.
+ * Each 40px corner contains a true 1px SVG stroke; straight edges use 1px masks.
+ * Fixed corner dimensions preserve the curve when cards resize or text wraps.
+ */
+.materialCard::before {
+  position: absolute;
+  inset: 0;
+  content: '';
+  pointer-events: none;
+  background: var(--color-gray-200);
+  transition: background-color 150ms ease;
+  mask-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http%3A//www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M.5 40V38.9000c0 -13.4413 0 -20.1619 2.6158 -25.2958a24 24 0 0 1 10.4884 -10.4884c5.1339 -2.6158 11.8545 -2.6158 25.2958 -2.6158H40' transform='rotate(0 20 20)' fill='none' stroke='black'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http%3A//www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M.5 40V38.9000c0 -13.4413 0 -20.1619 2.6158 -25.2958a24 24 0 0 1 10.4884 -10.4884c5.1339 -2.6158 11.8545 -2.6158 25.2958 -2.6158H40' transform='rotate(90 20 20)' fill='none' stroke='black'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http%3A//www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M.5 40V38.9000c0 -13.4413 0 -20.1619 2.6158 -25.2958a24 24 0 0 1 10.4884 -10.4884c5.1339 -2.6158 11.8545 -2.6158 25.2958 -2.6158H40' transform='rotate(180 20 20)' fill='none' stroke='black'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http%3A//www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M.5 40V38.9000c0 -13.4413 0 -20.1619 2.6158 -25.2958a24 24 0 0 1 10.4884 -10.4884c5.1339 -2.6158 11.8545 -2.6158 25.2958 -2.6158H40' transform='rotate(270 20 20)' fill='none' stroke='black'/%3E%3C/svg%3E"),
+    linear-gradient(#000, #000), linear-gradient(#000, #000), linear-gradient(#000, #000),
+    linear-gradient(#000, #000);
+  mask-size:
+    40px 40px,
+    40px 40px,
+    40px 40px,
+    40px 40px,
+    calc(100% - 80px) 1px,
+    calc(100% - 80px) 1px,
+    1px calc(100% - 80px),
+    1px calc(100% - 80px);
+  mask-position:
+    top left,
+    top right,
+    bottom right,
+    bottom left,
+    top center,
+    bottom center,
+    center left,
+    center right;
+  mask-repeat: no-repeat;
+}
+
+.materialCard:hover::before,
+.materialCard:focus-visible::before {
+  background: var(--color-primary-300);
+}
+
+.materialCard:focus-visible {
+  border-radius: 24px;
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .materialCard::before {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .materialCard {
+    border: 1px solid ButtonText;
+  }
+
+  .materialCard::before {
+    display: none;
+  }
+
+  .materialCard:focus-visible {
+    outline-color: Highlight;
+  }
+}

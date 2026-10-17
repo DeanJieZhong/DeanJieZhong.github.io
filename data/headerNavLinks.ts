@@ -21,8 +21,14 @@ const headerNavLinks: HeaderNavLink[] = [
     children: [{ href: '/tags', title: 'Tags' }],
   },
   {
-    href: '/static/files/cv.pdf',
-    title: 'CV',
+    href: '/application',
+    title: 'Application',
+    children: [
+      { href: '/application/cv', title: 'CV' },
+      { href: '/application/transcript', title: 'Transcript' },
+      { href: '/application/english', title: 'IELTS' },
+      { href: '/application/research', title: 'Research' },
+    ],
   },
   {
     href: '/about',
