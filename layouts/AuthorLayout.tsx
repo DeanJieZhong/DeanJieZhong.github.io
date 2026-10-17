@@ -1,51 +1,49 @@
 import { ReactNode } from 'react'
 import type { Authors } from 'contentlayer/generated'
-import SocialIcon from '@/components/social-icons'
+import type { AboutPhoto } from '@/data/aboutData'
 import Image from '@/components/Image'
+import styles from './AuthorLayout.module.css'
 
 interface Props {
   children: ReactNode
+  introduction: ReactNode
+  portrait?: Pick<AboutPhoto, 'src' | 'width' | 'height'>
   content: Omit<Authors, '_id' | '_raw' | 'body'>
 }
 
-export default function AuthorLayout({ children, content }: Props) {
-  const { name, avatar, occupation, company, email, twitter, bluesky, linkedin, github } = content
+export default function AuthorLayout({ children, introduction, portrait, content }: Props) {
+  const { name, avatar, occupation, company } = content
+  const photo = portrait ?? (avatar ? { src: avatar, width: 192, height: 192 } : undefined)
 
   return (
-    <>
-      <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-          <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
-            About
-          </h1>
-        </div>
-        <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:space-y-0 xl:gap-x-8">
-          <div className="flex flex-col items-center space-x-2 pt-8">
-            {avatar && (
-              <Image
-                src={avatar}
-                alt="avatar"
-                width={192}
-                height={192}
-                className="h-48 w-48 rounded-full"
-              />
-            )}
-            <h3 className="pt-4 pb-2 text-2xl leading-8 font-bold tracking-tight">{name}</h3>
-            <div className="text-gray-500 dark:text-gray-400">{occupation}</div>
-            <div className="text-gray-500 dark:text-gray-400">{company}</div>
-            <div className="flex space-x-3 pt-6">
-              <SocialIcon kind="mail" href={`mailto:${email}`} />
-              <SocialIcon kind="github" href={github} />
-              <SocialIcon kind="linkedin" href={linkedin} />
-              <SocialIcon kind="x" href={twitter} />
-              <SocialIcon kind="bluesky" href={bluesky} />
-            </div>
+    <article className={styles.page}>
+      <div className={styles.hero}>
+        <div className={styles.heroBand} aria-hidden="true" />
+        <header className={styles.header}>
+          <h1>About {name.replace(/[()]/g, '')}</h1>
+        </header>
+        {photo && (
+          <div className={styles.portrait}>
+            <Image
+              src={photo.src}
+              alt={`Portrait of ${name}`}
+              width={photo.width}
+              height={photo.height}
+              sizes="(min-width: 1280px) 240px, (min-width: 768px) 192px, 240px"
+              className={styles.avatar}
+              priority
+            />
           </div>
-          <div className="prose dark:prose-invert max-w-none pt-8 pb-8 xl:col-span-2">
-            {children}
+        )}
+        <div className={styles.introCopy}>
+          <div className={styles.identity}>
+            {occupation && <p>{occupation}</p>}
+            {company && <p>{company}</p>}
           </div>
+          <div className={`${styles.body} ${styles.biography}`}>{introduction}</div>
         </div>
       </div>
-    </>
+      {children}
+    </article>
   )
 }
