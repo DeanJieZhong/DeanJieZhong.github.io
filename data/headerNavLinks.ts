@@ -28,7 +28,13 @@ const headerNavLinks: HeaderNavLink[] = [
   {
     href: '/blog',
     title: 'Blog',
-    children: [{ href: '/tags', title: 'Tags' }],
+    children: [
+      { href: '/blog/', title: 'All' },
+      { href: '/blog/?category=research', title: 'Research' },
+      { href: '/blog/?category=reflection', title: 'Reflection' },
+      { href: '/blog/?category=travel', title: 'Travel' },
+      { href: '/blog/?category=side-quests', title: 'Side quests' },
+    ],
   },
   {
     href: '/about',
