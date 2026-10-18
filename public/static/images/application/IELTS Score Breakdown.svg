@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="840" viewBox="0 0 960 840" role="img" aria-labelledby="title description">
+  <title id="title">IELTS Score Breakdown</title>
+  <desc id="description">Score tables reproduced from the British Council email of 21 September 2026. Listening 35, Reading 38. Writing Task 1: TA 5, CC 7, LR 8, GRA 8. Writing Task 2: TR 7, CC 6, LR 7, GRA 7. Speaking: FC 8, LR 8, GRA 8, P 8.</desc>
+  <rect width="960" height="840" fill="#fff"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#111827">
+    <text x="48" y="64" font-size="30" font-weight="700">IELTS Score Breakdown</text>
+    <text x="48" y="96" font-size="18" fill="#4b5563">Score tables reproduced from the British Council email of 21 September 2026.</text>
+    <text x="48" y="152" font-size="22" font-weight="700">Listening/Reading Breakdown:</text>
+  <g transform="translate(48 172)">
+    <rect width="864" height="44" fill="#f3f4f6"/>
+    <rect width="864" height="88" fill="none" stroke="#cbd0d7"/>
+    <path d="M0 44H864M432 0V88" fill="none" stroke="#cbd0d7"/>
+    <text x="216" y="28" text-anchor="middle" font-size="18" font-weight="600">Listening</text>
+    <text x="648" y="28" text-anchor="middle" font-size="18" font-weight="600">Reading</text>
+    <text x="216" y="74" text-anchor="middle" font-size="22">35</text>
+    <text x="648" y="74" text-anchor="middle" font-size="22">38</text>
+  </g>
+    <text x="48" y="316" font-size="22" font-weight="700">Writing Breakdown:</text>
+  <g transform="translate(48 336)">
+    <rect width="864" height="44" fill="#f3f4f6"/>
+    <rect width="864" height="88" fill="none" stroke="#cbd0d7"/>
+    <path d="M0 44H864M216 0V88M432 0V88M648 0V88" fill="none" stroke="#cbd0d7"/>
+    <text x="108" y="28" text-anchor="middle" font-size="18" font-weight="600">Task 1 TA Score</text>
+    <text x="324" y="28" text-anchor="middle" font-size="18" font-weight="600">Task 1 CC Score</text>
+    <text x="540" y="28" text-anchor="middle" font-size="18" font-weight="600">Task 1 LR Score</text>
+    <text x="756" y="28" text-anchor="middle" font-size="18" font-weight="600">Task 1 GRA Score</text>
+    <text x="108" y="74" text-anchor="middle" font-size="22">5</text>
+    <text x="324" y="74" text-anchor="middle" font-size="22">7</text>
+    <text x="540" y="74" text-anchor="middle" font-size="22">8</text>
+    <text x="756" y="74" text-anchor="middle" font-size="22">8</text>
+  </g>
+  <g transform="translate(48 448)">
+    <rect width="864" height="44" fill="#f3f4f6"/>
+    <rect width="864" height="88" fill="none" stroke="#cbd0d7"/>
+    <path d="M0 44H864M216 0V88M432 0V88M648 0V88" fill="none" stroke="#cbd0d7"/>
+    <text x="108" y="28" text-anchor="middle" font-size="18" font-weight="600">Task 2 TR Score</text>
+    <text x="324" y="28" text-anchor="middle" font-size="18" font-weight="600">Task 2 CC Score</text>
+    <text x="540" y="28" text-anchor="middle" font-size="18" font-weight="600">Task 2 LR Score</text>
+    <text x="756" y="28" text-anchor="middle" font-size="18" font-weight="600">Task 2 GRA Score</text>
+    <text x="108" y="74" text-anchor="middle" font-size="22">7</text>
+    <text x="324" y="74" text-anchor="middle" font-size="22">6</text>
+    <text x="540" y="74" text-anchor="middle" font-size="22">7</text>
+    <text x="756" y="74" text-anchor="middle" font-size="22">7</text>
+  </g>
+    <text x="48" y="592" font-size="22" font-weight="700">Speaking Breakdown:</text>
+  <g transform="translate(48 612)">
+    <rect width="864" height="44" fill="#f3f4f6"/>
+    <rect width="864" height="88" fill="none" stroke="#cbd0d7"/>
+    <path d="M0 44H864M216 0V88M432 0V88M648 0V88" fill="none" stroke="#cbd0d7"/>
+    <text x="108" y="28" text-anchor="middle" font-size="18" font-weight="600">FC</text>
+    <text x="324" y="28" text-anchor="middle" font-size="18" font-weight="600">LR</text>
+    <text x="540" y="28" text-anchor="middle" font-size="18" font-weight="600">GRA</text>
+    <text x="756" y="28" text-anchor="middle" font-size="18" font-weight="600">P</text>
+    <text x="108" y="74" text-anchor="middle" font-size="22">8</text>
+    <text x="324" y="74" text-anchor="middle" font-size="22">8</text>
+    <text x="540" y="74" text-anchor="middle" font-size="22">8</text>
+    <text x="756" y="74" text-anchor="middle" font-size="22">8</text>
+  </g>
+    <g font-size="16" fill="#4b5563">
+      <text x="48" y="748">TA = Task achievement · TR = Task response · CC = Coherence and cohesion</text>
+      <text x="48" y="775">LR = Lexical resource · GRA = Grammatical range and accuracy</text>
+      <text x="48" y="802">FC = Fluency and coherence · P = Pronunciation</text>
+    </g>
+  </g>
+</svg>
+

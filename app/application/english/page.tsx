@@ -136,7 +136,7 @@ export default function EnglishPage() {
               </dl>
               {breakdown.length > 0 && (
                 <div
-                  className={`grid content-start gap-5 ${breakdown.length > 1 ? 'sm:grid-cols-2' : ''}`}
+                  className={`grid content-start gap-y-5 sm:gap-x-12 ${breakdown.length > 1 ? 'sm:grid-cols-2' : ''}`}
                 >
                   {breakdown.map(({ title, criteria }) => (
                     <div key={title ?? label}>
@@ -145,10 +145,7 @@ export default function EnglishPage() {
                       )}
                       <dl className="space-y-2">
                         {criteria.map(({ label, value }) => (
-                          <div
-                            key={label}
-                            className="flex items-baseline justify-between gap-3 text-sm"
-                          >
+                          <div key={label} className="flex items-baseline gap-2 text-sm">
                             <dt className="text-gray-600">{label}</dt>
                             <dd className="m-0 shrink-0 font-medium text-gray-900 tabular-nums">
                               {value}
@@ -173,6 +170,20 @@ export default function EnglishPage() {
             alt="Redacted IELTS Transcript showing an overall band score of 8.0."
             width={2479}
             height={3508}
+            className="m-0 h-auto w-full border border-gray-200"
+            unoptimized
+          />
+        </figure>
+      </section>
+
+      <section aria-labelledby="ielts-breakdown-heading">
+        <h2 id="ielts-breakdown-heading">IELTS Score Breakdown</h2>
+        <figure className="not-prose mt-6">
+          <Image
+            src="/static/images/application/IELTS%20Score%20Breakdown.svg"
+            alt="Listening, reading, writing and speaking score tables reproduced from the British Council email dated 21 September 2026. The detailed marks are also listed in Band scores above."
+            width={960}
+            height={840}
             className="m-0 h-auto w-full border border-gray-200"
             unoptimized
           />
