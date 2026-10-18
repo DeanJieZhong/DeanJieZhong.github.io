@@ -1,0 +1,285 @@
+.dialog {
+  position: relative;
+  z-index: 100;
+  color: #23242a;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgb(23 27 38 / 20%);
+  backdrop-filter: blur(4px);
+}
+
+.positioner {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: auto;
+  padding: min(16vh, 8rem) 1rem 2rem;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 42rem;
+  max-height: calc(100dvh - min(16vh, 8rem) - 2rem);
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 88%);
+  border-radius: 22px;
+  background: rgb(248 249 252 / 91%);
+  box-shadow:
+    0 28px 90px rgb(10 16 35 / 24%),
+    0 3px 12px rgb(10 16 35 / 10%),
+    inset 0 0 0 1px rgb(255 255 255 / 55%);
+  backdrop-filter: blur(30px) saturate(160%);
+  animation: appear 140ms ease-out;
+}
+
+.searchBar {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.15rem 1.25rem;
+  border-bottom: 1px solid rgb(35 42 60 / 10%);
+}
+
+.searchIcon {
+  flex-shrink: 0;
+  color: #727780;
+}
+
+.input,
+.input:focus,
+.input:focus-visible {
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  box-shadow: none;
+  color: #23242a;
+  font: inherit;
+  font-size: 1.65rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.025em;
+}
+
+.input::placeholder {
+  color: #858991;
+  opacity: 1;
+}
+
+.close {
+  display: grid;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgb(96 104 122 / 9%);
+  color: #747982;
+  cursor: pointer;
+}
+
+.close:hover {
+  background: rgb(96 104 122 / 17%);
+  color: #23242a;
+}
+.resultsArea {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.results {
+  padding: 0.45rem 0.6rem 0.65rem;
+}
+.groupLabel {
+  padding: 0.6rem 0.7rem 0.4rem;
+  color: #777c85;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+}
+
+.result {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.7rem;
+  border-radius: 11px;
+  cursor: pointer;
+  outline: none;
+}
+
+.result[data-focus] {
+  background: #1d2d8e;
+  color: white;
+}
+.resultIcon {
+  display: grid;
+  flex-shrink: 0;
+  width: 36px;
+  height: 40px;
+  place-items: center;
+  border: 1px solid rgb(70 85 135 / 12%);
+  border-radius: 9px;
+  background: rgb(255 255 255 / 72%);
+  color: #465889;
+  box-shadow: 0 1px 2px rgb(35 42 60 / 5%);
+}
+.resultCopy {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.resultTitle {
+  overflow: hidden;
+  font-size: 0.92rem;
+  font-weight: 550;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.resultPath {
+  overflow: hidden;
+  color: #777c85;
+  font-size: 0.7rem;
+  line-height: 1.5;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.snippet {
+  display: -webkit-box;
+  overflow: hidden;
+  margin-top: 0.15rem;
+  color: #666d79;
+  font-size: 0.77rem;
+  line-height: 1.5;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.openIcon {
+  flex-shrink: 0;
+  color: #9a9da6;
+}
+.result[data-focus] :is(.resultPath, .snippet, .openIcon) {
+  color: rgb(255 255 255 / 76%);
+}
+.result mark {
+  border-radius: 2px;
+  background: rgb(29 45 142 / 9%);
+  color: inherit;
+  font-weight: 600;
+}
+.result[data-focus] mark {
+  background: rgb(255 255 255 / 16%);
+}
+
+.message {
+  display: flex;
+  min-height: 12rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 2rem;
+  color: #777c85;
+  text-align: center;
+  font-size: 0.875rem;
+  overflow-wrap: anywhere;
+}
+.emptyTitle {
+  color: #383d47;
+  font-weight: 550;
+}
+.retry {
+  border-radius: 7px;
+  background: #1d2d8e;
+  padding: 0.45rem 0.8rem;
+  color: white;
+}
+.footer {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-top: 1px solid rgb(35 42 60 / 9%);
+  padding: 0.7rem 1.25rem;
+  color: #81858d;
+  font-size: 0.65rem;
+}
+.keyHints {
+  display: flex;
+  gap: 0.9rem;
+}
+.keyHints > span {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.footer kbd {
+  color: #636a77;
+  font-family: inherit;
+  font-size: 0.65rem;
+}
+.shortcut {
+  border: 1px solid rgb(35 42 60 / 13%);
+  border-radius: 4px;
+  padding: 0.05rem 0.3rem;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 639px) {
+  .positioner {
+    padding: max(0.75rem, env(safe-area-inset-top)) 0.75rem 1rem;
+  }
+  .panel {
+    max-height: calc(100dvh - 2rem);
+    border-radius: 18px;
+  }
+  .searchBar {
+    gap: 0.7rem;
+    padding: 0.9rem 1rem;
+  }
+  .input,
+  .input:focus,
+  .input:focus-visible {
+    font-size: 1.3rem;
+  }
+  .keyHints {
+    display: none;
+  }
+  .resultTitle {
+    font-size: 0.875rem;
+  }
+  .footer {
+    padding-inline: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    animation: none;
+  }
+}

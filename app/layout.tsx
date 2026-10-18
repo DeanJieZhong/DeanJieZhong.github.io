@@ -1,9 +1,8 @@
 import 'css/tailwind.css'
-import 'pliny/search/algolia.css'
 import 'remark-github-blockquote-alert/alert.css'
 
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
-import { SearchProvider, SearchConfig } from 'pliny/search'
+import SiteSearchProvider from '@/components/search/SiteSearchProvider'
 import Header from '@/components/Header'
 import SectionContainer from '@/components/SectionContainer'
 import Footer from '@/components/Footer'
@@ -100,10 +99,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
           <div className="flex-1">
             <SectionContainer>
-              <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
+              <SiteSearchProvider
+                indexUrl={`${basePath}/search.json?v=${process.env.SITE_REVISION}`}
+              >
                 <Header />
                 <main>{children}</main>
-              </SearchProvider>
+              </SiteSearchProvider>
             </SectionContainer>
           </div>
           <Footer />

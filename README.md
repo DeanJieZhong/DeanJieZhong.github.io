@@ -10,6 +10,13 @@ Pushes to `main` build and deploy the site through `.github/workflows/pages.yml`
 Use Yarn 3.6.1, run `yarn lint`, and run `EXPORT=true UNOPTIMIZED=true yarn build`
 before publishing changes.
 
+Site search opens from the header or with Command/Ctrl+K. Each production build
+generates `public/search.json` (and `out/search.json` for static hosting) from the
+rendered page titles, headings, and body text. Draft posts, error pages, assets,
+and duplicate pagination routes are excluded. Run a build before using search
+in a fresh local checkout, and rebuild to refresh the development search index.
+Run `yarn test:search` to check extraction, routing, ranking, and snippets.
+
 The original starter documentation follows.
 
 ![tailwind-nextjs-banner](/public/static/images/twitter-card.png)

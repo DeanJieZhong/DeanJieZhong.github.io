@@ -1,4 +1,3 @@
-import CopyTextButton from '@/components/CopyTextButton'
 import Image from '@/components/Image'
 import ApplicationMaterialLayout from '@/layouts/ApplicationMaterialLayout'
 import { genPageMetadata } from 'app/seo'
@@ -82,30 +81,15 @@ const scores: Score[] = [
   },
 ]
 
-const copyText = [
-  ...testDetails.map(({ label, value }) => `${label}: ${value}`),
-  '',
-  'Band scores',
-  ...scores.flatMap(({ label, value, breakdown }) => [
-    `${label}: ${value}`,
-    ...breakdown.flatMap(({ title, criteria }) =>
-      criteria.map(({ label, value }) => `  ${title ? `${title} — ` : ''}${label}: ${value}`)
-    ),
-  ]),
-].join('\n')
-
 export default function EnglishPage() {
   return (
     <ApplicationMaterialLayout title="IELTS Transcript">
       <p>IELTS Academic results and a redacted copy of the official Test Report Form.</p>
 
       <section aria-labelledby="ielts-details-heading" className="not-prose mt-8">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <h2 id="ielts-details-heading" className="text-xl font-semibold text-gray-900">
-            Test details
-          </h2>
-          <CopyTextButton text={copyText} />
-        </div>
+        <h2 id="ielts-details-heading" className="text-xl font-semibold text-gray-900">
+          Test details
+        </h2>
 
         <dl className="mt-5 divide-y divide-gray-200 border-y border-gray-200">
           {testDetails.map(({ label, value }) => (
