@@ -181,9 +181,9 @@ export default function EnglishPage() {
         <figure className="not-prose mt-6">
           <Image
             src="/static/images/application/IELTS%20Score%20Breakdown.svg"
-            alt="Listening, reading, writing and speaking score tables reproduced from the British Council email dated 21 September 2026. The detailed marks are also listed in Band scores above."
-            width={960}
-            height={840}
+            alt="Original listening, reading, writing and speaking score tables from the British Council email dated 21 September 2026. The detailed marks are also listed in Band scores above."
+            width={506}
+            height={286}
             className="m-0 h-auto w-full border border-gray-200"
             unoptimized
           />
