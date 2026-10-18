@@ -20,9 +20,9 @@ const headerNavLinks: HeaderNavLink[] = [
     title: 'Application',
     children: [
       { href: '/application/cv', title: 'CV' },
-      { href: '/application/transcript', title: 'Transcript' },
-      { href: '/application/english', title: 'IELTS' },
-      { href: '/application/research', title: 'Research' },
+      { href: '/application/academic-transcript', title: 'Transcript' },
+      { href: '/application/ielts-transcript', title: 'IELTS' },
+      { href: '/application/research-summary', title: 'Research' },
     ],
   },
   {
@@ -37,11 +37,11 @@ const headerNavLinks: HeaderNavLink[] = [
     ],
   },
   {
-    href: '/about',
+    href: '/about-dean-jie-zhong',
     title: 'About',
     children: [
-      { href: '/lego', title: 'Lego Archive' },
-      { href: '/about#contact', title: 'Contact' },
+      { href: '/lego-archive', title: 'Lego Archive' },
+      { href: '/about-dean-jie-zhong#contact', title: 'Contact' },
     ],
   },
 ]

@@ -13,7 +13,7 @@ export default function Guestbook() {
       <p>Thanks for visiting. This guestbook is not open for messages yet.</p>
       <p>
         How messages will be submitted and displayed is still to be decided. In the meantime, you
-        can <Link href="/about/#contact">get in touch directly</Link>.
+        can <Link href="/about-dean-jie-zhong/#contact">get in touch directly</Link>.
       </p>
     </SiteInfoLayout>
   )

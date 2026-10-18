@@ -10,6 +10,7 @@
     "analyze": "cross-env ANALYZE=true next build --webpack",
     "lint": "eslint --fix app components layouts scripts data",
     "test:search": "node scripts/search.test.mjs",
+    "test:routes": "node --test scripts/routes.test.mjs",
     "prepare": "husky"
   },
   "dependencies": {

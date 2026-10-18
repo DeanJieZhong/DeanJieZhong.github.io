@@ -1,0 +1,23 @@
+{
+  "/about/": "/about-dean-jie-zhong/",
+  "/application/english/": "/application/ielts-transcript/",
+  "/application/research/": "/application/research-summary/",
+  "/application/transcript/": "/application/academic-transcript/",
+  "/blog/code-sample/": "/blog/sample-md-file/",
+  "/blog/deriving-ols-estimator/": "/blog/deriving-the-ols-estimator/",
+  "/blog/github-markdown-guide/": "/blog/markdown-guide/",
+  "/blog/guide-to-using-images-in-nextjs/": "/blog/images-in-next-js/",
+  "/blog/nested-route/introducing-multi-part-posts-with-nested-routing/": "/blog/introducing-multi-part-posts-with-nested-routing/",
+  "/blog/pictures-of-canada/": "/blog/o-canada/",
+  "/blog/release-of-tailwind-nextjs-starter-blog-v2.0/": "/blog/release-of-tailwind-nextjs-starter-blog-v2-0/",
+  "/blog/why-blue-as-the-accent-colour/": "/blog/clustering-says-i-give-off-a-1d2d8e-vibe/",
+  "/colophon/": "/about-this-site/",
+  "/lego/": "/lego-archive/",
+  "/research/b-longum-pancreatic-cancer/": "/research/bifidobacterium-longum-elicits-anti-tumor-immunity-in-pancreatic-cancer/",
+  "/research/cxcl13-fc/": "/research/cxcl13-fc-and-cxcr5-engineered-cd8-t-cells/",
+  "/research/fj-gliding/": "/research/sprb-polysaccharide-interactions-in-f-johnsoniae/",
+  "/research/flame/": "/research/soochow-university/",
+  "/research/spotlight/": "/research/genome-wide-human-t-cell-screens-barriers-and-design/",
+  "/research/trogen/": "/research/trogen-a-commensal-bacterial-platform-for-intracellular-drug-delivery-in-tnbc/",
+  "/updates/": "/website-updates/"
+}

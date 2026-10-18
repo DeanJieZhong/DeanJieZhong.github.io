@@ -6,12 +6,12 @@ import AuthorLayout from '@/layouts/AuthorLayout'
 import Image from '@/components/Image'
 import Link from '@/components/Link'
 import aboutData, { type AboutPhoto } from '@/data/aboutData'
-import researchData from '@/data/researchData'
+import researchData, { researchPageSlug } from '@/data/researchData'
 import siteMetadata from '@/data/siteMetadata'
 import { genPageMetadata } from 'app/seo'
 import styles from '@/layouts/AuthorLayout.module.css'
 
-export const metadata = genPageMetadata({ title: 'About' })
+export const metadata = genPageMetadata({ title: 'About Dean Jie Zhong' })
 
 function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
   return (
@@ -108,7 +108,9 @@ export default function Page() {
                   <Details items={entry.outcomes} />
                   {project && (
                     <p>
-                      <Link href={`/research/${project.id}`}>{project.name} — Project details</Link>
+                      <Link href={`/research/${researchPageSlug(project)}`}>
+                        {project.name} — Project details
+                      </Link>
                     </p>
                   )}
                 </Entry>
@@ -197,7 +199,7 @@ export default function Page() {
             </Entries>
           ) : null}
           <p>
-            <Link href="/lego">Explore the Lego Archive</Link>
+            <Link href="/lego-archive">Explore the Lego Archive</Link>
           </p>
         </Section>
       </section>

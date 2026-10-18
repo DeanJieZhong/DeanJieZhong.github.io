@@ -5,8 +5,8 @@ import { sectionContainerClassName } from './SectionContainer'
 import styles from './Footer.module.css'
 
 const links = [
-  { title: 'Contact', href: '/about/#contact' },
-  { title: 'About this site', href: '/colophon/' },
+  { title: 'Contact', href: '/about-dean-jie-zhong/#contact' },
+  { title: 'About this site', href: '/about-this-site/' },
 ]
 
 export default function Footer() {
@@ -20,7 +20,7 @@ export default function Footer() {
           <span className={styles.release}>
             <span aria-hidden="true">·</span>
             <Link
-              href="/updates/"
+              href="/website-updates/"
               title="View update history"
               aria-label={`${siteVersion.label}: View update history`}
               className={`${styles.link} ${styles.version}`}

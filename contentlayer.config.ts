@@ -24,6 +24,7 @@ import rehypePrismPlus from 'rehype-prism-plus'
 import rehypePresetMinify from 'rehype-preset-minify'
 import siteMetadata from './data/siteMetadata'
 import prettier from 'prettier'
+import { pageTitleSlug } from './lib/pageTitleSlug'
 
 const root = process.cwd()
 const isProduction = process.env.NODE_ENV === 'production'
@@ -104,6 +105,8 @@ export const Blog = defineDocumentType(() => ({
   },
   computedFields: {
     ...computedFields,
+    slug: { type: 'string', resolve: (doc) => pageTitleSlug(doc.title) },
+    path: { type: 'string', resolve: (doc) => `blog/${pageTitleSlug(doc.title)}` },
     structuredData: {
       type: 'json',
       resolve: (doc) => ({
@@ -114,7 +117,7 @@ export const Blog = defineDocumentType(() => ({
         dateModified: doc.lastmod || doc.date,
         description: doc.summary,
         image: doc.images ? doc.images[0] : siteMetadata.socialBanner,
-        url: `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
+        url: `${siteMetadata.siteUrl}/blog/${pageTitleSlug(doc.title)}`,
       }),
     },
   },
@@ -141,6 +144,7 @@ export const Authors = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'data',
+  contentDirExclude: ['routeRedirects.json'],
   documentTypes: [Blog, Authors],
   mdx: {
     cwd: process.cwd(),

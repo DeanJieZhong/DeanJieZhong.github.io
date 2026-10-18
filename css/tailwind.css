@@ -351,3 +351,15 @@ input:-webkit-autofill:focus {
   display: inline-block;
   vertical-align: middle;
 }
+
+/* Search paints text ranges without changing page markup or layout. */
+::highlight(site-search-matches) {
+  background-color: #fff0ac;
+  color: #27220f;
+}
+
+::highlight(site-search-active) {
+  background-color: #ffb849;
+  color: #241704;
+  text-decoration: underline;
+}

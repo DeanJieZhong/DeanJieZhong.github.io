@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { researchDetailEntries } from '@/data/researchData'
+import { researchDetailEntries, researchPageSlug } from '@/data/researchData'
 import trogenData from '@/data/trogenData'
 import TrogenProject from '@/components/TrogenProject'
 import fjData from '@/data/fjData'
@@ -14,15 +14,15 @@ interface ResearchPageProps {
 export const dynamicParams = false
 
 export function generateStaticParams() {
-  return researchDetailEntries.map((entry) => ({ id: entry.id }))
+  return researchDetailEntries.map((entry) => ({ id: researchPageSlug(entry) }))
 }
 
 export async function generateMetadata({ params }: ResearchPageProps) {
   const { id } = await params
-  const entry = researchDetailEntries.find((item) => item.id === id)
+  const entry = researchDetailEntries.find((item) => researchPageSlug(item) === id)
   if (!entry) notFound()
 
-  if (id === 'trogen') {
+  if (entry.id === 'trogen') {
     return genPageMetadata({
       title: trogenData.title,
       description: trogenData.summary,
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: ResearchPageProps) {
     })
   }
 
-  if (id === 'fj-gliding') {
+  if (entry.id === 'fj-gliding') {
     return genPageMetadata({
       title: fjData.title,
       description: fjData.summary,
@@ -58,10 +58,10 @@ export async function generateMetadata({ params }: ResearchPageProps) {
 
 export default async function ResearchPage({ params }: ResearchPageProps) {
   const { id } = await params
-  const entry = researchDetailEntries.find((item) => item.id === id)
+  const entry = researchDetailEntries.find((item) => researchPageSlug(item) === id)
   if (!entry) notFound()
-  if (id === 'trogen') return <TrogenProject />
-  if (id === 'fj-gliding') return <FjProject />
+  if (entry.id === 'trogen') return <TrogenProject />
+  if (entry.id === 'fj-gliding') return <FjProject />
   if (entry.photo) return <PhotoResearchProject entry={entry} photo={entry.photo} />
 
   // Keep unfinished research routes blank until their own content is ready.

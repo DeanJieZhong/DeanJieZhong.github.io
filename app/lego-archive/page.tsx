@@ -15,7 +15,7 @@ export default function LegoPage() {
     <article className={styles.page}>
       <header className={styles.header}>
         <Breadcrumbs
-          items={[{ label: 'About', href: '/about' }, { label: 'Lego Archive' }]}
+          items={[{ label: 'About', href: '/about-dean-jie-zhong' }, { label: 'Lego Archive' }]}
           tone="inverse"
         />
         <h1>Lego Archive</h1>

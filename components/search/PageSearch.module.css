@@ -1,0 +1,99 @@
+.bar {
+  position: fixed;
+  z-index: 80;
+  top: 5.5rem;
+  right: 1rem;
+  width: min(25rem, calc(100vw - 2rem));
+  padding: 0.65rem 0.7rem;
+  border: 1px solid rgb(255 255 255 / 85%);
+  border-radius: 16px;
+  outline: none;
+  background: rgb(248 249 252 / 94%);
+  box-shadow: 0 8px 35px rgb(24 31 58 / 15%), 0 0 0 1px rgb(24 31 58 / 7%);
+  backdrop-filter: blur(24px);
+  color: #23242a;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.controls > svg {
+  flex-shrink: 0;
+  margin: 0 0.35rem;
+  color: #737885;
+}
+
+.query {
+  width: 0;
+  min-width: 0;
+  flex: 1;
+  padding: 0.25rem;
+  border: 0;
+  border-radius: 4px;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.query:focus {
+  outline: none;
+  box-shadow: 0 1px 0 #a5abd2;
+}
+
+.query::placeholder {
+  color: #737885;
+}
+
+.count {
+  padding: 0 0.4rem;
+  color: #737885;
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.controls button {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.controls button:hover:not(:disabled) {
+  background: #e8eaf4;
+}
+
+.controls button:focus-visible {
+  outline: 2px solid #1d2d8e;
+}
+
+.controls button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.message {
+  margin: 0.5rem 0.25rem 0.1rem;
+  color: #737885;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .bar {
+    top: auto;
+    bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+}

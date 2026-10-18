@@ -19,19 +19,19 @@ const materials = [
   {
     id: 'transcript',
     title: 'Academic Transcript',
-    href: '/application/transcript',
+    href: '/application/academic-transcript',
     description: 'Academic records by year, including module credits, marks, and grading context.',
   },
   {
-    id: 'english',
+    id: 'ielts',
     title: 'IELTS Transcript',
-    href: '/application/english',
+    href: '/application/ielts-transcript',
     description: 'English language test results and supporting documentation.',
   },
   {
     id: 'research',
     title: 'Research Summary',
-    href: '/application/research',
+    href: '/application/research-summary',
     description:
       'Research experience, individual contributions, technical skills, and future interests.',
   },

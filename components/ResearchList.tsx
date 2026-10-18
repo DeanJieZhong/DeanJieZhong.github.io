@@ -1,6 +1,6 @@
 import Link from '@/components/Link'
 import ResearchExperienceMetadata from '@/components/ResearchExperienceMetadata'
-import { researchExperiences, researchTypes } from '@/data/researchData'
+import { researchExperiences, researchTypes, researchPageSlug } from '@/data/researchData'
 import type { ResearchEntry, ResearchType } from '@/data/researchData'
 import styles from './ResearchList.module.css'
 
@@ -48,7 +48,7 @@ function ResearchItem({ entry }: { entry: ResearchEntry }) {
       >
         {entry.hasDetailPage && !hasSingleTarget ? (
           <Link
-            href={`/research/${entry.id}`}
+            href={`/research/${researchPageSlug(entry)}`}
             className={`${styles.projectLink} inline-block min-h-11 focus-visible:outline-offset-4`}
           >
             <span className={styles.projectName}>{titleContent}</span>
@@ -92,7 +92,7 @@ function ResearchItem({ entry }: { entry: ResearchEntry }) {
     >
       {hasSingleTarget ? (
         <Link
-          href={`/research/${entry.id}`}
+          href={`/research/${researchPageSlug(entry)}`}
           aria-labelledby={`${entry.id}-title`}
           className={`${styles.projectLink} ${styles.expandedLink} block focus-visible:outline-offset-4 ${rowClassName}`}
         >
@@ -157,7 +157,7 @@ function CompactResearchGroup({
               <article aria-labelledby={`${entry.id}-title`} className="min-w-0 break-words">
                 {entry.hasDetailPage ? (
                   <Link
-                    href={`/research/${entry.id}`}
+                    href={`/research/${researchPageSlug(entry)}`}
                     aria-labelledby={`${entry.id}-title`}
                     className={`${styles.projectLink} ${styles.expandedLink} ${styles.compactLink} focus-visible:outline-offset-4 ${rowClassName}`}
                   >

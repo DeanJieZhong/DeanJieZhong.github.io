@@ -92,6 +92,12 @@ module.exports = () => {
 
   // ✅ 关键：export 模式下不要出现 `headers` 这个字段（哪怕返回 [] 也会警告）
   if (output !== 'export') {
+    nextConfig.redirects = async () =>
+      Object.entries(require('./data/routeRedirects.json')).map(([source, destination]) => ({
+        source,
+        destination,
+        permanent: true,
+      }))
     nextConfig.headers = async () => [
       {
         source: '/(.*)',

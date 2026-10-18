@@ -15,7 +15,42 @@ generates `public/search.json` (and `out/search.json` for static hosting) from t
 rendered page titles, headings, and body text. Draft posts, error pages, assets,
 and duplicate pagination routes are excluded. Run a build before using search
 in a fresh local checkout, and rebuild to refresh the development search index.
-Run `yarn test:search` to check extraction, routing, ranking, and snippets.
+Search is case/accent insensitive and matches word prefixes (for example, `IE`
+finds `IELTS`, but not `Jie`). Results use strict priority tiers: exact title,
+all query terms in the title, some terms in the title, headings, body, then metadata.
+Opening a result preserves the query in `?find=…` and highlights the page's visible
+text in reading order. Editing the page finder's keyword immediately searches the
+current page again, starts at the first match, and updates the URL without adding
+history entries. Enter / Shift+Enter cycle through matches, and Escape closes
+the page finder. Controls and navigation are excluded; embedded image/PDF text is
+not part of page finding. Native browser Command/Ctrl+F remains available.
+The search palette lists current-page title/body matches in a leading “This page”
+group, without repeating the page among other results. It remembers the last page
+query during the visit so closing the finder does not lose it. The palette opens
+as a single sharp-cornered input bar without suggestions or a footer. Typing only
+edits the query; Enter submits it. The lens fills smoothly from the top using
+`76n / (75n + 200)`: 10 characters fill 80%, with diminishing additions until the
+200-character limit fills it completely. On submission, that fill drops away
+inside the clipped lens, then the panel unfolds downward to reveal the results.
+Reduced motion skips both animations.
+The palette and its lighter backdrop share the same 160ms fade in and out;
+pressing outside the panel starts closing immediately. Selected results use
+full-width rectangular highlights. Neither the palette nor the page finder has
+a shortcut-hint footer; their keyboard controls remain available.
+Matched text uses square yellow highlights on both selected and unselected results.
+Pointer dismissal prevents automatic focus restoration from leaving a header outline;
+the next pointer or keyboard interaction restores normal focus handling.
+Editing again collapses the results until the next submission. The header's white
+square lens matches the logo and fills from its top-left corner on hover, using
+the same timing as the navigation panels.
+Run `yarn test:search` to check extraction, routing, prefix matching, ranking, grouping, and snippets.
+
+Page URLs use their full English titles in lowercase, separated by hyphens; the
+homepage stays at `/`. Blog and research slugs are derived from their page titles.
+Historical URLs are listed in `data/routeRedirects.json`: Next serves redirects
+in development, and the static build generates redirect pages for GitHub Pages.
+Query parameters and fragments are retained. After a static build, run
+`yarn test:routes` to check title/URL agreement, redirects, and internal links.
 
 The original starter documentation follows.
 

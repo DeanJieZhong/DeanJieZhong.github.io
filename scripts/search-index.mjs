@@ -35,7 +35,7 @@ function getSection(url) {
   if (url.startsWith('/application')) return 'Application'
   if (url.startsWith('/research')) return 'Research'
   if (url.startsWith('/blog') || url.startsWith('/tags')) return 'Blog'
-  if (url.startsWith('/about') || url.startsWith('/lego')) return 'About'
+  if (url.startsWith('/about-dean-jie-zhong') || url.startsWith('/lego-archive')) return 'About'
   return 'Website'
 }
 
@@ -101,7 +101,7 @@ export async function generateSearchIndex() {
     const document = extractSearchDocument(await readFile(path.join(source, file), 'utf8'), url)
     if (document) documents.push(document)
   }
-  if (!documents.some((document) => document.url === '/application/english/')) {
+  if (!documents.some((document) => document.url === '/application/ielts-transcript/')) {
     throw new Error('The site search index is incomplete: application pages were not generated.')
   }
   const json = JSON.stringify(documents)

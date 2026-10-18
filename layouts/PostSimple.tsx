@@ -48,7 +48,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                 <p className="pt-4 text-sm leading-6 text-gray-600 dark:text-gray-400">
                   By{' '}
                   <Link
-                    href="/about"
+                    href="/about-dean-jie-zhong"
                     rel="author"
                     className="rounded-sm underline decoration-gray-300 underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4"
                   >

@@ -1,4 +1,5 @@
 import scholarsData from './scholarsData'
+import { pageTitleSlug } from '../lib/pageTitleSlug'
 import type { ScholarId } from './scholarsData'
 
 export const researchExperiences = [
@@ -203,7 +204,10 @@ const researchData: ResearchEntry[] = [
     summary:
       'A Python workflow adapted from an existing Fiji macro to apply consistent processing parameters across images from the same experiment and reduce repetitive manual processing.',
     contribution: 'Workflow adaptation and Python development',
-    relatedResearch: { label: 'FJ Gliding', url: '/research/fj-gliding' },
+    relatedResearch: {
+      label: 'FJ Gliding',
+      url: '/research/sprb-polysaccharide-interactions-in-f-johnsoniae',
+    },
   },
   {
     id: 'rainbow-tracker',
@@ -217,7 +221,10 @@ const researchData: ResearchEntry[] = [
     summary:
       'An experimental workflow for tracking bacterial identities across frames, with rules for contact, separation, missed detections, boundary crossings, and uncertain observations.',
     contribution: 'Tracking logic design and manual inspection',
-    relatedResearch: { label: 'FJ Gliding', url: '/research/fj-gliding' },
+    relatedResearch: {
+      label: 'FJ Gliding',
+      url: '/research/sprb-polysaccharide-interactions-in-f-johnsoniae',
+    },
   },
   {
     id: 'spotlight',
@@ -275,6 +282,14 @@ const researchData: ResearchEntry[] = [
     eventPeriod: 'iGEM 2026',
   },
 ]
+
+export function researchPageSlug(entry: ResearchEntry) {
+  const title =
+    entry.photo || entry.id === 'trogen' || entry.id === 'fj-gliding'
+      ? entry.listTitle || entry.researchTitle || entry.name
+      : entry.researchTitle?.trim() || entry.name
+  return pageTitleSlug(title)
+}
 
 export const researchDetailEntries = researchData.filter((entry) => entry.hasDetailPage)
 

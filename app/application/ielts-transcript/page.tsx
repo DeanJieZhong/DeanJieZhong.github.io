@@ -81,7 +81,7 @@ const scores: Score[] = [
   },
 ]
 
-export default function EnglishPage() {
+export default function IELTSPage() {
   return (
     <ApplicationMaterialLayout title="IELTS Transcript">
       <p>IELTS Academic results and a redacted copy of the official Test Report Form.</p>

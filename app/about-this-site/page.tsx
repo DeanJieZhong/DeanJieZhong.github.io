@@ -45,7 +45,7 @@ export default function Colophon() {
       </p>
 
       <p>
-        See <Link href="/updates/">website updates</Link> for the current source version and
+        See <Link href="/website-updates/">website updates</Link> for the current source version and
         recorded changes.
       </p>
     </SiteInfoLayout>
