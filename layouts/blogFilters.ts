@@ -11,8 +11,8 @@ export type BlogListPost = Pick<
 export const blogCategories = [
   { value: 'all', label: 'All', tags: [] },
   { value: 'research', label: 'Research', tags: ['research', 'math', 'ols'] },
-  { value: 'travel', label: 'Travel', tags: ['travel', 'holiday', 'canada'] },
   { value: 'reflection', label: 'Reflection', tags: ['reflection'] },
+  { value: 'travel', label: 'Travel', tags: ['travel', 'holiday', 'canada'] },
   { value: 'side-quests', label: 'Side quests', tags: ['side-quests'] },
 ] as const
 

@@ -77,14 +77,23 @@
 }
 
 .titleLink {
+  padding-bottom: 0.15em;
+  background-image: linear-gradient(
+    var(--interaction-underline-color),
+    var(--interaction-underline-color)
+  );
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 0% 1px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
   text-decoration: none;
-  text-underline-offset: 0.15em;
+  transition: background-size 150ms ease-out;
 }
 
 .titleLink:is(:hover, :focus-visible, :active) {
-  text-decoration: underline;
-  text-decoration-color: var(--interaction-underline-color);
-  text-decoration-thickness: 1px;
+  background-size: 100% 1px;
+  text-decoration: none;
 }
 
 .titleLink:focus-visible {
@@ -197,5 +206,11 @@
 
   .thumbnail {
     width: 7.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .titleLink {
+    transition: none;
   }
 }

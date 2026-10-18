@@ -16,11 +16,6 @@ const headerNavLinks: HeaderNavLink[] = [
     ],
   },
   {
-    href: '/blog',
-    title: 'Blog',
-    children: [{ href: '/tags', title: 'Tags' }],
-  },
-  {
     href: '/application',
     title: 'Application',
     children: [
@@ -29,6 +24,11 @@ const headerNavLinks: HeaderNavLink[] = [
       { href: '/application/english', title: 'IELTS' },
       { href: '/application/research', title: 'Research' },
     ],
+  },
+  {
+    href: '/blog',
+    title: 'Blog',
+    children: [{ href: '/tags', title: 'Tags' }],
   },
   {
     href: '/about',
