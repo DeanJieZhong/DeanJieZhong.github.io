@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 import type { Authors } from 'contentlayer/generated'
 import type { AboutPhoto } from '@/data/aboutData'
 import Image from '@/components/Image'
+import Breadcrumbs from '@/components/Breadcrumbs'
 import styles from './AuthorLayout.module.css'
 
 interface Props {
@@ -20,6 +21,7 @@ export default function AuthorLayout({ children, introduction, portrait, content
       <div className={styles.hero}>
         <div className={styles.heroBand} aria-hidden="true" />
         <header className={styles.header}>
+          <Breadcrumbs items={[{ label: 'About' }]} tone="inverse" />
           <h1>About {name.replace(/[()]/g, '')}</h1>
         </header>
         {photo && (

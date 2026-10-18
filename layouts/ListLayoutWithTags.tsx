@@ -6,6 +6,7 @@ import { formatDate } from 'pliny/utils/formatDate'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog } from 'contentlayer/generated'
 import Link from '@/components/Link'
+import Breadcrumbs, { type BreadcrumbItem } from '@/components/Breadcrumbs'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import tagData from 'app/tag-data.json'
@@ -32,11 +33,22 @@ export default function ListLayoutWithTags({
   const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a])
 
   const displayPosts = initialDisplayPosts.length > 0 ? initialDisplayPosts : posts
+  const breadcrumbItems: BreadcrumbItem[] = pathname.startsWith('/tags/')
+    ? [
+        { label: 'Blog', href: '/blog' },
+        { label: 'Tags', href: '/tags' },
+        { label: title, href: pathname.split('/page/')[0] },
+      ]
+    : [{ label: 'Blog', href: '/blog' }]
+  if (pagination && pagination.currentPage > 1) {
+    breadcrumbItems.push({ label: `Page ${pagination.currentPage}` })
+  }
 
   return (
     <>
       <div>
         <div className="pt-6 pb-6">
+          <Breadcrumbs items={breadcrumbItems} />
           <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:hidden sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
             {title}
           </h1>

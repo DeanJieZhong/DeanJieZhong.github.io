@@ -1,5 +1,6 @@
 import LegoGallery from '@/components/LegoGallery'
 import Link from '@/components/Link'
+import Breadcrumbs from '@/components/Breadcrumbs'
 import legoSets, { legoStatusCheckedAt } from '@/data/legoData'
 import { genPageMetadata } from 'app/seo'
 import styles from '@/components/LegoGallery.module.css'
@@ -13,6 +14,10 @@ export default function LegoPage() {
   return (
     <article className={styles.page}>
       <header className={styles.header}>
+        <Breadcrumbs
+          items={[{ label: 'About', href: '/about' }, { label: 'Lego Archive' }]}
+          tone="inverse"
+        />
         <h1>Lego Archive</h1>
         <p>I’ve always loved LEGOs.</p>
         <p>

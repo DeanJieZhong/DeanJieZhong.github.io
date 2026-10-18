@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import Image from 'next/image'
 import Link from '@/components/Link'
+import Breadcrumbs from '@/components/Breadcrumbs'
 import trogen from '@/data/trogenData'
 import type { TrogenFigure } from '@/data/trogenData'
 import styles from './TrogenArticle.module.css'
@@ -100,6 +101,13 @@ export default function TrogenProject() {
           </div>
         </div>
 
+        <div className={contentWidth}>
+          <Breadcrumbs
+            items={[{ label: 'Research', href: '/research' }, { label: 'TroGen' }]}
+            placement="after-cover"
+            tone="inverse"
+          />
+        </div>
         <section
           aria-labelledby="project-overview"
           className={`${contentWidth} pt-6 pb-12 sm:pt-8 sm:pb-16`}

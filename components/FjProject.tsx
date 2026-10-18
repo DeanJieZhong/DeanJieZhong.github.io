@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from '@/components/Link'
+import Breadcrumbs from '@/components/Breadcrumbs'
 import fj from '@/data/fjData'
 import styles from './TrogenProject.module.css'
 
@@ -36,6 +37,13 @@ export default function FjProject() {
           </div>
         </div>
 
+        <div className={contentWidth}>
+          <Breadcrumbs
+            items={[{ label: 'Research', href: '/research' }, { label: 'FJ Gliding' }]}
+            placement="after-cover"
+            tone="inverse"
+          />
+        </div>
         <section
           aria-labelledby="project-overview"
           className={`${contentWidth} pt-6 pb-12 sm:pt-8 sm:pb-16`}

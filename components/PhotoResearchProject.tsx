@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from '@/components/Link'
+import Breadcrumbs from '@/components/Breadcrumbs'
 import { ScholarPopoverGroup } from '@/components/ScholarPopover'
 import ResearchExperienceMetadata from '@/components/ResearchExperienceMetadata'
 import { researchExperiences } from '@/data/researchData'
@@ -55,6 +56,13 @@ export default function PhotoResearchProject({
           </div>
         </div>
 
+        <div className={contentWidth}>
+          <Breadcrumbs
+            items={[{ label: 'Research', href: '/research' }, { label: entry.name }]}
+            placement="after-cover"
+            tone="inverse"
+          />
+        </div>
         <section
           aria-labelledby="project-overview"
           className={`${contentWidth} pt-6 pb-12 sm:pt-8 sm:pb-16`}

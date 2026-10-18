@@ -3,6 +3,7 @@ import { formatDate } from 'pliny/utils/formatDate'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog } from 'contentlayer/generated'
 import Comments from '@/components/Comments'
+import Breadcrumbs from '@/components/Breadcrumbs'
 import Link from '@/components/Link'
 import SectionContainer from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
@@ -24,6 +25,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
       <article>
         <div>
           <header className="pt-8 sm:pt-12">
+            <Breadcrumbs items={[{ label: 'Blog', href: '/blog' }, { label: title }]} />
             <div className="space-y-1 border-b border-gray-200 pb-10 text-center dark:border-gray-700">
               <dl>
                 <div>

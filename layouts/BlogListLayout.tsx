@@ -3,11 +3,13 @@
 import { Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import BlogHero from '@/components/BlogHero'
+import Breadcrumbs from '@/components/Breadcrumbs'
 import Image from '@/components/Image'
 import Link from '@/components/Link'
 import siteMetadata from '@/data/siteMetadata'
 import styles from './BlogListLayout.module.css'
 import {
+  blogCategories,
   filterBlogPosts,
   getBlogCategory,
   type BlogCategory,
@@ -203,6 +205,17 @@ export default function BlogListLayout({ posts, title }: BlogListLayoutProps) {
         <BlogUrlState onChange={setQuery} />
       </Suspense>
       <BlogHero category={category} resultCount={filteredPosts.length} onChange={updateCategory} />
+      <Breadcrumbs
+        placement="after-cover"
+        items={
+          category === 'all'
+            ? [{ label: 'Blog' }]
+            : [
+                { label: 'Blog', href: '/blog' },
+                { label: blogCategories.find((item) => item.value === category)!.label },
+              ]
+        }
+      />
       <div ref={resultsRef} style={{ minHeight: minResultsHeight }}>
         <BlogPostFeed key={category} posts={filteredPosts} title={title} onClear={showAll} />
       </div>

@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog, Authors } from 'contentlayer/generated'
 import Comments from '@/components/Comments'
+import Breadcrumbs from '@/components/Breadcrumbs'
 import Link from '@/components/Link'
 import PageTitle from '@/components/PageTitle'
 import SectionContainer from '@/components/SectionContainer'
@@ -53,6 +54,7 @@ export default function PostLayout({
           <header
             className={`pt-6 xl:pb-6 ${alignTitleWithContent ? 'xl:ml-[calc((100%+1.5rem)/4)]' : ''}`}
           >
+            <Breadcrumbs items={[{ label: 'Blog', href: '/blog' }, { label: title }]} />
             {headerContent}
             <div className={`space-y-1 ${alignTitleWithContent ? 'text-left' : 'text-center'}`}>
               <dl className="space-y-10">

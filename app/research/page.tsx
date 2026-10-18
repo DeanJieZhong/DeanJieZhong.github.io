@@ -1,5 +1,6 @@
 import researchData from '@/data/researchData'
 import Image from '@/components/Image'
+import Breadcrumbs from '@/components/Breadcrumbs'
 import ResearchList from '@/components/ResearchList'
 import { ScholarPopoverGroup } from '@/components/ScholarPopover'
 import { sectionContainerClassName } from '@/components/SectionContainer'
@@ -40,6 +41,11 @@ export default function Research() {
         </div>
       </div>
 
+      <Breadcrumbs
+        items={[{ label: 'Research' }]}
+        placement="after-cover"
+        className="ml-9 sm:ml-12"
+      />
       <ScholarPopoverGroup>
         <ResearchList entries={researchData} />
       </ScholarPopoverGroup>
