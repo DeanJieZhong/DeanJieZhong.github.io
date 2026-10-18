@@ -210,8 +210,8 @@
   outline-offset: -2px;
 }
 
-.navigationLink[aria-current='page'] {
-  background-color: var(--color-primary-100);
+.navigationLink[aria-current='page'] .navigationLabel {
+  background-size: 100% 1px;
 }
 
 @media (min-width: 768px) {
