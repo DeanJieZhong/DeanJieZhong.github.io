@@ -3,6 +3,7 @@ import styles from './Breadcrumbs.module.css'
 
 export interface BreadcrumbItem {
   label: string
+  italicText?: string
   href?: string
 }
 
@@ -29,6 +30,17 @@ export default function Breadcrumbs({
       <ol className={styles.trail}>
         {trail.map((item, index) => {
           const isCurrent = index === trail.length - 1
+          const italicStart = item.italicText ? item.label.indexOf(item.italicText) : -1
+          const label =
+            item.italicText && italicStart >= 0 ? (
+              <>
+                {item.label.slice(0, italicStart)}
+                <i>{item.italicText}</i>
+                {item.label.slice(italicStart + item.italicText.length)}
+              </>
+            ) : (
+              item.label
+            )
 
           return (
             <li key={`${item.label}-${index}`} className={styles.item}>
@@ -44,11 +56,11 @@ export default function Breadcrumbs({
               )}
               {item.href && !isCurrent ? (
                 <Link href={item.href} className={styles.link}>
-                  {item.label}
+                  {label}
                 </Link>
               ) : (
                 <span aria-current={isCurrent ? 'page' : undefined} className={styles.current}>
-                  {item.label}
+                  {label}
                 </span>
               )}
             </li>
