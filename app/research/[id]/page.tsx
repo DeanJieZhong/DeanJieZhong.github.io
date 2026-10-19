@@ -5,6 +5,7 @@ import TrogenProject from '@/components/TrogenProject'
 import fjData from '@/data/fjData'
 import FjProject from '@/components/FjProject'
 import PhotoResearchProject from '@/components/PhotoResearchProject'
+import Cxcl13Article from '@/components/Cxcl13Article'
 import { genPageMetadata } from 'app/seo'
 
 interface ResearchPageProps {
@@ -62,7 +63,13 @@ export default async function ResearchPage({ params }: ResearchPageProps) {
   if (!entry) notFound()
   if (entry.id === 'trogen') return <TrogenProject />
   if (entry.id === 'fj-gliding') return <FjProject />
-  if (entry.photo) return <PhotoResearchProject entry={entry} photo={entry.photo} />
+  if (entry.photo) {
+    return (
+      <PhotoResearchProject entry={entry} photo={entry.photo}>
+        {entry.id === 'cxcl13-fc' ? <Cxcl13Article /> : null}
+      </PhotoResearchProject>
+    )
+  }
 
   // Keep unfinished research routes blank until their own content is ready.
   return null

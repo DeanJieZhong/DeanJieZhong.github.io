@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import type { ReactNode } from 'react'
 import Link from '@/components/Link'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import { ScholarPopoverGroup } from '@/components/ScholarPopover'
@@ -13,9 +14,11 @@ const linkStyle = 'underline underline-offset-4 decoration-gray-400 focus-visibl
 export default function PhotoResearchProject({
   entry,
   photo,
+  children,
 }: {
   entry: ResearchEntry
   photo: ResearchPhoto
+  children?: ReactNode
 }) {
   const experience = researchExperiences.find((item) => item.id === entry.experience)!
 
@@ -86,6 +89,8 @@ export default function PhotoResearchProject({
           </ScholarPopoverGroup>
         </section>
       </div>
+
+      {children}
 
       <nav
         aria-label="Research navigation"
