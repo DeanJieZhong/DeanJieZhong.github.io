@@ -30,14 +30,12 @@
   max-height: calc(100dvh - min(16vh, 8rem) - 2rem);
   /* Reveal the list without becoming a scroll container for option auto-focus. */
   overflow: clip;
-  border: 1px solid rgb(255 255 255 / 88%);
+  border: 0;
   border-radius: 0;
-  background: rgb(248 249 252 / 91%);
+  background: #fff;
   box-shadow:
     0 28px 90px rgb(10 16 35 / 24%),
-    0 3px 12px rgb(10 16 35 / 10%),
-    inset 0 0 0 1px rgb(255 255 255 / 55%);
-  backdrop-filter: blur(30px) saturate(160%);
+    0 3px 12px rgb(10 16 35 / 10%);
 }
 
 .backdrop,
@@ -168,18 +166,6 @@
   background: #1d2d8e;
   color: white;
 }
-.resultIcon {
-  display: grid;
-  flex-shrink: 0;
-  width: 36px;
-  height: 40px;
-  place-items: center;
-  border: 1px solid rgb(70 85 135 / 12%);
-  border-radius: 9px;
-  background: rgb(255 255 255 / 72%);
-  color: #465889;
-  box-shadow: 0 1px 2px rgb(35 42 60 / 5%);
-}
 .resultCopy {
   display: flex;
   min-width: 0;
@@ -195,7 +181,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.resultPath {
+.resultSection {
   overflow: hidden;
   color: #777c85;
   font-size: 0.7rem;
@@ -217,7 +203,7 @@
   flex-shrink: 0;
   color: #9a9da6;
 }
-.result[data-focus] :is(.resultPath, .snippet, .openIcon) {
+.result[data-focus] :is(.resultSection, .snippet, .openIcon) {
   color: rgb(255 255 255 / 76%);
 }
 .result mark {

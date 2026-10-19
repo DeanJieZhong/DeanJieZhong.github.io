@@ -12,7 +12,7 @@ import {
 } from '@headlessui/react'
 import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import { ArrowUpRight, BookOpen, FileText, FlaskConical, Globe2, UserRound, X } from 'lucide-react'
+import { ArrowUpRight, X } from 'lucide-react'
 import SearchIcon from './SearchIcon'
 import { findWordMatches } from './matching'
 import { prepareSearchDocuments, groupSearchResults, searchSnippet } from './search'
@@ -59,20 +59,6 @@ function loadIndex(url: string) {
     indexCache.set(url, pending)
   }
   return pending
-}
-
-function ResultIcon({ section }: { section: string }) {
-  const Icon =
-    section === 'Research'
-      ? FlaskConical
-      : section === 'Application'
-        ? FileText
-        : section === 'Blog'
-          ? BookOpen
-          : section === 'About'
-            ? UserRound
-            : Globe2
-  return <Icon size={21} strokeWidth={1.5} aria-hidden="true" />
 }
 
 function Highlight({ text, query }: { text: string; query: string }) {
@@ -335,17 +321,11 @@ export default function SearchDialog({
                               value={document}
                               className={styles.result}
                             >
-                              <span className={styles.resultIcon}>
-                                <ResultIcon section={document.section} />
-                              </span>
                               <span className={styles.resultCopy}>
                                 <span className={styles.resultTitle}>
                                   <Highlight text={document.title} query={submittedQuery} />
                                 </span>
-                                <span className={styles.resultPath}>
-                                  {document === currentPage ? 'This page' : document.section}{' '}
-                                  <span aria-hidden="true">·</span> {document.url}
-                                </span>
+                                <span className={styles.resultSection}>{document.section}</span>
                                 <span className={styles.snippet}>
                                   <Highlight
                                     text={searchSnippet(document, submittedQuery)}
