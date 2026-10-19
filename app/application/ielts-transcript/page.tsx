@@ -1,4 +1,5 @@
 import Image from '@/components/Image'
+import PdfPreview from '@/components/PdfPreview'
 import ApplicationMaterialLayout from '@/layouts/ApplicationMaterialLayout'
 import { genPageMetadata } from 'app/seo'
 
@@ -8,7 +9,7 @@ export const metadata = genPageMetadata({
     'IELTS Academic results: overall band 8.0. Test details, detailed scores and a redacted transcript.',
 })
 
-const transcriptPath = '/static/images/application/Redacted%20IELTS%20Transcript.png'
+const transcriptPath = '/static/files/ielts-transcript.pdf'
 
 // Scores and dates are transcribed from the supplied report. The test format and
 // venue were confirmed by the site owner; the origin field is not a test location.
@@ -148,16 +149,7 @@ export default function IELTSPage() {
 
       <section aria-labelledby="ielts-transcript-heading">
         <h2 id="ielts-transcript-heading">Redacted IELTS Transcript</h2>
-        <figure className="not-prose mt-6">
-          <Image
-            src={transcriptPath}
-            alt="Redacted IELTS Transcript showing an overall band score of 8.0."
-            width={2479}
-            height={3508}
-            className="m-0 h-auto w-full border border-gray-200"
-            unoptimized
-          />
-        </figure>
+        <PdfPreview src={transcriptPath} title="Redacted IELTS transcript PDF preview" />
       </section>
 
       <section aria-labelledby="ielts-breakdown-heading">

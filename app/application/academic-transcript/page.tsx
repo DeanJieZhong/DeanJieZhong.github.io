@@ -1,6 +1,6 @@
 import AcademicTranscript from '@/components/AcademicTranscript'
 import ApplicationMaterialLayout from '@/layouts/ApplicationMaterialLayout'
-import TranscriptPdfViewer from '@/components/TranscriptPdfViewer'
+import PdfPreview from '@/components/PdfPreview'
 import { genPageMetadata } from 'app/seo'
 
 export const metadata = genPageMetadata({
@@ -24,7 +24,7 @@ export default function TranscriptPage() {
       </section>
       <section aria-labelledby="official-transcript-heading">
         <h2 id="official-transcript-heading">Official transcript</h2>
-        <TranscriptPdfViewer src={transcriptPdf} />
+        <PdfPreview src={transcriptPdf} title="Official academic transcript PDF preview" />
       </section>
     </ApplicationMaterialLayout>
   )

@@ -31,3 +31,7 @@ Recent commits use short, lowercase, descriptive subjects such as `deleting dark
 ## Content & Configuration Notes
 
 When editing blog content, keep frontmatter aligned with `contentlayer.config.ts`. If you add images, place them under `public/static/images/` and reference them with stable paths. Changes to metadata, navigation, or SEO behavior usually belong in `data/siteMetadata.js`, `data/headerNavLinks.ts`, or `app/seo.tsx`.
+
+## PDF Embedding
+
+Use the shared `components/PdfPreview.tsx` component for all PDF embeds. The site owner prefers the browser's native PDF reader in an iframe, as verified in Safari. Do not reintroduce PDF.js, canvas rendering, or separate download / open-in-new-tab controls around embedded PDFs. Keep PDFs under `public/static/files/` so the same-origin framing header applies.

@@ -83,10 +83,6 @@ module.exports = () => {
     },
     webpack: (config) => {
       config.module.rules.push({
-        test: /pdf\.worker\.min\.mjs$/,
-        type: 'asset/resource',
-      })
-      config.module.rules.push({
         test: /\.svg$/,
         issuer: /\.[jt]sx?$/,
         use: ['@svgr/webpack'],
@@ -110,6 +106,11 @@ module.exports = () => {
       },
       {
         source: '/static/blog/why-blue-as-the-accent-colour/oklab-color-matrix.html',
+        headers: [{ key: 'X-Frame-Options', value: 'SAMEORIGIN' }],
+      },
+      {
+        // Let the browser's native reader display same-origin PDF documents.
+        source: '/static/files/:filename*.pdf',
         headers: [{ key: 'X-Frame-Options', value: 'SAMEORIGIN' }],
       },
     ]
