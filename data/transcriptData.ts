@@ -1,16 +1,27 @@
 type Period = 'ACYR' | 'SEM1' | 'SEM2'
 
-interface TranscriptModule {
+interface TranscriptAssessment {
+  title: string
+  type: 'Coursework' | 'Examination'
+  weight: number
+  mark: number
+  context?: string[]
+}
+
+export interface TranscriptModule {
   period: Period
   code: string
   title: string
   credits: number
   mark: number
+  assessments?: TranscriptAssessment[]
+  context?: string[]
 }
 
 interface TranscriptStage {
   stage: number
   academicYear: string
+  studyLevel: string
   weightedAverage: number
   modules: TranscriptModule[]
 }
@@ -35,6 +46,7 @@ const transcriptData = {
     {
       stage: 1,
       academicYear: '2023/24',
+      studyLevel: 'General education',
       weightedAverage: 65,
       modules: [
         {
@@ -117,6 +129,7 @@ const transcriptData = {
     {
       stage: 2,
       academicYear: '2024/25',
+      studyLevel: 'UK Year 1',
       weightedAverage: 78,
       modules: [
         {
@@ -182,6 +195,7 @@ const transcriptData = {
     {
       stage: 3,
       academicYear: '2025/26',
+      studyLevel: 'UK Year 2',
       weightedAverage: 68,
       modules: [
         { period: 'SEM1', code: 'BIO202', title: 'Biochemical Methods', credits: 2.5, mark: 73 },
@@ -200,9 +214,69 @@ const transcriptData = {
           title: 'Communicable and Non-communicable Diseases in Public Health',
           credits: 5,
           mark: 50,
+          // Component marks from e-Bridge; context is the student's account.
+          assessments: [
+            {
+              title: 'Essay and Data Analysis Paper',
+              type: 'Coursework',
+              weight: 15,
+              mark: 0,
+              context: [
+                'This component consisted of written responses collected during lectures, a format not explained in the handbook I consulted. Studying primarily independently and attending few lectures, I understood it as an assignment to be set later and did not submit these responses.',
+              ],
+            },
+            {
+              title: 'Oral Presentation',
+              type: 'Coursework',
+              weight: 15,
+              mark: 76,
+              context: ['Highest presentation mark in the class.'],
+            },
+            {
+              title: 'Final Exam',
+              type: 'Examination',
+              weight: 70,
+              mark: 55,
+              context: [
+                'Teaching staff from Soochow University verbally explained that they treated a UK mark of 70 as comparable to a Chinese mark of 90. They believed that only a small minority of students should receive marks at these levels and accordingly lowered examination marks to limit high overall module marks. I do not know my pre-adjustment mark.',
+                'After I raised these concerns, John Moraros, who was Dean at the time, said the results could not be changed following multiple reviews by XJTLU and the University of Liverpool, but that similarly large adjustments would be avoided in future.',
+              ],
+            },
+          ],
         },
         { period: 'SEM2', code: 'BIO204', title: 'Advanced Genetics', credits: 5, mark: 67 },
-        { period: 'SEM2', code: 'BIO206', title: 'Practical Bioinformatics', credits: 5, mark: 55 },
+        {
+          period: 'SEM2',
+          code: 'BIO206',
+          title: 'Practical Bioinformatics',
+          credits: 5,
+          mark: 55,
+          // Component marks from e-Bridge; context is the student's account.
+          assessments: [
+            {
+              title: 'Quiz',
+              type: 'Coursework',
+              weight: 15,
+              mark: 56,
+              context: [
+                'For the questions with fixed answers, my responses matched those of peers who received over 75/100 for this assignment. No marking feedback accompanied my result.',
+              ],
+            },
+            {
+              title: 'Analysis Report',
+              type: 'Coursework',
+              weight: 20,
+              mark: 37,
+              context: [
+                'For the questions with fixed answers, my responses matched those of peers who received over 80/100 for this assignment. No marking feedback accompanied my result.',
+              ],
+            },
+            { title: 'Scientific Essay', type: 'Coursework', weight: 65, mark: 61 },
+          ],
+          context: [
+            'I was involved in a serious assessment dispute between my iGEM team and this lecturer concerning another module. The dispute involved multiple hearings over more than one semester. I am concerned that this conflict may have influenced my mark, although I cannot confirm a connection.',
+          ],
+        },
         { period: 'SEM2', code: 'BIO208', title: 'Cell Signalling', credits: 2.5, mark: 70 },
         {
           period: 'SEM2',
@@ -211,7 +285,22 @@ const transcriptData = {
           credits: 5,
           mark: 69,
         },
-        { period: 'SEM2', code: 'CHE214', title: 'Biological Chemistry', credits: 2.5, mark: 55 },
+        {
+          period: 'SEM2',
+          code: 'CHE214',
+          title: 'Biological Chemistry',
+          credits: 2.5,
+          mark: 55,
+          // Component marks from e-Bridge; context is the student's account.
+          assessments: [
+            { title: 'In-Class Test #1', type: 'Coursework', weight: 20, mark: 25.5 },
+            { title: 'In-Class Test #2', type: 'Coursework', weight: 20, mark: 63.5 },
+            { title: 'Final Exam', type: 'Examination', weight: 60, mark: 62 },
+          ],
+          context: [
+            'I particularly appreciated Assistant Professor Qian Zhang’s teaching. A key challenge in this module was combining evidence from different spectroscopic techniques to determine molecular structures, a skill I had not yet mastered.',
+          ],
+        },
       ],
     },
   ] satisfies TranscriptStage[],

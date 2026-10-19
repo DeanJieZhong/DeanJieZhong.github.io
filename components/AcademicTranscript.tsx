@@ -1,4 +1,6 @@
 import transcriptData from '@/data/transcriptData'
+import TranscriptModuleRow from '@/components/TranscriptModuleRow'
+import TranscriptStudyLevelInfo from '@/components/TranscriptStudyLevelInfo'
 
 export default function AcademicTranscript() {
   return (
@@ -20,14 +22,28 @@ export default function AcademicTranscript() {
         </div>
       </dl>
 
-      <table>
-        <caption className="mb-3 text-left text-sm text-gray-600">
-          Weighted averages as reported on the transcript
-        </caption>
+      <section aria-labelledby="academic-context-heading">
+        <h2 id="academic-context-heading">Academic context</h2>
+        <p>
+          My first year focused on general education, and my engagement with coursework was limited.
+          In my second year, I devoted more time to independent study and began research. As
+          research commitments grew in my third year, balancing them with coursework became more
+          demanding.
+        </p>
+      </section>
+
+      <h2 id="transcript-weighted-averages">Weighted averages</h2>
+      <table aria-labelledby="transcript-weighted-averages">
         <thead>
           <tr>
             <th scope="col">Stage</th>
             <th scope="col">Academic year</th>
+            <th scope="col">
+              <span className="relative inline-block pr-8">
+                Study level
+                <TranscriptStudyLevelInfo />
+              </span>
+            </th>
             <th scope="col" className="text-right">
               Weighted average
             </th>
@@ -36,17 +52,18 @@ export default function AcademicTranscript() {
         <tbody>
           {transcriptData.stages.map((stage) => (
             <tr key={stage.stage}>
-              <th scope="row" className="font-normal">
+              <th scope="row" className="py-2 align-top font-normal whitespace-nowrap">
                 Stage {stage.stage}
               </th>
-              <td>{stage.academicYear}</td>
+              <td className="whitespace-nowrap">{stage.academicYear}</td>
+              <td>{stage.studyLevel}</td>
               <td className="text-right tabular-nums">{stage.weightedAverage}</td>
             </tr>
           ))}
         </tbody>
         <tfoot>
           <tr className="font-semibold text-gray-900">
-            <th scope="row" colSpan={2}>
+            <th scope="row" colSpan={3}>
               Overall weighted average
             </th>
             <td className="text-right tabular-nums">{transcriptData.overallWeightedAverage}</td>
@@ -64,7 +81,7 @@ export default function AcademicTranscript() {
             aria-labelledby={`transcript-stage-${stage.stage}`}
             // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- Enable keyboard scrolling of wide tables.
             tabIndex={0}
-            className="focus-visible:outline-primary-500 overflow-x-auto focus-visible:outline-2 focus-visible:outline-offset-4"
+            className="focus-visible:outline-primary-500 [container-type:inline-size] overflow-x-auto focus-visible:outline-2 focus-visible:outline-offset-4"
           >
             <table className="my-0 min-w-[640px]">
               <caption className="sr-only">
@@ -87,17 +104,7 @@ export default function AcademicTranscript() {
               </thead>
               <tbody>
                 {stage.modules.map((module) => (
-                  <tr key={module.code}>
-                    <td className="whitespace-nowrap">{module.period}</td>
-                    <th scope="row" className="px-2 py-2 text-left font-normal whitespace-nowrap">
-                      {module.code}
-                    </th>
-                    <td>{module.title}</td>
-                    <td className="text-right tabular-nums">{module.credits.toFixed(1)}</td>
-                    <td className="text-right font-medium whitespace-nowrap tabular-nums">
-                      {module.mark}%
-                    </td>
-                  </tr>
+                  <TranscriptModuleRow key={module.code} module={module} />
                 ))}
               </tbody>
             </table>
