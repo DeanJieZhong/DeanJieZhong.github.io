@@ -25,10 +25,10 @@ export default function AcademicTranscript() {
       <section aria-labelledby="academic-context-heading">
         <h2 id="academic-context-heading">Academic context</h2>
         <p>
-          My first year focused on general education, and my engagement with coursework was limited.
-          In my second year, I devoted more time to independent study and began research. As
-          research commitments grew in my third year, balancing them with coursework became more
-          demanding.
+          In my first year, I was not focused on academics or research. In my second year, however,
+          I began conducting research and took a more proactive approach to my studies through
+          independent learning. As my research commitments grew in my third year, balancing them
+          with coursework became more demanding.
         </p>
       </section>
 
