@@ -6,9 +6,9 @@ interface FjSection {
 }
 
 const fjData = {
-  title: 'SprB–polysaccharide interactions in F. johnsoniae',
-  titlePrefix: 'SprB–polysaccharide interactions in',
-  species: 'F. johnsoniae',
+  title: 'Motility Mechanisms in Flavobacterium johnsoniae',
+  titlePrefix: 'Motility Mechanisms in',
+  species: 'Flavobacterium johnsoniae',
   summary: 'Exploring the molecular basis of surface interactions in a model gliding bacterium.',
   photo: {
     src: '/static/images/research/fj-gliding/colony.png',

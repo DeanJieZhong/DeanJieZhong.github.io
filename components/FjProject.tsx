@@ -39,7 +39,7 @@ export default function FjProject() {
 
         <div className={contentWidth}>
           <Breadcrumbs
-            items={[{ label: 'Research', href: '/research' }, { label: 'FJ Gliding' }]}
+            items={[{ label: 'Research', href: '/research' }, { label: fj.title }]}
             placement="after-cover"
             tone="inverse"
           />

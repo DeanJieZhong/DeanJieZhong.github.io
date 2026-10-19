@@ -21,6 +21,7 @@ export default function PhotoResearchProject({
   children?: ReactNode
 }) {
   const experience = researchExperiences.find((item) => item.id === entry.experience)!
+  const title = entry.listTitle || entry.researchTitle || entry.name
 
   return (
     <article className={`${styles.page} break-words`} aria-labelledby="project-title">
@@ -53,7 +54,7 @@ export default function PhotoResearchProject({
                 id="project-title"
                 className={`${styles.title} font-bold tracking-tight text-white`}
               >
-                {entry.listTitle || entry.researchTitle || entry.name}
+                {title}
               </h1>
             </div>
           </div>
@@ -61,7 +62,7 @@ export default function PhotoResearchProject({
 
         <div className={contentWidth}>
           <Breadcrumbs
-            items={[{ label: 'Research', href: '/research' }, { label: entry.name }]}
+            items={[{ label: 'Research', href: '/research' }, { label: title }]}
             placement="after-cover"
             tone="inverse"
           />

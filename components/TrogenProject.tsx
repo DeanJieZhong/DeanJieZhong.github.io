@@ -103,7 +103,7 @@ export default function TrogenProject() {
 
         <div className={contentWidth}>
           <Breadcrumbs
-            items={[{ label: 'Research', href: '/research' }, { label: 'TroGen' }]}
+            items={[{ label: 'Research', href: '/research' }, { label: trogen.title }]}
             placement="after-cover"
             tone="inverse"
           />

@@ -1,4 +1,5 @@
 import scholarsData from './scholarsData'
+import fjData from './fjData'
 import { pageTitleSlug } from '../lib/pageTitleSlug'
 import type { ScholarId } from './scholarsData'
 
@@ -164,9 +165,9 @@ const researchData: ResearchEntry[] = [
     experience: 'f-johnsoniae',
     type: 'project',
     level: 'primary',
-    name: 'FJ Gliding',
-    listTitle: 'SprB–polysaccharide interactions in F. johnsoniae',
-    italicTitleText: 'F. johnsoniae',
+    name: fjData.title,
+    listTitle: fjData.title,
+    italicTitleText: fjData.species,
     summary: 'Exploring the molecular basis of surface interactions in a model gliding bacterium.',
     role: 'Research lead',
     participationPeriod: 'Jan 2026–Present',
@@ -205,8 +206,8 @@ const researchData: ResearchEntry[] = [
       'A Python workflow adapted from an existing Fiji macro to apply consistent processing parameters across images from the same experiment and reduce repetitive manual processing.',
     contribution: 'Workflow adaptation and Python development',
     relatedResearch: {
-      label: 'FJ Gliding',
-      url: '/research/sprb-polysaccharide-interactions-in-f-johnsoniae',
+      label: fjData.title,
+      url: '/research/motility-mechanisms-in-flavobacterium-johnsoniae',
     },
   },
   {
@@ -222,8 +223,8 @@ const researchData: ResearchEntry[] = [
       'An experimental workflow for tracking bacterial identities across frames, with rules for contact, separation, missed detections, boundary crossings, and uncertain observations.',
     contribution: 'Tracking logic design and manual inspection',
     relatedResearch: {
-      label: 'FJ Gliding',
-      url: '/research/sprb-polysaccharide-interactions-in-f-johnsoniae',
+      label: fjData.title,
+      url: '/research/motility-mechanisms-in-flavobacterium-johnsoniae',
     },
   },
   {
