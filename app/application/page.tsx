@@ -1,5 +1,5 @@
 import Link from '@/components/Link'
-import SiteInfoLayout from '@/layouts/SiteInfoLayout'
+import ApplicationMaterialLayout from '@/layouts/ApplicationMaterialLayout'
 import { genPageMetadata } from 'app/seo'
 import styles from './Application.module.css'
 
@@ -39,12 +39,8 @@ const materials = [
 
 export default function ApplicationPage() {
   return (
-    <SiteInfoLayout title="Application">
-      <p>
-        Materials for academic applications. Explore each document and its supporting context below.
-      </p>
-
-      <div className="not-prose mt-10 grid grid-cols-1 gap-5">
+    <ApplicationMaterialLayout title="Application" isOverview>
+      <div className="not-prose grid grid-cols-1 gap-5">
         {materials.map((material) => (
           <section
             key={material.id}
@@ -79,6 +75,6 @@ export default function ApplicationPage() {
           </section>
         ))}
       </div>
-    </SiteInfoLayout>
+    </ApplicationMaterialLayout>
   )
 }

@@ -84,8 +84,6 @@ const scores: Score[] = [
 export default function IELTSPage() {
   return (
     <ApplicationMaterialLayout title="IELTS Transcript">
-      <p>IELTS Academic results and a redacted copy of the official Test Report Form.</p>
-
       <section aria-labelledby="ielts-details-heading" className="not-prose mt-8">
         <h2 id="ielts-details-heading" className="text-xl font-semibold text-gray-900">
           Test details
@@ -107,7 +105,7 @@ export default function IELTSPage() {
         </h2>
         <ul
           aria-labelledby="ielts-scores-heading"
-          className="mt-4 divide-y divide-gray-200 border-y border-gray-200"
+          className="mt-4 divide-y divide-gray-200 border-t border-gray-200"
         >
           {scores.map(({ label, value, breakdown }) => (
             <li

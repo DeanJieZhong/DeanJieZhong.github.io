@@ -3,12 +3,22 @@ import transcriptData from '@/data/transcriptData'
 export default function AcademicTranscript() {
   return (
     <>
-      <p>
-        {transcriptData.programme}, {transcriptData.institution}.
-        <br />
-        Transcript issued on{' '}
-        <time dateTime={transcriptData.issuedOn}>{transcriptData.issuedOnLabel}</time>.
-      </p>
+      <dl className="not-prose mb-8 space-y-4">
+        <div className="grid gap-1 sm:grid-cols-[10rem_1fr] sm:gap-6">
+          <dt className="text-sm text-gray-600">Programme</dt>
+          <dd className="m-0 text-base text-gray-900">{transcriptData.programme}</dd>
+        </div>
+        <div className="grid gap-1 sm:grid-cols-[10rem_1fr] sm:gap-6">
+          <dt className="text-sm text-gray-600">Institution</dt>
+          <dd className="m-0 text-base text-gray-900">{transcriptData.institution}</dd>
+        </div>
+        <div className="grid gap-1 sm:grid-cols-[10rem_1fr] sm:gap-6">
+          <dt className="text-sm text-gray-600">Issued</dt>
+          <dd className="m-0 text-base text-gray-900">
+            <time dateTime={transcriptData.issuedOn}>{transcriptData.issuedOnLabel}</time>
+          </dd>
+        </div>
+      </dl>
 
       <table>
         <caption className="mb-3 text-left text-sm text-gray-600">

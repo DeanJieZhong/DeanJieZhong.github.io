@@ -1,0 +1,28 @@
+.preview {
+  position: relative;
+  height: 75vh;
+  min-height: 28rem;
+  margin-top: 24px;
+  background: var(--color-gray-100);
+}
+
+.viewport {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.viewport:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 4px;
+}
+
+.status {
+  position: relative;
+  margin: 0;
+  padding: 24px;
+  background: var(--color-gray-100);
+  color: var(--color-gray-600);
+  font-size: 14px;
+}

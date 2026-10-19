@@ -212,10 +212,6 @@
   outline-offset: -2px;
 }
 
-.navigationLink[aria-current='page'] .navigationLabel {
-  background-size: 100% 1px;
-}
-
 @media (min-width: 768px) {
   .desktopNav {
     display: block;
