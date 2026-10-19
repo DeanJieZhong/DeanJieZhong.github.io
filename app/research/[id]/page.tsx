@@ -41,11 +41,11 @@ export async function generateMetadata({ params }: ResearchPageProps) {
     })
   }
 
-  if (entry.photo) {
+  if (entry.photo || entry.type === 'advisory') {
     return genPageMetadata({
       title: entry.listTitle || entry.researchTitle || entry.name,
       description: entry.summary,
-      image: entry.photo.src,
+      image: entry.photo?.src,
       robots: { index: false, follow: false },
     })
   }

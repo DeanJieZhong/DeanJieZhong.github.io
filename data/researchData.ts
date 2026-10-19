@@ -178,8 +178,8 @@ const researchData: ResearchEntry[] = [
     experience: 'ism',
     type: 'project',
     level: 'primary',
-    name: 'CXCL13–Fc fusion protein',
-    listTitle: 'CXCL13–Fc and CXCR5-Engineered CD8⁺ T Cells',
+    name: 'CD8⁺ T Cell Engineering',
+    listTitle: 'CD8⁺ T Cell Engineering',
     photo: {
       src: '/static/images/research/cxcl13-fc/ice.webp',
       width: 3761,
@@ -248,7 +248,7 @@ const researchData: ResearchEntry[] = [
     type: 'advisory',
     level: 'supporting',
     name: 'DogmaOS',
-    listTitle: 'Xi’an Jiaotong-Liverpool University',
+    listTitle: 'Xi’an Jiaotong-Liverpool University iGEM Team 2026',
     role: 'Advisor',
     eventPeriod: 'iGEM 2026',
   },
@@ -259,7 +259,7 @@ const researchData: ResearchEntry[] = [
     type: 'advisory',
     level: 'supporting',
     name: 'FLAME',
-    listTitle: 'Soochow University',
+    listTitle: 'Soochow University ICPI iGEM Team 2026',
     photo: {
       src: '/static/images/research/soochow-university/icpi.jpg',
       width: 5992,
@@ -277,7 +277,7 @@ const researchData: ResearchEntry[] = [
     type: 'advisory',
     level: 'supporting',
     name: 'Bifidobacterium longum elicits anti-tumor immunity in pancreatic cancer',
-    listTitle: 'Zhejiang University-University of Edinburgh Institute',
+    listTitle: 'Zhejiang University-University of Edinburgh Institute iGEM Team 2026',
     role: 'Advisor',
     eventPeriod: 'iGEM 2026',
   },
@@ -285,7 +285,7 @@ const researchData: ResearchEntry[] = [
 
 export function researchPageSlug(entry: ResearchEntry) {
   const title =
-    entry.photo || entry.id === 'trogen' || entry.id === 'fj-gliding'
+    entry.photo || entry.type === 'advisory' || entry.id === 'trogen' || entry.id === 'fj-gliding'
       ? entry.listTitle || entry.researchTitle || entry.name
       : entry.researchTitle?.trim() || entry.name
   return pageTitleSlug(title)
