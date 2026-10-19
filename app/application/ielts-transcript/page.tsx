@@ -91,18 +91,20 @@ export default function IELTSPage() {
           Test details
         </h2>
 
-        <dl className="mt-5 divide-y divide-gray-200 border-y border-gray-200">
+        <dl className="mt-5 space-y-4">
           {testDetails.map(({ label, value }) => (
-            <div key={label} className="grid gap-1 py-3 sm:grid-cols-[10rem_1fr] sm:gap-6">
+            <div key={label} className="grid gap-1 sm:grid-cols-[10rem_1fr] sm:gap-6">
               <dt className="text-sm text-gray-600">{label}</dt>
               <dd className="m-0 text-base text-gray-900">{value}</dd>
             </div>
           ))}
         </dl>
+      </section>
 
-        <h3 id="ielts-scores-heading" className="mt-7 text-base font-semibold text-gray-900">
+      <section aria-labelledby="ielts-scores-heading" className="not-prose mt-12">
+        <h2 id="ielts-scores-heading" className="text-xl font-semibold text-gray-900">
           Band scores
-        </h3>
+        </h2>
         <ul
           aria-labelledby="ielts-scores-heading"
           className="mt-4 divide-y divide-gray-200 border-y border-gray-200"
@@ -114,7 +116,7 @@ export default function IELTSPage() {
             >
               <dl>
                 <dt className="text-sm text-gray-600">{label}</dt>
-                <dd className="text-primary-500 m-0 mt-1 text-2xl font-semibold tabular-nums">
+                <dd className="text-primary-500 m-0 mt-1 text-4xl font-bold tabular-nums">
                   {value}
                 </dd>
               </dl>
@@ -125,7 +127,7 @@ export default function IELTSPage() {
                   {breakdown.map(({ title, criteria }) => (
                     <div key={title ?? label}>
                       {title && (
-                        <h4 className="mb-3 text-sm font-semibold text-gray-900">{title}</h4>
+                        <h3 className="mb-3 text-sm font-semibold text-gray-900">{title}</h3>
                       )}
                       <dl className="space-y-2">
                         {criteria.map(({ label, value }) => (
