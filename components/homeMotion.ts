@@ -5,15 +5,6 @@ export const ease = (value: number) => value * value * (3 - 2 * value)
 export const easeTravel = (value: number) => value ** 3 * (value * (value * 6 - 15) + 10)
 export const mix = (from: number, to: number, progress: number) => from + (to - from) * progress
 
-export function drawSearchStroke(controls: HTMLElement, progress: number) {
-  // Trace the box counterclockwise from its lower-right corner, then draw the handle.
-  controls.style.setProperty('--home-search-ring', String(1 - clamp(progress / 0.82)))
-  controls.style.setProperty('--home-search-handle', String(1 - clamp((progress - 0.82) / 0.18)))
-  // Keep fully offset strokes hidden so their end caps cannot reveal the starting point.
-  controls.style.setProperty('--home-search-ring-visible', progress > 0 ? '1' : '0')
-  controls.style.setProperty('--home-search-handle-visible', progress > 0.82 ? '1' : '0')
-}
-
 // A scroll threshold starts a complete, critically damped transition, even after scrolling stops.
 export function createSnapMorph(duration: number) {
   let value = 0

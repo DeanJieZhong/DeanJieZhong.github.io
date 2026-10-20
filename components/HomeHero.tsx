@@ -7,15 +7,7 @@ import { createPortal } from 'react-dom'
 import { jieDots, jieOutline, zhongOutline } from '@/data/homeNameOutlines'
 import { useHomeNavigation } from './HomeNavigationContext'
 import styles from './HomeHero.module.css'
-import {
-  clamp,
-  drawSearchStroke,
-  ease,
-  easeTravel,
-  mix,
-  sampleDot,
-  squarePoint,
-} from './homeMotion'
+import { clamp, ease, easeTravel, mix, sampleDot, squarePoint } from './homeMotion'
 import HomeDeanNavigation from './HomeDeanNavigation'
 
 const TRAVEL_RESPONSE_MS = 100
@@ -40,8 +32,7 @@ export default function HomeHero() {
     const floating = floatingRef.current
     const header = headerRef.current
     const logo = logoRef.current
-    const controls = header?.querySelector<HTMLElement>('[data-home-controls]')
-    if (!hero || !source || !floating || !header || !logo || !controls) return
+    if (!hero || !source || !floating || !header || !logo) return
 
     const svg = floating.querySelector('svg')!
     const paths = [...floating.querySelectorAll('path')]
@@ -115,7 +106,6 @@ export default function HomeHero() {
         travel === 1 ? 'docked' : scroll < pinAt ? 'morphing' : travel > 0 ? 'sliding' : 'holding'
       floating.dataset.morph = morph.toFixed(3)
       floating.dataset.travel = travel.toFixed(3)
-      if (mobile.matches) drawSearchStroke(controls, travel)
       if (wasDocked !== (travel === 1)) {
         wasDocked = travel === 1
         if (!wasDocked && document.activeElement === floating) {
