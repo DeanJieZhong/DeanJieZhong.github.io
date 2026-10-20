@@ -37,8 +37,8 @@
 }
 
 :global(.interaction-dark) .trigger:is(:hover, :focus-visible, :active, [data-popup-open]) {
-  background-color: var(--color-primary-100);
-  color: var(--color-gray-950);
+  background-color: transparent;
+  color: inherit;
 }
 
 .positioner {

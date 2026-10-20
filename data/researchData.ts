@@ -109,6 +109,7 @@ export interface ResearchPhoto {
   height: number
   alt: string
   titlePlacement?: 'overlay' | 'lower'
+  preparedCover?: boolean
 }
 
 export interface ResearchEntry {
@@ -130,6 +131,12 @@ export interface ResearchEntry {
   summary?: string
   photo?: ResearchPhoto
   role?: string
+  advisoryDetails?: {
+    roster: string
+    team: ResearchLink
+    institution: string
+    supervisors: readonly Pick<ResearchSupervisor, 'name' | 'degree'>[]
+  }
   contribution?: string
   relatedResearch?: ResearchLink
   // Actual participation dates, independent of the project's event or cohort year.
@@ -261,15 +268,26 @@ const researchData: ResearchEntry[] = [
     level: 'supporting',
     name: 'FLAME',
     listTitle: 'Soochow University ICPI iGEM Team 2026',
+    summary:
+      'As an instructor for SUDA-ICPI-China, I worked with university leadership to establish Soochow University’s first iGEM team and secure funding.\nMy guidance focused on project design, experimental planning, and laboratory techniques.',
     photo: {
-      src: '/static/images/research/soochow-university/icpi.jpg',
-      width: 5992,
-      height: 2247,
-      alt: 'Group photo at the International College of Pharmaceutical Innovation, Soochow University.',
-      titlePlacement: 'lower',
+      src: '/static/images/research/soochow-university/cover.png',
+      width: 6078,
+      height: 1900,
+      alt: 'The XJTLU and ICPI teams together at Soochow University, with Dean identified above the group.',
+      preparedCover: true,
     },
-    role: 'Advisor',
+    role: 'Instructor',
     eventPeriod: 'iGEM 2026',
+    advisoryDetails: {
+      roster: 'https://teams.igem.org/6428/roster',
+      team: {
+        label: 'SUDA-ICPI-China',
+        url: 'https://2026.igem.wiki/suda-icpi-china/',
+      },
+      institution: 'International College of Pharmaceutical Innovation, Soochow University',
+      supervisors: [{ name: 'Xinchen Teng', degree: 'PhD' }],
+    },
   },
   {
     id: 'b-longum-pancreatic-cancer',

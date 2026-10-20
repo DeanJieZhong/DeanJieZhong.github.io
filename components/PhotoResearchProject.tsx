@@ -2,6 +2,7 @@ import Image from 'next/image'
 import type { ReactNode } from 'react'
 import Link from '@/components/Link'
 import Breadcrumbs from '@/components/Breadcrumbs'
+import PreparedProjectCover from '@/components/PreparedProjectCover'
 import { ScholarPopoverGroup } from '@/components/ScholarPopover'
 import ResearchExperienceMetadata from '@/components/ResearchExperienceMetadata'
 import { researchExperiences } from '@/data/researchData'
@@ -22,43 +23,49 @@ export default function PhotoResearchProject({
 }) {
   const experience = researchExperiences.find((item) => item.id === entry.experience)!
   const title = entry.listTitle || entry.researchTitle || entry.name
+  const overviewId = entry.type === 'advisory' ? 'advisory-overview' : 'project-overview'
+  const advisory = entry.advisoryDetails
 
   return (
     <article className={`${styles.page} break-words`} aria-labelledby="project-title">
       <div className="interaction-dark bg-black text-gray-300">
-        <div className="relative">
+        {photo.preparedCover ? (
+          <PreparedProjectCover photo={photo} title={title} titleId="project-title" />
+        ) : (
           <div className="relative">
-            <Image
-              src={photo.src}
-              alt={photo.alt}
-              width={photo.width}
-              height={photo.height}
-              sizes="100vw"
-              priority
-              className="block h-auto w-full"
-            />
+            <div className="relative">
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                width={photo.width}
+                height={photo.height}
+                sizes="100vw"
+                priority
+                className="block h-auto w-full"
+              />
+              <div
+                aria-hidden="true"
+                className={`${styles.gradient} pointer-events-none absolute inset-0`}
+              />
+            </div>
             <div
-              aria-hidden="true"
-              className={`${styles.gradient} pointer-events-none absolute inset-0`}
-            />
-          </div>
-          <div
-            className={
-              photo.titlePlacement === 'lower'
-                ? 'relative -mt-2 pb-6 sm:-mt-8 sm:pb-10 lg:pb-14'
-                : 'relative -mt-6 pb-6 sm:absolute sm:inset-x-0 sm:bottom-0 sm:mt-0 sm:pb-10 lg:pb-14'
-            }
-          >
-            <div className={contentWidth}>
-              <h1
-                id="project-title"
-                className={`${styles.title} font-bold tracking-tight text-white`}
-              >
-                {title}
-              </h1>
+              className={
+                photo.titlePlacement === 'lower'
+                  ? 'relative -mt-2 pb-6 sm:-mt-8 sm:pb-10 lg:pb-14'
+                  : 'relative -mt-6 pb-6 sm:absolute sm:inset-x-0 sm:bottom-0 sm:mt-0 sm:pb-10 lg:pb-14'
+              }
+            >
+              <div className={contentWidth}>
+                <h1
+                  id="project-title"
+                  className={`${styles.title} font-bold tracking-tight text-white`}
+                >
+                  {title}
+                </h1>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         <div className={contentWidth}>
           <Breadcrumbs
@@ -68,26 +75,57 @@ export default function PhotoResearchProject({
           />
         </div>
         <section
-          aria-labelledby="project-overview"
+          aria-labelledby={overviewId}
           className={`${contentWidth} pt-6 pb-12 sm:pt-8 sm:pb-16`}
         >
           <h2
-            id="project-overview"
+            id={overviewId}
             className="text-2xl font-semibold tracking-tight text-white sm:text-3xl"
           >
-            Project overview
+            {entry.type === 'advisory' ? 'Advisory overview' : 'Project overview'}
           </h2>
-          {entry.summary && <p className="mt-5 text-base leading-8 sm:text-lg">{entry.summary}</p>}
+          {entry.summary && (
+            <p className="mt-5 text-base leading-8 whitespace-pre-line sm:text-lg">
+              {entry.summary}
+            </p>
+          )}
 
-          <ScholarPopoverGroup>
-            <ResearchExperienceMetadata
-              experience={experience}
-              role={entry.role}
-              className="mt-7 space-y-2 text-sm leading-6 sm:text-base sm:leading-7"
-            >
-              {entry.participationPeriod && <p>{entry.participationPeriod}</p>}
-            </ResearchExperienceMetadata>
-          </ScholarPopoverGroup>
+          {advisory ? (
+            <div className="mt-7 space-y-2 text-sm leading-6 sm:text-base sm:leading-7">
+              <p>
+                Role:{' '}
+                <Link href={advisory.roster} className={linkStyle}>
+                  {entry.role}
+                </Link>
+              </p>
+              <p>
+                Team: {entry.eventPeriod} ·{' '}
+                <Link href={advisory.team.url} className={linkStyle}>
+                  {advisory.team.label}
+                </Link>
+                {' · '}
+                {advisory.institution}
+              </p>
+              <p>
+                {advisory.supervisors.length > 1 ? 'Supervisors: ' : 'Supervisor: '}
+                {advisory.supervisors
+                  .map((supervisor) =>
+                    [supervisor.name, supervisor.degree].filter(Boolean).join(', ')
+                  )
+                  .join(' and ')}
+              </p>
+            </div>
+          ) : (
+            <ScholarPopoverGroup>
+              <ResearchExperienceMetadata
+                experience={experience}
+                role={entry.role}
+                className="mt-7 space-y-2 text-sm leading-6 sm:text-base sm:leading-7"
+              >
+                {entry.participationPeriod && <p>{entry.participationPeriod}</p>}
+              </ResearchExperienceMetadata>
+            </ScholarPopoverGroup>
+          )}
         </section>
       </div>
 

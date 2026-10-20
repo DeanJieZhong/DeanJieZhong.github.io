@@ -94,7 +94,6 @@ const xjtluAdvisoryData = {
   eventPeriod: 'iGEM 2026',
   team: 'XJTLU-China',
   project: 'dogmaOS',
-  projectTitlePrefix: 'Translation–Folding Control for Protein Expression in',
   organism: 'Escherichia coli',
   photo: {
     src: `${photoRoot}/dogmaos_cover.png`,
@@ -102,14 +101,18 @@ const xjtluAdvisoryData = {
     height: 908,
     alt: 'An early XJTLU team photograph with Dean identified by a label above the group.',
   },
-  // Temporarily use TroGen's people and institution as the template, at the user's request.
-  pis: [
-    { name: 'Yongtao Zhu, PhD', url: 'https://connect.xjtlu.edu.cn/user/zhulab' },
-    { name: 'Kevin C. Chan, PhD' },
-  ],
+  // Supervisors confirmed by the site owner on 2026-10-21; reuse Research profile cards.
+  supervisors: ['kevin-chan', 'yongtao-zhu'] as const,
+  roster: 'https://teams.igem.org/6096/roster',
   wiki: 'https://2026.igem.wiki/xjtlu-china/',
   summary:
-    'Guiding project conceptualization and supporting recruitment and university sponsorship for XJTLU-China’s 2026 iGEM team.',
+    'As an advisor to XJTLU’s 2026 iGEM team, I supported the development of dogmaOS, a project exploring translation–folding control for protein expression in Escherichia coli.',
+  overview: {
+    introduction: 'As an advisor to XJTLU’s 2026 iGEM team, I supported the development of',
+    projectDescription: 'a project exploring translation–folding control for protein expression in',
+    guidance:
+      'My guidance focused on project conceptualization, research planning, and cross-team collaboration.',
+  },
   introduction:
     'Drawing on my experience with XJTLU’s 2025 team, I advised XJTLU-China through early project development and continued conceptual discussions later in the season.',
   sections: [

@@ -2,6 +2,9 @@ import { Fragment } from 'react'
 import Image from 'next/image'
 import Link from '@/components/Link'
 import Breadcrumbs from '@/components/Breadcrumbs'
+import PreparedProjectCover from '@/components/PreparedProjectCover'
+import ScholarPopover, { ScholarPopoverGroup } from '@/components/ScholarPopover'
+import scholarsData from '@/data/scholarsData'
 import trogen from '@/data/trogenData'
 import { pageTitleSlug } from '../lib/pageTitleSlug'
 import advisory, {
@@ -91,23 +94,7 @@ export default function XjtluAdvisory({ title }: { title: string }) {
   return (
     <article className={`${projectStyles.page} break-words`} aria-labelledby="advisory-title">
       <div className="interaction-dark bg-black text-gray-300">
-        <Image
-          src={advisory.photo.src}
-          alt={advisory.photo.alt}
-          width={advisory.photo.width}
-          height={advisory.photo.height}
-          sizes="100vw"
-          priority
-          className="block h-auto w-full"
-        />
-        <div className={`${contentWidth} pb-6 sm:pb-10 lg:pb-14`}>
-          <h1
-            id="advisory-title"
-            className={`${projectStyles.title} relative -top-[1lh] font-bold tracking-tight text-white`}
-          >
-            {title}
-          </h1>
-        </div>
+        <PreparedProjectCover photo={advisory.photo} title={title} titleId="advisory-title" />
 
         <div className={contentWidth}>
           <Breadcrumbs
@@ -117,54 +104,52 @@ export default function XjtluAdvisory({ title }: { title: string }) {
           />
         </div>
         <section
-          aria-labelledby="project-overview"
+          aria-labelledby="advisory-overview"
           className={`${contentWidth} pt-6 pb-12 sm:pt-8 sm:pb-16`}
         >
           <h2
-            id="project-overview"
+            id="advisory-overview"
             className="text-2xl font-semibold tracking-tight text-white sm:text-3xl"
           >
-            Project overview
+            Advisory overview
           </h2>
-          <p className="mt-5 text-base leading-8 sm:text-lg">{advisory.summary}</p>
-          <p className="mt-5 text-sm leading-7 sm:text-base">
-            <span className="font-medium text-white">{advisory.project}</span>
-            {' — '}
-            {advisory.projectTitlePrefix} <i>{advisory.organism}</i>
+          <p className="mt-5 text-base leading-8 sm:text-lg">
+            {advisory.overview.introduction}{' '}
+            <Link href={advisory.wiki} className={linkStyle}>
+              {advisory.project}
+            </Link>
+            , {advisory.overview.projectDescription} <i>{advisory.organism}</i>.
+            <br />
+            {advisory.overview.guidance}
           </p>
 
           <div className="mt-7 space-y-2 text-sm leading-6 sm:text-base sm:leading-7">
-            <p>Role: {advisory.role}</p>
             <p>
-              Supervisors:{' '}
-              {advisory.pis.map((pi, index) => (
-                <Fragment key={pi.name}>
-                  {index > 0 && ' and '}
-                  {pi.url ? (
-                    <Link href={pi.url} className={linkStyle}>
-                      {pi.name}
-                    </Link>
-                  ) : (
-                    pi.name
-                  )}
-                </Fragment>
-              ))}
+              Role:{' '}
+              <Link href={advisory.roster} className={linkStyle}>
+                {advisory.role}
+              </Link>
             </p>
             <p>
-              {advisory.eventPeriod} ·{' '}
+              Team: {advisory.eventPeriod} ·{' '}
               <Link href={advisory.wiki} className={linkStyle}>
                 {advisory.team}
               </Link>
               {' · '}
               {advisory.title}
             </p>
+            <ScholarPopoverGroup>
+              <p>
+                Supervisors:{' '}
+                {advisory.supervisors.map((scholarId, index) => (
+                  <Fragment key={scholarId}>
+                    {index > 0 && ' and '}
+                    <ScholarPopover scholar={scholarsData[scholarId]} />
+                  </Fragment>
+                ))}
+              </p>
+            </ScholarPopoverGroup>
           </div>
-
-          <p className="mt-7 text-base leading-7 text-white">
-            <Link href={advisory.wiki} className={linkStyle}>
-              Visit project wiki
-            </Link>
-          </p>
         </section>
       </div>
 
