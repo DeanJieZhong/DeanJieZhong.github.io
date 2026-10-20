@@ -71,6 +71,15 @@ export default function HomeDeanNavigation() {
       controls.style.setProperty('--home-search-handle-visible', value > 0.82 ? '1' : '0')
     }
 
+    const drawMobileMenu = (value: number) => {
+      // Three left-to-right strokes, staggered from top to bottom and reversible with scroll.
+      for (let line = 0; line < 3; line++) {
+        const drawn = easeTravel(clamp((value - line * 0.12) / 0.76))
+        controls.style.setProperty(`--home-menu-line-${line}`, String(1 - drawn))
+        controls.style.setProperty(`--home-menu-line-${line}-visible`, drawn > 0 ? '1' : '0')
+      }
+    }
+
     const draw = (time: number, settle = false) => {
       frame = 0
       const scroll = Math.max(0, window.scrollY)
@@ -92,7 +101,7 @@ export default function HomeDeanNavigation() {
       if (!desktop.matches) {
         source.style.opacity = '1'
         overlay.style.visibility = 'hidden'
-        controls.style.setProperty('--intro-mobile', String(ease(progress)))
+        drawMobileMenu(progress)
         drawSearch(ease(progress))
         updateReady(progress === 1)
       } else {
@@ -263,9 +272,12 @@ export default function HomeDeanNavigation() {
         '--home-search-handle',
         '--home-search-ring-visible',
         '--home-search-handle-visible',
-        '--intro-mobile',
       ]) {
         controls.style.removeProperty(property)
+      }
+      for (let line = 0; line < 3; line++) {
+        controls.style.removeProperty(`--home-menu-line-${line}`)
+        controls.style.removeProperty(`--home-menu-line-${line}-visible`)
       }
       items.forEach((item) => {
         item.style.removeProperty('--intro-label-clip')

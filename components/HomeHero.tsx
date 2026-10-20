@@ -36,6 +36,7 @@ export default function HomeHero() {
 
     const svg = floating.querySelector('svg')!
     const paths = [...floating.querySelectorAll('path')]
+    const mobile = window.matchMedia('(max-width: 767px)')
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
     let sourceBounds: DOMRect
     let target: DOMRect
@@ -72,8 +73,14 @@ export default function HomeHero() {
       const width = mix(sourceBounds.width, target.width, travel)
       const height = mix(sourceBounds.height, size, morph)
       const left = mix(sourceBounds.left, target.left, travel)
-      const top = Math.max(centerY - scroll, target.top + target.height / 2) - height / 2
+      // Before pinning, let the mobile browser scroll the dots with the rest of the name.
+      // A fixed overlay updated by scroll events can lag behind native momentum scrolling.
+      const followsDocument = mobile.matches && scroll < pinAt
+      const top = followsDocument
+        ? centerY - height / 2
+        : Math.max(centerY - scroll, target.top + target.height / 2) - height / 2
 
+      floating.style.position = followsDocument ? 'absolute' : 'fixed'
       floating.style.transform = `translate3d(${left}px, ${top}px, 0)`
       floating.style.width = `${width}px`
       floating.style.height = `${height}px`

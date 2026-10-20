@@ -52,6 +52,12 @@
   --home-search-handle: 1;
   --home-search-ring-visible: 0;
   --home-search-handle-visible: 0;
+  --home-menu-line-0: 1;
+  --home-menu-line-1: 1;
+  --home-menu-line-2: 1;
+  --home-menu-line-0-visible: 0;
+  --home-menu-line-1-visible: 0;
+  --home-menu-line-2-visible: 0;
 }
 
 .controls[data-intro-controls='true'] .label {
@@ -61,10 +67,6 @@
 
 .controls[data-intro-controls='true'] .reveal {
   opacity: var(--intro-marker, 0);
-}
-
-.controls[data-intro-controls='true'] > button {
-  opacity: var(--intro-mobile, 0);
 }
 
 .search {

@@ -32,11 +32,22 @@ const MobileNav = () => {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
-          fill="currentColor"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
           aria-hidden="true"
           className="h-7 w-7"
         >
-          <path d="M3 5h14v2H3zm0 4h14v2H3zm0 4h14v2H3z" />
+          {[0, 1, 2].map((line) => (
+            <path
+              key={line}
+              d={`M3 ${6 + line * 4}h14`}
+              pathLength="1"
+              strokeDasharray="1"
+              strokeDashoffset={`var(--home-menu-line-${line}, 0)`}
+              opacity={`var(--home-menu-line-${line}-visible, 1)`}
+            />
+          ))}
         </svg>
       </button>
       <Dialog open={navShow} onClose={() => setNavShow(false)} className="relative z-[70]">
