@@ -34,8 +34,20 @@ export default function SearchIcon({
         />
       )}
       {children}
-      <rect x="3" y="3" width="13" height="13" />
-      <path d="m16 16 5 5" />
+      <path
+        d="M16 16V3H3V16H16"
+        pathLength="1"
+        strokeDasharray="1"
+        strokeDashoffset="var(--home-search-ring, 0)"
+        opacity="var(--home-search-ring-visible, 1)"
+      />
+      <path
+        d="m16 16 5 5"
+        pathLength="1"
+        strokeDasharray="1"
+        strokeDashoffset="var(--home-search-handle, 0)"
+        opacity="var(--home-search-handle-visible, 1)"
+      />
     </svg>
   )
 }

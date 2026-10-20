@@ -5,10 +5,20 @@ import headerNavLinks from '@/data/headerNavLinks'
 import Link from './Link'
 import styles from './Header.module.css'
 
-export default function HeaderNavigation({ pathname }: { pathname: string }) {
+export default function HeaderNavigation({
+  pathname,
+  enabled = true,
+}: {
+  pathname: string
+  enabled?: boolean
+}) {
   const [openItem, setOpenItem] = useState<string | null>(null)
   const navRef = useRef<HTMLElement>(null)
   const focusFirstLink = useRef(false)
+
+  useEffect(() => {
+    if (!enabled) setOpenItem(null)
+  }, [enabled])
 
   const closeWithEscape = (event: KeyboardEvent<HTMLElement>) => {
     if (event.key !== 'Escape') return
@@ -90,11 +100,13 @@ export default function HeaderNavigation({ pathname }: { pathname: string }) {
                   }
                 }}
               >
-                <span className={styles.label}>{link.title}</span>
+                <span className={styles.label} data-nav-label>
+                  {link.title}
+                </span>
               </Link>
 
               {/* One clipping surface keeps the square, white panel and bold title in sync. */}
-              <div className={styles.reveal}>
+              <div className={styles.reveal} data-nav-reveal>
                 <div className={styles.titleSurface} aria-hidden="true">
                   <span className={styles.revealedLabel}>{link.title}</span>
                 </div>

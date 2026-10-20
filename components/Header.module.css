@@ -47,6 +47,26 @@
   gap: 16px;
 }
 
+.controls[data-intro-controls='true'] {
+  --home-search-ring: 1;
+  --home-search-handle: 1;
+  --home-search-ring-visible: 0;
+  --home-search-handle-visible: 0;
+}
+
+.controls[data-intro-controls='true'] .label {
+  clip-path: inset(0 0 0 var(--intro-label-clip, 100%));
+  transform: translateY(var(--intro-label-y, 0px));
+}
+
+.controls[data-intro-controls='true'] .reveal {
+  opacity: var(--intro-marker, 0);
+}
+
+.controls[data-intro-controls='true'] > button {
+  opacity: var(--intro-mobile, 0);
+}
+
 .search {
   display: flex;
   align-items: center;

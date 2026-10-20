@@ -1,0 +1,187 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: 100svh;
+  min-height: 420px;
+  overflow: hidden;
+  color: #fff;
+  background: #080808;
+}
+
+.portrait {
+  z-index: -1;
+  object-fit: cover;
+  /* Keep the bottom of the photograph; excess height is cropped from the sky. */
+  object-position: center bottom;
+}
+
+.title {
+  margin: 0;
+  font-family: 'Avenir Next', Avenir, sans-serif;
+  font-size: 11.3vw;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.045em;
+  text-shadow:
+    0 3px 2px rgb(0 0 0 / 55%),
+    0 12px 18px rgb(0 0 0 / 85%),
+    0 28px 48px rgb(0 0 0 / 70%);
+}
+
+.title span {
+  position: absolute;
+  display: block;
+  white-space: nowrap;
+}
+
+.chineseName {
+  top: 19%;
+  left: 9.5%;
+  font-size: 0.96em;
+  letter-spacing: -0.055em;
+}
+
+.chineseArtwork {
+  display: block;
+  width: 1.945em;
+  height: 0.93em;
+  overflow: visible;
+  filter: drop-shadow(0 3px 2px rgb(0 0 0 / 55%)) drop-shadow(0 12px 18px rgb(0 0 0 / 85%))
+    drop-shadow(0 28px 48px rgb(0 0 0 / 70%));
+}
+
+.floatingLogo {
+  --elevation: 1;
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  display: block;
+  visibility: hidden;
+  color: #fff;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.floatingLogo svg {
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(0 calc(3px * var(--elevation)) calc(2px * var(--elevation)) rgb(0 0 0 / 55%))
+    drop-shadow(0 calc(12px * var(--elevation)) calc(18px * var(--elevation)) rgb(0 0 0 / 85%))
+    drop-shadow(0 calc(28px * var(--elevation)) calc(48px * var(--elevation)) rgb(0 0 0 / 70%));
+}
+
+.floatingLogo[data-docked='true'] {
+  pointer-events: auto;
+}
+
+.floatingLogo[data-docked='true']::before {
+  position: absolute;
+  inset: -12px 0;
+  content: '';
+}
+
+.floatingLogo:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 8px;
+}
+
+.firstName {
+  top: 40%;
+  right: 4.5%;
+}
+
+.deanArtwork {
+  display: block;
+  height: 1em;
+  overflow: visible;
+  filter: drop-shadow(0 3px 2px rgb(0 0 0 / 55%)) drop-shadow(0 12px 18px rgb(0 0 0 / 85%))
+    drop-shadow(0 28px 48px rgb(0 0 0 / 70%));
+}
+
+.deanOverlay {
+  position: fixed;
+  z-index: 51;
+  inset: 0;
+  overflow: visible;
+  color: #fff;
+  pointer-events: none;
+}
+
+.deanGlyph {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+.deanGlyph svg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.fullName {
+  top: 66%;
+  right: 4.5%;
+}
+
+.scroll {
+  position: absolute;
+  bottom: 16px;
+  left: calc(50% - 24px);
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  color: #fff;
+}
+
+.scroll:focus-visible {
+  outline-color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floatingLogo {
+    will-change: auto;
+  }
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .title {
+    font-size: 17vw;
+  }
+
+  .chineseName {
+    top: 14%;
+    left: 7%;
+    font-size: 0.8em;
+  }
+
+  .firstName {
+    top: auto;
+    bottom: 24%;
+    right: 6%;
+  }
+
+  .fullName {
+    top: auto;
+    bottom: 14%;
+    right: 6%;
+  }
+}
+
+.homeNavigation {
+  position: fixed;
+  z-index: 40;
+  inset: 0 0 auto;
+}
+
+.homeNavigation[data-intro] {
+  transform: translate3d(0, var(--home-nav-offset, -100%), 0);
+  will-change: transform;
+}

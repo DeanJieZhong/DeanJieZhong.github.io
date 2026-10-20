@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, type CSSProperties } from 'react'
+import { useEffect, useState, type CSSProperties, type RefObject } from 'react'
 import { usePathname } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import siteMetadata from '@/data/siteMetadata'
@@ -11,7 +11,17 @@ import styles from './Header.module.css'
 
 const MobileNav = dynamic(() => import('./MobileNav'), { ssr: false })
 
-const Header = () => {
+const Header = ({
+  morphingLogo = false,
+  introControls = false,
+  controlsReady = true,
+  logoRef,
+}: {
+  morphingLogo?: boolean
+  introControls?: boolean
+  controlsReady?: boolean
+  logoRef?: RefObject<SVGSVGElement | null>
+}) => {
   const pathname = usePathname().replace(/\/$/, '') || '/'
   const [heightScale, setHeightScale] = useState(0.75)
 
@@ -37,8 +47,17 @@ const Header = () => {
         href="/"
         aria-label={`${siteMetadata.headerTitle} — Home`}
         className={styles.home}
+        style={morphingLogo ? { visibility: 'hidden' } : undefined}
+        aria-hidden={morphingLogo || undefined}
+        tabIndex={morphingLogo ? -1 : undefined}
       >
-        <svg viewBox="0 0 126 24" className={styles.logo} aria-hidden="true" focusable="false">
+        <svg
+          ref={logoRef}
+          viewBox="0 0 126 24"
+          className={styles.logo}
+          aria-hidden="true"
+          focusable="false"
+        >
           <path
             fill="currentColor"
             d="M0 0h24v24H0zM34 0h24v24H34zM68 0h24v24H68zM102 0h24v24h-24z"
@@ -46,8 +65,18 @@ const Header = () => {
         </svg>
       </Link>
 
-      <div className={styles.controls}>
-        <HeaderNavigation key={`desktop-${pathname}`} pathname={pathname} />
+      <div
+        className={styles.controls}
+        data-home-controls
+        data-intro-controls={introControls || undefined}
+        inert={introControls && !controlsReady}
+        aria-hidden={introControls && !controlsReady ? true : undefined}
+      >
+        <HeaderNavigation
+          key={`desktop-${pathname}`}
+          pathname={pathname}
+          enabled={!introControls || controlsReady}
+        />
         <div className={styles.search}>
           <SearchButton />
         </div>

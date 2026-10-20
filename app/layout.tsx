@@ -3,8 +3,7 @@ import 'remark-github-blockquote-alert/alert.css'
 
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
 import SiteSearchProvider from '@/components/search/SiteSearchProvider'
-import Header from '@/components/Header'
-import SectionContainer from '@/components/SectionContainer'
+import SiteContent from '@/components/SiteContent'
 import Footer from '@/components/Footer'
 import siteMetadata from '@/data/siteMetadata'
 import { ThemeProviders } from './theme-providers'
@@ -57,7 +56,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const faviconVersion = 'four-blocks-black-v1'
 
   return (
-    <html lang={siteMetadata.language} className="scroll-smooth" suppressHydrationWarning>
+    <html
+      lang={siteMetadata.language}
+      className="scroll-smooth"
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+    >
       <head>
         <link
           rel="apple-touch-icon"
@@ -98,14 +102,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
 
           <div className="flex-1">
-            <SectionContainer>
-              <SiteSearchProvider
-                indexUrl={`${basePath}/search.json?v=${process.env.SITE_REVISION}`}
-              >
-                <Header />
-                <main>{children}</main>
-              </SiteSearchProvider>
-            </SectionContainer>
+            <SiteSearchProvider indexUrl={`${basePath}/search.json?v=${process.env.SITE_REVISION}`}>
+              <SiteContent>{children}</SiteContent>
+            </SiteSearchProvider>
           </div>
           <Footer />
         </ThemeProviders>
