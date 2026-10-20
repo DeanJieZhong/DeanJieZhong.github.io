@@ -4,7 +4,7 @@ import { useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { deanLetters, deanWidth } from '@/data/homeDeanOutlines'
 import { useHomeNavigation } from './HomeNavigationContext'
-import { clamp, createSnapMorph, ease, easeTravel, mix } from './homeMotion'
+import { clamp, createSnapMorph, drawSearchStroke, easeTravel, mix } from './homeMotion'
 import styles from './HomeHero.module.css'
 
 type Glyph = {
@@ -62,15 +62,6 @@ export default function HomeDeanNavigation() {
       setControlsReady(next)
     }
 
-    const drawSearch = (value: number) => {
-      // One continuous stroke: lower-right corner, counterclockwise box, then the handle.
-      controls.style.setProperty('--home-search-ring', String(1 - clamp(value / 0.82)))
-      controls.style.setProperty('--home-search-handle', String(1 - clamp((value - 0.82) / 0.18)))
-      // A fully offset stroke can still leave an end cap; hide each segment until it starts.
-      controls.style.setProperty('--home-search-ring-visible', value > 0 ? '1' : '0')
-      controls.style.setProperty('--home-search-handle-visible', value > 0.82 ? '1' : '0')
-    }
-
     const drawMobileMenu = (value: number) => {
       // Three left-to-right strokes, staggered from top to bottom and reversible with scroll.
       for (let line = 0; line < 3; line++) {
@@ -102,7 +93,6 @@ export default function HomeDeanNavigation() {
         source.style.opacity = '1'
         overlay.style.visibility = 'hidden'
         drawMobileMenu(progress)
-        drawSearch(ease(progress))
         updateReady(progress === 1)
       } else {
         // A small dead band prevents trackpad jitter from repeatedly flipping the target.
@@ -165,7 +155,7 @@ export default function HomeDeanNavigation() {
           glyph.item.style.setProperty('--intro-label-y', `${-6 * (1 - shrink)}px`)
           glyph.item.style.setProperty('--intro-marker', progress === 1 ? '1' : '0')
         })
-        drawSearch(easeTravel(shrinkRaw))
+        drawSearchStroke(controls, sweep)
         updateReady(progress === 1)
       }
 
