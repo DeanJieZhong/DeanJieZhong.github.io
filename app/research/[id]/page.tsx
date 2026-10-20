@@ -6,6 +6,8 @@ import fjData from '@/data/fjData'
 import FjProject from '@/components/FjProject'
 import PhotoResearchProject from '@/components/PhotoResearchProject'
 import Cxcl13Article from '@/components/Cxcl13Article'
+import XjtluAdvisory from '@/components/XjtluAdvisory'
+import xjtluAdvisoryData from '@/data/xjtluAdvisoryData'
 import { genPageMetadata } from 'app/seo'
 
 interface ResearchPageProps {
@@ -41,6 +43,15 @@ export async function generateMetadata({ params }: ResearchPageProps) {
     })
   }
 
+  if (entry.id === 'dogmaos') {
+    return genPageMetadata({
+      title: entry.listTitle || entry.name,
+      description: xjtluAdvisoryData.summary,
+      image: xjtluAdvisoryData.photo.src,
+      robots: { index: false, follow: false },
+    })
+  }
+
   if (entry.photo || entry.type === 'advisory') {
     return genPageMetadata({
       title: entry.listTitle || entry.researchTitle || entry.name,
@@ -63,6 +74,7 @@ export default async function ResearchPage({ params }: ResearchPageProps) {
   if (!entry) notFound()
   if (entry.id === 'trogen') return <TrogenProject />
   if (entry.id === 'fj-gliding') return <FjProject />
+  if (entry.id === 'dogmaos') return <XjtluAdvisory title={entry.listTitle || entry.name} />
   if (entry.photo) {
     return (
       <PhotoResearchProject entry={entry} photo={entry.photo}>
