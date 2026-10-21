@@ -4,15 +4,12 @@ import { useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { deanLetters, deanWidth } from '@/data/homeDeanOutlines'
 import { useHomeNavigation } from './HomeNavigationContext'
-import { clamp, createSnapMorph, ease, easeTravel, mix } from './homeMotion'
+import { clamp, ease, easeTravel, mix } from './homeMotion'
 import styles from './HomeHero.module.css'
 
 type Glyph = {
-  bounds: DOMRect
-  documentCenterY: number
   element: HTMLDivElement
-  letter: SVGSVGElement
-  square: SVGSVGElement
+  cut: { x: number; documentCenterY: number; size: number; pinAt: number }
   item: HTMLElement
   label: DOMRect
   marker: { x: number; y: number; size: number }
@@ -43,7 +40,6 @@ export default function HomeDeanNavigation() {
     let logoSize = 24
     let headerCenterY = 36
     let pinAt = 0
-    let morphAt = 0
     let holdDistance = 0
     let sweepDistance = 0
     let shrinkDistance = 0
@@ -51,7 +47,6 @@ export default function HomeDeanNavigation() {
     let frame = 0
     let lastTime = 0
     let wasReady = false
-    const morphTransition = createSnapMorph(240)
 
     const updateReady = (next: boolean) => {
       if (next === wasReady) return
@@ -105,19 +100,20 @@ export default function HomeDeanNavigation() {
         drawSearch(ease(progress))
         updateReady(progress === 1)
       } else {
-        // A small dead band prevents trackpad jitter from repeatedly flipping the target.
-        const morphThreshold = morphAt + (morphTransition.target === 1 ? -6 : 6)
-        const morph = morphTransition.update(
-          scroll >= morphThreshold ? 1 : 0,
-          time,
-          settle || reducedMotion.matches
+        const bladeY = Math.max(0, header.getBoundingClientRect().bottom)
+        const captured = glyphs.filter((glyph) => scroll >= glyph.cut.pinAt).length
+        const cutting = glyphs.some(
+          (glyph) => glyph.cut.documentCenterY - scroll - glyph.cut.size / 2 < bladeY
         )
         const sweepFraction = sweepDistance / distance
         const sweep = easeTravel(clamp(progress / sweepFraction))
         const shrinkRaw = clamp((progress - sweepFraction) / (1 - sweepFraction))
         const shrink = 1 - (1 - shrinkRaw) ** 3
-        source.style.opacity = morph === 0 ? '1' : '0'
-        overlay.style.visibility = morph === 0 || progress === 1 ? 'hidden' : 'visible'
+        // The original word keeps scrolling behind the bar. Only its selected square cuts
+        // cross into the foreground, so there is no whole-letter shrink or layer handoff.
+        source.style.opacity = '1'
+        overlay.style.setProperty('--dean-blade-y', `${bladeY}px`)
+        overlay.style.visibility = !cutting || progress === 1 ? 'hidden' : 'visible'
         overlay.dataset.deanPhase =
           progress === 1
             ? 'docked'
@@ -125,40 +121,34 @@ export default function HomeDeanNavigation() {
               ? 'shrinking'
               : sweep > 0
                 ? 'sweeping'
-                : morph === 1
+                : captured === glyphs.length
                   ? 'holding'
-                  : morph > 0
-                    ? 'morphing'
+                  : cutting
+                    ? 'cutting'
                     : 'letters'
-        overlay.dataset.deanMorph = morph.toFixed(3)
+        overlay.dataset.deanCaptured = String(captured)
         overlay.dataset.deanProgress = progress.toFixed(3)
 
-        // Keep each letter intact, switch silhouettes once, then let the square settle.
-        const squareVisible = morph >= 0.88
         glyphs.forEach((glyph) => {
-          const { bounds, marker, element } = glyph
-          const baseWidth = mix(bounds.width, logoSize, morph)
-          const baseHeight = mix(bounds.height, logoSize, morph)
-          const width = mix(baseWidth, marker.size, shrink)
-          const height = mix(baseHeight, marker.size, shrink)
-          const originalY = Math.max(glyph.documentCenterY - scroll, headerCenterY)
+          const { cut, marker, element } = glyph
+          // Each cut follows its own part of the letter to the same horizontal row.
+          // Smaller titles leave smaller pieces, which settle to logo size once captured.
+          const arrival = reducedMotion.matches
+            ? Number(scroll >= cut.pinAt)
+            : ease(clamp((scroll - cut.pinAt) / 32))
+          const size = mix(mix(cut.size, logoSize, arrival), marker.size, shrink)
+          const originalY = Math.max(cut.documentCenterY - scroll, headerCenterY)
           // Sweep horizontally to directly below the marker, then shrink straight into its slot.
-          const centerX = mix(bounds.x + bounds.width / 2, marker.x, sweep)
+          const centerX = mix(cut.x, marker.x, sweep)
           const centerY = mix(originalY, marker.y, shrink)
-          element.style.transform = `translate3d(${centerX - width / 2}px, ${centerY - height / 2}px, 0)`
-          element.style.width = `${width}px`
-          element.style.height = `${height}px`
-          element.style.filter =
-            morph < 1
-              ? `drop-shadow(0 ${3 * (1 - morph)}px ${2 * (1 - morph)}px #0009) drop-shadow(0 ${12 * (1 - morph)}px ${18 * (1 - morph)}px #000d)`
-              : 'none'
-
-          glyph.letter.style.opacity = squareVisible ? '0' : '1'
-          glyph.square.style.opacity = squareVisible ? '1' : '0'
+          element.style.transform = `translate3d(${centerX - size / 2}px, ${centerY - size / 2}px, 0)`
+          element.style.width = `${size}px`
+          element.style.height = `${size}px`
+          element.dataset.captured = String(scroll >= cut.pinAt)
 
           // Reveal directly behind the sweep, with no opacity animation or one-way trigger.
           const covered =
-            sweep === 0 ? 1 : clamp((centerX - width / 2 - glyph.label.x) / glyph.label.width)
+            sweep === 0 ? 1 : clamp((centerX - size / 2 - glyph.label.x) / glyph.label.width)
           glyph.item.style.setProperty('--intro-label-clip', `${covered * 100}%`)
           // Center the full line (including descenders) behind the large sweeping square.
           // The words descend to their normal baseline as that square shrinks into its marker.
@@ -169,7 +159,7 @@ export default function HomeDeanNavigation() {
         updateReady(progress === 1)
       }
 
-      if (progress !== targetProgress || (desktop.matches && morphTransition.moving)) {
+      if (progress !== targetProgress) {
         frame = requestAnimationFrame(draw)
       }
     }
@@ -186,21 +176,26 @@ export default function HomeDeanNavigation() {
             const shape = group.querySelector<SVGPathElement>('[data-dean-shape]')!
             const bounds = shape.getBoundingClientRect()
             const outline = shape.getBBox()
-            const letter = elements[index].querySelector<SVGSVGElement>('[data-dean-letter]')!
-            letter.setAttribute(
-              'viewBox',
-              `${outline.x} ${outline.y} ${outline.width} ${outline.height}`
-            )
+            const scale = bounds.width / outline.width
+            // 128 font units fit inside the ink at all four selected right-angle corners.
+            const side = Math.min(128, logoSize / scale)
+            const corner = deanLetters[index].cutCorner
+            const left = corner.x - (corner.fromRight ? side : 0)
+            const top = corner.y - (corner.fromBottom ? side : 0)
+            const documentCenterY = bounds.y + window.scrollY + (top - outline.y + side / 2) * scale
             const item = items[index]
             const label = item.querySelector('[data-nav-label]')!.getBoundingClientRect()
             const panel = item.querySelector('[data-nav-reveal]')!.getBoundingClientRect()
             const size = parseFloat(getComputedStyle(item).getPropertyValue('--unit'))
+            elements[index].dataset.captureAt = (documentCenterY - headerCenterY).toFixed(1)
             return {
-              bounds,
-              documentCenterY: bounds.y + window.scrollY + bounds.height / 2,
               element: elements[index],
-              letter,
-              square: elements[index].querySelector<SVGSVGElement>('[data-dean-square]')!,
+              cut: {
+                x: bounds.x + (left - outline.x + side / 2) * scale,
+                documentCenterY,
+                size: side * scale,
+                pinAt: documentCenterY - headerCenterY,
+              },
               item,
               label,
               marker: {
@@ -211,15 +206,8 @@ export default function HomeDeanNavigation() {
             }
           }
         )
-        // The four squares arrive together, after the last letter reaches the bar.
-        pinAt = Math.max(...glyphs.map((glyph) => glyph.documentCenterY)) - headerCenterY
-        // Leave room for the full letters before reversing the morph and handing back to the page.
-        // Measuring their top edge keeps large desktop titles clear of the entire navigation bar.
-        const letterTop = Math.min(
-          ...glyphs.map((glyph) => glyph.documentCenterY - glyph.bounds.height / 2)
-        )
-        const letterClearance = Math.max(24, Math.min(40, window.innerHeight * 0.04))
-        morphAt = Math.max(0, letterTop - headerBounds.height - letterClearance)
+        // Start the shared hold only after the last piece joins the row.
+        pinAt = Math.max(...glyphs.map((glyph) => glyph.cut.pinAt))
         holdDistance = Math.max(60, Math.min(100, window.innerHeight * 0.08))
         sweepDistance = Math.max(260, Math.min(420, window.innerHeight * 0.35))
         shrinkDistance = Math.max(100, Math.min(180, window.innerHeight * 0.15))
@@ -232,7 +220,6 @@ export default function HomeDeanNavigation() {
         sweepDistance *= scale
         shrinkDistance *= scale
         overlay.dataset.deanPin = pinAt.toFixed(1)
-        overlay.dataset.deanMorphAt = morphAt.toFixed(1)
         overlay.dataset.deanHold = holdDistance.toFixed(1)
         overlay.dataset.deanSweep = sweepDistance.toFixed(1)
         overlay.dataset.deanShrink = shrinkDistance.toFixed(1)
@@ -260,6 +247,13 @@ export default function HomeDeanNavigation() {
     observer.observe(source)
     observer.observe(header)
     observer.observe(document.body)
+    // The bar moves in HomeHero's animation frame, which can run after this one.
+    // Refresh the blade before paint so stopping a scroll cannot leave a stale cut edge.
+    const bladeObserver = new MutationObserver(() => {
+      cancelAnimationFrame(frame)
+      draw(performance.now())
+    })
+    bladeObserver.observe(header, { attributes: true, attributeFilter: ['style'] })
     window.addEventListener('scroll', schedule, { passive: true })
     window.addEventListener('resize', measure)
     desktop.addEventListener('change', measure)
@@ -268,6 +262,7 @@ export default function HomeDeanNavigation() {
     return () => {
       cancelAnimationFrame(frame)
       observer.disconnect()
+      bladeObserver.disconnect()
       window.removeEventListener('scroll', schedule)
       window.removeEventListener('resize', measure)
       desktop.removeEventListener('change', measure)
@@ -320,9 +315,6 @@ export default function HomeDeanNavigation() {
                 className={styles.deanGlyph}
                 data-dean-glyph={letter.character}
               >
-                <svg fill="currentColor" preserveAspectRatio="xMidYMid meet" data-dean-letter>
-                  <path d={letter.contours.join('')} fillRule="evenodd" />
-                </svg>
                 <svg fill="currentColor" viewBox="0 0 1 1" data-dean-square>
                   <rect width="1" height="1" />
                 </svg>

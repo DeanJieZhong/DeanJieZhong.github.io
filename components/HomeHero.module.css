@@ -107,6 +107,8 @@
   overflow: visible;
   color: #fff;
   pointer-events: none;
+  /* Only the ink crossing the navigation's lower edge is retained above the bar. */
+  clip-path: inset(0 0 calc(100% - var(--dean-blade-y, 0px)) 0);
 }
 
 .deanGlyph {
