@@ -2,6 +2,15 @@
 // Add release notes after the corresponding source revision is known.
 const siteUpdates = [
   {
+    revision: 'ce5c46b03e78764a8fc3b4a77b712c44cdab4d9f',
+    date: '2026-10-25',
+    title: 'Accent color story and article preview',
+    changes: [
+      'Added a short introduction to the accent color and a bordered article card in About this site.',
+      'Added a static OKLab preview image shared by the Blog list and the About this site card.',
+    ],
+  },
+  {
     revision: '3957dd5c68715882dfda35734010e6ccf12065f8',
     date: '2026-10-25',
     title: 'Website version and integrated changelog',
