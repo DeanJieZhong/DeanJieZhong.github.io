@@ -21,6 +21,7 @@ export interface SearchEntry extends SearchDocument {
 const aliases: Record<string, string> = {
   '/application/cv/': 'curriculum vitae resume résumé 简历',
   '/application/academic-transcript/': 'grades gpa academic transcript 成绩 成绩单',
+  '/application/academic-ranking/': 'academic ranking rank cohort 排名 专业排名 排名证明',
   '/application/ielts-transcript/': 'ielts english test 雅思 英语',
   '/application/research-summary/': 'research summary 研究总结',
   '/research/': 'research 科研 研究',

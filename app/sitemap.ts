@@ -25,6 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'application',
     'application/cv',
     'application/academic-transcript',
+    'application/academic-ranking',
     'application/ielts-transcript',
     'application/research-summary',
     'lego-archive',
