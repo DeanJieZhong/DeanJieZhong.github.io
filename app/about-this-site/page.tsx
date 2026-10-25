@@ -1,3 +1,5 @@
+import { allBlogs } from 'contentlayer/generated'
+import BlogEntry from '@/components/BlogEntry'
 import Link from '@/components/Link'
 import siteMetadata from '@/data/siteMetadata'
 import siteUpdates from '@/data/siteUpdates'
@@ -11,6 +13,10 @@ export const metadata = genPageMetadata({
 })
 
 export default function Colophon() {
+  const accentColorPost = allBlogs.find(
+    (post) => post._raw.sourceFilePath === 'blog/why-blue-as-the-accent-colour.mdx' && !post.draft
+  )
+
   return (
     <SiteInfoLayout title="About this site">
       <p>A personal website for research, writing, and updates.</p>
@@ -22,6 +28,26 @@ export default function Colophon() {
         unavailable. Research pages pair full-width photographs with dark gradients. A fine divider
         and two links define the footer, with underlines on hover and clear keyboard focus outlines.
       </p>
+
+      <h3 id="accent-color">Accent color</h3>
+      <p>
+        The deep blue used for links and highlights,{' '}
+        <span className="whitespace-nowrap">
+          <span
+            aria-hidden="true"
+            className="bg-primary-500 mr-1.5 inline-block size-3 rounded-sm align-baseline"
+          />
+          <strong>#1D2D8E</strong>
+        </span>
+        , came from asking 30 friends to choose a color they associate with me. I grouped their
+        choices and used the center of the largest cluster as the site’s accent color. See my blog
+        below for more.
+      </p>
+      {accentColorPost ? (
+        <div className="not-prose my-6 border border-gray-300 p-5 sm:p-6">
+          <BlogEntry post={accentColorPost} headingAs="h4" />
+        </div>
+      ) : null}
 
       <h2>Development and technology</h2>
       <p>
