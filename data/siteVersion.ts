@@ -1,10 +1,13 @@
-// Injected once at build/startup by next.config.js. Never use the template's package version.
+// Maintain the website release separately from the inherited template package version.
+const version = '1.2.0'
+
+// Build/startup metadata is shown only in the changelog.
 const revision = process.env.SITE_REVISION || ''
 const isLocal = process.env.SITE_LOCAL_PREVIEW !== 'false'
 
 export const siteVersion = {
+  version,
+  label: `v${version}`,
   revision,
   isLocal,
-  // The fallback is a display label, not a fabricated release entry.
-  label: revision ? `r${revision.slice(0, 7)}${isLocal ? '-local' : ''}` : 'v1.2.0',
 }

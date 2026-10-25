@@ -1,11 +1,13 @@
 import Link from '@/components/Link'
 import siteMetadata from '@/data/siteMetadata'
+import siteUpdates from '@/data/siteUpdates'
+import { siteVersion } from '@/data/siteVersion'
 import SiteInfoLayout from '@/layouts/SiteInfoLayout'
 import { genPageMetadata } from 'app/seo'
 
 export const metadata = genPageMetadata({
   title: 'About this site',
-  description: 'The technology, typography, design, source code, and credits behind this website.',
+  description: 'The design, technology, source code, credits, and changelog for this website.',
 })
 
 export default function Colophon() {
@@ -44,10 +46,57 @@ export default function Colophon() {
         <Link href={`${siteMetadata.siteRepo}/blob/main/LICENSE`}>repository license</Link>.
       </p>
 
-      <p>
-        See <Link href="/website-updates/">website updates</Link> for the current source version and
-        recorded changes.
-      </p>
+      <section id="changelog" aria-labelledby="changelog-heading" className="scroll-mt-8">
+        <h2 id="changelog-heading">Changelog</h2>
+        <p>
+          Current version: <strong>{siteVersion.label}</strong>.
+        </p>
+        {siteVersion.isLocal && (
+          <p>Local preview. This preview may include changes beyond the recorded source commit.</p>
+        )}
+        <p>
+          {siteVersion.revision ? (
+            <>
+              {siteVersion.isLocal ? 'Preview base commit: ' : 'Source commit: '}
+              <Link
+                href={`${siteMetadata.siteRepo}/commit/${siteVersion.revision}`}
+                className="font-mono"
+              >
+                {siteVersion.revision.slice(0, 7)}
+              </Link>
+              .
+            </>
+          ) : (
+            'No source commit is available for this build.'
+          )}
+        </p>
+
+        {siteUpdates.map((update) => (
+          <section key={update.revision} aria-labelledby={`update-${update.revision}`}>
+            <h3 id={`update-${update.revision}`}>{update.title}</h3>
+            <p>
+              <time dateTime={update.date}>{update.date}</time>
+              {' · '}
+              {'Commit '}
+              <Link
+                href={`${siteMetadata.siteRepo}/commit/${update.revision}`}
+                className="font-mono"
+              >
+                {update.revision.slice(0, 7)}
+              </Link>
+            </p>
+            <ul>
+              {update.changes.map((change) => (
+                <li key={change}>{change}</li>
+              ))}
+            </ul>
+          </section>
+        ))}
+        <p>
+          This log starts with the verified update from October 11, 2026. Earlier changes are not
+          reconstructed here.
+        </p>
+      </section>
     </SiteInfoLayout>
   )
 }

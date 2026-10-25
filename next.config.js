@@ -1,8 +1,8 @@
 const { withContentlayer } = require('next-contentlayer2')
 const { execFileSync } = require('node:child_process')
 
-// GitHub Pages supplies the exact deployed source revision. Local previews use
-// HEAD with an explicit local suffix, including builds with uncommitted edits.
+// GitHub Pages supplies the deployed source revision for the changelog. Local
+// previews use HEAD as their base commit; the website version is maintained separately.
 const deploymentRevision = /^[a-f0-9]{40}$/i.test(process.env.GITHUB_SHA || '')
   ? process.env.GITHUB_SHA
   : ''

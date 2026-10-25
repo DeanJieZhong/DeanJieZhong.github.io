@@ -30,7 +30,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'lego-archive',
     'guestbook',
     'about-this-site',
-    'website-updates',
   ].map((route) => ({
     url: `${siteUrl}/${route}`,
     lastModified: new Date().toISOString().split('T')[0],

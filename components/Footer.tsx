@@ -20,7 +20,7 @@ export default function Footer() {
           <span className={styles.release}>
             <span aria-hidden="true">·</span>
             <Link
-              href="/website-updates/"
+              href="/about-this-site/#changelog"
               title="View update history"
               aria-label={`${siteVersion.label}: View update history`}
               className={`${styles.link} ${styles.version}`}

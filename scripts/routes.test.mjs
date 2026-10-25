@@ -49,10 +49,11 @@ test('every indexed page uses its full English title, with the homepage at the r
 test('old links resolve directly to exported canonical pages and preserve queries and fragments', async () => {
   const canonical = new Set(pages.map((page) => page.url))
   for (const [source, destination] of Object.entries(redirects)) {
+    const pathname = new URL(destination, 'https://example.com').pathname
     assert.ok(!canonical.has(source), `Legacy URL is still indexed: ${source}`)
-    assert.ok(canonical.has(destination), `Missing destination: ${destination}`)
-    assert.ok(!redirects[destination], `Redirect chain: ${source}`)
-    await access(path.join('out', destination, 'index.html'))
+    assert.ok(canonical.has(pathname), `Missing destination: ${destination}`)
+    assert.ok(!redirects[pathname], `Redirect chain: ${source}`)
+    await access(path.join('out', pathname, 'index.html'))
     const html = await readFile(path.join('out', source, 'index.html'), 'utf8')
     assert.equal(html, redirectHtml(destination))
     assert.equal(extractSearchDocument(html, source), null)
@@ -69,8 +70,28 @@ test('old links resolve directly to exported canonical pages and preserve querie
         },
       },
     })
-    assert.equal(redirected, `${destination}?find=IE&filter=a%20b#band-scores`)
+    assert.equal(redirected, `${pathname}?find=IE&filter=a%20b#band-scores`)
   }
+})
+
+test('changelog redirects keep queries and use the original fragment or the changelog section', () => {
+  const html = redirectHtml('/about-this-site/#changelog')
+  for (const [search, hash, expected] of [
+    ['', '', '/about-this-site/#changelog'],
+    ['?from=footer', '', '/about-this-site/?from=footer#changelog'],
+    ['', '#update-521eebf', '/about-this-site/#update-521eebf'],
+  ]) {
+    let redirected
+    runInNewContext(html.match(/<script>(.*?)<\/script>/s)[1], {
+      window: { location: { search, hash, replace: (url) => (redirected = url) } },
+    })
+    assert.equal(redirected, expected)
+  }
+  assert.match(html, /<link rel="canonical" href="\/about-this-site\/">/)
+  assert.match(
+    html,
+    /<noscript><meta http-equiv="refresh" content="0; url=\/about-this-site\/#changelog">/
+  )
 })
 
 function links(node) {
