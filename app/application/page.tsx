@@ -6,7 +6,7 @@ import styles from './Application.module.css'
 export const metadata = genPageMetadata({
   title: 'Application',
   description:
-    'CV, academic transcript, English language qualifications, and research summary for academic applications.',
+    'CV, academic transcript, academic ranking, English language qualifications, and research summary for academic applications.',
 })
 
 const materials = [
@@ -21,6 +21,12 @@ const materials = [
     title: 'Academic Transcript',
     href: '/application/academic-transcript',
     description: 'Academic records by year, including module credits, marks, and grading context.',
+  },
+  {
+    id: 'ranking',
+    title: 'Academic Ranking',
+    href: '/application/academic-ranking',
+    description: 'Programme cohort ranking, calculation basis, and the official ranking letter.',
   },
   {
     id: 'ielts',

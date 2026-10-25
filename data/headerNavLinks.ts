@@ -21,6 +21,7 @@ const headerNavLinks: HeaderNavLink[] = [
     children: [
       { href: '/application/cv', title: 'CV' },
       { href: '/application/academic-transcript', title: 'Transcript' },
+      { href: '/application/academic-ranking', title: 'Ranking' },
       { href: '/application/ielts-transcript', title: 'IELTS' },
       { href: '/application/research-summary', title: 'Research' },
     ],
