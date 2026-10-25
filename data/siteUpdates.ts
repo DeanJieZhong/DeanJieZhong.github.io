@@ -2,6 +2,16 @@
 // Add release notes after the corresponding source revision is known.
 const siteUpdates = [
   {
+    revision: '3957dd5c68715882dfda35734010e6ccf12065f8',
+    date: '2026-10-25',
+    title: 'Website version and integrated changelog',
+    changes: [
+      'Set the website version to v1.2.0, maintained separately from source commit identifiers.',
+      'Moved the changelog into About this site and linked the footer version directly to it.',
+      'Kept source commit links in the changelog and redirected both previous update page addresses.',
+    ],
+  },
+  {
     revision: '560dc06f5eb7334029190488fbc20407d8829ad4',
     date: '2026-10-18',
     title: 'Consistent blue interaction feedback',
