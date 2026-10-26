@@ -131,6 +131,7 @@ export interface ResearchEntry {
   summary?: string
   photo?: ResearchPhoto
   role?: string
+  researchMentor?: ScholarId
   advisoryDetails?: {
     roster: string
     team: ResearchLink
@@ -186,8 +187,8 @@ const researchData: ResearchEntry[] = [
     experience: 'ism',
     type: 'project',
     level: 'primary',
-    name: 'CD8⁺ T Cell Engineering',
-    listTitle: 'CD8⁺ T Cell Engineering',
+    name: 'T Cell Engineering',
+    listTitle: 'T Cell Engineering',
     photo: {
       src: '/static/images/research/cxcl13-fc/ice.webp',
       width: 3761,
@@ -195,8 +196,9 @@ const researchData: ResearchEntry[] = [
       alt: 'Laboratory reagent tubes nestled in crushed ice.',
     },
     summary:
-      'We are investigating how CXCL13–Fc affects the trafficking and antitumor function of CXCR5-engineered CD8⁺ T cells.',
-    role: 'Core contributor',
+      'Exploring cancer immunotherapy from a synthetic biology perspective by engineering T cells and immune signaling proteins to enhance antitumor immunity.',
+    role: 'Research trainee',
+    researchMentor: 'jiajia-wang',
     participationPeriod: 'Jan 2026–Present',
     status: 'Ongoing',
   },

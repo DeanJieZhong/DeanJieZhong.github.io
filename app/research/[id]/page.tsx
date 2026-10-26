@@ -77,7 +77,11 @@ export default async function ResearchPage({ params }: ResearchPageProps) {
   if (entry.id === 'dogmaos') return <XjtluAdvisory title={entry.listTitle || entry.name} />
   if (entry.photo) {
     return (
-      <PhotoResearchProject entry={entry} photo={entry.photo}>
+      <PhotoResearchProject
+        entry={entry}
+        photo={entry.photo}
+        showOverviewHeading={entry.id !== 'cxcl13-fc'}
+      >
         {entry.id === 'cxcl13-fc' ? <Cxcl13Article /> : null}
       </PhotoResearchProject>
     )

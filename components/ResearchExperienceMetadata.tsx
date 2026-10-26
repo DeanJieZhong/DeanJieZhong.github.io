@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 import Link from '@/components/Link'
 import ScholarPopover from '@/components/ScholarPopover'
 import scholarsData from '@/data/scholarsData'
+import type { ScholarId } from '@/data/scholarsData'
 import type { ResearchExperienceDetails } from '@/data/researchData'
 
 const linkStyle = 'underline decoration-gray-400 underline-offset-4 focus-visible:outline-offset-4'
@@ -9,11 +10,13 @@ const linkStyle = 'underline decoration-gray-400 underline-offset-4 focus-visibl
 export default function ResearchExperienceMetadata({
   experience,
   role,
+  researchMentor,
   className = 'mt-4 space-y-1 text-sm leading-6 text-gray-600 dark:text-gray-300',
   children,
 }: {
   experience: ResearchExperienceDetails
   role?: string
+  researchMentor?: ScholarId
   className?: string
   children?: React.ReactNode
 }) {
@@ -45,6 +48,11 @@ export default function ResearchExperienceMetadata({
           )
         })}
       </p>
+      {researchMentor && (
+        <p>
+          Research mentor: <ScholarPopover scholar={scholarsData[researchMentor]} />
+        </p>
+      )}
       {experience.affiliations.map((affiliation) => (
         <p key={affiliation.name || affiliation.url}>
           {affiliation.url ? (

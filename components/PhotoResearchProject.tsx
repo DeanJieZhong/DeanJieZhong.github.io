@@ -15,10 +15,12 @@ const linkStyle = 'underline underline-offset-4 decoration-gray-400 focus-visibl
 export default function PhotoResearchProject({
   entry,
   photo,
+  showOverviewHeading = true,
   children,
 }: {
   entry: ResearchEntry
   photo: ResearchPhoto
+  showOverviewHeading?: boolean
   children?: ReactNode
 }) {
   const experience = researchExperiences.find((item) => item.id === entry.experience)!
@@ -75,15 +77,17 @@ export default function PhotoResearchProject({
           />
         </div>
         <section
-          aria-labelledby={overviewId}
+          aria-labelledby={showOverviewHeading ? overviewId : 'project-title'}
           className={`${contentWidth} pt-6 pb-12 sm:pt-8 sm:pb-16`}
         >
-          <h2
-            id={overviewId}
-            className="text-2xl font-semibold tracking-tight text-white sm:text-3xl"
-          >
-            {entry.type === 'advisory' ? 'Advisory overview' : 'Project overview'}
-          </h2>
+          {showOverviewHeading && (
+            <h2
+              id={overviewId}
+              className="text-2xl font-semibold tracking-tight text-white sm:text-3xl"
+            >
+              {entry.type === 'advisory' ? 'Advisory overview' : 'Project overview'}
+            </h2>
+          )}
           {entry.summary && (
             <p className="mt-5 text-base leading-8 whitespace-pre-line sm:text-lg">
               {entry.summary}
@@ -120,6 +124,7 @@ export default function PhotoResearchProject({
               <ResearchExperienceMetadata
                 experience={experience}
                 role={entry.role}
+                researchMentor={entry.researchMentor}
                 className="mt-7 space-y-2 text-sm leading-6 sm:text-base sm:leading-7"
               >
                 {entry.participationPeriod && <p>{entry.participationPeriod}</p>}

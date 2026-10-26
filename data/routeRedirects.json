@@ -15,8 +15,8 @@
   "/lego/": "/lego-archive/",
   "/research/b-longum-pancreatic-cancer/": "/research/zhejiang-university-university-of-edinburgh-institute-igem-team-2026/",
   "/research/bifidobacterium-longum-elicits-anti-tumor-immunity-in-pancreatic-cancer/": "/research/zhejiang-university-university-of-edinburgh-institute-igem-team-2026/",
-  "/research/cxcl13-fc-and-cxcr5-engineered-cd8-t-cells/": "/research/cd8-t-cell-engineering/",
-  "/research/cxcl13-fc/": "/research/cd8-t-cell-engineering/",
+  "/research/cxcl13-fc-and-cxcr5-engineered-cd8-t-cells/": "/research/t-cell-engineering/",
+  "/research/cxcl13-fc/": "/research/t-cell-engineering/",
   "/research/dogmaos/": "/research/xian-jiaotong-liverpool-university-igem-team-2026/",
   "/research/fj-gliding/": "/research/motility-mechanisms-in-flavobacterium-johnsoniae/",
   "/research/flame/": "/research/soochow-university-icpi-igem-team-2026/",
@@ -25,5 +25,6 @@
   "/research/sprb-polysaccharide-interactions-in-f-johnsoniae/": "/research/motility-mechanisms-in-flavobacterium-johnsoniae/",
   "/research/trogen/": "/research/trogen-a-commensal-bacterial-platform-for-intracellular-drug-delivery-in-tnbc/",
   "/updates/": "/about-this-site/#changelog",
-  "/website-updates/": "/about-this-site/#changelog"
+  "/website-updates/": "/about-this-site/#changelog",
+  "/research/cd8-t-cell-engineering/": "/research/t-cell-engineering/"
 }

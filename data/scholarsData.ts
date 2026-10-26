@@ -1,13 +1,19 @@
-export type ScholarId = 'lianjun-zhang' | 'yongtao-zhu' | 'kevin-chan' | 'john-moraros'
+export type ScholarId =
+  | 'lianjun-zhang'
+  | 'jiajia-wang'
+  | 'yongtao-zhu'
+  | 'kevin-chan'
+  | 'john-moraros'
 
 export interface ScholarProfile {
   id: ScholarId
   name: string
-  degree: string
+  degree?: string
   title: string
+  lab?: string
   institutions: string[]
   emails: string[]
-  googleScholarUrl: string
+  googleScholarUrl?: string
   institutionalProfileUrl?: string
   card: {
     background: string
@@ -23,6 +29,28 @@ export interface ScholarProfile {
 }
 
 const scholarsData: Record<ScholarId, ScholarProfile> = {
+  'jiajia-wang': {
+    id: 'jiajia-wang',
+    name: 'Jiajia Wang',
+    title: 'PhD candidate',
+    lab: "Dr. Lianjun Zhang's Lab",
+    institutions: [
+      'Suzhou Institute of Systems Medicine',
+      'Chinese Academy of Medical Sciences & Peking Union Medical College',
+    ],
+    emails: [],
+    card: {
+      background: '#c6c7c9',
+      foreground: '#111111',
+      institution: 'Suzhou Institute of Systems Medicine, CAMS & PUMC',
+    },
+    photo: {
+      src: '/static/images/people/jiajia-wang-portrait.png',
+      alt: 'Portrait of Jiajia Wang',
+      width: 2879,
+      height: 2880,
+    },
+  },
   'lianjun-zhang': {
     id: 'lianjun-zhang',
     name: 'Lianjun Zhang',

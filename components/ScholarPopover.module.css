@@ -119,8 +119,13 @@
 }
 
 .role,
+.lab,
 .institution {
   display: block;
+}
+
+.lab {
+  margin-top: 4px;
 }
 
 .institution {
@@ -188,6 +193,34 @@
   width: 340px;
 }
 
+.card[data-scholar='jiajia-wang'] .copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: calc(100% - 260px);
+  padding-block: 28px;
+}
+
+.card[data-scholar='jiajia-wang'] .details {
+  min-height: 0;
+  margin-top: 18px;
+}
+
+.card[data-scholar='jiajia-wang'] .institution {
+  margin-top: 8px;
+}
+
+.card[data-scholar='jiajia-wang'] .portrait {
+  width: 270px;
+}
+
+.card[data-scholar='jiajia-wang'] .photo {
+  top: -12px;
+  right: -64px;
+  bottom: auto;
+  width: 351px;
+}
+
 .card[data-scholar='yongtao-zhu'] .photo {
   width: 226px;
   bottom: -36px;
@@ -201,6 +234,26 @@
 
 .card[data-scholar='john-moraros'] .degree {
   font-size: 0.45em;
+}
+
+.card[data-has-photo='false'] {
+  width: min(440px, calc(100vw - 32px));
+}
+
+.card[data-has-photo='false'] .copy {
+  width: 100%;
+  min-height: 0;
+  padding: 24px 28px;
+}
+
+.card[data-has-photo='false'] .name {
+  font-size: 32px;
+}
+
+.card[data-has-photo='false'] .details {
+  width: 100%;
+  min-height: 0;
+  margin-top: 16px;
 }
 
 @media (max-width: 671px) {
@@ -270,6 +323,26 @@
     right: -48px;
     bottom: -135px;
     width: 260px;
+  }
+
+  .card[data-scholar='jiajia-wang'] .copy {
+    width: 100%;
+    padding-block: 24px;
+  }
+
+  .card[data-scholar='jiajia-wang'] .details {
+    width: calc(100% - 150px);
+  }
+
+  .card[data-scholar='jiajia-wang'] .portrait {
+    width: calc(40% + 64px);
+  }
+
+  .card[data-scholar='jiajia-wang'] .photo {
+    top: -11px;
+    right: -70px;
+    bottom: auto;
+    width: 288px;
   }
 }
 

@@ -86,6 +86,7 @@ function ScholarCard({
       ref={popupRef}
       className={styles.card}
       data-scholar={profile.id}
+      data-has-photo={Boolean(profile.photo)}
       style={
         {
           '--card-background': profile.card.background,
@@ -95,18 +96,28 @@ function ScholarCard({
     >
       <div className={styles.copy}>
         <Popover.Title className={styles.name}>
-          {profile.name}, <span className={styles.degree}>{profile.degree}</span>
+          {profile.name}
+          {profile.degree && (
+            <>
+              , <span className={styles.degree}>{profile.degree}</span>
+            </>
+          )}
         </Popover.Title>
         <Popover.Description className={styles.details}>
           <span className={styles.role}>{profile.title}</span>
+          {profile.lab && <span className={styles.lab}>{profile.lab}</span>}
           <span className={styles.institution}>{profile.card.institution}</span>
         </Popover.Description>
-        <div className={styles.links}>
-          <Link href={profile.googleScholarUrl}>Google Scholar</Link>
-          {profile.institutionalProfileUrl ? (
-            <Link href={profile.institutionalProfileUrl}>Profile</Link>
-          ) : null}
-        </div>
+        {(profile.googleScholarUrl || profile.institutionalProfileUrl) && (
+          <div className={styles.links}>
+            {profile.googleScholarUrl && (
+              <Link href={profile.googleScholarUrl}>Google Scholar</Link>
+            )}
+            {profile.institutionalProfileUrl && (
+              <Link href={profile.institutionalProfileUrl}>Profile</Link>
+            )}
+          </div>
+        )}
       </div>
       {profile.photo && <ScholarPortrait key={profile.photo.src} photo={profile.photo} />}
     </Popover.Popup>
@@ -185,7 +196,7 @@ export default function ScholarPopover({ scholar }: { scholar: ScholarProfile })
       className={styles.trigger}
     >
       <span className={styles.triggerLabel}>
-        {scholar.name}, {scholar.degree}
+        {[scholar.name, scholar.degree].filter(Boolean).join(', ')}
       </span>
     </Popover.Trigger>
   )
