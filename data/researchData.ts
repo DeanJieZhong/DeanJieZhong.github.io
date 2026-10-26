@@ -6,7 +6,7 @@ import type { ScholarId } from './scholarsData'
 export const researchExperiences = [
   {
     id: 'ism',
-    title: 'CD8⁺ T Cells & Cancer Immunotherapy',
+    title: 'Engineering for Cancer Immunotherapy',
     description: 'Research internship in cancer immunology.',
     italicTitleText: '',
     supervisors: [
@@ -187,8 +187,8 @@ const researchData: ResearchEntry[] = [
     experience: 'ism',
     type: 'project',
     level: 'primary',
-    name: 'T Cell Engineering',
-    listTitle: 'T Cell Engineering',
+    name: 'CD8⁺ T-Cell & Cytokine Engineering',
+    listTitle: 'CD8⁺ T-Cell & Cytokine Engineering',
     photo: {
       src: '/static/images/research/systems-medicine/flow-cover-hue-lowered.png',
       width: 5712,
