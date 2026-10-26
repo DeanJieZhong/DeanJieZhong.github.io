@@ -187,8 +187,8 @@ const researchData: ResearchEntry[] = [
     experience: 'ism',
     type: 'project',
     level: 'primary',
-    name: 'CD8⁺ T-Cell & Cytokine Engineering',
-    listTitle: 'CD8⁺ T-Cell & Cytokine Engineering',
+    name: 'CD8⁺ T Cell & Cytokine Engineering',
+    listTitle: 'CD8⁺ T Cell & Cytokine Engineering',
     photo: {
       src: '/static/images/research/systems-medicine/flow-cover-hue-lowered.png',
       width: 5712,

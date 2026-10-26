@@ -32,6 +32,8 @@ Recent commits use short, lowercase, descriptive subjects such as `deleting dark
 
 When editing blog content, keep frontmatter aligned with `contentlayer.config.ts`. If you add images, place them under `public/static/images/` and reference them with stable paths. Changes to metadata, navigation, or SEO behavior usually belong in `data/siteMetadata.js`, `data/headerNavLinks.ts`, or `app/seo.tsx`.
 
+Write “T cell” / “T cells” without a hyphen between the words, including adjectival uses. Title case may use “T Cell” / “T Cells”. Apply this preference to titles, body text, captions, and image alt text. URL slug separators retain their normal hyphens.
+
 ## PDF Embedding
 
 Use the shared `components/PdfPreview.tsx` component for all PDF embeds. The site owner prefers the browser's native PDF reader in an iframe, as verified in Safari. Do not reintroduce PDF.js, canvas rendering, or separate download / open-in-new-tab controls around embedded PDFs. Keep PDFs under `public/static/files/` so the same-origin framing header applies.
