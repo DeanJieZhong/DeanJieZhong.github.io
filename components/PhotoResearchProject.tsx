@@ -53,8 +53,13 @@ export default function PhotoResearchProject({
             <div
               className={
                 photo.titlePlacement === 'lower'
-                  ? 'relative -mt-2 pb-6 sm:-mt-8 sm:pb-10 lg:pb-14'
+                  ? 'relative pb-6 sm:pb-10 lg:pb-14'
                   : 'relative -mt-6 pb-6 sm:absolute sm:inset-x-0 sm:bottom-0 sm:mt-0 sm:pb-10 lg:pb-14'
+              }
+              style={
+                photo.titlePlacement === 'lower'
+                  ? { marginTop: `-${(photo.height / photo.width) * 15}cqw` }
+                  : undefined
               }
             >
               <div className={contentWidth}>
@@ -118,6 +123,11 @@ export default function PhotoResearchProject({
                   )
                   .join(' and ')}
               </p>
+            </div>
+          ) : entry.type === 'advisory' ? (
+            <div className="mt-7 space-y-2 text-sm leading-6 sm:text-base sm:leading-7">
+              <p>Role: {entry.role}</p>
+              {entry.eventPeriod && <p>{entry.eventPeriod}</p>}
             </div>
           ) : (
             <ScholarPopoverGroup>

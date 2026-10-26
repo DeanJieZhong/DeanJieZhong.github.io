@@ -190,10 +190,10 @@ const researchData: ResearchEntry[] = [
     name: 'T Cell Engineering',
     listTitle: 'T Cell Engineering',
     photo: {
-      src: '/static/images/research/cxcl13-fc/ice.webp',
-      width: 3761,
-      height: 2115,
-      alt: 'Laboratory reagent tubes nestled in crushed ice.',
+      src: '/static/images/research/systems-medicine/flow-cover-hue-lowered.png',
+      width: 5712,
+      height: 2142,
+      alt: 'A flow cytometer and a monitor displaying flow cytometry plots in the laboratory.',
     },
     summary:
       'Exploring cancer immunotherapy from a synthetic biology perspective by engineering T cells and immune signaling proteins to enhance antitumor immunity.',
@@ -299,6 +299,13 @@ const researchData: ResearchEntry[] = [
     level: 'supporting',
     name: 'Bifidobacterium longum elicits anti-tumor immunity in pancreatic cancer',
     listTitle: 'Zhejiang University-University of Edinburgh Institute iGEM Team 2026',
+    photo: {
+      src: '/static/images/research/zhejiang-university/cover.png',
+      width: 2776,
+      height: 1041,
+      alt: 'An online discussion with the Zhejiang University iGEM team alongside a fluorescence microscopy image.',
+      titlePlacement: 'lower',
+    },
     role: 'Advisor',
     eventPeriod: 'iGEM 2026',
   },
