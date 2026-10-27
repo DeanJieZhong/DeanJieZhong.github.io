@@ -471,7 +471,7 @@ const cxcl13Data: Cxcl13Summary = {
             },
             {
               type: 'paragraph',
-              text: 'The final plasmid trial did not reproduce the near-background signal seen in the initial LPS screen (Fig. 14). The experimental group remained similar to the plasmid-only control, and elevated Cesome-only and reagent backgrounds complicated interpretation. Work stopped at endotoxin testing, leaving treatment performance, background control and DNA recovery unresolved.',
+              text: 'The final plasmid trial did not reproduce the near-background signal seen in the initial LPS screen (Fig. 14). The experimental group remained similar to the plasmid-only control, while Cesome-only and reagent controls also showed elevated signals, making this trial difficult to interpret. Microbial contamination or degradation of Cesome during prolonged storage may have contributed to these results. Work stopped at endotoxin testing, leaving treatment performance, background control and DNA recovery unresolved.',
             },
             {
               type: 'figure',
@@ -481,7 +481,7 @@ const cxcl13Data: Cxcl13Summary = {
               width: 1920,
               height: 1230,
               caption:
-                'Fig. 14. Plasmid trial with material and water controls. Points show the recorded readings: two for plasmid only, three for Cesome only, three for the experimental group and one for endotoxin-free water. Horizontal bars mark group means where multiple readings are available. The experimental group is shown in blue.',
+                'Fig. 14. Plasmid trial with plasmid-only, Cesome-only and water controls. Points show the recorded readings: two for plasmid only, three for Cesome only, three for the experimental group and one for endotoxin-free water. Horizontal bars mark group means where multiple readings are available. The experimental group is shown in blue.',
               size: 'medium',
             },
           ],
