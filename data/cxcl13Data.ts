@@ -356,11 +356,11 @@ const cxcl13Data: Cxcl13Summary = {
             },
             {
               type: 'paragraph',
-              text: 'Cesome and Cecelle are two cerium-containing materials developed in my parents’ research group. They differ in how cerium ions are incorporated: Cesome forms hollow spheres with cerium ions on the inner wall, whereas Cecelle has a rod-like structure with cerium ions in its interior.',
+              text: 'Cesome and Cecelle are two cerium-containing materials developed in my parents’ research group. They differ in how cerium ions are incorporated: Cesome forms hollow spheres with cerium ions on the inner wall, whereas Cecelle has a core–shell structure with cerium ions in its core.',
             },
             {
               type: 'paragraph',
-              text: 'Previous work in the group examined ROS scavenging and macrophage polarization following Cesome treatment in an LPS-stimulated model. Their observations included a shift from M1-like toward M2-like states and a substantial reduction in ROS that persisted throughout the observation period. Discussions of these findings led us to hypothesize that Cesome might also act directly on LPS, the initiating stimulus. I evaluated this hypothesis in LPS solutions before investigating plasmid treatment and recovery.',
+              text: 'Previous work in the group examined ROS/RNS scavenging and macrophage polarization following Cesome treatment in an LPS-stimulated model. Their observations included a shift from M1-like toward M2-like states and a substantial reduction in ROS/RNS that persisted throughout the observation period. Discussions of these findings led us to hypothesize that Cesome might also act directly on LPS, the initiating stimulus. Published work on an engineered cerium oxide (CeO₂) nanozyme has also demonstrated LPS hydrolysis, providing a precedent for evaluating cerium-containing materials against endotoxin ([Jin et al., 2026](https://www.nature.com/articles/s41467-026-74689-3)). I evaluated this hypothesis in LPS solutions before investigating plasmid treatment and recovery.',
             },
           ],
         },
@@ -565,6 +565,7 @@ const cxcl13Data: Cxcl13Summary = {
     entries: [
       'Feng, B., Bai, Z., Zhou, X., et al. (2024). [The type 2 cytokine Fc–IL-4 revitalizes exhausted CD8⁺ T cells against cancer](https://www.nature.com/articles/s41586-024-07962-4). *Nature*, 634, 712–720. DOI: 10.1038/s41586-024-07962-4.',
       'Hirschhorn, D., Budhu, S., Kraehenbuehl, L., et al. (2023). [T cell immunotherapies engage neutrophils to eliminate tumor antigen escape variants](https://pubmed.ncbi.nlm.nih.gov/37001503/). *Cell*, 186(7), 1432–1447.e17. DOI: 10.1016/j.cell.2023.03.007.',
+      'Jin, L., Zhang, C., Yi, H., et al. (2026). [Lipopolysaccharide hydrolysis-targeting nano-chimeras detoxify endotoxin through specific adsorption and efficient degradation](https://www.nature.com/articles/s41467-026-74689-3). *Nature Communications*, 17, 7814. DOI: 10.1038/s41467-026-74689-3.',
       'Li, J. P., Wu, C. Y., Chen, M. Y., et al. (2021). [PD-1⁺CXCR5⁻CD4⁺ Th-CXCL13 cell subset drives B cells into tertiary lymphoid structures of nasopharyngeal carcinoma](https://pmc.ncbi.nlm.nih.gov/articles/PMC8276302/). *Journal for ImmunoTherapy of Cancer*, 9(7), e002101. DOI: 10.1136/jitc-2020-002101.',
       'Rodriguez, A. B., Peske, J. D., Woods, A. N., et al. (2021). [Immune mechanisms orchestrate tertiary lymphoid structures in tumors via cancer-associated fibroblasts](https://pmc.ncbi.nlm.nih.gov/articles/PMC8362934/). *Cell Reports*, 36(3), 109422. DOI: 10.1016/j.celrep.2021.109422.',
       'Tang, Z., Hu, J., Li, X. C., et al. (2025). [A subset of neutrophils activates anti-tumor immunity and inhibits non-small-cell lung cancer progression](https://pubmed.ncbi.nlm.nih.gov/39515330/). *Developmental Cell*, 60(3), 379–395.e8. DOI: 10.1016/j.devcel.2024.10.010.',
