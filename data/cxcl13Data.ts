@@ -61,7 +61,7 @@ const cxcl13Data: Cxcl13Summary = {
       },
       {
         type: 'paragraph',
-        text: 'My work focuses on engineering CD8 T cells and cytokines for cancer immunotherapy. In the CXCL13Fc/CXCR5 project, we test whether combining CXCL13Fc with CXCR5 overexpression can improve CD8 T cell recruitment and function, with the longer-term aim of promoting tertiary lymphoid structures (TLS). The IL4–8Fc project aims to address tumor antigen escape by combining IL4’s support of CD8 T cell function with IL8-mediated neutrophil recruitment. The TB4 project explores whether a synthetic receptor can turn TGFβ, normally an immunosuppressive cue, into a trigger for IL4-associated signaling.',
+        text: 'My work focuses on engineering CD8 T cells and cytokines for cancer immunotherapy. The IL4–8Fc project aims to address tumor antigen escape by combining IL4’s support of CD8 T cell function with IL8-mediated neutrophil recruitment. In the CXCL13Fc/CXCR5 project, we test whether combining CXCL13Fc with CXCR5 overexpression can improve CD8 T cell recruitment and function, with the longer-term aim of promoting tertiary lymphoid structures (TLS). The TGFβ receptor engineering project explores whether a synthetic receptor can turn TGFβ, normally an immunosuppressive cue, into a trigger for IL4-associated signaling.',
       },
       {
         type: 'paragraph',
@@ -70,96 +70,6 @@ const cxcl13Data: Cxcl13Summary = {
     ],
   },
   projects: [
-    {
-      id: 'cxcl13-cxcr5',
-      title: 'CXCL13Fc fusion protein and CXCR5-engineered CD8 T cells',
-      navTitle: 'CXCL13Fc / CXCR5',
-      sections: [
-        {
-          id: 'research-question',
-          title: 'Research question & approach',
-          blocks: [
-            {
-              type: 'paragraph',
-              text: 'CXCL13 is a chemokine that attracts B cells and subsets of T cells through its receptor, CXCR5. The CXCL13–CXCR5 axis helps determine where these lymphocytes accumulate and interact. In tumors, one setting for these interactions is tertiary lymphoid structures (TLS): organized aggregates of immune cells that resemble lymphoid tissue.',
-            },
-            {
-              type: 'paragraph',
-              text: 'TLS are of interest in cancer immunotherapy because they have been associated with better tumor control and responses to treatment. CXCL13 provides a potential way to influence these structures. In nasopharyngeal carcinoma, CXCL13-producing T cells recruit B cells and colocalize with them in TLS ([Li et al., 2021](https://pmc.ncbi.nlm.nih.gov/articles/PMC8276302/)). In a mouse melanoma model, CXCL13-dependent B cell recruitment drove TLS expansion, and tumors with more and larger TLS responded better to checkpoint immunotherapy ([Rodriguez et al., 2021](https://pmc.ncbi.nlm.nih.gov/articles/PMC8362934/)).',
-            },
-            {
-              type: 'paragraph',
-              text: 'Our project asks whether engineering both sides of the CXCL13–CXCR5 axis can improve CD8 T cell recruitment and antitumor function. We pair CXCL13Fc (Fig. 1), designed to extend the circulating half-life of CXCL13, with CD8 T cells that overexpress CXCR5 to increase their responsiveness to the chemokine. We examine migration and tissue distribution, proliferation, cytotoxicity, stemness and memory-associated properties. The longer-term aim is to test whether this combination can promote TLS formation within tumors.',
-            },
-            {
-              type: 'figure',
-              src: '/static/images/research/systems-medicine/cxcl13-fc-molecular-design.png',
-              alt: 'Schematic of CXCL13 fused to the two arms of an Fc scaffold',
-              width: 1920,
-              height: 1080,
-              caption:
-                'Fig. 1. CXCL13–Fc fusion protein design. Schematic showing CXCL13 linked to Fc.',
-            },
-          ],
-        },
-        {
-          id: 'my-contribution',
-          title: 'My contribution',
-          blocks: [
-            {
-              type: 'list',
-              items: [
-                '**Recombinant protein expression, purification and quality control**: Cultured and transfected 293F cells to express CXCL13Fc and the IgGFc control protein, then performed protein purification and endotoxin testing.',
-                '**Engineered CD8 T cell preparation**: Repeatedly performed the full workflow, including viral packaging, mouse tissue processing, naïve CD8 T cell isolation and activation, viral transduction, and culture expansion.',
-                '**Flow cytometry and data analysis**: Independently performed surface and intracellular staining, flow cytometric acquisition, and FlowJo analysis.',
-                '**Mouse experiments**: Performed multiple rounds of ear tagging, tumor inoculation, and adoptive T cell transfer via tail-vein injection. Dissected mice and collected lymph nodes, spleen and bone marrow, and used flow cytometry on harvested tissues to assess T cell distribution *in vivo*.',
-              ],
-            },
-          ],
-        },
-        {
-          id: 'experimental-progress',
-          title: 'Selected experimental results',
-          blocks: [
-            {
-              type: 'paragraph',
-              text: 'Our *in vitro* migration assay showed chemotactic activity of CXCL13Fc toward CXCR5⁺ T cells, with higher fusion-protein concentrations corresponding to more migrated cells. The assay included commercial mCXCL13 at 100 ng/mL as a reference and tested CXCL13Fc up to 10 µg/mL. Representative migration images are shown in Fig. 2. At 10 µg/mL CXCL13Fc, approximately 100,000 cells migrated, compared with approximately 35,000–36,000 in the control condition (Fig. 3).',
-            },
-            {
-              type: 'figure',
-              src: '/static/images/research/systems-medicine/cxcl13-fc-migration-images.png',
-              alt: 'Representative microscopy images of migrated T cells under control, IgGFc, mCXCL13 and five CXCL13Fc concentration conditions',
-              width: 1920,
-              height: 1080,
-              caption:
-                'Fig. 2. Representative images of T cell migration. Conditions include control, IgGFc (10 µg/mL), commercial mCXCL13 (100 ng/mL), and CXCL13Fc at 100 ng/mL, 500 ng/mL, 1 µg/mL, 5 µg/mL and 10 µg/mL.',
-            },
-            {
-              type: 'figure',
-              src: '/static/images/research/systems-medicine/cxcl13-fc-migration-quantification.png',
-              alt: 'Migrated CXCR5-positive T cell counts for the conditions shown in Fig. 2',
-              width: 1920,
-              height: 1080,
-              caption:
-                'Fig. 3. Quantification of T cell migration. Migrated CXCR5⁺ T cell counts for the conditions shown in Fig. 2. The y-axis reports cell number in units of 10⁴. n = 1 per condition.',
-            },
-          ],
-        },
-        {
-          id: 'reflection',
-          title: 'Reflection',
-          blocks: [
-            {
-              type: 'list',
-              items: [
-                '**Engineering interacting components**: Engineering can target multiple components of a biological system together. Complementary changes can improve how those components interact and strengthen the desired response.',
-                '**Breaking research goals into testable questions**: A broad research goal can be broken down into smaller questions, each linked to a measurable readout. Testing these questions step by step, then considering the results together, provides a way to evaluate the larger idea.',
-              ],
-            },
-          ],
-        },
-      ],
-    },
     {
       id: 'il4-il8-fc',
       title: 'IL4–IL8 heterodimeric Fc fusion protein',
@@ -179,7 +89,7 @@ const cxcl13Data: Cxcl13Summary = {
             },
             {
               type: 'paragraph',
-              text: 'IL4–8Fc combines the two cytokines in one heterodimeric fusion protein: one Fc chain carries IL4 and the other carries IL8 (Fig. 4). The aim is to enhance CD8 T cell function while recruiting neutrophils to help control tumor cells that escape antigen recognition. We test whether both arms retain their activity and whether the combined protein improves cooperation between the two cell populations. Comparisons with IgGFc, IL4Fc and IL8Fc assess the contribution of each cytokine, while neutrophil–tumor–T cell co-cultures measure the resulting T cell activation and effector responses.',
+              text: 'IL4–8Fc combines the two cytokines in one heterodimeric fusion protein: one Fc chain carries IL4 and the other carries IL8 (Fig. 1). The aim is to enhance CD8 T cell function while recruiting neutrophils to help control tumor cells that escape antigen recognition. We test whether both arms retain their activity and whether the combined protein improves cooperation between the two cell populations. Comparisons with IgGFc, IL4Fc and IL8Fc assess the contribution of each cytokine, while neutrophil–tumor–T cell co-cultures measure the resulting T cell activation and effector responses.',
             },
             {
               type: 'figure',
@@ -188,7 +98,7 @@ const cxcl13Data: Cxcl13Summary = {
               width: 1920,
               height: 1080,
               caption:
-                'Fig. 4. IL4–8Fc design and proposed mechanism of action. Two Fc chains carry IL4 and IL8 on separate arms, aiming to enhance CD8 T cell function and recruit neutrophils for a coordinated antitumor response.',
+                'Fig. 1. IL4–8Fc design and proposed mechanism of action. Two Fc chains carry IL4 and IL8 on separate arms, aiming to enhance CD8 T cell function and recruit neutrophils for a coordinated antitumor response.',
             },
           ],
         },
@@ -219,7 +129,7 @@ const cxcl13Data: Cxcl13Summary = {
             },
             {
               type: 'paragraph',
-              text: 'Treatment with IL4Fc or IL4–8Fc increased the frequency of CD44⁺CD62L⁻ CD8 T cells compared with the IgGFc control, consistent with a shift toward an effector phenotype (Fig. 5).',
+              text: 'Treatment with IL4Fc or IL4–8Fc increased the frequency of CD44⁺CD62L⁻ CD8 T cells compared with the IgGFc control, consistent with a shift toward an effector phenotype (Fig. 2).',
             },
             {
               type: 'figure',
@@ -230,11 +140,11 @@ const cxcl13Data: Cxcl13Summary = {
               height: 1080,
               crop: { x: 340, y: 50, width: 1250, height: 990 },
               caption:
-                'Fig. 5. CD8 T cell differentiation after fusion-protein treatment. Representative CD44/CD62L flow plots and summary proportions of CD44⁺CD62L⁺ and CD44⁺CD62L⁻ cells compare IgGFc, IL4Fc, IL8Fc and IL4–8Fc.',
+                'Fig. 2. CD8 T cell differentiation after fusion-protein treatment. Representative CD44/CD62L flow plots and summary proportions of CD44⁺CD62L⁺ and CD44⁺CD62L⁻ cells compare IgGFc, IL4Fc, IL8Fc and IL4–8Fc.',
             },
             {
               type: 'paragraph',
-              text: 'Both treatments also increased the frequencies of GZMB⁺ and IFNγ⁺TNFα⁺ CD8 T cells relative to IgGFc (Fig. 6A–B). In contrast, the frequency of IL2⁺ cells was lower in both groups (Fig. 6C).',
+              text: 'Both treatments also increased the frequencies of GZMB⁺ and IFNγ⁺TNFα⁺ CD8 T cells relative to IgGFc (Fig. 3A–B). In contrast, the frequency of IL2⁺ cells was lower in both groups (Fig. 3C).',
             },
             {
               type: 'figure-group',
@@ -266,7 +176,7 @@ const cxcl13Data: Cxcl13Summary = {
                 },
               ],
               caption:
-                'Fig. 6. Effector-associated readouts after direct CD8 T cell treatment. Each panel pairs representative flow plots with the corresponding summary across IgGFc, IL4Fc, IL8Fc and IL4–8Fc: (A) GZMB⁺ cells, (B) IFNγ⁺TNFα⁺ cells and (C) IL2⁺ cells.',
+                'Fig. 3. Effector-associated readouts after direct CD8 T cell treatment. Each panel pairs representative flow plots with the corresponding summary across IgGFc, IL4Fc, IL8Fc and IL4–8Fc: (A) GZMB⁺ cells, (B) IFNγ⁺TNFα⁺ cells and (C) IL2⁺ cells.',
             },
             {
               type: 'heading',
@@ -275,7 +185,7 @@ const cxcl13Data: Cxcl13Summary = {
             },
             {
               type: 'paragraph',
-              text: 'Human IL8 (hIL8, 10 ng/mL) and IL8Fc (100 µg/mL) both promoted neutrophil migration relative to the control. A CXCR2 inhibitor (10 µM) reduced migration in both groups, supporting a role for CXCR2 signaling in the chemotactic response (Fig. 7).',
+              text: 'Human IL8 (hIL8, 10 ng/mL) and IL8Fc (100 µg/mL) both promoted neutrophil migration relative to the control. A CXCR2 inhibitor (10 µM) reduced migration in both groups, supporting a role for CXCR2 signaling in the chemotactic response (Fig. 4).',
             },
             {
               type: 'figure',
@@ -286,7 +196,7 @@ const cxcl13Data: Cxcl13Summary = {
               height: 1080,
               crop: { x: 12, y: 125, width: 1896, height: 825 },
               caption:
-                'Fig. 7. Neutrophil migration toward hIL8 and IL8Fc. Representative microscopy images and migrated-cell counts compare control, human IL8 (hIL8, 10 ng/mL) and IL8Fc (100 µg/mL), each with or without a CXCR2 inhibitor (CXCR2i, 10 µM). The legend label “non” indicates no inhibitor. Cell counts are reported in units of 10⁴.',
+                'Fig. 4. Neutrophil migration toward hIL8 and IL8Fc. Representative microscopy images and migrated-cell counts compare control, human IL8 (hIL8, 10 ng/mL) and IL8Fc (100 µg/mL), each with or without a CXCR2 inhibitor (CXCR2i, 10 µM). The legend label “non” indicates no inhibitor. Cell counts are reported in units of 10⁴.',
             },
             {
               type: 'heading',
@@ -295,7 +205,7 @@ const cxcl13Data: Cxcl13Summary = {
             },
             {
               type: 'paragraph',
-              text: 'In co-cultures of protein-pretreated neutrophils, B16OVA tumor cells and naïve OT-I T cells, IL4–8Fc increased the expression of the activation markers CD44 and CD25 on T cells relative to IgGFc (Fig. 8).',
+              text: 'In co-cultures of protein-pretreated neutrophils, B16OVA tumor cells and naïve OT-I T cells, IL4–8Fc increased the expression of the activation markers CD44 and CD25 on T cells relative to IgGFc (Fig. 5).',
             },
             {
               type: 'figure',
@@ -306,11 +216,11 @@ const cxcl13Data: Cxcl13Summary = {
               height: 1080,
               crop: { x: 145, y: 80, width: 1685, height: 795 },
               caption:
-                'Fig. 8. Co-culture design and T cell activation. Neutrophils were treated with IgGFc, IL4Fc, IL8Fc or IL4–8Fc on day 0. B16OVA cells were added on day 1, followed by naïve OT-I T cells and IL2 on day 2. CD44 and CD25 expression was assessed by flow cytometry on day 4. Histograms and MFI summaries are shown for each treatment.',
+                'Fig. 5. Co-culture design and T cell activation. Neutrophils were treated with IgGFc, IL4Fc, IL8Fc or IL4–8Fc on day 0. B16OVA cells were added on day 1, followed by naïve OT-I T cells and IL2 on day 2. CD44 and CD25 expression was assessed by flow cytometry on day 4. Histograms and MFI summaries are shown for each treatment.',
             },
             {
               type: 'paragraph',
-              text: 'IL4–8Fc also increased the frequency of GZMB⁺ CD8 T cells, whereas IL4Fc and IL8Fc alone showed no significant difference from IgGFc. In the representative flow plots, GZMB⁺ cells accounted for 57.1% of CD8 T cells with IL4–8Fc and 13.7% with IgGFc (Fig. 9).',
+              text: 'IL4–8Fc also increased the frequency of GZMB⁺ CD8 T cells, whereas IL4Fc and IL8Fc alone showed no significant difference from IgGFc. In the representative flow plots, GZMB⁺ cells accounted for 57.1% of CD8 T cells with IL4–8Fc and 13.7% with IgGFc (Fig. 6).',
             },
             {
               type: 'figure',
@@ -321,7 +231,7 @@ const cxcl13Data: Cxcl13Summary = {
               height: 1080,
               crop: { x: 80, y: 300, width: 1710, height: 480 },
               caption:
-                'Fig. 9. GZMB expression after co-culture. Representative flow plots and quantification of GZMB⁺ CD8 T cells following co-culture under the four protein-treatment conditions.',
+                'Fig. 6. GZMB expression after co-culture. Representative flow plots and quantification of GZMB⁺ CD8 T cells following co-culture under the four protein-treatment conditions.',
             },
           ],
         },
@@ -335,6 +245,96 @@ const cxcl13Data: Cxcl13Summary = {
                 '**Evaluating function in biological context**: The activity of an engineered molecule depends on the cells and interactions around it. Testing across systems of increasing complexity helps establish how that activity changes in the environment where the molecule is intended to work.',
                 '**Designing complementary functions**: Combining components starts with defining the role of each and how those roles contribute to a shared objective. Evaluating the combination alongside its individual components helps determine whether their functions work together as intended.',
                 '**Interpreting functional profiles**: Biological responses can change in several directions at once. Interpreting multiple readouts in relation to the intended function helps identify useful changes and potential trade-offs that a single metric may miss.',
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'cxcl13-cxcr5',
+      title: 'CXCL13Fc fusion protein and CXCR5-engineered CD8 T cells',
+      navTitle: 'CXCL13Fc / CXCR5',
+      sections: [
+        {
+          id: 'research-question',
+          title: 'Research question & approach',
+          blocks: [
+            {
+              type: 'paragraph',
+              text: 'CXCL13 is a chemokine that attracts B cells and subsets of T cells through its receptor, CXCR5. The CXCL13–CXCR5 axis helps determine where these lymphocytes accumulate and interact. In tumors, one setting for these interactions is tertiary lymphoid structures (TLS): organized aggregates of immune cells that resemble lymphoid tissue.',
+            },
+            {
+              type: 'paragraph',
+              text: 'TLS are of interest in cancer immunotherapy because they have been associated with better tumor control and responses to treatment. CXCL13 provides a potential way to influence these structures. In nasopharyngeal carcinoma, CXCL13-producing T cells recruit B cells and colocalize with them in TLS ([Li et al., 2021](https://pmc.ncbi.nlm.nih.gov/articles/PMC8276302/)). In a mouse melanoma model, CXCL13-dependent B cell recruitment drove TLS expansion, and tumors with more and larger TLS responded better to checkpoint immunotherapy ([Rodriguez et al., 2021](https://pmc.ncbi.nlm.nih.gov/articles/PMC8362934/)).',
+            },
+            {
+              type: 'paragraph',
+              text: 'Our project asks whether engineering both sides of the CXCL13–CXCR5 axis can improve CD8 T cell recruitment and antitumor function. We pair CXCL13Fc (Fig. 7), designed to extend the circulating half-life of CXCL13, with CD8 T cells that overexpress CXCR5 to increase their responsiveness to the chemokine. We examine migration and tissue distribution, proliferation, cytotoxicity, stemness and memory-associated properties. The longer-term aim is to test whether this combination can promote TLS formation within tumors.',
+            },
+            {
+              type: 'figure',
+              src: '/static/images/research/systems-medicine/cxcl13-fc-molecular-design.png',
+              alt: 'Schematic of CXCL13 fused to the two arms of an Fc scaffold',
+              width: 1920,
+              height: 1080,
+              caption:
+                'Fig. 7. CXCL13–Fc fusion protein design. Schematic showing CXCL13 linked to Fc.',
+            },
+          ],
+        },
+        {
+          id: 'my-contribution',
+          title: 'My contribution',
+          blocks: [
+            {
+              type: 'list',
+              items: [
+                '**Recombinant protein expression, purification and quality control**: Cultured and transfected 293F cells to express CXCL13Fc and the IgGFc control protein, then performed protein purification and endotoxin testing.',
+                '**Engineered CD8 T cell preparation**: Repeatedly performed the full workflow, including viral packaging, mouse tissue processing, naïve CD8 T cell isolation and activation, viral transduction, and culture expansion.',
+                '**Flow cytometry and data analysis**: Independently performed surface and intracellular staining, flow cytometric acquisition, and FlowJo analysis.',
+                '**Mouse experiments**: Performed multiple rounds of ear tagging, tumor inoculation, and adoptive T cell transfer via tail-vein injection. Dissected mice and collected lymph nodes, spleen and bone marrow, and used flow cytometry on harvested tissues to assess T cell distribution *in vivo*.',
+              ],
+            },
+          ],
+        },
+        {
+          id: 'experimental-progress',
+          title: 'Selected experimental results',
+          blocks: [
+            {
+              type: 'paragraph',
+              text: 'Our *in vitro* migration assay showed chemotactic activity of CXCL13Fc toward CXCR5⁺ T cells, with higher fusion-protein concentrations corresponding to more migrated cells. The assay included commercial mCXCL13 at 100 ng/mL as a reference and tested CXCL13Fc up to 10 µg/mL. Representative migration images are shown in Fig. 8. At 10 µg/mL CXCL13Fc, approximately 100,000 cells migrated, compared with approximately 35,000–36,000 in the control condition (Fig. 9).',
+            },
+            {
+              type: 'figure',
+              src: '/static/images/research/systems-medicine/cxcl13-fc-migration-images.png',
+              alt: 'Representative microscopy images of migrated T cells under control, IgGFc, mCXCL13 and five CXCL13Fc concentration conditions',
+              width: 1920,
+              height: 1080,
+              caption:
+                'Fig. 8. Representative images of T cell migration. Conditions include control, IgGFc (10 µg/mL), commercial mCXCL13 (100 ng/mL), and CXCL13Fc at 100 ng/mL, 500 ng/mL, 1 µg/mL, 5 µg/mL and 10 µg/mL.',
+            },
+            {
+              type: 'figure',
+              src: '/static/images/research/systems-medicine/cxcl13-fc-migration-quantification.png',
+              alt: 'Migrated CXCR5-positive T cell counts for the conditions shown in Fig. 8',
+              width: 1920,
+              height: 1080,
+              caption:
+                'Fig. 9. Quantification of T cell migration. Migrated CXCR5⁺ T cell counts for the conditions shown in Fig. 8. The y-axis reports cell number in units of 10⁴. n = 1 per condition.',
+            },
+          ],
+        },
+        {
+          id: 'reflection',
+          title: 'Reflection',
+          blocks: [
+            {
+              type: 'list',
+              items: [
+                '**Engineering interacting components**: Engineering can target multiple components of a biological system together. Complementary changes can improve how those components interact and strengthen the desired response.',
+                '**Breaking research goals into testable questions**: A broad research goal can be broken down into smaller questions, each linked to a measurable readout. Testing these questions step by step, then considering the results together, provides a way to evaluate the larger idea.',
               ],
             },
           ],
@@ -502,12 +502,12 @@ const cxcl13Data: Cxcl13Summary = {
       ],
     },
     {
-      id: 'tb4',
-      title: 'TGFβ signal-switching receptor engineering (TB4)',
-      navTitle: 'TGFβ receptor / TB4',
+      id: 'tgfb-receptor',
+      title: 'TGFβ signal-switching receptor engineering',
+      navTitle: 'TGFβ receptor',
       sections: [
         {
-          id: 'tb4-research-question',
+          id: 'tgfb-receptor-research-question',
           title: 'Research question & approach',
           blocks: [
             {
@@ -516,7 +516,7 @@ const cxcl13Data: Cxcl13Summary = {
             },
             {
               type: 'paragraph',
-              text: 'TB4 is a chimeric receptor that combines the extracellular TGFβ-binding domain of TGFβRII, a CD8α transmembrane domain and the intracellular signaling domain of IL4Rα. Expressed on engineered CD8 T cells, it is designed to couple TGFβ recognition to IL4Rα-associated intracellular signaling, with the aim of supporting T cell effector function.',
+              text: 'The chimeric receptor combines the extracellular TGFβ-binding domain of TGFβRII, a CD8α transmembrane domain and the intracellular signaling domain of IL4Rα. Expressed on engineered CD8 T cells, it is designed to couple TGFβ recognition to IL4Rα-associated intracellular signaling, with the aim of supporting T cell effector function.',
             },
             {
               type: 'paragraph',
@@ -525,24 +525,24 @@ const cxcl13Data: Cxcl13Summary = {
           ],
         },
         {
-          id: 'tb4-my-contribution',
+          id: 'tgfb-receptor-my-contribution',
           title: 'My contribution',
           blocks: [
             {
               type: 'list',
               items: [
-                '**Engineered T cell preparation and culture**: Performed viral packaging of the TGFβRII–IL4Rα receptor construct, naïve T cell isolation and activation, viral transduction, cell counting and culture expansion to prepare TB4 and vector-control cells. Followed culture conditions across multiple experimental rounds.',
+                '**Engineered T cell preparation and culture**: Performed viral packaging of the TGFβRII–IL4Rα receptor construct, naïve T cell isolation and activation, viral transduction, cell counting and culture expansion to prepare receptor-expressing and vector-control cells. Followed culture conditions across multiple experimental rounds.',
               ],
             },
           ],
         },
         {
-          id: 'tb4-experimental-progress',
+          id: 'tgfb-receptor-experimental-progress',
           title: 'Selected experimental results',
           blocks: [
             {
               type: 'paragraph',
-              text: 'According to Jiajia Wang, TGFβ stimulation did not induce detectable STAT6 phosphorylation in TB4-expressing cells.',
+              text: 'According to Jiajia Wang, TGFβ stimulation did not induce detectable STAT6 phosphorylation in cells expressing the engineered receptor.',
             },
           ],
         },
