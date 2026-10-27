@@ -47,6 +47,11 @@ interface Cxcl13Summary {
     title: string
     entries: string[]
   }
+  notice: {
+    id: string
+    title: string
+    text: string
+  }
 }
 
 // English source: Systems_Medicine_Research_Summary.md in the Obsidian vault.
@@ -572,6 +577,11 @@ const cxcl13Data: Cxcl13Summary = {
       'Thomas, D. A., & Massagué, J. (2005). [TGF-beta directly targets cytotoxic T cell functions during tumor evasion of immune surveillance](https://pubmed.ncbi.nlm.nih.gov/16286245/). *Cancer Cell*, 8(5), 369–380. DOI: 10.1016/j.ccr.2005.10.012.',
       'Yoshimura, T., Matsushima, K., Tanaka, S., et al. (1987). [Purification of a human monocyte-derived neutrophil chemotactic factor that has peptide sequence similarity to other host defense cytokines](https://pubmed.ncbi.nlm.nih.gov/3480540/). *Proceedings of the National Academy of Sciences of the USA*, 84(24), 9233–9237. DOI: 10.1073/pnas.84.24.9233.',
     ],
+  },
+  notice: {
+    id: 'data-use-notice',
+    title: 'Unpublished data and intended use',
+    text: 'This page includes unpublished research data and figures, shared with the permission of my research mentor, Jiajia Wang, solely to support the evaluation of my academic applications. Please do not reproduce, redistribute or reuse the unpublished material without prior permission from the relevant research team.',
   },
 }
 

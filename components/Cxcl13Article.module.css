@@ -133,6 +133,22 @@
   margin-top: 1.25rem;
 }
 
+.notice {
+  margin-top: 3rem;
+  border-top: 1px solid var(--color-gray-200);
+  padding-top: 1.5rem;
+  color: var(--color-gray-600);
+  font-size: 0.875rem;
+  line-height: 1.75;
+}
+
+.notice h2 {
+  margin-bottom: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  scroll-margin-top: 2rem;
+}
+
 .resultHeading {
   margin-top: 2rem;
   margin-bottom: 1rem;

@@ -238,6 +238,14 @@ export default function Cxcl13Article() {
             </ul>
           </div>
         </section>
+
+        <aside
+          className={`${styles.reading} ${articleStyles.notice}`}
+          aria-labelledby={cxcl13.notice.id}
+        >
+          <h2 id={cxcl13.notice.id}>{cxcl13.notice.title}</h2>
+          <p>{cxcl13.notice.text}</p>
+        </aside>
       </div>
     </div>
   )
