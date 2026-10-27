@@ -11,8 +11,7 @@ export const researchExperiences = [
     italicTitleText: '',
     supervisors: [
       {
-        name: 'Lianjun Zhang',
-        degree: 'PhD',
+        name: 'Dr. Lianjun Zhang',
         url: scholarsData['lianjun-zhang'].institutionalProfileUrl,
         scholarId: 'lianjun-zhang',
       },

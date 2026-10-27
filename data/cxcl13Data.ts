@@ -1,12 +1,29 @@
 export type Cxcl13Block =
   | { type: 'paragraph'; text: string }
   | { type: 'list'; items: string[] }
+  | { type: 'heading'; id: string; text: string }
+  | {
+      type: 'figure-group'
+      id: string
+      panels: {
+        label: string
+        src: string
+        alt: string
+        width: number
+        height: number
+        crop: { x: number; y: number; width: number; height: number }
+      }[]
+      caption: string
+    }
   | {
       type: 'figure'
+      id?: string
       src: string
       alt: string
       width: number
       height: number
+      crop?: { x: number; y: number; width: number; height: number }
+      size?: 'medium' | 'supporting'
       caption: string
     }
 
@@ -40,23 +57,15 @@ const cxcl13Data: Cxcl13Summary = {
     blocks: [
       {
         type: 'paragraph',
-        text: 'I joined the ongoing doctoral research of Jiajia Wang, a senior PhD candidate in Lianjun Zhang’s group at the Suzhou Institute of Systems Medicine. My work explores how engineered receptors and immunomodulatory fusion proteins might change where T cells accumulate and how they function. I contribute to four experimental research lines, connecting repeated laboratory practice with questions about what an experiment can establish and how its readout should guide the next decision.',
+        text: 'In Jan 2026, I joined Dr. Lianjun Zhang’s lab at the Suzhou Institute of Systems Medicine (ISM), CAMS & PUMC. I spent the first few months studying immunology and reading research papers before beginning experimental work in late March with Jiajia Wang, a senior PhD candidate in the lab.',
       },
       {
         type: 'paragraph',
-        text: 'Lianjun Zhang guides the overall research direction. Within Jiajia Wang’s ongoing doctoral research, I carry out the experimental and analytical work described below, performing procedures independently and working together with her on parts of the studies. We discuss experimental difficulties and data interpretation; she has been present throughout my mouse procedures. I also proposed the Cesome application and designed its experiments.',
+        text: 'My work focuses on engineering CD8 T cells and cytokines for cancer immunotherapy. In the CXCL13Fc/CXCR5 project, we test whether combining CXCL13Fc with CXCR5 overexpression can improve CD8 T cell recruitment and function, with the longer-term aim of promoting tertiary lymphoid structures (TLS). The IL4–8Fc project aims to address tumor antigen escape by combining IL4’s support of CD8 T cell function with IL8-mediated neutrophil recruitment. The TB4 project explores whether a synthetic receptor can turn TGFβ, normally an immunosuppressive cue, into a trigger for IL4-associated signaling.',
       },
       {
         type: 'paragraph',
-        text: 'The experimental results presented below come from our shared research work. The contribution sections describe my own involvement, while the figures show the progress of the studies we worked on together. The Cesome figures come from my experiments and analysis.',
-      },
-      {
-        type: 'paragraph',
-        text: 'From January to March 2026, I studied immunology textbooks and read research literature. I have been carrying out experimental work since late March 2026.',
-      },
-      {
-        type: 'paragraph',
-        text: 'My experimental experience during this period also includes Ficoll separation of human peripheral blood mononuclear cells (PBMCs) and Transwell cell migration assays.',
+        text: 'Dr. Lianjun Zhang guides the research, while Jiajia Wang trains me in experimental techniques, supervises my work and helps me troubleshoot. Below, I describe my contributions and present results from our work together.',
       },
     ],
   },
@@ -72,11 +81,15 @@ const cxcl13Data: Cxcl13Summary = {
           blocks: [
             {
               type: 'paragraph',
-              text: 'CXCL13 is a chemokine that directs the migration and positioning of B cells and subsets of T cells through its receptor CXCR5, contributing to the spatial organization of immune cells ([Li et al., 2021](https://pmc.ncbi.nlm.nih.gov/articles/PMC8276302/)). Tertiary lymphoid structures (TLS) are lymphoid-like structures that form in tumors or chronically inflamed tissues. CXCL13-mediated B-cell recruitment contributes to TLS formation and expansion in some tumor models, and TLS have been associated with stronger antitumor immunity and treatment responses in some cancer studies. These findings provide a rationale for exploring the CXCL13–CXCR5 axis as a way to influence local immune-cell distribution and TLS formation ([Rodriguez et al., 2021](https://pmc.ncbi.nlm.nih.gov/articles/PMC8362934/)).',
+              text: 'CXCL13 is a chemokine that attracts B cells and subsets of T cells through its receptor, CXCR5. The CXCL13–CXCR5 axis helps determine where these lymphocytes accumulate and interact. In tumors, one setting for these interactions is tertiary lymphoid structures (TLS): organized aggregates of immune cells that resemble lymphoid tissue.',
             },
             {
               type: 'paragraph',
-              text: 'Against this background, the main project investigates whether combining CXCL13Fc (Fig. 1) with CXCR5 overexpression can influence CD8 T cell localization, effector function, stemness maintenance and immune memory. The Fc fusion is intended to extend ligand exposure, while receptor overexpression is intended to increase cellular responsiveness. My work focuses on cellular properties as part of the longer-term investigation of TLS formation.',
+              text: 'TLS are of interest in cancer immunotherapy because they have been associated with better tumor control and responses to treatment. CXCL13 provides a potential way to influence these structures. In nasopharyngeal carcinoma, CXCL13-producing T cells recruit B cells and colocalize with them in TLS ([Li et al., 2021](https://pmc.ncbi.nlm.nih.gov/articles/PMC8276302/)). In a mouse melanoma model, CXCL13-dependent B cell recruitment drove TLS expansion, and tumors with more and larger TLS responded better to checkpoint immunotherapy ([Rodriguez et al., 2021](https://pmc.ncbi.nlm.nih.gov/articles/PMC8362934/)).',
+            },
+            {
+              type: 'paragraph',
+              text: 'Our project asks whether engineering both sides of the CXCL13–CXCR5 axis can improve CD8 T cell recruitment and antitumor function. We pair CXCL13Fc (Fig. 1), designed to extend the circulating half-life of CXCL13, with CD8 T cells that overexpress CXCR5 to increase their responsiveness to the chemokine. We examine migration and tissue distribution, proliferation, cytotoxicity, stemness and memory-associated properties. The longer-term aim is to test whether this combination can promote TLS formation within tumors.',
             },
             {
               type: 'figure',
@@ -96,10 +109,10 @@ const cxcl13Data: Cxcl13Summary = {
             {
               type: 'list',
               items: [
-                'Recombinant protein expression, purification and quality control: Cultured and transfected 293F cells to express CXCL13Fc and the IgGFc control protein, then performed protein purification and endotoxin testing.',
-                'Engineered CD8 T cell preparation: Independently completed multiple rounds of the full workflow, including viral packaging, mouse tissue processing, naïve CD8 T cell isolation and activation, viral transduction, and culture expansion. Adjusted polybrene conditions according to the plans agreed through discussion.',
-                'Flow cytometry and data analysis: Independently performed surface and intracellular staining, flow cytometric acquisition, and FlowJo analysis to assess differences between groups and their possible explanations.',
-                'Mouse experiments: Repeatedly performed ear tagging, tumor inoculation, and adoptive T cell transfer via tail-vein injection. Dissected mice and collected lymph nodes, spleen and bone marrow, and used flow cytometry on harvested tissues to assess T cell distribution in vivo.',
+                '**Recombinant protein expression, purification and quality control**: Cultured and transfected 293F cells to express CXCL13Fc and the IgGFc control protein, then performed protein purification and endotoxin testing.',
+                '**Engineered CD8 T cell preparation**: Repeatedly performed the full workflow, including viral packaging, mouse tissue processing, naïve CD8 T cell isolation and activation, viral transduction, and culture expansion.',
+                '**Flow cytometry and data analysis**: Independently performed surface and intracellular staining, flow cytometric acquisition, and FlowJo analysis.',
+                '**Mouse experiments**: Performed multiple rounds of ear tagging, tumor inoculation, and adoptive T cell transfer via tail-vein injection. Dissected mice and collected lymph nodes, spleen and bone marrow, and used flow cytometry on harvested tissues to assess T cell distribution *in vivo*.',
               ],
             },
           ],
@@ -110,7 +123,7 @@ const cxcl13Data: Cxcl13Summary = {
           blocks: [
             {
               type: 'paragraph',
-              text: 'Our in vitro experiment showed chemotactic activity of CXCL13Fc toward CXCR5⁺ T cells, with higher fusion-protein concentrations corresponding to more migrated cells. Representative migration images are shown in Fig. 2, and Fig. 3 shows approximately 100,000 cells at 10 µg/mL CXCL13Fc, compared with approximately 35,000–36,000 in the control condition. This result provides a basis for further investigation of the axis in cell localization.',
+              text: 'Our *in vitro* migration assay showed chemotactic activity of CXCL13Fc toward CXCR5⁺ T cells, with higher fusion-protein concentrations corresponding to more migrated cells. The assay included commercial mCXCL13 at 100 ng/mL as a reference and tested CXCL13Fc up to 10 µg/mL. Representative migration images are shown in Fig. 2. At 10 µg/mL CXCL13Fc, approximately 100,000 cells migrated, compared with approximately 35,000–36,000 in the control condition (Fig. 3).',
             },
             {
               type: 'figure',
@@ -137,8 +150,11 @@ const cxcl13Data: Cxcl13Summary = {
           title: 'Reflection',
           blocks: [
             {
-              type: 'paragraph',
-              text: '*To be discussed.*',
+              type: 'list',
+              items: [
+                '**Engineering interacting components**: Engineering can target multiple components of a biological system together. Complementary changes can improve how those components interact and strengthen the desired response.',
+                '**Breaking research goals into testable questions**: A broad research goal can be broken down into smaller questions, each linked to a measurable readout. Testing these questions step by step, then considering the results together, provides a way to evaluate the larger idea.',
+              ],
             },
           ],
         },
@@ -146,8 +162,8 @@ const cxcl13Data: Cxcl13Summary = {
     },
     {
       id: 'il4-il8-fc',
-      title: 'IL4 and IL8 Fc fusion proteins',
-      navTitle: 'IL4 / IL8 Fc',
+      title: 'IL4–IL8 heterodimeric Fc fusion protein',
+      navTitle: 'IL4–8Fc',
       sections: [
         {
           id: 'il4-il8-fc-research-question',
@@ -155,24 +171,24 @@ const cxcl13Data: Cxcl13Summary = {
           blocks: [
             {
               type: 'paragraph',
-              text: 'T cell immunotherapy depends on specific recognition of tumor antigens, but antigen heterogeneity within tumors and antigen loss during treatment can allow some tumor cells to escape immune clearance. Neutrophils offer a complementary approach: in specific T cell immunotherapy models, they have been shown to help eliminate tumor antigen escape variants, providing a rationale for connecting antigen-dependent and antigen-independent antitumor responses ([Hirschhorn et al., 2023](https://pubmed.ncbi.nlm.nih.gov/37001503/)).',
+              text: 'Tumor cells can escape T cell recognition by losing or varying the antigens they display. Neutrophils can complement antigen-specific T cell killing: in melanoma models, they helped eliminate antigen-loss variants following T cell therapy ([Hirschhorn et al., 2023](https://pubmed.ncbi.nlm.nih.gov/37001503/)).',
             },
             {
               type: 'paragraph',
-              text: 'IL4 and IL8 provide ways to engage these two cell populations. Fc–IL4 can act directly on CD8 T cells to improve their metabolism and effector function in specific tumor models ([Feng et al., 2024](https://www.nature.com/articles/s41586-024-07962-4)). IL8 induces neutrophil migration ([Yoshimura et al., 1987](https://pubmed.ncbi.nlm.nih.gov/3480540/)); in an IL8-humanized mouse model of lung cancer, it also promotes a neutrophil subset capable of antigen cross-presentation, enhancing antitumor T cell responses ([Tang et al., 2025](https://pubmed.ncbi.nlm.nih.gov/39515330/)). These findings suggest that neutrophils may both contribute to tumor clearance and support T cell responses.',
+              text: 'IL4 and IL8 offer complementary ways to engage these cells. Fc–IL4 improves CD8 T cell metabolism and effector function, enhancing antitumor activity in mouse models ([Feng et al., 2024](https://www.nature.com/articles/s41586-024-07962-4)). IL8 recruits neutrophils ([Yoshimura et al., 1987](https://pubmed.ncbi.nlm.nih.gov/3480540/)). In an IL8-humanized lung cancer model, it also promoted a neutrophil population capable of antigen cross-presentation and supporting T cell responses ([Tang et al., 2025](https://pubmed.ncbi.nlm.nih.gov/39515330/)).',
             },
             {
               type: 'paragraph',
-              text: 'The project therefore combines IL4 and IL8 in an IL4-8Fc fusion protein (Fig. 4), aiming to enhance T cell effector function through the IL4 arm and recruit neutrophils through the IL8 arm. The research first examines whether each component retains its biological activity after fusion, then investigates whether the protein promotes functional cooperation between the two cell populations. Experiments compare responses to IgGFc, IL4Fc, IL8Fc and IL4-8Fc, using neutrophil–tumor–T cell co-cultures to examine how protein treatment affects subsequent T cell activation and effector function.',
+              text: 'IL4–8Fc combines the two cytokines in one heterodimeric fusion protein: one Fc chain carries IL4 and the other carries IL8 (Fig. 4). The aim is to enhance CD8 T cell function while recruiting neutrophils to help control tumor cells that escape antigen recognition. We test whether both arms retain their activity and whether the combined protein improves cooperation between the two cell populations. Comparisons with IgGFc, IL4Fc and IL8Fc assess the contribution of each cytokine, while neutrophil–tumor–T cell co-cultures measure the resulting T cell activation and effector responses.',
             },
             {
               type: 'figure',
-              src: '/static/images/research/systems-medicine/il4-il8-fc-molecular-design.png',
-              alt: 'Schematic showing IL4 and IL8 on the two arms of an Fc fusion protein',
+              src: '/static/images/research/systems-medicine/il4-il8-fc-functional-schematic.png',
+              alt: 'IL4–8Fc proposed mechanism linking IL4-mediated CD8 T cell enhancement with IL8-mediated neutrophil recruitment and antitumor activity',
               width: 1920,
               height: 1080,
               caption:
-                'Fig. 4. IL4–IL8–Fc fusion protein design. Schematic showing IL4 and IL8 linked through an Fc scaffold.',
+                'Fig. 4. IL4–8Fc design and proposed mechanism of action. Two Fc chains carry IL4 and IL8 on separate arms, aiming to enhance CD8 T cell function and recruit neutrophils for a coordinated antitumor response.',
             },
           ],
         },
@@ -183,11 +199,11 @@ const cxcl13Data: Cxcl13Summary = {
             {
               type: 'list',
               items: [
-                'Recombinant protein expression, purification and quality control: Cultured and transfected 293F cells to express Fc-related proteins, then performed protein purification and endotoxin testing.',
-                'IL4 activity assays: Stimulated cells after Th2 induction, performed intracellular IL4 staining and flow cytometry, and used Th2-associated responses as a readout of IL4 function.',
-                'Direct effects on T cells: Participated in CD8 T cell experiments comparing IgGFc, IL4Fc, IL8Fc and IL4-8Fc, using flow cytometry to assess survival, differentiation and effector-associated phenotypes.',
-                'Neutrophil-mediated tumor-cell killing: Isolated neutrophils, pretreated them with IL8Fc, and performed LDH assays to assess their killing of tumor cells.',
-                'Neutrophil–T cell co-cultures: Independently performed neutrophil isolation and fusion-protein treatment, tumor-cell plating and co-culture, addition of naïve OT-I cells, and subsequent flow staining and acquisition to examine how neutrophil–tumor interactions influence T cell activation and effector function.',
+                '**Recombinant protein expression, purification and quality control**: Cultured and transfected 293F cells to express Fc-related proteins, then performed protein purification and endotoxin testing.',
+                '**IL4 activity assays**: Stimulated cells after Th2 induction, performed intracellular IL4 staining and flow cytometry, and used Th2-associated responses as a readout of IL4 function.',
+                '**Direct effects on T cells**: Participated in CD8 T cell experiments comparing IgGFc, IL4Fc, IL8Fc and IL4–8Fc, using flow cytometry to assess survival, differentiation and effector-associated phenotypes.',
+                '**Neutrophil-mediated tumor-cell killing**: Isolated neutrophils, pretreated them with IL8Fc, and performed LDH assays to assess their killing of tumor cells.',
+                '**Neutrophil–T cell co-cultures**: Independently performed neutrophil isolation and fusion-protein treatment, tumor-cell plating and co-culture, addition of naïve OT-I cells, and subsequent flow staining and acquisition to examine how neutrophil–tumor interactions influence T cell activation and effector function.',
               ],
             },
           ],
@@ -197,30 +213,115 @@ const cxcl13Data: Cxcl13Summary = {
           title: 'Experimental progress',
           blocks: [
             {
+              type: 'heading',
+              id: 'il4-il8-fc-direct-response',
+              text: '1. Direct effects on CD8 T cells',
+            },
+            {
               type: 'paragraph',
-              text: 'In our co-culture experiments, the IL4-8Fc condition showed higher CD44 and CD25 fluorescence than the IgGFc condition (Fig. 5). This connected the protein-treatment strategy to measurable changes in OT-I activation-associated markers.',
+              text: 'Treatment with IL4Fc or IL4–8Fc increased the frequency of CD44⁺CD62L⁻ CD8 T cells compared with the IgGFc control, consistent with a shift toward an effector phenotype (Fig. 5).',
             },
             {
               type: 'figure',
+              id: 'il4-il8-fc-figure-5',
+              src: '/static/images/research/systems-medicine/il4-il8-fc-cd8-differentiation.png',
+              alt: 'Four CD44/CD62L flow plots above summary proportions of CD44-positive CD62L-positive and CD44-positive CD62L-negative CD8 T cells across IgGFc, IL4Fc, IL8Fc and IL4–8Fc',
+              width: 1920,
+              height: 1080,
+              crop: { x: 340, y: 50, width: 1250, height: 990 },
+              caption:
+                'Fig. 5. CD8 T cell differentiation after fusion-protein treatment. Representative CD44/CD62L flow plots and summary proportions of CD44⁺CD62L⁺ and CD44⁺CD62L⁻ cells compare IgGFc, IL4Fc, IL8Fc and IL4–8Fc.',
+            },
+            {
+              type: 'paragraph',
+              text: 'Both treatments also increased the frequencies of GZMB⁺ and IFNγ⁺TNFα⁺ CD8 T cells relative to IgGFc (Fig. 6A–B). In contrast, the frequency of IL2⁺ cells was lower in both groups (Fig. 6C).',
+            },
+            {
+              type: 'figure-group',
+              id: 'il4-il8-fc-figure-6',
+              panels: [
+                {
+                  label: 'A. GZMB',
+                  src: '/static/images/research/systems-medicine/il4-il8-fc-direct-cd8-gzmb.png',
+                  alt: 'Representative GZMB flow plots and GZMB-positive CD8 T cell proportions across IgGFc, IL4Fc, IL8Fc and IL4–8Fc',
+                  width: 1920,
+                  height: 1080,
+                  crop: { x: 80, y: 300, width: 1680, height: 480 },
+                },
+                {
+                  label: 'B. IFNγ / TNFα',
+                  src: '/static/images/research/systems-medicine/il4-il8-fc-direct-cd8-ifng-tnfa.png',
+                  alt: 'Representative IFNγ/TNFα flow plots and double-positive CD8 T cell proportions across IgGFc, IL4Fc, IL8Fc and IL4–8Fc',
+                  width: 1920,
+                  height: 1080,
+                  crop: { x: 80, y: 300, width: 1680, height: 480 },
+                },
+                {
+                  label: 'C. IL2',
+                  src: '/static/images/research/systems-medicine/il4-il8-fc-direct-cd8-il2.png',
+                  alt: 'Representative IL2 flow plots and IL2-positive CD8 T cell proportions across IgGFc, IL4Fc, IL8Fc and IL4–8Fc',
+                  width: 1920,
+                  height: 1080,
+                  crop: { x: 80, y: 300, width: 1680, height: 480 },
+                },
+              ],
+              caption:
+                'Fig. 6. Effector-associated readouts after direct CD8 T cell treatment. Each panel pairs representative flow plots with the corresponding summary across IgGFc, IL4Fc, IL8Fc and IL4–8Fc: (A) GZMB⁺ cells, (B) IFNγ⁺TNFα⁺ cells and (C) IL2⁺ cells.',
+            },
+            {
+              type: 'heading',
+              id: 'il4-il8-fc-neutrophil-migration',
+              text: '2. Neutrophil recruitment',
+            },
+            {
+              type: 'paragraph',
+              text: 'Human IL8 (hIL8, 10 ng/mL) and IL8Fc (100 µg/mL) both promoted neutrophil migration relative to the control. A CXCR2 inhibitor (10 µM) reduced migration in both groups, supporting a role for CXCR2 signaling in the chemotactic response (Fig. 7).',
+            },
+            {
+              type: 'figure',
+              id: 'il4-il8-fc-figure-7',
+              src: '/static/images/research/systems-medicine/il8-fc-neutrophil-migration.png',
+              alt: 'Six microscopy images and migrated neutrophil counts comparing control, human IL8 and IL8Fc, each with or without a CXCR2 inhibitor',
+              width: 1920,
+              height: 1080,
+              crop: { x: 12, y: 125, width: 1896, height: 825 },
+              caption:
+                'Fig. 7. Neutrophil migration toward hIL8 and IL8Fc. Representative microscopy images and migrated-cell counts compare control, human IL8 (hIL8, 10 ng/mL) and IL8Fc (100 µg/mL), each with or without a CXCR2 inhibitor (CXCR2i, 10 µM). The legend label “non” indicates no inhibitor. Cell counts are reported in units of 10⁴.',
+            },
+            {
+              type: 'heading',
+              id: 'il4-il8-fc-coculture-response',
+              text: '3. T cell responses in co-culture',
+            },
+            {
+              type: 'paragraph',
+              text: 'In co-cultures of protein-pretreated neutrophils, B16OVA tumor cells and naïve OT-I T cells, IL4–8Fc increased the expression of the activation markers CD44 and CD25 on T cells relative to IgGFc (Fig. 8).',
+            },
+            {
+              type: 'figure',
+              id: 'il4-il8-fc-figure-8',
               src: '/static/images/research/systems-medicine/il4-il8-fc-coculture.png',
               alt: 'Neutrophil–B16OVA–OT-I co-culture timeline and CD44 and CD25 flow cytometry results',
-              width: 2720,
-              height: 1287,
+              width: 1920,
+              height: 1080,
+              crop: { x: 145, y: 80, width: 1685, height: 795 },
               caption:
-                'Fig. 5. Co-culture design and activation-associated readouts. Neutrophils receive protein treatment on day 0, followed by B16OVA on day 1 and naïve OT-I with IL2 on day 2; flow cytometry is performed on day 4. The four protein conditions are shown alongside CD44 and CD25 fluorescence distributions and MFI summaries. These readouts track changes in T cell activation-associated markers.',
+                'Fig. 8. Co-culture design and T cell activation. Neutrophils were treated with IgGFc, IL4Fc, IL8Fc or IL4–8Fc on day 0. B16OVA cells were added on day 1, followed by naïve OT-I T cells and IL2 on day 2. CD44 and CD25 expression was assessed by flow cytometry on day 4. Histograms and MFI summaries are shown for each treatment.',
             },
             {
               type: 'paragraph',
-              text: 'The same research sequence also showed a higher proportion of GZMB⁺ cells among CD8 T cells in the IL4-8Fc condition. Representative flow plots display 57.1% with IL4-8Fc and 13.7% with IgGFc (Fig. 6).',
+              text: 'IL4–8Fc also increased the frequency of GZMB⁺ CD8 T cells, whereas IL4Fc and IL8Fc alone showed no significant difference from IgGFc. In the representative flow plots, GZMB⁺ cells accounted for 57.1% of CD8 T cells with IL4–8Fc and 13.7% with IgGFc (Fig. 9).',
             },
             {
               type: 'figure',
+              id: 'il4-il8-fc-figure-9',
               src: '/static/images/research/systems-medicine/il4-il8-fc-gzmb.png',
-              alt: 'Representative GZMB flow plots and a summary across IgGFc, IL4Fc, IL8Fc and IL4-8Fc conditions',
-              width: 2720,
-              height: 1287,
+              alt: 'Representative GZMB flow plots and a summary across IgGFc, IL4Fc, IL8Fc and IL4–8Fc conditions',
+              width: 1920,
+              height: 1080,
+              crop: { x: 80, y: 300, width: 1710, height: 480 },
               caption:
-                'Fig. 6. GZMB expression after co-culture. Representative flow plots and summary results compare the four protein conditions, showing gates, data points and significance annotations. Source: IL4–IL8Fc presentation, slide 15.',
+                'Fig. 9. GZMB expression after co-culture. Representative flow plots and quantification of GZMB⁺ CD8 T cells following co-culture under the four protein-treatment conditions.',
             },
           ],
         },
@@ -229,8 +330,12 @@ const cxcl13Data: Cxcl13Summary = {
           title: 'Reflection',
           blocks: [
             {
-              type: 'paragraph',
-              text: '*To be discussed.*',
+              type: 'list',
+              items: [
+                '**Evaluating function in biological context**: The activity of an engineered molecule depends on the cells and interactions around it. Testing across systems of increasing complexity helps establish how that activity changes in the environment where the molecule is intended to work.',
+                '**Designing complementary functions**: Combining components starts with defining the role of each and how those roles contribute to a shared objective. Evaluating the combination alongside its individual components helps determine whether their functions work together as intended.',
+                '**Interpreting functional profiles**: Biological responses can change in several directions at once. Interpreting multiple readouts in relation to the intended function helps identify useful changes and potential trade-offs that a single metric may miss.',
+              ],
             },
           ],
         },
@@ -247,11 +352,15 @@ const cxcl13Data: Cxcl13Summary = {
           blocks: [
             {
               type: 'paragraph',
-              text: 'Residual endotoxin (lipopolysaccharide, LPS) in plasmid preparations can affect transfection efficiency in sensitive cells and trigger nonspecific immune responses that complicate subsequent experiments. Endotoxin control is therefore part of experimental material quality management ([QIAGEN, 2024](https://www.qiagen.com/en-US/resources/download/KitHandbook/hb-1194-003-hb-endofree-plasmid-purif-1124-ww)). For this project, a treatment method also needed to support plasmid recovery and subsequent use in cell experiments.',
+              text: 'Plasmids were used across all projects, and residual endotoxin was a persistent problem in their preparation. Treatment with the endotoxin-removal kit used at the time did not provide adequate clearance. I proposed evaluating Cesome and Cecelle for endotoxin removal, with the aim of developing a plasmid-recovery protocol for subsequent transfection.',
             },
             {
               type: 'paragraph',
-              text: 'Endotoxin in CXCL13Fc plasmid preparations prompted a separate question about experimental materials. I proposed testing Cesome, a material from my parents’ research group that had previously been studied for ROS removal. Discussions with them led to the hypothesis that it might also act on LPS. I received prepared materials and designed the tests of this application.',
+              text: 'Cesome and Cecelle are two cerium-containing materials developed in my parents’ research group. They differ in how cerium ions are incorporated: Cesome forms hollow spheres with cerium ions on the inner wall, whereas Cecelle has a rod-like structure with cerium ions in its interior.',
+            },
+            {
+              type: 'paragraph',
+              text: 'Previous work in the group examined ROS scavenging and macrophage polarization following Cesome treatment in an LPS-stimulated model. Their observations included a shift from M1-like toward M2-like states and a substantial reduction in ROS that persisted throughout the observation period. Discussions of these findings led us to hypothesize that Cesome might also act directly on LPS, the initiating stimulus. I evaluated this hypothesis in LPS solutions before investigating plasmid treatment and recovery.',
             },
           ],
         },
@@ -262,11 +371,10 @@ const cxcl13Data: Cxcl13Summary = {
             {
               type: 'list',
               items: [
-                'Application proposal and experimental design: Proposed using Cesome to treat endotoxin in plasmid preparations and independently designed material comparisons, concentration series and controls.',
-                'Sample treatment and endotoxin testing: Independently prepared and treated samples and measured endotoxin, examining how materials, concentrations and background signals affected the readouts.',
-                'Treatment and plasmid-recovery protocol development: Independently designed and iterated a protocol integrating Cesome treatment, material separation and plasmid recovery, with downstream transfection as the intended application. Set up DNA-only, Cesome-only and mixed-sample controls, compared ethanol precipitation and centrifugation conditions, and revised washing and resuspension plans in response to experimental observations.',
-                'Material characterization and DNA quantification: Used dynamic light scattering (DLS) at Soochow University to examine Cesome particle size and scattering signals under different treatment conditions. Combined this with NanoDrop measurements of DNA in supernatants and resuspended samples to assess material behavior and plasmid recovery.',
-                'Data analysis: Organized assay readings, plotted data and fitted standard curves in Prism, and assessed the measurements alongside standards and background signals.',
+                '**Experimental design**: Proposed the plasmid-endotoxin application and independently designed the Cesome/Cecelle screen, the five-concentration Cesome series and their controls.',
+                '**Endotoxin assays**: Independently prepared and treated samples, tested LPS dilutions and endotoxin standards, and ran material-only, unloaded-polymer and reagent controls. Plotted the readings and fitted standard curves in Prism.',
+                '**Plasmid-recovery protocol development**: Designed and tested ethanol precipitation and centrifugation with DNA-only, Cesome-only and mixed samples. Collected supernatants and resuspended fractions, and revised the planned washing and resuspension steps after examining the results.',
+                '**DLS and NanoDrop measurements**: At Soochow University, used DLS to examine material size and scattering signals after treatment, and NanoDrop to measure DNA concentrations in supernatants and resuspended fractions.',
               ],
             },
           ],
@@ -276,8 +384,11 @@ const cxcl13Data: Cxcl13Summary = {
           title: 'Research decisions',
           blocks: [
             {
-              type: 'paragraph',
-              text: 'The assay imposed a practical constraint: small liquid volumes, sequential mixing and short incubations limited the number of samples I could handle reliably. I therefore generally preserved three separately prepared and treated samples per condition while reducing the number of concentration levels.',
+              type: 'list',
+              items: [
+                '**Overall study design**: I divided the overall objective into a sequence of testable questions and used targeted controls to distinguish treatment responses from background signals and processing effects. Results at each stage informed the next comparison or adjustment.',
+                '**Design of individual experiments**: I matched the number of conditions to assay capacity and handling requirements. When throughput was limited, I prioritized independently prepared and treated replicates while reducing the number of concentration levels, so that consistency within each condition could be assessed.',
+              ],
             },
           ],
         },
@@ -286,30 +397,92 @@ const cxcl13Data: Cxcl13Summary = {
           title: 'Experimental progress',
           blocks: [
             {
-              type: 'paragraph',
-              text: 'In the 29 July experiment, I tested five Ce concentrations, including a zero-material control. At 50 µg/mL Ce, the mean OD405 was 0.068, compared with 0.643 without Ce, with three samples per LPS-containing condition. The nonzero concentrations are shown in Fig. 7. The standard curve from the same experiment was non-monotonic (Fig. 8), so this round is presented as a comparison of raw OD405 readings.',
-            },
-            {
-              type: 'figure',
-              src: '/static/images/research/systems-medicine/cesome-od405.png',
-              alt: 'Original OD405 readings across four nonzero Ce concentrations in the 29 July Cesome experiment',
-              width: 2204,
-              height: 1244,
-              caption:
-                'Fig. 7. OD405 readings across the concentration series. The plot shows three separately prepared and treated samples at each of four nonzero Ce concentrations, with a line connecting group means. The zero-Ce control is reported in the main text. My experimental record and Prism analysis, 29 July 2026.',
-            },
-            {
-              type: 'figure',
-              src: '/static/images/research/systems-medicine/cesome-standard-curve.png',
-              alt: 'Non-monotonic endotoxin standard response from the same 29 July experiment',
-              width: 1260,
-              height: 752,
-              caption:
-                'Fig. 8. Endotoxin standard response. The standard curve from the same experiment shows a non-monotonic response, documenting the calibration issue encountered in this round. My experimental record and Prism analysis, 29 July 2026.',
+              type: 'heading',
+              id: 'cesome-initial-screen',
+              text: 'Material selection and concentration response',
             },
             {
               type: 'paragraph',
-              text: 'On 4 August, I extended the work to development of the treatment and recovery protocol, comparing centrifugation conditions and using NanoDrop and DLS at Soochow University to assess DNA recovery and Cesome material behavior. Observations from that round focused subsequent protocol revisions on retaining the pellet, washing and resuspension. The final experiment on 12 August ended at the endotoxin-detection stage after unsuccessful LPS removal.',
+              text: 'In the initial screen, the Cesome-treated LPS sample gave a reading close to background, while the LPS-only control remained high (Fig. 10). Cecelle showed high signals even without added LPS. These findings supported further testing of Cesome and prompted a separate investigation of Cecelle-associated background.',
+            },
+            {
+              type: 'figure',
+              id: 'cesome-figure-10',
+              src: '/static/images/research/systems-medicine/cesome-initial-screen.png',
+              alt: 'Initial screen comparing all six OD405 readings: no material, Cecelle and Cesome, each with and without LPS',
+              width: 1920,
+              height: 1230,
+              caption:
+                'Fig. 10. Initial material screen. Gray bars show no-LPS controls; blue bars show samples with added LPS. Each bar represents one recorded OD405 reading, with the value labeled above it.',
+              size: 'medium',
+            },
+            {
+              type: 'paragraph',
+              text: 'Across the concentration series, lower concentrations produced little change or variable responses. At 50 µg/mL Ce, all three independently treated samples approached background, providing a starting condition for protocol development (Fig. 11).',
+            },
+            {
+              type: 'figure',
+              id: 'cesome-figure-11',
+              src: '/static/images/research/systems-medicine/cesome-concentration-controls.png',
+              alt: 'OD405 readings at five Ce concentrations including zero, comparing three LPS-containing samples and one no-LPS control per concentration',
+              width: 2220,
+              height: 1320,
+              caption:
+                'Fig. 11. Cesome concentration series with controls. Filled circles show three separately prepared and treated samples containing 10 ng/mL LPS at each Ce concentration; horizontal bars mark their means. Open squares show one no-LPS control per concentration. At 0 Ce, these correspond to LPS-only and reagent-background controls, respectively. Concentrations are displayed as discrete groups.',
+            },
+            {
+              type: 'heading',
+              id: 'cesome-material-background',
+              text: 'Investigating material background',
+            },
+            {
+              type: 'paragraph',
+              text: 'Both Cecelle and the unloaded polymer produced elevated signals without added LPS (Fig. 12). The background was therefore present even without Ce loading, identifying the polymer and its preparation reagents as possible sources requiring further investigation.',
+            },
+            {
+              type: 'figure',
+              id: 'cesome-figure-12',
+              src: '/static/images/research/systems-medicine/cesome-material-background.png',
+              alt: 'OD405 readings for water, Cecelle and unloaded polymer, each with and without LPS',
+              width: 1920,
+              height: 1230,
+              caption:
+                'Fig. 12. Material-background controls. Filled circles show three LPS-containing samples per condition, with means marked by horizontal bars. Open squares show one no-LPS control per condition. The polymer control contains no loaded Ce.',
+              size: 'medium',
+            },
+            {
+              type: 'heading',
+              id: 'cesome-protocol-development',
+              text: 'Plasmid treatment and recovery',
+            },
+            {
+              type: 'paragraph',
+              text: 'The DNA-only control also gave no detectable DNA signal in the resuspended fraction (Fig. 13), showing that recovery required troubleshooting independently of Cesome. I suspected pellet loss during washing and planned changes to liquid removal and resuspension. DLS observations after prolonged ethanol exposure also suggested changes in material state, making ethanol compatibility another consideration for separation.',
+            },
+            {
+              type: 'figure',
+              id: 'cesome-figure-13',
+              src: '/static/images/research/systems-medicine/cesome-nanodrop-readings.png',
+              alt: 'Table of recorded NanoDrop concentrations for DNA-only, Cesome-only and mixed samples, distinguishing recorded zero readings from missing values',
+              width: 2280,
+              height: 825,
+              caption:
+                'Fig. 13. NanoDrop measurements during protocol development. Concentrations are shown for supernatants and resuspended fractions after ethanol precipitation and centrifugation. The two values for DNA + Cesome at 15,000 × g are separate recorded readings. Dashes indicate unrecorded values; zeros are explicit zero readings. The separately measured DNA stock was 93.8 µg/mL.',
+            },
+            {
+              type: 'paragraph',
+              text: 'The final plasmid trial did not reproduce the near-background signal seen in the initial LPS screen (Fig. 14). The experimental group remained similar to the plasmid-only control, and elevated Cesome-only and reagent backgrounds complicated interpretation. Work stopped at endotoxin testing, leaving treatment performance, background control and DNA recovery unresolved.',
+            },
+            {
+              type: 'figure',
+              id: 'cesome-figure-14',
+              src: '/static/images/research/systems-medicine/cesome-plasmid-trial.png',
+              alt: 'Recorded OD405 values for endotoxin-free water, plasmid only, Cesome only and the experimental group in the final plasmid trial',
+              width: 1920,
+              height: 1230,
+              caption:
+                'Fig. 14. Plasmid trial with material and water controls. Points show the recorded readings: two for plasmid only, three for Cesome only, three for the experimental group and one for endotoxin-free water. Horizontal bars mark group means where multiple readings are available. The experimental group is shown in blue.',
+              size: 'medium',
             },
           ],
         },
@@ -318,8 +491,11 @@ const cxcl13Data: Cxcl13Summary = {
           title: 'Reflection',
           blocks: [
             {
-              type: 'paragraph',
-              text: '*To be discussed.*',
+              type: 'list',
+              items: [
+                '**Evaluating practical value**: A method’s value depends on performance in its intended use, compatibility with subsequent steps and implementation costs. Interpreting that performance also requires understanding how the intervention and measurement system jointly shape the observed response.',
+                '**Finding new applications in existing observations**: Connecting observations from one research context with practical needs in another can generate new application hypotheses. Mechanistic understanding can develop alongside the exploration of those applications.',
+              ],
             },
           ],
         },
@@ -336,11 +512,15 @@ const cxcl13Data: Cxcl13Summary = {
           blocks: [
             {
               type: 'paragraph',
-              text: 'TGFβ is an immunosuppressive signal in the tumor microenvironment that can inhibit cytotoxic T cell effector function and limit antitumor activity ([Thomas and Massagué, 2005](https://pubmed.ncbi.nlm.nih.gov/16286245/)). This raises a receptor-engineering question: can the T cell response to this external signal be altered to trigger a different intracellular pathway?',
+              text: 'TGFβ in the tumor microenvironment can suppress CD8 T cell cytotoxic function ([Thomas and Massagué, 2005](https://pubmed.ncbi.nlm.nih.gov/16286245/)). IL4 signaling has been shown to support the function of exhausted CD8 T cells in experimental tumor models ([Feng et al., 2024](https://www.nature.com/articles/s41586-024-07962-4)). These findings provide a rationale for redirecting the T cell response to TGFβ toward IL4-associated signaling.',
             },
             {
               type: 'paragraph',
-              text: 'The TB4 strategy couples the extracellular recognition domain of TGFβRII to IL4Rα-associated intracellular signaling, aiming to turn TGFβ recognition into a signal that promotes T cell activation and effector function. The research plan examines receptor binding to TGFβ, IL4-associated downstream signaling such as STAT6 phosphorylation, and the antitumor activity of the engineered T cells relative to vector controls.',
+              text: 'TB4 is a chimeric receptor that combines the extracellular TGFβ-binding domain of TGFβRII, a CD8α transmembrane domain and the intracellular signaling domain of IL4Rα. Expressed on engineered CD8 T cells, it is designed to couple TGFβ recognition to IL4Rα-associated intracellular signaling, with the aim of supporting T cell effector function.',
+            },
+            {
+              type: 'paragraph',
+              text: 'The initial objective is to establish TGFβ binding and activation of IL4-associated signaling, using STAT6 phosphorylation as a downstream readout. The longer-term goal is to improve antitumor activity after adoptive transfer, compared with vector-transduced T cells in tumor-bearing mice.',
             },
           ],
         },
@@ -351,7 +531,7 @@ const cxcl13Data: Cxcl13Summary = {
             {
               type: 'list',
               items: [
-                'Engineered T cell preparation and culture: Performed viral packaging of the TGFβRII–IL4Rα receptor construct, naïve T cell isolation and activation, viral transduction, cell counting and culture expansion to prepare TB4 and vector-control cells. Followed culture conditions across multiple experimental rounds.',
+                '**Engineered T cell preparation and culture**: Performed viral packaging of the TGFβRII–IL4Rα receptor construct, naïve T cell isolation and activation, viral transduction, cell counting and culture expansion to prepare TB4 and vector-control cells. Followed culture conditions across multiple experimental rounds.',
               ],
             },
           ],
@@ -362,21 +542,7 @@ const cxcl13Data: Cxcl13Summary = {
           blocks: [
             {
               type: 'paragraph',
-              text: 'Two documented rounds included three TB4 transduction wells on 30 June and four on 6 July, with vector controls cultured in parallel. I counted 3.65 million TB4 cells in the first round, and the second culture was subsequently expanded to six wells. These experiments provided cell cultures for subsequent receptor-function studies.',
-            },
-            {
-              type: 'paragraph',
-              text: 'In subsequent testing of the TB4 response to TGFβ, no activation of downstream STAT6 phosphorylation was detected, according to Jiajia Wang.',
-            },
-          ],
-        },
-        {
-          id: 'tb4-reflection',
-          title: 'Reflection',
-          blocks: [
-            {
-              type: 'paragraph',
-              text: '*To be discussed.*',
+              text: 'According to Jiajia Wang, TGFβ stimulation did not induce detectable STAT6 phosphorylation in TB4-expressing cells.',
             },
           ],
         },
@@ -389,7 +555,7 @@ const cxcl13Data: Cxcl13Summary = {
     blocks: [
       {
         type: 'paragraph',
-        text: '*To be discussed together with application goals.*',
+        text: 'Through independent study and experimental work, I developed a foundation in immunology and studied how cytokine and receptor engineering can alter cell recruitment, responses to signals and interactions between cells. Connecting these molecular interventions to cellular behavior strengthened my interest in designing biological systems with new functions and developing methods to test and refine them.',
       },
     ],
   },
@@ -400,7 +566,6 @@ const cxcl13Data: Cxcl13Summary = {
       'Feng, B., Bai, Z., Zhou, X., et al. (2024). [The type 2 cytokine Fc–IL-4 revitalizes exhausted CD8⁺ T cells against cancer](https://www.nature.com/articles/s41586-024-07962-4). *Nature*, 634, 712–720. DOI: 10.1038/s41586-024-07962-4.',
       'Hirschhorn, D., Budhu, S., Kraehenbuehl, L., et al. (2023). [T cell immunotherapies engage neutrophils to eliminate tumor antigen escape variants](https://pubmed.ncbi.nlm.nih.gov/37001503/). *Cell*, 186(7), 1432–1447.e17. DOI: 10.1016/j.cell.2023.03.007.',
       'Li, J. P., Wu, C. Y., Chen, M. Y., et al. (2021). [PD-1⁺CXCR5⁻CD4⁺ Th-CXCL13 cell subset drives B cells into tertiary lymphoid structures of nasopharyngeal carcinoma](https://pmc.ncbi.nlm.nih.gov/articles/PMC8276302/). *Journal for ImmunoTherapy of Cancer*, 9(7), e002101. DOI: 10.1136/jitc-2020-002101.',
-      'QIAGEN. (2024). [EndoFree Plasmid Purification Handbook](https://www.qiagen.com/en-US/resources/download/KitHandbook/hb-1194-003-hb-endofree-plasmid-purif-1124-ww). November 2024 edition.',
       'Rodriguez, A. B., Peske, J. D., Woods, A. N., et al. (2021). [Immune mechanisms orchestrate tertiary lymphoid structures in tumors via cancer-associated fibroblasts](https://pmc.ncbi.nlm.nih.gov/articles/PMC8362934/). *Cell Reports*, 36(3), 109422. DOI: 10.1016/j.celrep.2021.109422.',
       'Tang, Z., Hu, J., Li, X. C., et al. (2025). [A subset of neutrophils activates anti-tumor immunity and inhibits non-small-cell lung cancer progression](https://pubmed.ncbi.nlm.nih.gov/39515330/). *Developmental Cell*, 60(3), 379–395.e8. DOI: 10.1016/j.devcel.2024.10.010.',
       'Thomas, D. A., & Massagué, J. (2005). [TGF-beta directly targets cytotoxic T cell functions during tumor evasion of immune surveillance](https://pubmed.ncbi.nlm.nih.gov/16286245/). *Cancer Cell*, 8(5), 369–380. DOI: 10.1016/j.ccr.2005.10.012.',

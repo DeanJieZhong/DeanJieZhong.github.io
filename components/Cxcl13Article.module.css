@@ -117,11 +117,29 @@
 }
 
 .subsection {
-  margin-top: 2rem;
+  margin-top: 2.5rem;
+}
+
+.article .subsection h3 {
+  margin-bottom: 1.125rem;
+  border-left: 3px solid var(--color-primary-500);
+  padding-left: 0.75rem;
+  font-size: clamp(1.25rem, 2.4vw, 1.375rem);
+  font-weight: 600;
+  line-height: 1.4;
 }
 
 .textBlock + .textBlock {
   margin-top: 1.25rem;
+}
+
+.resultHeading {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5;
+  scroll-margin-top: 2rem;
 }
 
 .contributions {
@@ -139,6 +157,40 @@
 
 .figure {
   margin-block: 2rem;
+}
+
+.mediumFigure {
+  width: min(100%, 40rem);
+  margin-inline: auto;
+}
+
+.supportingFigure {
+  width: min(100%, 28rem);
+  margin-inline: auto;
+}
+
+.figurePanel + .figurePanel {
+  margin-top: 1.5rem;
+}
+
+.panelLabel {
+  margin-bottom: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.panelCrop {
+  position: relative;
+  overflow: hidden;
+  background: white;
+}
+
+.croppedImage {
+  position: absolute;
+  display: block;
+  max-width: none;
+  height: auto;
 }
 
 .figureLink {

@@ -34,6 +34,8 @@ When editing blog content, keep frontmatter aligned with `contentlayer.config.ts
 
 Write “T cell” / “T cells” without a hyphen between the words, including adjectival uses. Title case may use “T Cell” / “T Cells”. Apply this preference to titles, body text, captions, and image alt text. URL slug separators retain their normal hyphens.
 
+Refer to Dr. Lianjun Zhang with “Dr.” in prose, labels, and profile cards; use “Dr. Lianjun Zhang’s lab” for his laboratory.
+
 ## PDF Embedding
 
 Use the shared `components/PdfPreview.tsx` component for all PDF embeds. The site owner prefers the browser's native PDF reader in an iframe, as verified in Safari. Do not reintroduce PDF.js, canvas rendering, or separate download / open-in-new-tab controls around embedded PDFs. Keep PDFs under `public/static/files/` so the same-origin framing header applies.

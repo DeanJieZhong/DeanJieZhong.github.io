@@ -22,30 +22,94 @@ const articleOutline: {
 ]
 
 function ArticleText({ text }: { text: string }) {
-  return text.split(/(\[[^\]]+\]\(https?:\/\/[^)]+\)|\*[^*]+\*)/g).map((part, index) => {
-    const link = part.match(/^\[([^\]]+)\]\((https?:\/\/[^)]+)\)$/)
-    if (link)
-      return (
-        <Link key={index} href={link[2]} className={articleStyles.citation}>
-          {link[1]}
-        </Link>
-      )
-    if (part.startsWith('*') && part.endsWith('*')) return <em key={index}>{part.slice(1, -1)}</em>
-    return <Fragment key={index}>{part}</Fragment>
-  })
+  return text
+    .split(/(\[[^\]]+\]\(https?:\/\/[^)]+\)|\*\*[^*]+\*\*|\*[^*]+\*)/g)
+    .map((part, index) => {
+      const link = part.match(/^\[([^\]]+)\]\((https?:\/\/[^)]+)\)$/)
+      if (link)
+        return (
+          <Link key={index} href={link[2]} className={articleStyles.citation}>
+            {link[1]}
+          </Link>
+        )
+      if (part.startsWith('**') && part.endsWith('**'))
+        return <strong key={index}>{part.slice(2, -2)}</strong>
+      if (part.startsWith('*') && part.endsWith('*'))
+        return <em key={index}>{part.slice(1, -1)}</em>
+      return <Fragment key={index}>{part}</Fragment>
+    })
 }
 
 function ArticleBlocks({ blocks }: { blocks: Cxcl13Block[] }) {
   return blocks.map((block, index) => {
+    if (block.type === 'heading') {
+      return (
+        <div key={block.id} className={styles.reading}>
+          <h4 id={block.id} className={articleStyles.resultHeading}>
+            {block.text}
+          </h4>
+        </div>
+      )
+    }
+
+    if (block.type === 'figure-group') {
+      return (
+        <figure key={block.id} id={block.id} className={articleStyles.figure}>
+          {block.panels.map((panel) => (
+            <div key={panel.src} className={articleStyles.figurePanel}>
+              <p className={articleStyles.panelLabel}>{panel.label}</p>
+              <Link
+                href={panel.src}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open full-size figure: ${panel.alt}`}
+                className={articleStyles.figureLink}
+              >
+                <div
+                  className={articleStyles.panelCrop}
+                  style={{ aspectRatio: `${panel.crop.width} / ${panel.crop.height}` }}
+                >
+                  <Image
+                    src={panel.src}
+                    alt={panel.alt}
+                    width={panel.width}
+                    height={panel.height}
+                    sizes="(min-width: 960px) 1024px, 115vw"
+                    unoptimized
+                    className={articleStyles.croppedImage}
+                    style={{
+                      width: `${(panel.width / panel.crop.width) * 100}%`,
+                      left: `${(-panel.crop.x / panel.crop.width) * 100}%`,
+                      top: `${(-panel.crop.y / panel.crop.height) * 100}%`,
+                    }}
+                  />
+                </div>
+              </Link>
+            </div>
+          ))}
+          <figcaption className={`${styles.reading} ${styles.caption}`}>
+            <ArticleText text={block.caption} />
+          </figcaption>
+        </figure>
+      )
+    }
+
     if (block.type === 'figure') {
       return (
-        <figure key={block.src} className={articleStyles.figure}>
+        <figure
+          key={block.src}
+          id={block.id}
+          className={`${articleStyles.figure} ${block.size === 'supporting' ? articleStyles.supportingFigure : block.size === 'medium' ? articleStyles.mediumFigure : ''}`}
+        >
           <Link
             href={block.src}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Open full-size figure: ${block.alt}`}
-            className={articleStyles.figureLink}
+            className={`${articleStyles.figureLink} ${block.crop ? articleStyles.panelCrop : ''}`}
+            style={
+              block.crop ? { aspectRatio: `${block.crop.width} / ${block.crop.height}` } : undefined
+            }
           >
             <Image
               src={block.src}
@@ -54,7 +118,16 @@ function ArticleBlocks({ blocks }: { blocks: Cxcl13Block[] }) {
               height={block.height}
               sizes="(min-width: 960px) 896px, 100vw"
               unoptimized
-              className={styles.figureImage}
+              className={block.crop ? articleStyles.croppedImage : styles.figureImage}
+              style={
+                block.crop
+                  ? {
+                      width: `${(block.width / block.crop.width) * 100}%`,
+                      left: `${(-block.crop.x / block.crop.width) * 100}%`,
+                      top: `${(-block.crop.y / block.crop.height) * 100}%`,
+                    }
+                  : undefined
+              }
             />
           </Link>
           <figcaption className={`${styles.reading} ${styles.caption}`}>

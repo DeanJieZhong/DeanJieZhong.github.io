@@ -53,8 +53,7 @@ const scholarsData: Record<ScholarId, ScholarProfile> = {
   },
   'lianjun-zhang': {
     id: 'lianjun-zhang',
-    name: 'Lianjun Zhang',
-    degree: 'PhD',
+    name: 'Dr. Lianjun Zhang',
     title: 'Research Professor',
     institutions: [
       'Suzhou Institute of Systems Medicine',
@@ -70,7 +69,7 @@ const scholarsData: Record<ScholarId, ScholarProfile> = {
     },
     photo: {
       src: '/static/images/people/lianjun-zhang-ps-cutout.webp',
-      alt: 'Portrait of Lianjun Zhang',
+      alt: 'Portrait of Dr. Lianjun Zhang',
       width: 1600,
       height: 2172,
     },
