@@ -28,6 +28,10 @@ test('normalizes full English titles, punctuation, scientific notation and mixed
   assert.equal(pageTitleSlug('IELTS Transcript'), 'ielts-transcript')
   assert.equal(pageTitleSlug('About Dean Jie Zhong 钟杰'), 'about-dean-jie-zhong')
   assert.equal(
+    pageTitleSlug('CD8⁺ T Cell & Cytokine Engineering'),
+    'cd8-t-cell-and-cytokine-engineering'
+  )
+  assert.equal(
     pageTitleSlug('CXCL13–Fc and CXCR5-Engineered CD8⁺ T Cells'),
     'cxcl13-fc-and-cxcr5-engineered-cd8-t-cells'
   )

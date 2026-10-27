@@ -4,6 +4,7 @@ export function pageTitleSlug(title: string) {
     .normalize('NFKD')
     .replace(/\p{M}/gu, '')
     .toLowerCase()
+    .replace(/&/g, ' and ')
     .replace(/['’]/g, '')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, '')
