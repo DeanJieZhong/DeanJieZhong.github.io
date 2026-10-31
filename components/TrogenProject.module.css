@@ -32,3 +32,19 @@
   font-size: clamp(1.5rem, 4.2vw, 3.5rem);
   line-height: 1.2;
 }
+
+.wikiLink {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-color: var(--color-gray-400);
+  text-underline-offset: 4px;
+}
+
+.wikiLink:is(:hover, :focus-visible, :active) {
+  color: inherit;
+  background-color: transparent;
+}
+
+.wikiLink:focus-visible {
+  outline-offset: 4px;
+}

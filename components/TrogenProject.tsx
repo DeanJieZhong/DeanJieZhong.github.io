@@ -17,8 +17,6 @@ import projectStyles from './TrogenProject.module.css'
 
 const contentWidth = 'mx-auto max-w-4xl px-4 sm:px-6'
 const igemExperience = researchExperiences.find((experience) => experience.id === 'igem-2025')!
-const linkStyle =
-  'underline underline-offset-4 decoration-gray-400 hover:decoration-current focus-visible:outline-offset-4'
 
 function ProjectText({ children }: { children: string }) {
   return children
@@ -262,7 +260,7 @@ export default function TrogenProject() {
             </ScholarPopoverGroup>
             <p>
               Team: {trogen.team} (
-              <Link href={trogen.wiki} className={linkStyle}>
+              <Link href={trogen.wiki} className={projectStyles.wikiLink}>
                 visit wiki
               </Link>
               )

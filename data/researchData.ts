@@ -1,4 +1,5 @@
 import scholarsData from './scholarsData'
+import trogenData from './trogenData'
 import fjData from './fjData'
 import { pageTitleSlug } from '../lib/pageTitleSlug'
 import type { ScholarId } from './scholarsData'
@@ -161,8 +162,8 @@ const researchData: ResearchEntry[] = [
     level: 'primary',
     name: 'TroGen',
     listTitle: 'TroGen: A commensal bacterial platform for intracellular drug delivery in TNBC',
-    listSummary: 'Exploring tumor-associated bacteria for intracellular drug delivery.',
-    summary: 'Exploring tumor-associated bacteria for intracellular drug delivery.',
+    listSummary: trogenData.summary,
+    summary: trogenData.summary,
     role: 'Research lead',
     participationPeriod: 'Feb–Nov 2025',
   },
