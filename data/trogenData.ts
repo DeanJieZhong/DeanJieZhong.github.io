@@ -35,7 +35,8 @@ interface TrogenData {
   role: string
   participationPeriod: string
   colleagues: ColleagueId[]
-  context: { name: string; url: string | null }[]
+  team: string
+  institution: string
   wiki: string
   overview: TrogenBlock[]
   researchLines: TrogenResearchLine[]
@@ -46,8 +47,7 @@ interface TrogenData {
 // The bilingual source and editorial history remain in Obsidian.
 const trogenData: TrogenData = {
   title: 'TroGen: A commensal bacterial platform for intracellular drug delivery in TNBC',
-  summary:
-    'A Top 10 undergraduate project at iGEM 2025, exploring tumor-associated bacteria for intracellular drug delivery in triple-negative breast cancer.',
+  summary: 'Engineering bacteria–host interactions to enable new therapeutic functions.',
   photo: {
     src: '/static/images/research/trogen/gemy_edited.png',
     width: 2827,
@@ -57,16 +57,8 @@ const trogenData: TrogenData = {
   role: 'Research lead',
   participationPeriod: 'Feb–Nov 2025',
   colleagues: ['shuning-dong', 'tianran-chen', 'rui-chen', 'shulei-he', 'zhicheng-yang'],
-  context: [
-    {
-      name: 'School of Science, Xi’an Jiaotong-Liverpool University',
-      url: null,
-    },
-    {
-      name: 'XJTLU-Science-China',
-      url: 'https://2025.igem.wiki/xjtlu-science-china/',
-    },
-  ],
+  team: 'XJTLU-Science-China',
+  institution: 'School of Science, Xi’an Jiaotong-Liverpool University',
   wiki: 'https://2025.igem.wiki/xjtlu-science-china/',
   overview: [
     {
@@ -492,7 +484,7 @@ const trogenData: TrogenData = {
         },
         {
           type: 'paragraph',
-          text: 'Kanghui Ruan, a doctoral candidate in Dr. Shang Cai’s lab at Westlake University during the project, advised on co-culture and bacterial labeling. Yongjie Sha, then a doctoral student at Soochow University, provided experimental guidance, and Guang Cai supported cell and spheroid culture.',
+          text: 'Kanghui Ruan, a doctoral candidate in Dr. Shang Cai’s lab at Westlake University during the project, advised on co-culture and bacterial labeling. Yongjie Sha provided experimental guidance, and Guang Cai supported cell and spheroid culture. Both are doctoral students at Soochow University.',
         },
         {
           type: 'paragraph',

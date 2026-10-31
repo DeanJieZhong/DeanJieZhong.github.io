@@ -261,27 +261,15 @@ export default function TrogenProject() {
               </p>
             </ScholarPopoverGroup>
             <p>
-              {trogen.context.map((item, index) => (
-                <Fragment key={item.name}>
-                  {index > 0 && ' · '}
-                  {item.url ? (
-                    <Link href={item.url} className={linkStyle}>
-                      {item.name}
-                    </Link>
-                  ) : (
-                    item.name
-                  )}
-                </Fragment>
-              ))}
+              Team: {trogen.team} (
+              <Link href={trogen.wiki} className={linkStyle}>
+                visit wiki
+              </Link>
+              )
             </p>
+            <p>{trogen.institution}</p>
             <p>{trogen.participationPeriod}</p>
           </div>
-
-          <p className="mt-7 text-base leading-7 text-white">
-            <Link href={trogen.wiki} className={linkStyle}>
-              Visit project wiki
-            </Link>
-          </p>
         </section>
       </div>
 
