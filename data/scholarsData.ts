@@ -5,9 +5,11 @@ export type ScholarId =
   | 'kevin-chan'
   | 'john-moraros'
 
-export interface ScholarProfile {
-  id: ScholarId
+export interface PersonProfile {
+  id: string
   name: string
+  chineseName?: string
+  nickname?: string
   degree?: string
   title: string
   lab?: string
@@ -15,10 +17,12 @@ export interface ScholarProfile {
   emails: string[]
   googleScholarUrl?: string
   institutionalProfileUrl?: string
+  links?: { label: string; href: string }[]
   card: {
     background: string
     foreground: string
     institution: string
+    layout?: 'photo'
   }
   photo?: {
     src: string
@@ -26,6 +30,10 @@ export interface ScholarProfile {
     width: number
     height: number
   }
+}
+
+export interface ScholarProfile extends PersonProfile {
+  id: ScholarId
 }
 
 const scholarsData: Record<ScholarId, ScholarProfile> = {

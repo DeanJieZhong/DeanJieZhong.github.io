@@ -12,7 +12,7 @@ import { preload } from 'react-dom'
 import { Popover } from '@base-ui/react/popover'
 import Image from 'next/image'
 import Link from '@/components/Link'
-import type { ScholarProfile } from '@/data/scholarsData'
+import type { PersonProfile } from '@/data/scholarsData'
 import styles from './ScholarPopover.module.css'
 
 // Warm and decode portraits without delaying the profile's text or links.
@@ -40,7 +40,7 @@ function preparePortrait(src: string) {
   return pending
 }
 
-function ScholarPortrait({ photo }: { photo: NonNullable<ScholarProfile['photo']> }) {
+function ScholarPortrait({ photo }: { photo: NonNullable<PersonProfile['photo']> }) {
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>(() =>
     decodedPortraits.has(photo.src) ? 'ready' : 'loading'
   )
@@ -78,7 +78,7 @@ function ScholarCard({
   scholar: profile,
   popupRef,
 }: {
-  scholar: ScholarProfile
+  scholar: PersonProfile
   popupRef: RefObject<HTMLDivElement | null>
 }) {
   return (
@@ -87,6 +87,7 @@ function ScholarCard({
       className={styles.card}
       data-scholar={profile.id}
       data-has-photo={Boolean(profile.photo)}
+      data-layout={profile.card.layout}
       style={
         {
           '--card-background': profile.card.background,
@@ -102,14 +103,26 @@ function ScholarCard({
               , <span className={styles.degree}>{profile.degree}</span>
             </>
           )}
+          {(profile.chineseName || profile.nickname) && (
+            <span className={styles.secondaryName}>
+              {profile.chineseName && <span lang="zh-CN">{profile.chineseName}</span>}
+              {profile.chineseName && profile.nickname && ' '}
+              {profile.nickname && <span className={styles.nickname}>({profile.nickname})</span>}
+            </span>
+          )}
         </Popover.Title>
         <Popover.Description className={styles.details}>
           <span className={styles.role}>{profile.title}</span>
           {profile.lab && <span className={styles.lab}>{profile.lab}</span>}
           <span className={styles.institution}>{profile.card.institution}</span>
         </Popover.Description>
-        {(profile.googleScholarUrl || profile.institutionalProfileUrl) && (
+        {(profile.links?.length || profile.googleScholarUrl || profile.institutionalProfileUrl) && (
           <div className={styles.links}>
+            {profile.links?.map((link) => (
+              <Link key={link.href} href={link.href}>
+                {link.label}
+              </Link>
+            ))}
             {profile.googleScholarUrl && (
               <Link href={profile.googleScholarUrl}>Google Scholar</Link>
             )}
@@ -158,7 +171,7 @@ export function ScholarPopoverGroup({ children }: { children: ReactNode }) {
   }
 
   return (
-    <Popover.Root<ScholarProfile> modal={false} onOpenChange={handleOpenChange}>
+    <Popover.Root<PersonProfile> modal={false} onOpenChange={handleOpenChange}>
       {({ payload: scholar }) => (
         <>
           {children}
@@ -181,7 +194,7 @@ export function ScholarPopoverGroup({ children }: { children: ReactNode }) {
   )
 }
 
-export default function ScholarPopover({ scholar }: { scholar: ScholarProfile }) {
+export default function ScholarPopover({ scholar }: { scholar: PersonProfile }) {
   if (scholar.photo) preload(scholar.photo.src, { as: 'image' })
   useEffect(() => {
     if (scholar.photo) void preparePortrait(scholar.photo.src)

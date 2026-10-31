@@ -3,9 +3,45 @@ import Link from '@/components/Link'
 import ScholarPopover from '@/components/ScholarPopover'
 import scholarsData from '@/data/scholarsData'
 import type { ScholarId } from '@/data/scholarsData'
-import type { ResearchExperienceDetails } from '@/data/researchData'
+import type { ResearchExperienceDetails, ResearchSupervisor } from '@/data/researchData'
 
 const linkStyle = 'underline decoration-gray-400 underline-offset-4 focus-visible:outline-offset-4'
+
+export function ResearchSupervisors({
+  supervisors,
+  id,
+}: {
+  supervisors: readonly ResearchSupervisor[]
+  id?: string
+}) {
+  return (
+    <p id={id}>
+      {supervisors.length > 1 ? 'Supervisors: ' : 'Supervisor: '}
+      {supervisors.map((supervisor, index) => {
+        const label = [supervisor.name, supervisor.degree].filter(Boolean).join(', ')
+        return (
+          <Fragment key={supervisor.scholarId || supervisor.name}>
+            {index > 0 &&
+              (index === supervisors.length - 1
+                ? supervisors.length > 2
+                  ? ', and '
+                  : ' and '
+                : ', ')}
+            {supervisor.scholarId ? (
+              <ScholarPopover scholar={scholarsData[supervisor.scholarId]} />
+            ) : supervisor.url ? (
+              <Link href={supervisor.url} className={linkStyle}>
+                {label}
+              </Link>
+            ) : (
+              label
+            )}
+          </Fragment>
+        )
+      })}
+    </p>
+  )
+}
 
 export default function ResearchExperienceMetadata({
   experience,
@@ -23,31 +59,7 @@ export default function ResearchExperienceMetadata({
   return (
     <div className={className}>
       {role && <p>Role: {role}</p>}
-      <p>
-        {experience.supervisors.length > 1 ? 'Supervisors: ' : 'Supervisor: '}
-        {experience.supervisors.map((supervisor, index) => {
-          const label = [supervisor.name, supervisor.degree].filter(Boolean).join(', ')
-          return (
-            <Fragment key={supervisor.scholarId || supervisor.name}>
-              {index > 0 &&
-                (index === experience.supervisors.length - 1
-                  ? experience.supervisors.length > 2
-                    ? ', and '
-                    : ' and '
-                  : ', ')}
-              {supervisor.scholarId ? (
-                <ScholarPopover scholar={scholarsData[supervisor.scholarId]} />
-              ) : supervisor.url ? (
-                <Link href={supervisor.url} className={linkStyle}>
-                  {label}
-                </Link>
-              ) : (
-                label
-              )}
-            </Fragment>
-          )
-        })}
-      </p>
+      <ResearchSupervisors supervisors={experience.supervisors} />
       {researchMentor && (
         <p>
           Research mentor: <ScholarPopover scholar={scholarsData[researchMentor]} />

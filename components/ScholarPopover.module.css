@@ -111,6 +111,20 @@
   white-space: nowrap;
 }
 
+.secondaryName {
+  display: block;
+  margin-top: 4px;
+  font-size: max(15px, 0.55em);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: normal;
+}
+
+.nickname {
+  display: inline-block;
+  white-space: nowrap;
+}
+
 .details {
   min-height: 67px;
   margin: 22px 0 0;
@@ -356,5 +370,188 @@
   .card[data-side][data-starting-style],
   .card[data-side][data-ending-style] {
     transform: none;
+  }
+}
+
+/* Photo-backed colleague cards follow the compositions in draft.key, slides 6–10. */
+.card[data-layout='photo'] {
+  container-type: inline-size;
+  overflow: hidden auto;
+}
+
+.card[data-layout='photo'] .copy {
+  width: 100%;
+  min-height: 0;
+  aspect-ratio: var(--photo-card-ratio);
+  padding: 0;
+  text-shadow: 0 1px 5px rgb(0 0 0 / 30%);
+}
+
+.card[data-layout='photo'] .name {
+  position: absolute;
+  top: var(--name-top);
+  left: var(--name-left);
+  width: var(--name-width);
+  font-size: clamp(26px, 8cqw, 54px);
+  line-height: 1.08;
+  text-align: var(--name-align, left);
+  text-wrap: initial;
+}
+
+.card[data-layout='photo'] .details {
+  position: absolute;
+  top: var(--details-top);
+  left: var(--details-left);
+  width: var(--details-width, 65%);
+  min-height: 0;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  text-align: var(--details-align, left);
+}
+
+.card[data-layout='photo'] .institution {
+  margin-top: 5px;
+}
+
+.card[data-layout='photo'] .links {
+  position: absolute;
+  top: var(--links-top);
+  left: var(--links-left);
+  right: var(--links-right, auto);
+  width: auto;
+  gap: 0 18px;
+  margin: 0;
+  font-size: 15px;
+  justify-content: var(--links-align, flex-start);
+}
+
+.card[data-layout='photo'] .portrait {
+  inset: 0;
+  width: 100%;
+}
+
+.card[data-layout='photo'] .photo {
+  top: var(--photo-top);
+  left: var(--photo-left);
+  right: auto;
+  bottom: auto;
+  width: var(--photo-width);
+  height: var(--photo-height);
+  object-fit: fill;
+}
+
+.card[data-scholar='shuning-dong'] {
+  --photo-card-ratio: 1.94135;
+  --photo-left: -0%;
+  --photo-top: -0%;
+  --photo-width: 109.318%;
+  --photo-height: 140.75%;
+  --name-top: 8.73%;
+  --name-left: 4.43%;
+  --name-width: 80%;
+  --details-top: 43%;
+  --details-left: 4.96%;
+  --links-top: 83%;
+  --links-left: 6.28%;
+}
+
+.card[data-scholar='tianran-chen'] {
+  --photo-card-ratio: 1.809;
+  --photo-left: -19.384%;
+  --photo-top: -28.885%;
+  --photo-width: 119.384%;
+  --photo-height: 161.909%;
+  --name-top: 6.31%;
+  --name-left: 32%;
+  --name-width: 63%;
+  --name-align: right;
+  --details-top: 40%;
+  --details-left: 38%;
+  --details-width: 57%;
+  --details-align: right;
+  --links-top: 80%;
+  --links-left: 50%;
+  --links-right: 5%;
+  --links-align: flex-end;
+}
+
+.card[data-scholar='rui-chen'] {
+  --photo-card-ratio: 2.26181;
+  --photo-left: -0.211%;
+  --photo-top: -0%;
+  --photo-width: 184.829%;
+  --photo-height: 277.254%;
+  --name-top: 8.33%;
+  --name-left: 4.27%;
+  --name-width: 60%;
+  --details-top: 43%;
+  --details-left: 4.96%;
+  --links-top: 71%;
+  --links-left: 5.15%;
+}
+
+.card[data-scholar='shulei-he'] {
+  --photo-card-ratio: 1.97683;
+  --photo-left: -0%;
+  --photo-top: -0%;
+  --photo-width: 161.254%;
+  --photo-height: 211.394%;
+  --name-top: 10.85%;
+  --name-left: 7.32%;
+  --name-width: 70%;
+  --details-top: 43%;
+  --details-left: 8.36%;
+  --links-top: 66%;
+  --links-left: 8.56%;
+}
+
+.card[data-scholar='zhicheng-yang'] {
+  --photo-card-ratio: 2.30716;
+  --photo-left: -5.055%;
+  --photo-top: -146.831%;
+  --photo-width: 105.055%;
+  --photo-height: 365.698%;
+  --name-top: 13.36%;
+  --name-left: 58.59%;
+  --name-width: 36.47%;
+  --name-align: right;
+  --details-top: 54.36%;
+  --details-left: 4.96%;
+  --links-top: 80%;
+  --links-left: 5.02%;
+}
+
+@media (max-width: 671px) {
+  .card[data-layout='photo'] .copy {
+    aspect-ratio: auto;
+    min-height: calc(100cqw / var(--photo-card-ratio) + 144px);
+  }
+
+  .card[data-layout='photo'] .portrait {
+    height: calc(100cqw / var(--photo-card-ratio));
+  }
+
+  .card[data-layout='photo'] .name {
+    top: 18px;
+    font-size: clamp(23px, 7.8cqw, 38px);
+  }
+
+  .card[data-layout='photo'] .details {
+    top: calc(100cqw / var(--photo-card-ratio) + 14px);
+    left: 18px;
+    width: calc(100% - 36px);
+    font-size: 13px;
+    text-align: left;
+  }
+
+  .card[data-layout='photo'] .links {
+    top: auto;
+    right: 18px;
+    bottom: 8px;
+    left: 18px;
+    gap: 0 18px;
+    font-size: 13px;
+    justify-content: flex-start;
   }
 }
