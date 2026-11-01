@@ -1,5 +1,5 @@
 .hero {
-  --portrait-shift: 11%;
+  --portrait-shift: 9%;
   position: relative;
   isolation: isolate;
   width: 100%;
@@ -96,8 +96,8 @@
 }
 
 .chineseName {
-  top: 8%;
-  left: 4.5%;
+  top: 10%;
+  left: 6%;
   font-size: 0.96em;
   letter-spacing: -0.055em;
 }
@@ -215,7 +215,7 @@
 
 @media (max-aspect-ratio: 1/1) {
   .hero {
-    --portrait-shift: 9%;
+    --portrait-shift: 7%;
   }
 
   .title {
@@ -223,8 +223,8 @@
   }
 
   .chineseName {
-    top: 5%;
-    left: 6%;
+    top: 7%;
+    left: 8%;
     font-size: 0.8em;
   }
 
