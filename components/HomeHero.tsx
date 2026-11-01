@@ -46,9 +46,9 @@ export default function HomeHero() {
   }, [intro])
 
   useLayoutEffect(() => {
-    setReady(intro && entrance === 'complete')
+    setReady(intro)
     setDocked(false)
-  }, [intro, entrance])
+  }, [intro])
 
   useLayoutEffect(() => {
     if (!intro || !ready) return
@@ -240,7 +240,7 @@ export default function HomeHero() {
                 </g>
               </svg>
             </span>
-            <HomeDeanNavigation enabled={entrance === 'complete'} />
+            <HomeDeanNavigation entrance={entrance} />
             <span className={styles.fullName} aria-hidden="true">
               Jie Zhong
             </span>
@@ -258,7 +258,8 @@ export default function HomeHero() {
           <Link
             ref={floatingRef}
             href="/"
-            className={styles.floatingLogo}
+            className={`${styles.floatingLogo} ${styles.entranceOverlay}`}
+            data-entrance={entrance}
             data-docked={docked}
             aria-label="Dean Jie Zhong — Home"
             aria-hidden={!docked}

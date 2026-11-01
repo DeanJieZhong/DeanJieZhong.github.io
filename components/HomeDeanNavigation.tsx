@@ -15,13 +15,17 @@ type Glyph = {
   marker: { x: number; y: number; size: number }
 }
 
-export default function HomeDeanNavigation({ enabled = true }: { enabled?: boolean }) {
+export default function HomeDeanNavigation({
+  entrance = 'complete',
+}: {
+  entrance?: 'pending' | 'revealing' | 'complete'
+}) {
   const { intro, headerRef, logoRef, setControlsReady } = useHomeNavigation()
   const sourceRef = useRef<SVGSVGElement>(null)
   const overlayRef = useRef<HTMLDivElement>(null)
   const [ready, setReady] = useState(false)
 
-  useLayoutEffect(() => setReady(intro && enabled), [intro, enabled])
+  useLayoutEffect(() => setReady(intro), [intro])
 
   useLayoutEffect(() => {
     if (!intro || !ready) return
@@ -308,7 +312,12 @@ export default function HomeDeanNavigation({ enabled = true }: { enabled?: boole
       {intro &&
         ready &&
         createPortal(
-          <div ref={overlayRef} className={styles.deanOverlay} aria-hidden="true">
+          <div
+            ref={overlayRef}
+            className={`${styles.deanOverlay} ${styles.entranceOverlay}`}
+            data-entrance={entrance}
+            aria-hidden="true"
+          >
             {deanLetters.map((letter) => (
               <div
                 key={letter.character}
