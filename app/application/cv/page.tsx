@@ -10,7 +10,10 @@ export const metadata = genPageMetadata({
 export default function CVPage() {
   return (
     <ApplicationMaterialLayout title="CV">
-      <PdfPreview src="/static/files/cv.pdf" title="CV PDF preview" />
+      <p className="text-sm text-gray-500">
+        Version: <time dateTime="2026-11-01">1 November 2026</time>
+      </p>
+      <PdfPreview src="/static/files/cv.pdf?v=2026-11-01" title="CV PDF preview" />
     </ApplicationMaterialLayout>
   )
 }
