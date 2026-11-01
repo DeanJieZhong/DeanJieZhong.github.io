@@ -4,7 +4,7 @@ import { useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { deanLetters, deanWidth } from '@/data/homeDeanOutlines'
 import { useHomeNavigation } from './HomeNavigationContext'
-import { clamp, ease, easeTravel, mix } from './homeMotion'
+import { clamp, ease, easeTravel, homeMotionEnd, mix } from './homeMotion'
 import styles from './HomeHero.module.css'
 
 type Glyph = {
@@ -47,9 +47,8 @@ export default function HomeDeanNavigation({
     let holdDistance = 0
     let sweepDistance = 0
     let shrinkDistance = 0
-    let progress = 0
+    let mobileDistance = 120
     let frame = 0
-    let lastTime = 0
     let wasReady = false
 
     const updateReady = (next: boolean) => {
@@ -79,23 +78,15 @@ export default function HomeDeanNavigation({
       }
     }
 
-    const draw = (time: number, settle = false) => {
+    const draw = () => {
       frame = 0
       const scroll = Math.max(0, window.scrollY)
       const start = pinAt + holdDistance
       const distance = sweepDistance + shrinkDistance
       const target = desktop.matches
         ? clamp((scroll - start) / distance)
-        : clamp((scroll - pinAt) / 120)
-      const targetProgress = reducedMotion.matches ? Number(target === 1) : target
-      if (settle || reducedMotion.matches || scroll < pinAt) {
-        progress = targetProgress
-      } else {
-        const elapsed = Math.min(64, Math.max(0, time - lastTime))
-        progress = mix(progress, targetProgress, 1 - Math.exp(-elapsed / 110))
-        if (Math.abs(progress - targetProgress) < 0.0001) progress = targetProgress
-      }
-      lastTime = time
+        : clamp((scroll - pinAt) / mobileDistance)
+      const progress = reducedMotion.matches ? Number(target === 1) : target
 
       if (!desktop.matches) {
         source.style.opacity = '1'
@@ -162,10 +153,6 @@ export default function HomeDeanNavigation({
         drawSearch(easeTravel(shrinkRaw))
         updateReady(progress === 1)
       }
-
-      if (progress !== targetProgress) {
-        frame = requestAnimationFrame(draw)
-      }
     }
 
     const measure = () => {
@@ -174,6 +161,14 @@ export default function HomeDeanNavigation({
       const headerBounds = header.getBoundingClientRect()
       headerCenterY = headerBounds.height / 2
       logoSize = logo.getBoundingClientRect().height
+      const heroBounds = source.closest('section')!.getBoundingClientRect()
+      const finishAt = homeMotionEnd(
+        heroBounds.top + window.scrollY,
+        heroBounds.height,
+        headerBounds.height,
+        document.documentElement.scrollHeight - window.innerHeight
+      )
+      overlay.dataset.deanFinish = finishAt.toFixed(1)
       if (desktop.matches) {
         glyphs = [...source.querySelectorAll<SVGGElement>('[data-dean-source]')].map(
           (group, index) => {
@@ -215,10 +210,7 @@ export default function HomeDeanNavigation({
         holdDistance = Math.max(60, Math.min(100, window.innerHeight * 0.08))
         sweepDistance = Math.max(260, Math.min(420, window.innerHeight * 0.35))
         shrinkDistance = Math.max(100, Math.min(180, window.innerHeight * 0.15))
-        const available = Math.max(
-          1,
-          document.documentElement.scrollHeight - window.innerHeight - pinAt - 24
-        )
+        const available = Math.max(1, finishAt - pinAt)
         const scale = Math.min(1, available / (holdDistance + sweepDistance + shrinkDistance))
         holdDistance *= scale
         sweepDistance *= scale
@@ -229,19 +221,19 @@ export default function HomeDeanNavigation({
         overlay.dataset.deanShrink = shrinkDistance.toFixed(1)
       } else {
         // Small screens keep the existing mobile menu instead of squeezing in four desktop items.
-        pinAt = window.innerHeight * 0.6
+        pinAt = Math.max(0, Math.min(window.innerHeight * 0.6, finishAt - 80))
+        mobileDistance = Math.max(1, finishAt - pinAt)
         items.forEach((item) => {
           item.style.removeProperty('--intro-label-clip')
           item.style.removeProperty('--intro-label-y')
           item.style.removeProperty('--intro-marker')
         })
       }
-      draw(performance.now(), true)
+      draw()
     }
 
     const schedule = () => {
       if (!frame) {
-        lastTime = performance.now()
         frame = requestAnimationFrame(draw)
       }
     }
@@ -255,7 +247,7 @@ export default function HomeDeanNavigation({
     // Refresh the blade before paint so stopping a scroll cannot leave a stale cut edge.
     const bladeObserver = new MutationObserver(() => {
       cancelAnimationFrame(frame)
-      draw(performance.now())
+      draw()
     })
     bladeObserver.observe(header, { attributes: true, attributeFilter: ['style'] })
     window.addEventListener('scroll', schedule, { passive: true })

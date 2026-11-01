@@ -7,7 +7,7 @@ import { createPortal } from 'react-dom'
 import { jieDots, jieOutline, zhongOutline } from '@/data/homeNameOutlines'
 import { useHomeNavigation } from './HomeNavigationContext'
 import styles from './HomeHero.module.css'
-import { clamp, ease, easeTravel, mix, sampleDot, squarePoint } from './homeMotion'
+import { clamp, ease, easeTravel, homeMotionEnd, mix, sampleDot, squarePoint } from './homeMotion'
 import HomeDeanNavigation from './HomeDeanNavigation'
 
 export default function HomeHero() {
@@ -143,17 +143,21 @@ export default function HomeHero() {
       pinAt = Math.max(1, centerY - target.top - target.height / 2)
       holdDistance = Math.max(80, Math.min(140, window.innerHeight * 0.12))
       slideDistance = Math.max(300, Math.min(480, window.innerHeight * 0.44))
-      // Fit both stages into short homepages, leaving a little scroll after docking.
-      const availableScroll = Math.max(
-        1,
-        document.documentElement.scrollHeight - window.innerHeight - pinAt - 16
+      const heroBounds = hero.getBoundingClientRect()
+      const finishAt = homeMotionEnd(
+        heroBounds.top + window.scrollY,
+        heroBounds.height,
+        headerBounds.height,
+        document.documentElement.scrollHeight - window.innerHeight
       )
+      const availableScroll = Math.max(1, finishAt - pinAt)
       const distanceScale = Math.min(1, availableScroll / (holdDistance + slideDistance))
       holdDistance *= distanceScale
       slideDistance *= distanceScale
       dots = [...source.querySelectorAll('path')].map((path) => sampleDot(path, sourceBounds))
       // Small titles need smaller interim squares so the original gaps stay open.
       squareSize = Math.min(target.height, ...dots.map((dot) => dot.width))
+      floating.dataset.finishAt = finishAt.toFixed(1)
       floating.dataset.pinAt = pinAt.toFixed(1)
       floating.dataset.holdDistance = holdDistance.toFixed(1)
       floating.dataset.slideDistance = slideDistance.toFixed(1)

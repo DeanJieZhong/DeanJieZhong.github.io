@@ -5,6 +5,17 @@ export const ease = (value: number) => value * value * (3 - 2 * value)
 export const easeTravel = (value: number) => value ** 3 * (value * (value * 6 - 15) + 10)
 export const mix = (from: number, to: number, progress: number) => from + (to - from) * progress
 
+// Finish while a small strip of the portrait is still visible below the navigation.
+export function homeMotionEnd(
+  heroTop: number,
+  heroHeight: number,
+  headerHeight: number,
+  maxScroll: number
+) {
+  const visiblePortrait = Math.max(32, Math.min(64, heroHeight * 0.08))
+  return Math.max(1, Math.min(maxScroll, heroTop + heroHeight - headerHeight - visiblePortrait))
+}
+
 // A scroll threshold starts a complete, critically damped transition, even after scrolling stops.
 export function createSnapMorph(duration: number) {
   let value = 0
