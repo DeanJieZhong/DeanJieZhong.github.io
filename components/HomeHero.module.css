@@ -1,4 +1,5 @@
 .hero {
+  --portrait-shift: 11%;
   position: relative;
   isolation: isolate;
   width: 100%;
@@ -15,11 +16,11 @@
   isolation: isolate;
 }
 
-/* Retain the old full-height image scale, clipping 10% from either end. */
+/* Keep the photo scale; shift its crop upward with the Chinese name. */
 .portraitFrame {
   position: absolute;
   z-index: -1;
-  top: 50%;
+  top: calc(50% - var(--portrait-shift));
   width: 100%;
   height: max(100svh, 420px);
   transform: translateY(-50%);
@@ -95,8 +96,8 @@
 }
 
 .chineseName {
-  top: 19%;
-  left: 9.5%;
+  top: 8%;
+  left: 4.5%;
   font-size: 0.96em;
   letter-spacing: -0.055em;
 }
@@ -147,7 +148,7 @@
 }
 
 .firstName {
-  top: 40%;
+  top: 36%;
   right: 4.5%;
 }
 
@@ -213,19 +214,23 @@
 }
 
 @media (max-aspect-ratio: 1/1) {
+  .hero {
+    --portrait-shift: 9%;
+  }
+
   .title {
     font-size: 17vw;
   }
 
   .chineseName {
-    top: 14%;
-    left: 7%;
+    top: 5%;
+    left: 6%;
     font-size: 0.8em;
   }
 
   .firstName {
     top: auto;
-    bottom: 24%;
+    bottom: 28%;
     right: 6%;
   }
 
