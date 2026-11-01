@@ -4,6 +4,8 @@ import trogenData from '@/data/trogenData'
 import TrogenProject from '@/components/TrogenProject'
 import fjData from '@/data/fjData'
 import FjProject from '@/components/FjProject'
+import FjToolArticle from '@/components/FjToolArticle'
+import fjTools from '@/data/fjToolsData'
 import PhotoResearchProject from '@/components/PhotoResearchProject'
 import Cxcl13Article from '@/components/Cxcl13Article'
 import XjtluAdvisory from '@/components/XjtluAdvisory'
@@ -43,6 +45,15 @@ export async function generateMetadata({ params }: ResearchPageProps) {
     })
   }
 
+  if (Object.hasOwn(fjTools, entry.id)) {
+    const tool = fjTools[entry.id]
+    return genPageMetadata({
+      title: `${tool.title} | F. johnsoniae`,
+      description: tool.summary,
+      robots: { index: false, follow: false },
+    })
+  }
+
   if (entry.id === 'dogmaos') {
     return genPageMetadata({
       title: entry.listTitle || entry.name,
@@ -74,6 +85,7 @@ export default async function ResearchPage({ params }: ResearchPageProps) {
   if (!entry) notFound()
   if (entry.id === 'trogen') return <TrogenProject />
   if (entry.id === 'fj-gliding') return <FjProject />
+  if (Object.hasOwn(fjTools, entry.id)) return <FjToolArticle tool={fjTools[entry.id]} />
   if (entry.id === 'dogmaos') return <XjtluAdvisory title={entry.listTitle || entry.name} />
   if (entry.photo) {
     return (
