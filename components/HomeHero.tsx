@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { jieDots, jieOutline, zhongOutline } from '@/data/homeNameOutlines'
 import { useHomeNavigation } from './HomeNavigationContext'
@@ -17,13 +17,38 @@ export default function HomeHero() {
   const heroRef = useRef<HTMLElement>(null)
   const sourceRef = useRef<SVGGElement>(null)
   const floatingRef = useRef<HTMLAnchorElement>(null)
+  const imageRef = useRef<HTMLImageElement>(null)
+  const [entrance, setEntrance] = useState<'pending' | 'revealing' | 'complete'>('pending')
   const [ready, setReady] = useState(false)
   const [docked, setDocked] = useState(false)
 
-  useLayoutEffect(() => {
-    setReady(intro)
-    setDocked(false)
+  useEffect(() => {
+    const image = imageRef.current
+    if (!image) return
+    let active = true
+    const show = async () => {
+      // decode() also handles images already in the browser cache.
+      await Promise.allSettled([image.decode(), document.fonts.ready])
+      if (active) {
+        setEntrance(
+          !intro ||
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+            window.scrollY > 0
+            ? 'complete'
+            : 'revealing'
+        )
+      }
+    }
+    void show()
+    return () => {
+      active = false
+    }
   }, [intro])
+
+  useLayoutEffect(() => {
+    setReady(intro && entrance === 'complete')
+    setDocked(false)
+  }, [intro, entrance])
 
   useLayoutEffect(() => {
     if (!intro || !ready) return
@@ -178,38 +203,54 @@ export default function HomeHero() {
   return (
     <>
       <section ref={heroRef} id="home-top" className={styles.hero} aria-labelledby="home-title">
-        <Image
-          src="/static/images/home/portrait.png"
-          alt="Dean Jie Zhong in front of an illuminated building at night"
-          fill
-          sizes="(max-aspect-ratio: 3/2) 150vh, 100vw"
-          className={styles.portrait}
-          priority
-        />
-        <h1 id="home-title" className={styles.title} aria-label="Dean Jie Zhong 钟杰" tabIndex={-1}>
-          <span className={styles.chineseName} lang="zh" aria-hidden="true">
-            <svg viewBox="0 60 1945 930" className={styles.chineseArtwork} fill="currentColor">
-              <path d={zhongOutline} />
-              <g transform="translate(945 0)">
-                <path d={jieOutline} />
-                <g ref={sourceRef} opacity={ready && intro ? 0 : 1}>
-                  {jieDots.map((dot, index) => (
-                    <path key={index} d={dot} />
-                  ))}
+        <div
+          className={styles.composition}
+          data-entrance={entrance}
+          onAnimationEnd={(event) => {
+            if (event.target === event.currentTarget) setEntrance('complete')
+          }}
+        >
+          <div className={styles.portraitFrame}>
+            <Image
+              ref={imageRef}
+              src="/static/images/home/portrait.webp"
+              alt="Dean Jie Zhong in front of an illuminated building at night"
+              fill
+              sizes="(max-aspect-ratio: 3/2) 150vh, 100vw"
+              className={styles.portrait}
+              priority
+            />
+          </div>
+          <h1
+            id="home-title"
+            className={styles.title}
+            aria-label="Dean Jie Zhong 钟杰"
+            tabIndex={-1}
+          >
+            <span className={styles.chineseName} lang="zh" aria-hidden="true">
+              <svg viewBox="0 60 1945 930" className={styles.chineseArtwork} fill="currentColor">
+                <path d={zhongOutline} />
+                <g transform="translate(945 0)">
+                  <path d={jieOutline} />
+                  <g ref={sourceRef} opacity={ready && intro ? 0 : 1}>
+                    {jieDots.map((dot, index) => (
+                      <path key={index} d={dot} />
+                    ))}
+                  </g>
                 </g>
-              </g>
+              </svg>
+            </span>
+            <HomeDeanNavigation enabled={entrance === 'complete'} />
+            <span className={styles.fullName} aria-hidden="true">
+              Jie Zhong
+            </span>
+          </h1>
+          <a href="#home-content" className={styles.scroll} aria-label="Explore the site">
+            <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+              <path d="m5 9 7 7 7-7" fill="none" stroke="currentColor" strokeWidth="1.5" />
             </svg>
-          </span>
-          <HomeDeanNavigation />
-          <span className={styles.fullName} aria-hidden="true">
-            Jie Zhong
-          </span>
-        </h1>
-        <a href="#home-content" className={styles.scroll} aria-label="Explore the site">
-          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-            <path d="m5 9 7 7 7-7" fill="none" stroke="currentColor" strokeWidth="1.5" />
-          </svg>
-        </a>
+          </a>
+        </div>
       </section>
       {ready &&
         intro &&

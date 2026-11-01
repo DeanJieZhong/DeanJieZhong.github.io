@@ -15,13 +15,13 @@ type Glyph = {
   marker: { x: number; y: number; size: number }
 }
 
-export default function HomeDeanNavigation() {
+export default function HomeDeanNavigation({ enabled = true }: { enabled?: boolean }) {
   const { intro, headerRef, logoRef, setControlsReady } = useHomeNavigation()
   const sourceRef = useRef<SVGSVGElement>(null)
   const overlayRef = useRef<HTMLDivElement>(null)
   const [ready, setReady] = useState(false)
 
-  useLayoutEffect(() => setReady(intro), [intro])
+  useLayoutEffect(() => setReady(intro && enabled), [intro, enabled])
 
   useLayoutEffect(() => {
     if (!intro || !ready) return
