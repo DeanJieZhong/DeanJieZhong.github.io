@@ -10,8 +10,6 @@ import styles from './HomeHero.module.css'
 import { clamp, ease, easeTravel, mix, sampleDot, squarePoint } from './homeMotion'
 import HomeDeanNavigation from './HomeDeanNavigation'
 
-const TRAVEL_RESPONSE_MS = 100
-
 export default function HomeHero() {
   const { intro, headerRef, logoRef } = useHomeNavigation()
   const heroRef = useRef<HTMLElement>(null)
@@ -61,7 +59,6 @@ export default function HomeHero() {
 
     const svg = floating.querySelector('svg')!
     const paths = [...floating.querySelectorAll('path')]
-    const mobile = window.matchMedia('(max-width: 767px)')
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
     let sourceBounds: DOMRect
     let target: DOMRect
@@ -72,35 +69,25 @@ export default function HomeHero() {
     let squareSize = 0
     let dots: ReturnType<typeof sampleDot>[] = []
     let frame = 0
-    let lastFrameTime = 0
-    let travel = 0
     let wasDocked = false
 
-    const draw = (time: number, settle = false) => {
+    const draw = () => {
       frame = 0
       const scroll = Math.max(0, window.scrollY)
       const slideStart = pinAt + holdDistance
       const morph = reducedMotion.matches ? Number(scroll >= pinAt) : ease(clamp(scroll / pinAt))
-      const travelTarget = reducedMotion.matches
+      const travel = reducedMotion.matches
         ? Number(scroll >= slideStart)
         : easeTravel(clamp((scroll - slideStart) / slideDistance))
-      // Only the horizontal stage has inertia; the dots stay attached to the title before pinning.
-      if (settle || reducedMotion.matches || scroll < pinAt) {
-        travel = travelTarget
-      } else {
-        const elapsed = Math.min(64, Math.max(0, time - lastFrameTime))
-        travel = mix(travel, travelTarget, 1 - Math.exp(-elapsed / TRAVEL_RESPONSE_MS))
-        if (Math.abs(travel - travelTarget) < 0.0001) travel = travelTarget
-      }
-      lastFrameTime = time
+      // Scroll position is the only animation clock; stopping scroll stops the dots.
       const reveal = reducedMotion.matches ? Number(scroll >= pinAt) : ease(clamp(scroll / pinAt))
       const size = mix(squareSize, target.height, travel)
       const width = mix(sourceBounds.width, target.width, travel)
       const height = mix(sourceBounds.height, size, morph)
       const left = mix(sourceBounds.left, target.left, travel)
-      // Before pinning, let the mobile browser scroll the dots with the rest of the name.
+      // Before pinning, let the browser scroll the dots with the name on every screen.
       // A fixed overlay updated by scroll events can lag behind native momentum scrolling.
-      const followsDocument = mobile.matches && scroll < pinAt
+      const followsDocument = scroll < pinAt
       const top = followsDocument
         ? centerY - height / 2
         : Math.max(centerY - scroll, target.top + target.height / 2) - height / 2
@@ -138,7 +125,6 @@ export default function HomeHero() {
         }
         setDocked(wasDocked)
       }
-      if (travel !== travelTarget) frame = requestAnimationFrame(draw)
     }
 
     const measure = () => {
@@ -171,11 +157,10 @@ export default function HomeHero() {
       floating.dataset.pinAt = pinAt.toFixed(1)
       floating.dataset.holdDistance = holdDistance.toFixed(1)
       floating.dataset.slideDistance = slideDistance.toFixed(1)
-      draw(performance.now(), true)
+      draw()
     }
     const scheduleDraw = () => {
       if (!frame) {
-        lastFrameTime = performance.now()
         frame = requestAnimationFrame(draw)
       }
     }
