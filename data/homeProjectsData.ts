@@ -3,13 +3,16 @@ import researchData, { researchExperiences, researchPageSlug } from './researchD
 // Homepage excerpts from the existing project pages; bilingual copy lives in
 // Obsidian's 003_Homepage_Design_and_Content.md. Keep preliminary results qualified.
 export const homeIntroduction = [
-  'That’s me. Jie Zhong, or just Dean. I study biological sciences at Xi’an Jiaotong-Liverpool University.',
+  'I’m now a final-year undergrad studying biological sciences at Xi’an Jiaotong-Liverpool University.',
   'I’m interested in bioengineering: working with bacteria, immune cells and the signals that shape what they do.',
 ]
+
+export const homeProjectInvitation = 'Look what I’ve been doing.'
 
 const homeProjects = [
   {
     id: 'trogen',
+    label: 'iGEM - 2025',
     title: ['TroGen'],
     image: {
       src: '/static/images/home/trogen.webp',
@@ -29,6 +32,7 @@ const homeProjects = [
   },
   {
     id: 'cxcl13-fc',
+    label: 'Intern - Ongoing',
     title: ['T Cell &', 'Cytokine', 'Engineering'],
     image: {
       src: '/static/images/home/immunotherapy.webp',
@@ -48,6 +52,7 @@ const homeProjects = [
   },
   {
     id: 'fj-gliding',
+    label: 'Research - Ongoing',
     title: ['Bacterial', 'Motility'],
     image: {
       src: '/static/images/research/fj-gliding/rainbow-temporal-projection.webp',
@@ -73,9 +78,7 @@ export default homeProjects.map((project) => {
   const experience = researchExperiences.find((experience) => experience.id === entry.experience)
   return {
     ...project,
-    period: entry.participationPeriod,
     institutionLines: experience?.affiliations[0]?.name.split(', ') ?? [],
-    event: project.id === 'trogen' ? 'iGEM 2025' : undefined,
     role: entry.role,
     href: `/research/${researchPageSlug(entry)}/`,
   }

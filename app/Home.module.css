@@ -23,6 +23,19 @@
   color: #b8b8b8;
 }
 
+.introInner .projectInvitation {
+  width: fit-content;
+  max-width: 100%;
+  color: #fff;
+}
+
+.introLine {
+  display: block;
+  height: 2px;
+  margin-top: 12px;
+  background: var(--color-primary-500);
+}
+
 .projects {
   max-width: 1200px;
   margin-inline: auto;
@@ -74,7 +87,7 @@
   text-align: right;
 }
 
-.period {
+.projectLabel {
   margin-bottom: 22px;
   color: #696969;
   font-size: 12px;
@@ -105,11 +118,6 @@
   margin-top: 22px;
   font-size: 17px;
   line-height: 1.5;
-}
-
-.projectMetadata .event {
-  margin-bottom: 6px;
-  font-weight: 600;
 }
 
 .institutionLine {
@@ -274,7 +282,7 @@
     margin-left: 0;
   }
 
-  .period {
+  .projectLabel {
     margin-bottom: 18px;
   }
 

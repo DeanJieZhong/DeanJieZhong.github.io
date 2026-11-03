@@ -3,7 +3,7 @@ import Image from 'next/image'
 import HomeProjectFlow from '@/components/HomeProjectFlow'
 import HomeHero from '@/components/HomeHero'
 import Link from '@/components/Link'
-import homeProjects, { homeIntroduction } from '@/data/homeProjectsData'
+import homeProjects, { homeIntroduction, homeProjectInvitation } from '@/data/homeProjectsData'
 import styles from './Home.module.css'
 
 export default function HomePage() {
@@ -16,6 +16,10 @@ export default function HomePage() {
           {homeIntroduction.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
+          <p className={styles.projectInvitation}>
+            {homeProjectInvitation}
+            <span className={styles.introLine} data-project-entry aria-hidden="true" />
+          </p>
         </div>
       </section>
 
@@ -34,7 +38,7 @@ export default function HomePage() {
             >
               <div className={styles.identity}>
                 <header className={styles.projectHeading}>
-                  <p className={styles.period}>{project.period}</p>
+                  <p className={styles.projectLabel}>{project.label}</p>
                   <h2
                     id={`home-${project.id}-title`}
                     className={project.title.length === 1 ? styles.shortTitle : undefined}
@@ -44,7 +48,6 @@ export default function HomePage() {
                     ))}
                   </h2>
                   <div className={styles.projectMetadata}>
-                    {project.event && <p className={styles.event}>{project.event}</p>}
                     <p>
                       {project.institutionLines.map((line) => (
                         <span className={styles.institutionLine} key={line}>

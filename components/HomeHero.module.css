@@ -113,9 +113,9 @@
 }
 
 .chineseName {
-  top: 10%;
-  left: 6%;
-  font-size: 0.96em;
+  top: 12%;
+  left: 7.5%;
+  font-size: 0.768em;
   letter-spacing: -0.055em;
 }
 
@@ -240,9 +240,9 @@
   }
 
   .chineseName {
-    top: 7%;
-    left: 8%;
-    font-size: 0.8em;
+    top: 8.5%;
+    left: 9.5%;
+    font-size: 0.64em;
   }
 
   .firstName {

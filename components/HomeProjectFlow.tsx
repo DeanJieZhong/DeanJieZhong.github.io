@@ -13,6 +13,8 @@ export default function HomeProjectFlow({ children }: { children: ReactNode }) {
     const ribbon = ribbonRef.current
     if (!flow || !ribbon) return
     const projects = [...flow.querySelectorAll<HTMLElement>('[data-home-project]')]
+    const introduction = document.getElementById('home-content')
+    const entryLine = introduction?.querySelector<HTMLElement>('[data-project-entry]')
     let frame = 0
     let disposed = false
 
@@ -57,6 +59,14 @@ export default function HomeProjectFlow({ children }: { children: ReactNode }) {
       const right = [...segments]
         .reverse()
         .flatMap(({ x, y, end, width }) => [`${x + width / 2} ${end}`, `${x + width / 2} ${y}`])
+      if (entryLine && segments.length) {
+        const entry = entryLine.getBoundingClientRect()
+        const end = entry.right - bounds.left
+        const y = entry.bottom - bounds.top
+        // Continue from the underline's final bar-width section into the first project.
+        left.unshift(`${end - segments[0].width} ${y}`)
+        right.push(`${end} ${y}`)
+      }
       ribbon.setAttribute('d', `M ${[...left, ...right].join(' L ')} Z`)
       flow.dataset.connected = 'true'
     }
@@ -67,6 +77,8 @@ export default function HomeProjectFlow({ children }: { children: ReactNode }) {
     const observer = new ResizeObserver(schedule)
     observer.observe(flow)
     projects.forEach((project) => observer.observe(project))
+    if (introduction) observer.observe(introduction)
+    if (entryLine) observer.observe(entryLine)
     measure()
     document.fonts.ready.then(() => {
       if (!disposed) schedule()
