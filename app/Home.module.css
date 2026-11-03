@@ -1,4 +1,5 @@
 .home {
+  --spine-width: 18px;
   color: #111;
   background: #fff;
 }
@@ -20,18 +21,16 @@
 
 .introInner p + p {
   margin-top: 22px;
-  color: #b8b8b8;
 }
 
 .introInner .projectInvitation {
   width: fit-content;
   max-width: 100%;
-  color: #fff;
 }
 
 .introLine {
   display: block;
-  height: 2px;
+  height: var(--spine-width);
   margin-top: 12px;
   background: var(--color-primary-500);
 }
@@ -43,7 +42,6 @@
 }
 
 .projectFlow {
-  --spine-width: 18px;
   position: relative;
   display: grid;
   gap: 180px;
@@ -242,6 +240,10 @@
 }
 
 @media (max-width: 760px) {
+  .home {
+    --spine-width: 10px;
+  }
+
   .introInner {
     padding: 28px 24px 44px;
     font-size: 22px;
@@ -252,7 +254,6 @@
   }
 
   .projectFlow {
-    --spine-width: 10px;
     gap: 108px;
     margin-bottom: 48px;
   }
