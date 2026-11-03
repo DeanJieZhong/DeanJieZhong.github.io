@@ -51,7 +51,7 @@ export default function HomeProjectFlow({ children }: { children: ReactNode }) {
         }
       })
       // One filled outline avoids seams between the vertical and diagonal sections.
-      // Both horizontal ends of each connector exactly match the adjacent bar width.
+      // Project-to-project connectors match the adjacent bar widths at both ends.
       const left = segments.flatMap(({ x, y, end, width }) => [
         `${x - width / 2} ${y}`,
         `${x - width / 2} ${end}`,
@@ -63,8 +63,8 @@ export default function HomeProjectFlow({ children }: { children: ReactNode }) {
         const entry = entryLine.getBoundingClientRect()
         const end = entry.right - bounds.left
         const y = entry.bottom - bounds.top
-        // Continue from the underline's final bar-width section into the first project.
-        left.unshift(`${end - segments[0].width} ${y}`)
+        // Straight edges widen evenly from the underline's thickness to the first bar.
+        left.unshift(`${end - entry.height} ${y}`)
         right.push(`${end} ${y}`)
       }
       ribbon.setAttribute('d', `M ${[...left, ...right].join(' L ')} Z`)
