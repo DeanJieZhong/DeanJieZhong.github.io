@@ -6,14 +6,12 @@ import styles from '../app/Home.module.css'
 /** Measure layout only: the connecting line has no scroll animation or inertia. */
 export default function HomeProjectFlow({ children }: { children: ReactNode }) {
   const flowRef = useRef<HTMLDivElement>(null)
-  const verticalRef = useRef<SVGPathElement>(null)
-  const diagonalRef = useRef<SVGPathElement>(null)
+  const ribbonRef = useRef<SVGPathElement>(null)
 
   useLayoutEffect(() => {
     const flow = flowRef.current
-    const vertical = verticalRef.current
-    const diagonal = diagonalRef.current
-    if (!flow || !vertical || !diagonal) return
+    const ribbon = ribbonRef.current
+    if (!flow || !ribbon) return
     const projects = [...flow.querySelectorAll<HTMLElement>('[data-home-project]')]
     let frame = 0
     let disposed = false
@@ -50,30 +48,16 @@ export default function HomeProjectFlow({ children }: { children: ReactNode }) {
           end: rect.bottom - bounds.top,
         }
       })
-      // Filled rectangles and parallelograms give every junction a horizontal cut.
-      // Compensate for slope so the diagonal's perpendicular thickness is 70%.
-      vertical.setAttribute(
-        'd',
-        segments
-          .map(
-            ({ x, y, end, width }) =>
-              `M ${x - width / 2} ${y} H ${x + width / 2} V ${end} H ${x - width / 2} Z`
-          )
-          .join(' ')
-      )
-      diagonal.setAttribute(
-        'd',
-        segments
-          .slice(0, -1)
-          .map((current, index) => {
-            const next = segments[index + 1]
-            const rise = next.y - current.end
-            const run = next.x - current.x
-            const halfCap = (current.width * 0.7 * Math.hypot(run, rise)) / rise / 2
-            return `M ${current.x - halfCap} ${current.end} H ${current.x + halfCap} L ${next.x + halfCap} ${next.y} H ${next.x - halfCap} Z`
-          })
-          .join(' ')
-      )
+      // One filled outline avoids seams between the vertical and diagonal sections.
+      // Both horizontal ends of each connector exactly match the adjacent bar width.
+      const left = segments.flatMap(({ x, y, end, width }) => [
+        `${x - width / 2} ${y}`,
+        `${x - width / 2} ${end}`,
+      ])
+      const right = [...segments]
+        .reverse()
+        .flatMap(({ x, y, end, width }) => [`${x + width / 2} ${end}`, `${x + width / 2} ${y}`])
+      ribbon.setAttribute('d', `M ${[...left, ...right].join(' L ')} Z`)
       flow.dataset.connected = 'true'
     }
     const schedule = () => {
@@ -99,8 +83,7 @@ export default function HomeProjectFlow({ children }: { children: ReactNode }) {
   return (
     <div className={styles.projectFlow} ref={flowRef}>
       <svg className={styles.projectPath} aria-hidden="true" focusable="false">
-        <path ref={verticalRef} data-project-vertical fill="currentColor" />
-        <path ref={diagonalRef} data-project-diagonal fill="currentColor" />
+        <path ref={ribbonRef} data-project-ribbon fill="currentColor" />
       </svg>
       {children}
     </div>

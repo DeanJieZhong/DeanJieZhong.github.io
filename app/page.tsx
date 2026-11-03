@@ -44,7 +44,14 @@ export default function HomePage() {
                     ))}
                   </h2>
                   <div className={styles.projectMetadata}>
-                    <p>{project.institution}</p>
+                    {project.event && <p className={styles.event}>{project.event}</p>}
+                    <p>
+                      {project.institutionLines.map((line) => (
+                        <span className={styles.institutionLine} key={line}>
+                          {line}
+                        </span>
+                      ))}
+                    </p>
                     <p className={styles.role}>{project.role}</p>
                   </div>
                 </header>

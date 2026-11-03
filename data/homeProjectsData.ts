@@ -74,7 +74,8 @@ export default homeProjects.map((project) => {
   return {
     ...project,
     period: entry.participationPeriod,
-    institution: experience?.affiliations[0]?.name,
+    institutionLines: experience?.affiliations[0]?.name.split(', ') ?? [],
+    event: project.id === 'trogen' ? 'iGEM 2025' : undefined,
     role: entry.role,
     href: `/research/${researchPageSlug(entry)}/`,
   }
