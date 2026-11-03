@@ -21,7 +21,7 @@ export default function HomePage() {
 
       <section className={styles.projects} aria-label="Selected projects">
         <HomeProjectFlow>
-          {homeProjects.map((project, index) => (
+          {homeProjects.map((project) => (
             <article
               key={project.id}
               className={styles.project}
@@ -34,7 +34,7 @@ export default function HomePage() {
             >
               <div className={styles.identity}>
                 <header className={styles.projectHeading}>
-                  <p className={styles.number}>0{index + 1} / 03</p>
+                  <p className={styles.period}>{project.period}</p>
                   <h2
                     id={`home-${project.id}-title`}
                     className={project.title.length === 1 ? styles.shortTitle : undefined}
@@ -43,9 +43,10 @@ export default function HomePage() {
                       <span key={line}>{line}</span>
                     ))}
                   </h2>
-                  <p className={styles.subtitle}>
-                    {project.italicSubtitle ? <i>{project.subtitle}</i> : project.subtitle}
-                  </p>
+                  <div className={styles.projectMetadata}>
+                    <p>{project.institution}</p>
+                    <p className={styles.role}>{project.role}</p>
+                  </div>
                 </header>
                 <figure className={styles.figure}>
                   <Image

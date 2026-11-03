@@ -1,4 +1,4 @@
-import researchData, { researchPageSlug } from './researchData'
+import researchData, { researchExperiences, researchPageSlug } from './researchData'
 
 // Homepage excerpts from the existing project pages; bilingual copy lives in
 // Obsidian's 003_Homepage_Design_and_Content.md. Keep preliminary results qualified.
@@ -11,7 +11,6 @@ const homeProjects = [
   {
     id: 'trogen',
     title: ['TroGen'],
-    subtitle: 'iGEM 2025 · Research lead',
     image: {
       src: '/static/images/home/trogen.webp',
       width: 1200,
@@ -31,7 +30,6 @@ const homeProjects = [
   {
     id: 'cxcl13-fc',
     title: ['T Cell &', 'Cytokine', 'Engineering'],
-    subtitle: 'Systems Medicine · Research trainee',
     image: {
       src: '/static/images/home/immunotherapy.webp',
       width: 1200,
@@ -51,8 +49,6 @@ const homeProjects = [
   {
     id: 'fj-gliding',
     title: ['Bacterial', 'Motility'],
-    subtitle: 'Flavobacterium johnsoniae',
-    italicSubtitle: true,
     image: {
       src: '/static/images/research/fj-gliding/rainbow-temporal-projection.webp',
       width: 1824,
@@ -74,5 +70,12 @@ const homeProjects = [
 export default homeProjects.map((project) => {
   const entry = researchData.find((entry) => entry.id === project.id)
   if (!entry?.hasDetailPage) throw new Error(`Missing homepage project route: ${project.id}`)
-  return { ...project, href: `/research/${researchPageSlug(entry)}/` }
+  const experience = researchExperiences.find((experience) => experience.id === entry.experience)
+  return {
+    ...project,
+    period: entry.participationPeriod,
+    institution: experience?.affiliations[0]?.name,
+    role: entry.role,
+    href: `/research/${researchPageSlug(entry)}/`,
+  }
 })

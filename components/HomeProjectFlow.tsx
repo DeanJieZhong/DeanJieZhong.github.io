@@ -6,12 +6,14 @@ import styles from '../app/Home.module.css'
 /** Measure layout only: the connecting line has no scroll animation or inertia. */
 export default function HomeProjectFlow({ children }: { children: ReactNode }) {
   const flowRef = useRef<HTMLDivElement>(null)
-  const pathRef = useRef<SVGPathElement>(null)
+  const verticalRef = useRef<SVGPathElement>(null)
+  const diagonalRef = useRef<SVGPathElement>(null)
 
   useLayoutEffect(() => {
     const flow = flowRef.current
-    const path = pathRef.current
-    if (!flow || !path) return
+    const vertical = verticalRef.current
+    const diagonal = diagonalRef.current
+    if (!flow || !vertical || !diagonal) return
     const projects = [...flow.querySelectorAll<HTMLElement>('[data-home-project]')]
     let frame = 0
     let disposed = false
@@ -43,14 +45,35 @@ export default function HomeProjectFlow({ children }: { children: ReactNode }) {
         const rect = spine.getBoundingClientRect()
         return {
           x: rect.left + rect.width / 2 - bounds.left,
+          width: rect.width,
           y: rect.top - bounds.top,
           end: rect.bottom - bounds.top,
         }
       })
-      const d = segments
-        .map(({ x, y, end }, index) => `${index ? 'L' : 'M'} ${x} ${y} L ${x} ${end}`)
-        .join(' ')
-      path.setAttribute('d', d)
+      // Filled rectangles and parallelograms give every junction a horizontal cut.
+      // Compensate for slope so the diagonal's perpendicular thickness is 70%.
+      vertical.setAttribute(
+        'd',
+        segments
+          .map(
+            ({ x, y, end, width }) =>
+              `M ${x - width / 2} ${y} H ${x + width / 2} V ${end} H ${x - width / 2} Z`
+          )
+          .join(' ')
+      )
+      diagonal.setAttribute(
+        'd',
+        segments
+          .slice(0, -1)
+          .map((current, index) => {
+            const next = segments[index + 1]
+            const rise = next.y - current.end
+            const run = next.x - current.x
+            const halfCap = (current.width * 0.7 * Math.hypot(run, rise)) / rise / 2
+            return `M ${current.x - halfCap} ${current.end} H ${current.x + halfCap} L ${next.x + halfCap} ${next.y} H ${next.x - halfCap} Z`
+          })
+          .join(' ')
+      )
       flow.dataset.connected = 'true'
     }
     const schedule = () => {
@@ -76,7 +99,8 @@ export default function HomeProjectFlow({ children }: { children: ReactNode }) {
   return (
     <div className={styles.projectFlow} ref={flowRef}>
       <svg className={styles.projectPath} aria-hidden="true" focusable="false">
-        <path ref={pathRef} fill="none" stroke="currentColor" strokeLinejoin="bevel" />
+        <path ref={verticalRef} data-project-vertical fill="currentColor" />
+        <path ref={diagonalRef} data-project-diagonal fill="currentColor" />
       </svg>
       {children}
     </div>
