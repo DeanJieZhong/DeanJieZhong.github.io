@@ -7,7 +7,7 @@
   min-height: 336px;
   overflow: hidden;
   color: #fff;
-  background: #080808;
+  background: #000;
 }
 
 .composition {
@@ -16,10 +16,27 @@
   isolation: isolate;
 }
 
+/* Fade the photograph into the black introduction without changing scroll geometry. */
+.composition::after {
+  position: absolute;
+  z-index: -1;
+  inset: 58% 0 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgb(0 0 0 / 8%) 20%,
+    rgb(0 0 0 / 32%) 45%,
+    rgb(0 0 0 / 72%) 74%,
+    #000 100%
+  );
+  content: '';
+  pointer-events: none;
+}
+
 /* Keep the photo scale; shift its crop upward with the Chinese name. */
 .portraitFrame {
   position: absolute;
-  z-index: -1;
+  z-index: -2;
   top: calc(50% - var(--portrait-shift));
   width: 100%;
   height: max(100svh, 420px);

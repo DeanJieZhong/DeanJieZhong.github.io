@@ -1,57 +1,224 @@
 .home {
-  color: #000;
+  color: #111;
   background: #fff;
 }
 
-.content {
-  min-height: 100svh;
+.introduction {
+  color: #fff;
+  background: #000;
+  scroll-margin-top: 72px;
+}
+
+.introInner {
   max-width: 1200px;
   margin-inline: auto;
-  padding: 48px;
+  padding: 44px 48px 68px;
+  font-size: clamp(22px, 2.25vw, 30px);
+  line-height: 1.55;
+  letter-spacing: -0.025em;
 }
 
-.links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 40px;
-  padding-bottom: 40px;
-  font-size: 20px;
+.introInner p + p {
+  margin-top: 22px;
+  color: #b8b8b8;
+}
+
+.projects {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: 0 48px;
+}
+
+.project {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: clamp(32px, 5vw, 72px);
+  padding-block: 96px;
+}
+
+.project + .project {
+  border-top: 1px solid #dedede;
+}
+
+.projectHeading {
+  padding: 8px 28px 30px 0;
+  border-right: 18px solid var(--color-primary-500);
+  text-align: right;
+}
+
+.number {
+  margin-bottom: 22px;
+  color: #696969;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+}
+
+.projectHeading h2 {
+  margin: 0;
+  font-size: clamp(35px, 4vw, 54px);
+  font-weight: 700;
+  line-height: 1.03;
+  letter-spacing: -0.055em;
+}
+
+.projectHeading h2.shortTitle {
+  font-size: clamp(60px, 6.8vw, 88px);
+}
+
+.projectHeading h2 span {
+  display: block;
+}
+
+.subtitle {
+  margin-top: 22px;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.figure {
+  margin: 0;
+}
+
+.figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.figure figcaption {
+  margin-top: 12px;
+  color: #666;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.story {
+  padding-top: 38px;
+  font-size: clamp(18px, 1.65vw, 21px);
+  line-height: 1.65;
+  letter-spacing: -0.015em;
+}
+
+.story > p + p {
+  margin-top: 24px;
+}
+
+.progress {
+  margin-top: 32px;
+}
+
+.progress h3 {
+  margin-bottom: 8px;
+  font-size: 15px;
   font-weight: 600;
+  letter-spacing: 0;
 }
 
-.links a {
+.progress p {
+  color: #555;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.story .note {
+  margin-top: 24px;
+  color: #666;
+  font-size: 13px;
+  letter-spacing: 0;
+}
+
+.projectLink {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  gap: 12px;
-}
-
-.placeholder {
-  padding-block: 32px;
-  border-top: 1px solid var(--color-gray-200);
-}
-
-.placeholder h2 {
-  margin: 0;
-  font-size: 28px;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-}
-
-.placeholder p {
-  margin-top: 12px;
-  color: var(--color-gray-500);
+  gap: 28px;
+  margin-top: 18px;
+  border-bottom: 1px solid currentColor;
+  color: var(--color-primary-500);
   font-size: 16px;
-  line-height: 1.6;
+  font-weight: 600;
+  letter-spacing: 0;
 }
 
-@media (max-width: 767px) {
-  .content {
-    padding: 32px 24px;
+.projectLink span[aria-hidden] {
+  transition: transform 180ms ease;
+}
+
+.projectLink:hover span[aria-hidden] {
+  transform: translate(3px, -3px);
+}
+
+.allResearch {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-block: 28px 64px;
+  border-top: 1px solid #dedede;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.allResearch a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  gap: 32px;
+}
+
+@media (max-width: 760px) {
+  .introInner {
+    padding: 28px 24px 44px;
+    font-size: 22px;
   }
 
-  .links {
-    gap: 8px 24px;
+  .projects {
+    padding-inline: 24px;
+  }
+
+  .project {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-block: 56px;
+  }
+
+  .projectHeading {
+    padding: 0 22px 24px 0;
+    border-right-width: 12px;
+    text-align: left;
+  }
+
+  .number {
+    margin-bottom: 18px;
+  }
+
+  .projectHeading h2 {
+    font-size: clamp(36px, 8.5vw, 54px);
+  }
+
+  .projectHeading h2.shortTitle {
+    font-size: 68px;
+  }
+
+  .subtitle {
+    margin-top: 18px;
+    font-size: 16px;
+  }
+
+  .story {
+    padding-top: 0;
     font-size: 18px;
+  }
+
+  .allResearch {
+    font-size: 16px;
+    padding-bottom: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projectLink span[aria-hidden] {
+    transition: none;
   }
 }
