@@ -13,6 +13,7 @@ const homeProjects = [
     id: 'trogen',
     label: 'iGEM - 2025',
     title: ['TroGen'],
+    imageScale: 1.25,
     image: {
       src: '/static/images/research/trogen/project-concept.webp',
       width: 6000,
