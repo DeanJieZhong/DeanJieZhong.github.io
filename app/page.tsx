@@ -42,7 +42,9 @@ export default function HomePage() {
             >
               <div className={styles.identity}>
                 <header className={styles.projectHeading}>
-                  <p className={styles.projectLabel}>{project.label}</p>
+                  <p className={styles.projectLabel}>
+                    {project.label} · {project.institutionLines.join(', ')}
+                  </p>
                   <h2
                     id={`home-${project.id}-title`}
                     className={project.title.length === 1 ? styles.shortTitle : undefined}
@@ -52,13 +54,6 @@ export default function HomePage() {
                     ))}
                   </h2>
                   <div className={styles.projectMetadata}>
-                    <p>
-                      {project.institutionLines.map((line) => (
-                        <span className={styles.institutionLine} key={line}>
-                          {line}
-                        </span>
-                      ))}
-                    </p>
                     <p className={styles.role}>{project.role}</p>
                   </div>
                 </header>
