@@ -14,11 +14,11 @@ const homeProjects = [
     label: 'iGEM - 2025',
     title: ['TroGen'],
     image: {
-      src: '/static/images/home/trogen.webp',
-      width: 1200,
-      height: 675,
-      alt: 'A green iGEM mascot among the crowd at the 2025 event.',
-      caption: 'iGEM 2025 · XJTLU-Science-China',
+      src: '/static/images/research/trogen/project-concept.webp',
+      width: 6000,
+      height: 3448,
+      alt: 'Proposed TroGen concept showing bacterial payload delivery in a hypoxic tumor microenvironment and control in normal tissue.',
+      caption: 'Proposed concept，Shuning Dong制作。',
     },
     paragraphs: [
       'In 2025, I conceived and led TroGen, a project exploring engineered commensal bacteria as intracellular delivery vehicles for triple-negative breast cancer.',
