@@ -20,9 +20,10 @@ export default function HomeProjectFlow({ children }: { children: ReactNode }) {
 
     const measure = () => {
       const mobile = window.matchMedia('(max-width: 760px)').matches
-      const widths = projects.map((project) => {
+      const layouts = projects.map((project) => {
         const width = project.getBoundingClientRect().width
         const ratio = Number(project.dataset.imageRatio) || 1.5
+        const scale = Number(project.dataset.imageScale) || 1
         const headingWidth = Math.max(
           0,
           ...[...project.querySelectorAll<HTMLElement>('h2 span')].map(
@@ -32,11 +33,18 @@ export default function HomeProjectFlow({ children }: { children: ReactNode }) {
         const photoWidth = ratio * Math.max(200, Math.min(260, width * 0.215))
         // Reserve a readable text column; the wider of the title and image wins.
         const available = Math.min(width * 0.58, width - 18 - 36 - 300)
-        return mobile ? 0 : Math.min(available, Math.max(photoWidth, headingWidth + 28))
+        const visualWidth = Math.min(available, Math.max(photoWidth, headingWidth + 28)) * scale
+        const storyGap = Math.max(36, Math.min(56, window.innerWidth * 0.04))
+        return {
+          width: visualWidth,
+          // Let enlarged figures keep their size without squeezing the body text.
+          stacked: !mobile && scale > 1 && width - visualWidth - 18 - storyGap < 300,
+        }
       })
       projects.forEach((project, index) => {
         if (mobile) project.style.removeProperty('--visual-width')
-        else project.style.setProperty('--visual-width', `${widths[index]}px`)
+        else project.style.setProperty('--visual-width', `${layouts[index].width}px`)
+        project.dataset.stacked = String(layouts[index].stacked)
       })
 
       const bounds = flow.getBoundingClientRect()

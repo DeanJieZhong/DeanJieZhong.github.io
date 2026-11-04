@@ -33,6 +33,7 @@ const homeProjects = [
     id: 'cxcl13-fc',
     label: 'Intern - Ongoing',
     title: ['T Cell &', 'Cytokine', 'Engineering'],
+    imageScale: 1.5,
     image: {
       src: '/static/images/home/il4-8fc-mechanism.png',
       width: 1920,
@@ -77,6 +78,7 @@ export default homeProjects.map((project) => {
   const experience = researchExperiences.find((experience) => experience.id === entry.experience)
   return {
     ...project,
+    imageScale: project.imageScale ?? 1,
     institutionLines: experience?.affiliations[0]?.name.split(', ') ?? [],
     role: entry.role,
     href: `/research/${researchPageSlug(entry)}/`,

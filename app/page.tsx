@@ -31,8 +31,12 @@ export default function HomePage() {
               className={styles.project}
               data-home-project={project.id}
               data-image-ratio={project.image.width / project.image.height}
+              data-image-scale={project.imageScale}
               style={
-                { '--image-ratio': project.image.width / project.image.height } as CSSProperties
+                {
+                  '--image-ratio': project.image.width / project.image.height,
+                  '--image-scale': project.imageScale,
+                } as CSSProperties
               }
               aria-labelledby={`home-${project.id}-title`}
             >
@@ -59,13 +63,24 @@ export default function HomePage() {
                   </div>
                 </header>
                 <figure className={styles.figure}>
-                  <Image
-                    src={project.image.src}
-                    width={project.image.width}
-                    height={project.image.height}
-                    alt={project.image.alt}
-                    sizes="(max-width: 760px) 100vw, (max-width: 1280px) 55vw, 640px"
-                  />
+                  <div
+                    className={styles.figureViewport}
+                    tabIndex={project.imageScale > 1 ? 0 : undefined}
+                    role={project.imageScale > 1 ? 'region' : undefined}
+                    aria-label={project.imageScale > 1 ? project.image.caption : undefined}
+                  >
+                    <Image
+                      src={project.image.src}
+                      width={project.image.width}
+                      height={project.image.height}
+                      alt={project.image.alt}
+                      sizes={
+                        project.imageScale > 1
+                          ? '(max-width: 760px) 150vw, (max-width: 1280px) 82.5vw, 960px'
+                          : '(max-width: 760px) 100vw, (max-width: 1280px) 55vw, 640px'
+                      }
+                    />
+                  </div>
                   <figcaption>{project.image.caption}</figcaption>
                 </figure>
               </div>

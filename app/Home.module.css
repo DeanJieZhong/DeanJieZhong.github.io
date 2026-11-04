@@ -70,6 +70,28 @@
   min-width: 0;
 }
 
+.project[data-stacked='true'] {
+  row-gap: 28px;
+}
+
+.project[data-stacked='true'] .identity {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.project[data-stacked='true'] .projectSpine {
+  grid-column: 2;
+  grid-row: 1 / 3;
+}
+
+.project[data-stacked='true'] .story {
+  grid-column: 1;
+  grid-row: 2;
+  margin-left: 0;
+  padding-top: 0;
+  padding-right: 28px;
+}
+
 .projectSpine {
   align-self: stretch;
   height: 100%;
@@ -130,6 +152,11 @@
 
 .figure {
   margin: 0;
+}
+
+.figureViewport {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
 }
 
 .figure img {
@@ -272,6 +299,11 @@
   .identity {
     grid-column: 1;
     padding-right: 16px;
+  }
+
+  .figure img {
+    width: calc(100% * var(--image-scale));
+    max-width: none;
   }
 
   .projectSpine {
