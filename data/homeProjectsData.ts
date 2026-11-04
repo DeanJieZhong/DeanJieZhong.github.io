@@ -32,8 +32,8 @@ const homeProjects = [
   {
     id: 'cxcl13-fc',
     label: 'Intern - Ongoing',
-    title: ['T Cell & Cytokine', 'Engineering'],
-    imageScale: 1.2,
+    title: ['T Cell &', 'Cytokine', 'Engineering'],
+    imageScale: 1.5,
     image: {
       src: '/static/images/home/il4-8fc-mechanism.png',
       width: 1920,

@@ -33,10 +33,7 @@ export default function HomeProjectFlow({ children }: { children: ReactNode }) {
         const photoWidth = ratio * Math.max(200, Math.min(260, width * 0.215))
         // Reserve a readable text column; the wider of the title and image wins.
         const available = Math.min(width * 0.58, width - 18 - 36 - 300)
-        const visualWidth = Math.min(
-          available * scale,
-          Math.max(photoWidth * scale, headingWidth + 28)
-        )
+        const visualWidth = Math.min(available, Math.max(photoWidth, headingWidth + 28)) * scale
         const storyGap = Math.max(36, Math.min(56, window.innerWidth * 0.04))
         return {
           width: visualWidth,

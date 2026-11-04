@@ -76,7 +76,7 @@ export default function HomePage() {
                       alt={project.image.alt}
                       sizes={
                         project.imageScale > 1
-                          ? `(max-width: 760px) ${100 * project.imageScale}vw, (max-width: 1280px) ${55 * project.imageScale}vw, ${640 * project.imageScale}px`
+                          ? '(max-width: 760px) 150vw, (max-width: 1280px) 82.5vw, 960px'
                           : '(max-width: 760px) 100vw, (max-width: 1280px) 55vw, 640px'
                       }
                     />
