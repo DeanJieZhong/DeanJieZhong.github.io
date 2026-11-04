@@ -34,11 +34,11 @@ const homeProjects = [
     label: 'Intern - Ongoing',
     title: ['T Cell &', 'Cytokine', 'Engineering'],
     image: {
-      src: '/static/images/home/immunotherapy.webp',
-      width: 1200,
-      height: 450,
-      alt: 'A flow cytometer and a monitor displaying experimental flow cytometry plots.',
-      caption: 'Flow cytometry · Suzhou Institute of Systems Medicine',
+      src: '/static/images/home/il4-8fc-mechanism.png',
+      width: 1920,
+      height: 1080,
+      alt: 'Proposed IL4–8Fc mechanism linking IL4-mediated CD8 T cell enhancement with IL8-mediated neutrophil recruitment, alongside functional characterization plots.',
+      caption: 'Proposed Mechanism and Functional Characterization of IL4–8Fc',
     },
     paragraphs: [
       'In 2026, I joined Dr. Lianjun Zhang’s lab at the Suzhou Institute of Systems Medicine to explore cancer immunotherapy through CD8 T cell and cytokine engineering.',
