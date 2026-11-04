@@ -173,11 +173,6 @@
   line-height: 1.5;
 }
 
-.project[data-home-project='trogen'] .figure figcaption {
-  padding-right: 0;
-  font-weight: 600;
-}
-
 .story {
   min-width: 0;
   margin-left: clamp(36px, 4vw, 56px);

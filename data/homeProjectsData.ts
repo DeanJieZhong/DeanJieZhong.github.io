@@ -1,4 +1,4 @@
-import researchData, { researchExperiences, researchPageSlug } from './researchData'
+import researchData, { researchPageSlug } from './researchData'
 
 // Homepage excerpts from the existing project pages; bilingual copy lives in
 // Obsidian's 003_Homepage_Design_and_Content.md. Keep preliminary results qualified.
@@ -11,7 +11,7 @@ export const homeProjectInvitation = 'Look what I’ve been doing.'
 const homeProjects = [
   {
     id: 'trogen',
-    label: 'iGEM - 2025',
+    institutionLines: ['XJTLU'],
     title: ['TroGen'],
     imageScale: 1.25,
     image: {
@@ -19,7 +19,7 @@ const homeProjects = [
       width: 6000,
       height: 3448,
       alt: 'Proposed TroGen concept showing bacterial payload delivery in a hypoxic tumor microenvironment and control in normal tissue.',
-      caption: 'Proposed concept. Illustration by Shuning Dong.',
+      caption: 'Proposed concept.',
     },
     paragraphs: [
       'In 2025, I conceived and led TroGen, a project exploring engineered commensal bacteria as intracellular delivery vehicles for triple-negative breast cancer.',
@@ -32,7 +32,7 @@ const homeProjects = [
   },
   {
     id: 'cxcl13-fc',
-    label: 'Intern - Ongoing',
+    institutionLines: ['ISM, CAMS & PUMC'],
     title: ['T Cell &', 'Cytokine', 'Engineering'],
     imageScale: 1.5,
     image: {
@@ -53,7 +53,7 @@ const homeProjects = [
   },
   {
     id: 'fj-gliding',
-    label: 'Research - Ongoing',
+    institutionLines: ['XJTLU'],
     title: ['Bacterial', 'Motility'],
     image: {
       src: '/static/images/research/fj-gliding/rainbow-temporal-projection.webp',
@@ -75,12 +75,13 @@ const homeProjects = [
 
 export default homeProjects.map((project) => {
   const entry = researchData.find((entry) => entry.id === project.id)
-  if (!entry?.hasDetailPage) throw new Error(`Missing homepage project route: ${project.id}`)
-  const experience = researchExperiences.find((experience) => experience.id === entry.experience)
+  if (!entry?.hasDetailPage || !entry.participationPeriod) {
+    throw new Error(`Missing homepage project route or participation dates: ${project.id}`)
+  }
   return {
     ...project,
+    label: entry.participationPeriod,
     imageScale: project.imageScale ?? 1,
-    institutionLines: experience?.affiliations[0]?.name.split(', ') ?? [],
     role: entry.role,
     href: `/research/${researchPageSlug(entry)}/`,
   }
