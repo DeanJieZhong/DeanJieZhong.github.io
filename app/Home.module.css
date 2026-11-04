@@ -134,6 +134,10 @@
   margin-left: auto;
 }
 
+.project[data-home-project='cxcl13-fc'] .projectHeading h2 span {
+  white-space: nowrap;
+}
+
 .projectMetadata {
   margin-top: 22px;
   font-size: 17px;

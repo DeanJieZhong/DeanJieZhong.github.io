@@ -18,7 +18,7 @@ const homeProjects = [
       width: 6000,
       height: 3448,
       alt: 'Proposed TroGen concept showing bacterial payload delivery in a hypoxic tumor microenvironment and control in normal tissue.',
-      caption: 'Proposed concept，Shuning Dong制作。',
+      caption: 'Proposed concept. Illustration by Shuning Dong.',
     },
     paragraphs: [
       'In 2025, I conceived and led TroGen, a project exploring engineered commensal bacteria as intracellular delivery vehicles for triple-negative breast cancer.',
@@ -32,8 +32,8 @@ const homeProjects = [
   {
     id: 'cxcl13-fc',
     label: 'Intern - Ongoing',
-    title: ['T Cell &', 'Cytokine', 'Engineering'],
-    imageScale: 1.5,
+    title: ['T Cell & Cytokine', 'Engineering'],
+    imageScale: 1.2,
     image: {
       src: '/static/images/home/il4-8fc-mechanism.png',
       width: 1920,
