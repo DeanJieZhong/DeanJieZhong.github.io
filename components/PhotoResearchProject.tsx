@@ -1,3 +1,4 @@
+import AdvisoryAwards from '@/components/AdvisoryAwards'
 import Image from 'next/image'
 import type { ReactNode } from 'react'
 import Link from '@/components/Link'
@@ -141,6 +142,7 @@ export default function PhotoResearchProject({
               </ResearchExperienceMetadata>
             </ScholarPopoverGroup>
           )}
+          <AdvisoryAwards projectId={entry.id} />
         </section>
       </div>
 

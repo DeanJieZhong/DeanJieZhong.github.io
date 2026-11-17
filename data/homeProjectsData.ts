@@ -22,13 +22,18 @@ const homeProjects = [
       caption: 'Proposed concept.',
     },
     paragraphs: [
-      'In 2025, I conceived and led TroGen, a project exploring engineered commensal bacteria as intracellular delivery vehicles for triple-negative breast cancer.',
-      'I led the genetic system design and experimental strategy, developed bacteria–cell co-culture assays, and carried out flow cytometry and confocal imaging. Our work connected bacterial–cell interactions, restriction–modification system bypass and hypoxia-responsive regulation.',
+      'I conceived and led TroGen, exploring engineered commensal bacteria as intracellular delivery vehicles for triple-negative breast cancer. I designed the genetic systems and experimental strategy, and developed bacteria–cell assays to investigate invasion and hypoxia-responsive expression.',
     ],
-    progressTitle: 'What we built',
-    progress:
-      'Engineered bacterial strains and preliminary co-culture and reporter data. Reporter fluorescence was higher under low oxygen; intracellular payload delivery and anticancer efficacy remained to be validated.',
-    note: 'Top 10 undergraduate team · iGEM 2025',
+    awards: [
+      'Top 10 — 10 of 190 undergraduate teams worldwide (top 5.3%).',
+      'Best New Composite Part — sole undergraduate winner in the category.',
+      'Best Oncology Project nominee — shortlisted across undergraduate and overgraduate teams.',
+      'Best Wiki nominee — undergraduate award shortlist.',
+      'Gold Medal — highest medal tier; all Bronze and Silver criteria plus excellence in three selected areas.',
+    ],
+    progressTitle: '',
+    progress: '',
+    note: '',
   },
   {
     id: 'cxcl13-fc',
@@ -71,18 +76,69 @@ const homeProjects = [
       'Experimental readouts and computational tools for studying gliding. Rainbow Trace produces temporal color projections; labeling methods and tracking accuracy are still being validated.',
     note: 'Undergraduate researcher · January 2026–present',
   },
+  {
+    id: 'dogmaos',
+    institutionLines: ['XJTLU & partner teams'],
+    title: ['Supporting', 'Our Next', 'Generation'],
+    imageScale: 1.3,
+    image: {
+      src: '/static/images/research/xjtlu-advisory/recruitment-group.webp',
+      width: 2000,
+      height: 1333,
+      alt: 'Incoming and previous XJTLU iGEM members together during recruitment.',
+      caption: 'Supporting the next generation at XJTLU and sharing experience with other teams.',
+    },
+    paragraphs: ['During 2026, I also took on mentorship roles with three iGEM teams.'],
+    advisoryTeams: [
+      {
+        id: 'dogmaos',
+        title: 'XJTLU-China, Advisor',
+        description:
+          'I helped our next iGEM generation develop dogmaOS, a project exploring translation–folding control for protein expression in Escherichia coli. As an advisor, I shaped the early concept and experimental plans and supported team recruitment and university sponsorship.',
+        awards: [
+          'Best Model (1/281, sole undergrad winner)',
+          'Best Education (1/281, sole undergrad winner)',
+          'Nominated for Best Measurement & Best Wiki',
+          'Gold Medal',
+        ],
+      },
+      {
+        id: 'flame',
+        title: 'SUDA-ICPI-China, Instructor',
+        description:
+          'For FLAME, ICPI’s first iGEM project, I helped establish the team and secure university funding, then guided project design, experimental planning and laboratory techniques as an instructor.',
+        awards: ['Silver Medal'],
+      },
+      {
+        id: 'b-longum-pancreatic-cancer',
+        title: 'Zhejiang University team, Advisor',
+        description:
+          'The team explored Bifidobacterium longum for antitumor immunity in pancreatic cancer. Drawing on TroGen, I advised on project and experimental design and provided laboratory guidance, strains and plasmids.',
+        awards: ['Gold Medal'],
+      },
+    ],
+    progressTitle: '',
+    progress: '',
+    note: '',
+  },
 ]
 
 export default homeProjects.map((project) => {
   const entry = researchData.find((entry) => entry.id === project.id)
-  if (!entry?.hasDetailPage || !entry.participationPeriod) {
+  const label = entry?.participationPeriod || entry?.eventPeriod
+  if (!entry?.hasDetailPage || !label) {
     throw new Error(`Missing homepage project route or participation dates: ${project.id}`)
   }
   return {
     ...project,
-    label: entry.participationPeriod,
+    label,
     imageScale: project.imageScale ?? 1,
-    role: entry.role,
+    awards: project.awards ?? [],
+    role: project.advisoryTeams ? 'Advisor & Instructor' : entry.role,
+    advisoryTeams: (project.advisoryTeams ?? []).map((team) => {
+      const teamEntry = researchData.find((item) => item.id === team.id)!
+      return { ...team, href: `/research/${researchPageSlug(teamEntry)}/` }
+    }),
     href: `/research/${researchPageSlug(entry)}/`,
   }
 })

@@ -1,3 +1,4 @@
+import AdvisoryAwards from '@/components/AdvisoryAwards'
 import { Fragment } from 'react'
 import Image from 'next/image'
 import Link from '@/components/Link'
@@ -150,6 +151,7 @@ export default function XjtluAdvisory({ title }: { title: string }) {
               </p>
             </ScholarPopoverGroup>
           </div>
+          <AdvisoryAwards projectId="dogmaos" />
         </section>
       </div>
 

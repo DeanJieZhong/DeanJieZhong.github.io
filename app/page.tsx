@@ -85,16 +85,54 @@ export default function HomePage() {
                 {project.paragraphs.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
-                <div className={styles.progress}>
-                  <h3>{project.progressTitle}</h3>
-                  <p>{project.progress}</p>
-                </div>
-                <p className={styles.note}>{project.note}</p>
-                <Link href={project.href} className={styles.projectLink}>
-                  Explore the project
-                  <span className="sr-only">: {project.title.join(' ')}</span>
-                  <span aria-hidden="true">↗</span>
-                </Link>
+                {project.advisoryTeams.length > 0 && (
+                  <ul className="mt-6 list-none space-y-8">
+                    {project.advisoryTeams.map((team) => (
+                      <li key={team.id}>
+                        <h3 className="mb-3 font-semibold">
+                          <Link href={team.href}>{team.title}</Link>
+                        </h3>
+                        <p>
+                          {team.description
+                            .split(/(Escherichia coli|Bifidobacterium longum)/)
+                            .map((part, index) =>
+                              /^(Escherichia coli|Bifidobacterium longum)$/.test(part) ? (
+                                <em key={index}>{part}</em>
+                              ) : (
+                                part
+                              )
+                            )}
+                        </p>
+                        <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-6">
+                          {team.awards.map((award) => (
+                            <li key={award}>{award}</li>
+                          ))}
+                        </ul>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {project.awards.length > 0 && (
+                  <ul className="mt-5 list-disc space-y-2 pl-5 text-sm leading-6">
+                    {project.awards.map((award) => (
+                      <li key={award}>{award}</li>
+                    ))}
+                  </ul>
+                )}
+                {project.progress && (
+                  <div className={styles.progress}>
+                    <h3>{project.progressTitle}</h3>
+                    <p>{project.progress}</p>
+                  </div>
+                )}
+                {project.note && <p className={styles.note}>{project.note}</p>}
+                {project.advisoryTeams.length === 0 && (
+                  <Link href={project.href} className={styles.projectLink}>
+                    Explore the project
+                    <span className="sr-only">: {project.title.join(' ')}</span>
+                    <span aria-hidden="true">↗</span>
+                  </Link>
+                )}
               </div>
             </article>
           ))}
