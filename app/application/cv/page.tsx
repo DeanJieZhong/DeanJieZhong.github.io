@@ -11,9 +11,9 @@ export default function CVPage() {
   return (
     <ApplicationMaterialLayout title="CV">
       <p className="text-sm text-gray-500">
-        Version: <time dateTime="2026-11-01">1 November 2026</time>
+        Version: <time dateTime="2026-11-20">20 November 2026</time>
       </p>
-      <PdfPreview src="/static/files/cv.pdf?v=2026-11-01-r2" title="CV PDF preview" />
+      <PdfPreview src="/static/files/cv.pdf?v=2026-11-20" title="CV PDF preview" />
     </ApplicationMaterialLayout>
   )
 }
