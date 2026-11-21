@@ -35,10 +35,10 @@ test('indexes readable page content, excluding navigation, controls, and seriali
       <span aria-hidden="true">Decorative label</span><span class="sr-only">Hidden helper</span>
       <script>privateSerializedData</script></main><footer>Footer content</footer></body></html>
   `,
-    '/application/ielts-transcript/'
+    '/materials/ielts-transcript/'
   )
   assert.equal(document.title, 'IELTS Transcript')
-  assert.equal(document.section, 'Application')
+  assert.equal(document.section, 'Materials')
   assert.match(document.content, /Listening: 8.0/)
   assert.match(document.content, /cohesion & grammar/)
   assert.doesNotMatch(
@@ -50,8 +50,8 @@ test('indexes readable page content, excluding navigation, controls, and seriali
 test('normalizes exported routes and excludes duplicate pagination and error pages', () => {
   assert.equal(routeFromFile('index.html'), '/')
   assert.equal(
-    routeFromFile('application/ielts-transcript/index.html'),
-    '/application/ielts-transcript/'
+    routeFromFile('materials/ielts-transcript/index.html'),
+    '/materials/ielts-transcript/'
   )
   assert.equal(
     routeFromFile(
@@ -79,9 +79,9 @@ const documents = prepareSearchDocuments([
     content: 'A note about IELTS and studying abroad.',
   },
   {
-    url: '/application/ielts-transcript/',
+    url: '/materials/ielts-transcript/',
     title: 'IELTS Transcript',
-    section: 'Application',
+    section: 'Materials',
     description: 'Academic English scores',
     headings: 'Band scores',
     content: 'IELTS Transcript. Listening 8.0. Coherence and cohesion 7. Suzhou.',
@@ -95,17 +95,17 @@ const documents = prepareSearchDocuments([
     content: 'Environmental sensing under hypoxia.',
   },
   {
-    url: '/application/cv/',
+    url: '/materials/cv/',
     title: 'CV',
-    section: 'Application',
+    section: 'Materials',
     description: 'Curriculum vitae',
     headings: '',
     content: 'Academic profile.',
   },
   {
-    url: '/application/academic-transcript/',
+    url: '/materials/academic-transcript/',
     title: 'Academic Transcript',
-    section: 'Application',
+    section: 'Materials',
     description: 'Academic records',
     headings: 'Weighted averages',
     content: 'Academic Transcript. Module marks.',
@@ -113,20 +113,20 @@ const documents = prepareSearchDocuments([
 ])
 
 test('finds body-only terms and ranks a matching page title ahead of incidental references', () => {
-  assert.equal(searchDocuments(documents, 'IELTS')[0].url, '/application/ielts-transcript/')
-  assert.equal(searchDocuments(documents, 'transcript')[0].url, '/application/academic-transcript/')
-  assert.equal(searchDocuments(documents, 'coherence')[0].url, '/application/ielts-transcript/')
+  assert.equal(searchDocuments(documents, 'IELTS')[0].url, '/materials/ielts-transcript/')
+  assert.equal(searchDocuments(documents, 'transcript')[0].url, '/materials/academic-transcript/')
+  assert.equal(searchDocuments(documents, 'coherence')[0].url, '/materials/ielts-transcript/')
   assert.equal(
     searchDocuments(documents, 'hypoxia')[0].url,
     '/research/trogen-a-commensal-bacterial-platform-for-intracellular-drug-delivery-in-tnbc/'
   )
-  assert.equal(searchDocuments(documents, 'ielts suzhou')[0].url, '/application/ielts-transcript/')
+  assert.equal(searchDocuments(documents, 'ielts suzhou')[0].url, '/materials/ielts-transcript/')
   assert.equal(searchDocuments(documents, 'IELTS hypoxia').length, 0)
 })
 
 test('handles aliases, diacritics, whitespace, and empty searches', () => {
-  assert.equal(searchDocuments(documents, '  雅思  ')[0].url, '/application/ielts-transcript/')
-  assert.equal(searchDocuments(documents, 'résumé')[0].url, '/application/cv/')
+  assert.equal(searchDocuments(documents, '  雅思  ')[0].url, '/materials/ielts-transcript/')
+  assert.equal(searchDocuments(documents, 'résumé')[0].url, '/materials/cv/')
   assert.equal(searchDocuments(documents, '').length, 0)
   assert.equal(searchDocuments(documents, 'nonexistent-query').length, 0)
 })
@@ -153,7 +153,7 @@ test('only matches word beginnings, consistently in results, snippets, and highl
   const entries = prepareSearchDocuments([...documents, jie])
   assert.deepEqual(
     searchDocuments(entries, 'IE').map((entry) => entry.url),
-    ['/application/ielts-transcript/', '/blog/example/']
+    ['/materials/ielts-transcript/', '/blog/example/']
   )
   assert.equal(searchDocuments(entries, 'elts').length, 0)
   assert.equal(searchDocuments(entries, 'Jie')[0].url, '/about-dean-jie-zhong/jie/')
@@ -215,7 +215,7 @@ test('separates current-page title/body matches ahead of other ranked pages with
   const entries = prepareSearchDocuments([...documents, current])
   const grouped = groupSearchResults(entries, 'IE', '/blog/current')
   assert.equal(grouped.currentPage.url, '/blog/current/')
-  assert.equal(grouped.otherPages[0].url, '/application/ielts-transcript/')
+  assert.equal(grouped.otherPages[0].url, '/materials/ielts-transcript/')
   assert.ok(grouped.otherPages.every((entry) => entry.url !== '/blog/current/'))
   assert.equal(
     groupSearchResults(entries, 'Study', '/blog/current/').currentPage.url,
@@ -232,11 +232,11 @@ test('shows no suggestions for empty queries and keeps alias-only results separa
   )
   assert.equal(empty.currentPage, null)
   assert.equal(empty.otherPages.length, 0)
-  const quick = groupSearchResults(documents, '', '/application/ielts-transcript/')
+  const quick = groupSearchResults(documents, '', '/materials/ielts-transcript/')
   assert.equal(quick.currentPage, null)
   assert.equal(quick.otherPages.length, 0)
-  const alias = groupSearchResults(documents, '雅思', '/application/ielts-transcript/')
+  const alias = groupSearchResults(documents, '雅思', '/materials/ielts-transcript/')
   assert.equal(alias.currentPage, null)
-  assert.equal(alias.otherPages[0].url, '/application/ielts-transcript/')
+  assert.equal(alias.otherPages[0].url, '/materials/ielts-transcript/')
   assert.equal(groupSearchResults(documents, 'IE', '/missing/').currentPage, null)
 })

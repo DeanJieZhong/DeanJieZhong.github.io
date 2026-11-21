@@ -3,12 +3,16 @@
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import Header from './Header'
+import siteMetadata from '@/data/siteMetadata'
 import SectionContainer, { sectionContainerClassName } from './SectionContainer'
 import { HomeNavigationContext } from './HomeNavigationContext'
 import styles from './HomeHero.module.css'
+import headerStyles from './Header.module.css'
 
 export default function SiteContent({ children }: { children: ReactNode }) {
-  const isHome = usePathname() === '/'
+  const pathname = usePathname().replace(/\/$/, '') || '/'
+  const isHome = pathname === '/'
+  const stickyNavigation = siteMetadata.stickyNav
   const [hasVisitedInternalPage, setHasVisitedInternalPage] = useState(!isHome)
   const headerRef = useRef<HTMLDivElement>(null)
   const logoRef = useRef<SVGSVGElement>(null)
@@ -35,7 +39,10 @@ export default function SiteContent({ children }: { children: ReactNode }) {
     <HomeNavigationContext.Provider value={{ intro, headerRef, logoRef, setControlsReady }}>
       <div
         ref={headerRef}
-        className={isHome ? styles.homeNavigation : undefined}
+        className={
+          isHome ? styles.homeNavigation : stickyNavigation ? headerStyles.sticky : undefined
+        }
+        data-sticky-navigation={!isHome && stickyNavigation ? true : undefined}
         data-intro={intro || undefined}
         inert={intro}
       >

@@ -1,18 +1,28 @@
 .header {
   --interaction-focus-halo: var(--color-primary-100);
+  --header-base-height: 88px;
+  --header-scroll-scale: 1;
   position: relative;
   z-index: 40;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  min-height: calc(88px * var(--header-height-scale, 0.75));
+  min-height: calc(
+    var(--header-base-height) * var(--header-height-scale, 0.75) * var(--header-scroll-scale)
+  );
   gap: 24px;
   color: #fff;
+  transition: min-height 200ms ease;
+}
+
+.header[data-compact='true'] {
+  --header-scroll-scale: 0.8;
 }
 
 .sticky {
   position: sticky;
+  z-index: 40;
   top: 0;
 }
 
@@ -251,7 +261,7 @@
 
 @media (min-width: 1280px) {
   .header {
-    min-height: calc(96px * var(--header-height-scale, 0.75));
+    --header-base-height: 96px;
   }
 
   .controls {
@@ -261,7 +271,7 @@
 
 @media (max-width: 767px) {
   .header {
-    min-height: calc(80px * var(--header-height-scale, 0.75));
+    --header-base-height: 80px;
   }
 
   .logo {
@@ -271,6 +281,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .header,
   .reveal,
   .label,
   .revealedLabel,

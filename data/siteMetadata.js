@@ -25,8 +25,8 @@ const siteMetadata = {
   medium: 'https://medium.com',
   bluesky: 'https://bsky.app/',
   locale: 'en-US',
-  // set to true if you want a navbar fixed to the top
-  stickyNav: false,
+  // Keep the navigation at the top on every page.
+  stickyNav: true,
   analytics: {
     // If you want to use an analytics provider you have to add it to the
     // content security policy in the `next.config.js` file.

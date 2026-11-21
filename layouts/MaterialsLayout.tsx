@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react'
 import Breadcrumbs from '@/components/Breadcrumbs'
-import styles from './ApplicationMaterialLayout.module.css'
+import styles from './MaterialsLayout.module.css'
 
-export default function ApplicationMaterialLayout({
+export default function MaterialsLayout({
   title,
   isOverview = false,
   children,
@@ -18,7 +18,7 @@ export default function ApplicationMaterialLayout({
           items={
             isOverview
               ? [{ label: title }]
-              : [{ label: 'Application', href: '/application' }, { label: title }]
+              : [{ label: 'Materials', href: '/materials' }, { label: title }]
           }
           tone="inverse"
         />

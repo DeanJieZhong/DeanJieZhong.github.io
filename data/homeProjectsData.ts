@@ -3,7 +3,7 @@ import researchData, { researchPageSlug } from './researchData'
 // Homepage narrative introducing the project pages; bilingual copy lives in
 // Obsidian's 003_Homepage_Design_and_Content.md. Keep preliminary results qualified.
 export const homeIntroduction = [
-  'I’m now a final-year undergrad studying biological sciences at Xi’an Jiaotong-Liverpool University. I like engineering biology to do things it wasn’t supposed to do. Sometimes it even works.',
+  'I’m a final-year biological sciences undergrad at Xi’an Jiaotong-Liverpool University. I like engineering biology to do things it wasn’t supposed to do. Sometimes it even works.',
 ]
 
 export const homeProjectInvitation = 'Look what I’ve been doing.'

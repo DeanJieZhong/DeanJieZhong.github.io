@@ -1,51 +1,44 @@
 import Link from '@/components/Link'
-import ApplicationMaterialLayout from '@/layouts/ApplicationMaterialLayout'
+import MaterialsLayout from '@/layouts/MaterialsLayout'
 import { genPageMetadata } from 'app/seo'
-import styles from './Application.module.css'
+import styles from './Materials.module.css'
 
 export const metadata = genPageMetadata({
-  title: 'Application',
+  title: 'Materials',
   description:
-    'CV, academic transcript, academic ranking, English language qualifications, and research summary for academic applications.',
+    'CV, academic transcript, academic ranking, and English language qualifications for academic applications.',
 })
 
 const materials = [
   {
     id: 'cv',
     title: 'CV',
-    href: '/application/cv',
+    href: '/materials/cv',
     description: 'Education, research experience, and academic activities, with a downloadable CV.',
   },
   {
     id: 'transcript',
     title: 'Academic Transcript',
-    href: '/application/academic-transcript',
+    href: '/materials/academic-transcript',
     description: 'Academic records by year, including module credits, marks, and grading context.',
   },
   {
     id: 'ranking',
     title: 'Academic Ranking',
-    href: '/application/academic-ranking',
+    href: '/materials/academic-ranking',
     description: 'Programme cohort ranking, calculation basis, and the official ranking letter.',
   },
   {
     id: 'ielts',
     title: 'IELTS Transcript',
-    href: '/application/ielts-transcript',
+    href: '/materials/ielts-transcript',
     description: 'English language test results and supporting documentation.',
-  },
-  {
-    id: 'research',
-    title: 'Research Summary',
-    href: '/application/research-summary',
-    description:
-      'Research experience, individual contributions, technical skills, and future interests.',
   },
 ]
 
-export default function ApplicationPage() {
+export default function MaterialsPage() {
   return (
-    <ApplicationMaterialLayout title="Application" isOverview>
+    <MaterialsLayout title="Materials" isOverview>
       <div className="not-prose grid grid-cols-1 gap-5">
         {materials.map((material) => (
           <section
@@ -81,6 +74,6 @@ export default function ApplicationPage() {
           </section>
         ))}
       </div>
-    </ApplicationMaterialLayout>
+    </MaterialsLayout>
   )
 }

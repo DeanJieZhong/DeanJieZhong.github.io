@@ -24,6 +24,28 @@ const { pageTitleSlug } = await import(
 const redirects = JSON.parse(await readFile('data/routeRedirects.json', 'utf8'))
 const pages = JSON.parse(await readFile('out/search.json', 'utf8'))
 
+test('materials pages replace application routes and remove the research summary', async () => {
+  const materialPages = pages.filter((page) => page.url.startsWith('/materials/'))
+  assert.deepEqual(materialPages.map((page) => page.url).sort(), [
+    '/materials/',
+    '/materials/academic-ranking/',
+    '/materials/academic-transcript/',
+    '/materials/cv/',
+    '/materials/ielts-transcript/',
+  ])
+  assert.equal(materialPages.find((page) => page.url === '/materials/').title, 'Materials')
+  assert.ok(materialPages.every((page) => page.section === 'Materials'))
+  assert.ok(!pages.some((page) => page.url.startsWith('/application/')))
+  for (const route of [
+    '/application/research-summary/',
+    '/application/research/',
+    '/materials/research-summary/',
+  ]) {
+    assert.ok(!redirects[route])
+    await assert.rejects(access(path.join('out', route, 'index.html')), { code: 'ENOENT' })
+  }
+})
+
 test('normalizes full English titles, punctuation, scientific notation and mixed scripts', () => {
   assert.equal(pageTitleSlug('IELTS Transcript'), 'ielts-transcript')
   assert.equal(pageTitleSlug('About Dean Jie Zhong 钟杰'), 'about-dean-jie-zhong')

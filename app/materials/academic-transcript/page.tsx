@@ -1,5 +1,5 @@
 import AcademicTranscript from '@/components/AcademicTranscript'
-import ApplicationMaterialLayout from '@/layouts/ApplicationMaterialLayout'
+import MaterialsLayout from '@/layouts/MaterialsLayout'
 import PdfPreview from '@/components/PdfPreview'
 import { genPageMetadata } from 'app/seo'
 
@@ -13,7 +13,7 @@ export default function TranscriptPage() {
   const transcriptPdf = '/static/files/academic-transcript.pdf'
 
   return (
-    <ApplicationMaterialLayout title="Academic Transcript">
+    <MaterialsLayout title="Academic Transcript">
       <AcademicTranscript />
       <section aria-labelledby="grading-information-heading">
         <h2 id="grading-information-heading">Grading information</h2>
@@ -26,6 +26,6 @@ export default function TranscriptPage() {
         <h2 id="official-transcript-heading">Official transcript</h2>
         <PdfPreview src={transcriptPdf} title="Official academic transcript PDF preview" />
       </section>
-    </ApplicationMaterialLayout>
+    </MaterialsLayout>
   )
 }

@@ -10,20 +10,19 @@ const headerNavLinks: HeaderNavLink[] = [
     href: '/research',
     title: 'Research',
     children: [
-      { href: '/research#ism-heading', title: 'Immunology' },
+      { href: '/research#ism-heading', title: 'T cells' },
       { href: '/research#igem-2025-heading', title: 'iGEM' },
       { href: '/research#f-johnsoniae-heading', title: 'Motility' },
     ],
   },
   {
-    href: '/application',
-    title: 'Application',
+    href: '/materials',
+    title: 'Materials',
     children: [
-      { href: '/application/cv', title: 'CV' },
-      { href: '/application/academic-transcript', title: 'Transcript' },
-      { href: '/application/academic-ranking', title: 'Ranking' },
-      { href: '/application/ielts-transcript', title: 'IELTS' },
-      { href: '/application/research-summary', title: 'Research' },
+      { href: '/materials/cv', title: 'CV' },
+      { href: '/materials/academic-transcript', title: 'Transcript' },
+      { href: '/materials/academic-ranking', title: 'Ranking' },
+      { href: '/materials/ielts-transcript', title: 'IELTS' },
     ],
   },
   {

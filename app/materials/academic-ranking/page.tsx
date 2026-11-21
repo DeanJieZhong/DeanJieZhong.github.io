@@ -1,6 +1,6 @@
 import PdfPreview from '@/components/PdfPreview'
 import academicRankingData from '@/data/academicRankingData'
-import ApplicationMaterialLayout from '@/layouts/ApplicationMaterialLayout'
+import MaterialsLayout from '@/layouts/MaterialsLayout'
 import { genPageMetadata } from 'app/seo'
 
 export const metadata = genPageMetadata({
@@ -11,7 +11,7 @@ export const metadata = genPageMetadata({
 
 export default function AcademicRankingPage() {
   return (
-    <ApplicationMaterialLayout title="Academic Ranking">
+    <MaterialsLayout title="Academic Ranking">
       <dl className="not-prose mb-8 space-y-4">
         <div className="grid gap-1 sm:grid-cols-[10rem_1fr] sm:gap-6">
           <dt className="text-sm text-gray-600">Programme</dt>
@@ -62,6 +62,6 @@ export default function AcademicRankingPage() {
           title="Official academic ranking letter PDF preview"
         />
       </section>
-    </ApplicationMaterialLayout>
+    </MaterialsLayout>
   )
 }

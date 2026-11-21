@@ -66,6 +66,10 @@
     color-scheme: light;
   }
 
+  html:has([data-sticky-navigation='true']) {
+    scroll-padding-top: 88px;
+  }
+
   ::selection {
     color: var(--color-primary-700);
     background-color: var(--color-primary-100);

@@ -24,6 +24,19 @@ const Header = ({
 }) => {
   const pathname = usePathname().replace(/\/$/, '') || '/'
   const [heightScale, setHeightScale] = useState(0.75)
+  const [compact, setCompact] = useState(false)
+
+  useEffect(() => {
+    const updateCompact = () => {
+      const scroll = Math.max(0, window.scrollY)
+      // Separate thresholds prevent the height change from repeatedly toggling near the top.
+      setCompact((previous) => (previous ? scroll > 4 : scroll > 32))
+    }
+
+    updateCompact()
+    window.addEventListener('scroll', updateCompact, { passive: true })
+    return () => window.removeEventListener('scroll', updateCompact)
+  }, [pathname])
 
   useEffect(() => {
     // Local comparisons only; production keeps the selected default height.
@@ -37,7 +50,8 @@ const Header = ({
 
   return (
     <header
-      className={`${styles.header} ${siteMetadata.stickyNav ? styles.sticky : ''}`}
+      className={styles.header}
+      data-compact={compact || undefined}
       style={{ '--header-height-scale': heightScale } as CSSProperties}
     >
       <div className={styles.background} aria-hidden="true" />

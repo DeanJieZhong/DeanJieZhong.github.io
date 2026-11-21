@@ -1,6 +1,6 @@
 import Image from '@/components/Image'
 import PdfPreview from '@/components/PdfPreview'
-import ApplicationMaterialLayout from '@/layouts/ApplicationMaterialLayout'
+import MaterialsLayout from '@/layouts/MaterialsLayout'
 import { genPageMetadata } from 'app/seo'
 
 export const metadata = genPageMetadata({
@@ -84,7 +84,7 @@ const scores: Score[] = [
 
 export default function IELTSPage() {
   return (
-    <ApplicationMaterialLayout title="IELTS Transcript">
+    <MaterialsLayout title="IELTS Transcript">
       <section aria-labelledby="ielts-details-heading" className="not-prose mt-8">
         <h2 id="ielts-details-heading" className="text-xl font-semibold text-gray-900">
           Test details
@@ -165,6 +165,6 @@ export default function IELTSPage() {
           />
         </figure>
       </section>
-    </ApplicationMaterialLayout>
+    </MaterialsLayout>
   )
 }

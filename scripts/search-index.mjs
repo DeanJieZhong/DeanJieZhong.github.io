@@ -32,7 +32,7 @@ function findAll(node, predicate) {
 const cleanText = (text) => text.replace(/\s+/g, ' ').trim()
 
 function getSection(url) {
-  if (url.startsWith('/application')) return 'Application'
+  if (url.startsWith('/materials')) return 'Materials'
   if (url.startsWith('/research')) return 'Research'
   if (url.startsWith('/blog') || url.startsWith('/tags')) return 'Blog'
   if (url.startsWith('/about-dean-jie-zhong') || url.startsWith('/lego-archive')) return 'About'
@@ -101,8 +101,8 @@ export async function generateSearchIndex() {
     const document = extractSearchDocument(await readFile(path.join(source, file), 'utf8'), url)
     if (document) documents.push(document)
   }
-  if (!documents.some((document) => document.url === '/application/ielts-transcript/')) {
-    throw new Error('The site search index is incomplete: application pages were not generated.')
+  if (!documents.some((document) => document.url === '/materials/ielts-transcript/')) {
+    throw new Error('The site search index is incomplete: materials pages were not generated.')
   }
   const json = JSON.stringify(documents)
   // Keep local development and the static deployment on the same generated index.
