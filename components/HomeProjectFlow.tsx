@@ -13,6 +13,7 @@ export default function HomeProjectFlow({ children }: { children: ReactNode }) {
     const ribbon = ribbonRef.current
     if (!flow || !ribbon) return
     const projects = [...flow.querySelectorAll<HTMLElement>('[data-home-project]')]
+    const imageProjects = projects.filter((project) => project.hasAttribute('data-image-ratio'))
     const introduction = document.getElementById('home-content')
     const entryLine = introduction?.querySelector<HTMLElement>('[data-project-entry]')
     let frame = 0
@@ -20,7 +21,7 @@ export default function HomeProjectFlow({ children }: { children: ReactNode }) {
 
     const measure = () => {
       const mobile = window.matchMedia('(max-width: 760px)').matches
-      const layouts = projects.map((project) => {
+      const layouts = imageProjects.map((project) => {
         const width = project.getBoundingClientRect().width
         const ratio = Number(project.dataset.imageRatio) || 1.5
         const scale = Number(project.dataset.imageScale) || 1
@@ -41,7 +42,7 @@ export default function HomeProjectFlow({ children }: { children: ReactNode }) {
           stacked: !mobile && scale > 1 && width - visualWidth - 18 - storyGap < 300,
         }
       })
-      projects.forEach((project, index) => {
+      imageProjects.forEach((project, index) => {
         if (mobile) project.style.removeProperty('--visual-width')
         else project.style.setProperty('--visual-width', `${layouts[index].width}px`)
         project.dataset.stacked = String(layouts[index].stacked)

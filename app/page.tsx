@@ -2,9 +2,26 @@ import type { CSSProperties } from 'react'
 import Image from 'next/image'
 import HomeProjectFlow from '@/components/HomeProjectFlow'
 import HomeHero from '@/components/HomeHero'
+import HomeMemoryPhoto from '@/components/HomeMemoryPhoto'
 import Link from '@/components/Link'
-import homeProjects, { homeIntroduction, homeProjectInvitation } from '@/data/homeProjectsData'
+import homeProjects, {
+  homeIntroduction,
+  homeOutlook,
+  homeProjectInvitation,
+} from '@/data/homeProjectsData'
 import styles from './Home.module.css'
+
+function AwardText({ award }: { award: string }) {
+  return award.split(/(\([^()]*\))/).map((part, index) =>
+    part.startsWith('(') ? (
+      <span key={index} className="text-sm text-[#666]">
+        {part}
+      </span>
+    ) : (
+      part
+    )
+  )
+}
 
 export default function HomePage() {
   return (
@@ -23,7 +40,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className={styles.projects} aria-label="Selected projects">
+      <section className={styles.projects} aria-label="Research journey and future goals">
         <HomeProjectFlow>
           {homeProjects.map((project) => (
             <article
@@ -64,17 +81,19 @@ export default function HomePage() {
                     role={project.imageScale > 1 ? 'region' : undefined}
                     aria-label={project.imageScale > 1 ? project.image.caption : undefined}
                   >
-                    <Image
-                      src={project.image.src}
-                      width={project.image.width}
-                      height={project.image.height}
-                      alt={project.image.alt}
-                      sizes={
-                        project.imageScale > 1
-                          ? '(max-width: 760px) 150vw, (max-width: 1280px) 82.5vw, 960px'
-                          : '(max-width: 760px) 100vw, (max-width: 1280px) 55vw, 640px'
-                      }
-                    />
+                    <div className={styles.figureImage}>
+                      <Image
+                        src={project.image.src}
+                        width={project.image.width}
+                        height={project.image.height}
+                        alt={project.image.alt}
+                        sizes={
+                          project.imageScale > 1
+                            ? '(max-width: 760px) 150vw, (max-width: 1280px) 82.5vw, 960px'
+                            : '(max-width: 760px) 100vw, (max-width: 1280px) 55vw, 640px'
+                        }
+                      />
+                    </div>
                   </div>
                   <figcaption>{project.image.caption}</figcaption>
                 </figure>
@@ -83,14 +102,27 @@ export default function HomePage() {
               <div className={styles.projectSpine} data-project-spine aria-hidden="true" />
               <div className={styles.story}>
                 {project.paragraphs.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
+                  <p key={paragraph}>
+                    {paragraph
+                      .split(/(Flavobacterium johnsoniae)/)
+                      .map((part, index) =>
+                        part === 'Flavobacterium johnsoniae' ? <em key={index}>{part}</em> : part
+                      )}
+                  </p>
                 ))}
                 {project.advisoryTeams.length > 0 && (
                   <ul className="mt-6 list-none space-y-8">
                     {project.advisoryTeams.map((team) => (
                       <li key={team.id}>
-                        <h3 className="mb-3 font-semibold">
-                          <Link href={team.href}>{team.title}</Link>
+                        <h3 className="mb-3 flex items-start gap-3 font-semibold">
+                          <span className="min-w-0 flex-1">{team.title}</span>
+                          <Link
+                            href={team.href}
+                            className={styles.teamProjectLink}
+                            aria-label={`Explore the project: ${team.title}`}
+                          >
+                            <span aria-hidden="true">↗</span>
+                          </Link>
                         </h3>
                         <p>
                           {team.description
@@ -103,21 +135,33 @@ export default function HomePage() {
                               )
                             )}
                         </p>
-                        <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-6">
-                          {team.awards.map((award) => (
-                            <li key={award}>{award}</li>
-                          ))}
-                        </ul>
+                        {team.awards.length > 0 && (
+                          <div className="mt-5">
+                            {team.awardsIntroduction && <p>{team.awardsIntroduction}</p>}
+                            <ul className={styles.awardList}>
+                              {team.awards.map((award) => (
+                                <li key={award}>
+                                  <AwardText award={award} />
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
                       </li>
                     ))}
                   </ul>
                 )}
                 {project.awards.length > 0 && (
-                  <ul className="mt-5 list-disc space-y-2 pl-5 text-sm leading-6">
-                    {project.awards.map((award) => (
-                      <li key={award}>{award}</li>
-                    ))}
-                  </ul>
+                  <div className="mt-5">
+                    {project.awardsIntroduction && <p>{project.awardsIntroduction}</p>}
+                    <ul className={styles.awardList}>
+                      {project.awards.map((award) => (
+                        <li key={award}>
+                          <AwardText award={award} />
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 )}
                 {project.progress && (
                   <div className={styles.progress}>
@@ -127,24 +171,43 @@ export default function HomePage() {
                 )}
                 {project.note && <p className={styles.note}>{project.note}</p>}
                 {project.advisoryTeams.length === 0 && (
-                  <Link href={project.href} className={styles.projectLink}>
-                    Explore the project
-                    <span className="sr-only">: {project.title.join(' ')}</span>
-                    <span aria-hidden="true">↗</span>
-                  </Link>
+                  <div className={project.memory ? styles.projectActions : undefined}>
+                    <Link href={project.href} className={styles.projectLink}>
+                      Explore the project
+                      <span className="sr-only">: {project.title.join(' ')}</span>
+                      <span aria-hidden="true">↗</span>
+                    </Link>
+                    {project.memory && <HomeMemoryPhoto {...project.memory} />}
+                  </div>
                 )}
               </div>
             </article>
           ))}
+          <article
+            id="whats-next"
+            className={styles.outlook}
+            data-home-project="outlook"
+            aria-labelledby="home-outlook-title"
+          >
+            <div
+              className={`${styles.projectSpine} ${styles.outlookArrow}`}
+              data-project-spine
+              aria-hidden="true"
+            />
+            <header className={styles.outlookHeading}>
+              <h2 id="home-outlook-title">
+                {homeOutlook.title.map((line) => (
+                  <span key={line}>{line}</span>
+                ))}
+              </h2>
+            </header>
+            <div className={styles.outlookStory}>
+              {homeOutlook.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+          </article>
         </HomeProjectFlow>
-        <div className={styles.allResearch}>
-          <Link href="/research/">
-            All research <span aria-hidden="true">↗</span>
-          </Link>
-          <Link href="/about-dean-jie-zhong/">
-            More about me <span aria-hidden="true">↗</span>
-          </Link>
-        </div>
       </section>
     </div>
   )

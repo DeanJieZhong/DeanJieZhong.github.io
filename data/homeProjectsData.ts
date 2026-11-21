@@ -1,12 +1,20 @@
 import researchData, { researchPageSlug } from './researchData'
 
-// Homepage excerpts from the existing project pages; bilingual copy lives in
+// Homepage narrative introducing the project pages; bilingual copy lives in
 // Obsidian's 003_Homepage_Design_and_Content.md. Keep preliminary results qualified.
 export const homeIntroduction = [
   'I’m now a final-year undergrad studying biological sciences at Xi’an Jiaotong-Liverpool University. I like engineering biology to do things it wasn’t supposed to do. Sometimes it even works.',
 ]
 
 export const homeProjectInvitation = 'Look what I’ve been doing.'
+
+export const homeOutlook = {
+  title: ['What’s', 'next?'],
+  paragraphs: [
+    'Looking back, exploring engineering applications of biological principles is what has been sustaining my curiosity. I’m now seeking a PhD in synthetic biology or bioengineering to pursue those ideas in depth and self-refine as an independent researcher.',
+    'If we look further, I hope to stay closely involved in developing such systems throughout my career, ideally seeing direct benefits to the world. I’m open to academia, industry, entrepreneurship, or paths that bring them together.',
+  ],
+}
 
 const homeProjects = [
   {
@@ -22,15 +30,21 @@ const homeProjects = [
       caption: 'Proposed concept.',
     },
     paragraphs: [
-      'I conceived and led TroGen, exploring engineered commensal bacteria as intracellular delivery vehicles for triple-negative breast cancer. I designed the genetic systems and experimental strategy, and developed bacteria–cell assays to investigate invasion and hypoxia-responsive expression.',
+      'That interest took shape in iGEM 2025, when I conceived and led TroGen. I designed all genetic systems and experimental strategies, and carried out the bacteria–cell co-culture experiments and subsequent analyses. Our work culminated in a prototype chassis with validated TNBC cell invasiveness and hypoxia responsiveness.',
     ],
+    awardsIntroduction: 'We won:',
     awards: [
-      'Top 10 — 10 of 190 undergraduate teams worldwide (top 5.3%).',
-      'Best New Composite Part — sole undergraduate winner in the category.',
-      'Best Oncology Project nominee — shortlisted across undergraduate and overgraduate teams.',
-      'Best Wiki nominee — undergraduate award shortlist.',
-      'Gold Medal — highest medal tier; all Bronze and Silver criteria plus excellence in three selected areas.',
+      'Top 10 (among 190 undergrad teams)',
+      'Best New Composite Part (sole undergrad winner)',
+      'Nominated for Best Oncology Project & Best Wiki',
+      'Gold Medal',
     ],
+    memory: {
+      src: '/static/images/home/trogen-team-selfie.jpeg',
+      width: 4032,
+      height: 3024,
+      alt: 'TroGen team selfie at night with the Eiffel Tower in the background.',
+    },
     progressTitle: '',
     progress: '',
     note: '',
@@ -48,73 +62,75 @@ const homeProjects = [
       caption: 'Proposed Mechanism and Functional Characterization of IL4–8Fc',
     },
     paragraphs: [
-      'In 2026, I joined Dr. Lianjun Zhang’s lab at the Suzhou Institute of Systems Medicine to explore cancer immunotherapy through CD8 T cell and cytokine engineering.',
-      'Working with Jiajia Wang, I contribute to cytokine fusion-protein production, functional assays and immune-cell co-cultures. The projects investigate IL4–IL8 cooperation, CXCL13/CXCR5-mediated recruitment and synthetic TGFβ receptor signaling.',
+      'The complexity of cancer drove me to undertake an internship in immunology. Working with a PhD candidate, I have engineered T cells, produced cytokine fusion proteins, and conducted functional assays and adoptive T cell transfer experiments in mice. Our preliminary results showed that IL4–8Fc increased T cell activation and the proportion of granzyme B⁺ CD8 T cells in co-culture.',
     ],
-    progressTitle: 'What I’m investigating',
-    progress:
-      'How engineered immune signals can support T cell function and cooperation with other immune cells. My experimental work includes protein purification, neutrophil isolation and flow-cytometry readouts.',
-    note: 'Ongoing · January 2026–present',
+    progressTitle: '',
+    progress: '',
+    note: '',
   },
   {
     id: 'fj-gliding',
     institutionLines: ['XJTLU'],
     title: ['Bacterial', 'Motility'],
+    imageScale: 0.75,
     image: {
       src: '/static/images/research/fj-gliding/rainbow-temporal-projection.webp',
       width: 1824,
       height: 1216,
       alt: 'Temporal color projection showing bacterial movement across microscopy frames.',
-      caption: 'Rainbow Trace · Temporal color projection of bacterial movement',
+      caption: 'Rainbow Trace representative result',
     },
     paragraphs: [
-      'How does a bacterium glide across a surface? I investigate motility in Flavobacterium johnsoniae, connecting surface-protein motion with cell movement and colony organization.',
-      'I designed and tested fluorescence-labeling and microscopy workflows, proposed HA-tag labeling for the surface adhesin SprB, and developed Rainbow Trace and Rainbow Tracker to visualize movement and compare tracking strategies.',
+      'Meanwhile, I continued working with my iGEM supervisor Dr. Yongtao Zhu, studying bacterial motility.',
+      'Flavobacterium johnsoniae glides without flagella, using surface proteins that travel along helical paths. How this motion is coordinated within colonies remains incompletely understood. I am developing fluorescence-based methods to distinguish migration from growth and track the surface adhesin SprB. This has involved refining strategies for labeling colony polysaccharides and tracking surface adhesins. I also developed Rainbow Trace to visualize motion and an early version of Rainbow Tracker to follow individual cells.',
     ],
-    progressTitle: 'What I’m developing',
-    progress:
-      'Experimental readouts and computational tools for studying gliding. Rainbow Trace produces temporal color projections; labeling methods and tracking accuracy are still being validated.',
-    note: 'Undergraduate researcher · January 2026–present',
+    progressTitle: '',
+    progress: '',
+    note: '',
   },
   {
     id: 'dogmaos',
     institutionLines: ['XJTLU & partner teams'],
-    title: ['Supporting', 'Our Next', 'Generation'],
-    imageScale: 1.3,
+    title: ['Community', 'Engagement'],
+    role: 'Advisor & Instructor',
+    imageScale: 0.975,
     image: {
-      src: '/static/images/research/xjtlu-advisory/recruitment-group.webp',
-      width: 2000,
-      height: 1333,
-      alt: 'Incoming and previous XJTLU iGEM members together during recruitment.',
-      caption: 'Supporting the next generation at XJTLU and sharing experience with other teams.',
+      src: '/static/images/home/dogmaos.jpg',
+      width: 2400,
+      height: 1600,
+      alt: 'XJTLU-China dogmaOS team holding awards at iGEM 2026.',
+      caption: 'The XJTLU-China dogmaOS team at iGEM 2026.',
     },
-    paragraphs: ['During 2026, I also took on mentorship roles with three iGEM teams.'],
+    paragraphs: [
+      'I stayed involved in the iGEM community in the hope of giving others an experience as memorable as mine. Along the way, I made many like-minded friends, and we often stayed up late over hot pot.',
+    ],
     advisoryTeams: [
       {
         id: 'dogmaos',
-        title: 'XJTLU-China, Advisor',
+        title: 'Xi’an Jiaotong-Liverpool University, Advisor',
         description:
-          'I helped our next iGEM generation develop dogmaOS, a project exploring translation–folding control for protein expression in Escherichia coli. As an advisor, I shaped the early concept and experimental plans and supported team recruitment and university sponsorship.',
+          'I helped the team turn early ideas into dogmaOS, advising on the concept and experimental plans while supporting recruitment and university sponsorship.',
+        awardsIntroduction: 'I’m proud to say we won:',
         awards: [
-          'Best Model (1/281, sole undergrad winner)',
-          'Best Education (1/281, sole undergrad winner)',
+          'Best Model (sole undergrad winner)',
+          'Best Education (sole undergrad winner)',
           'Nominated for Best Measurement & Best Wiki',
           'Gold Medal',
         ],
       },
       {
         id: 'flame',
-        title: 'SUDA-ICPI-China, Instructor',
+        title: 'Soochow University ICPI, Instructor',
         description:
-          'For FLAME, ICPI’s first iGEM project, I helped establish the team and secure university funding, then guided project design, experimental planning and laboratory techniques as an instructor.',
-        awards: ['Silver Medal'],
+          'I helped establish ICPI’s first iGEM team, secure 240,000 CNY in university funding, and guide the design and experiments for FLAME, which earned a Silver Medal.',
+        awards: [],
       },
       {
         id: 'b-longum-pancreatic-cancer',
-        title: 'Zhejiang University team, Advisor',
+        title: 'Zhejiang University-University of Edinburgh Institute, Advisor',
         description:
-          'The team explored Bifidobacterium longum for antitumor immunity in pancreatic cancer. Drawing on TroGen, I advised on project and experimental design and provided laboratory guidance, strains and plasmids.',
-        awards: ['Gold Medal'],
+          'I advised on project design, shared strains and plasmids, and provided laboratory guidance for the team’s bacterial cancer immunotherapy project, which earned a Gold Medal.',
+        awards: [],
       },
     ],
     progressTitle: '',
@@ -133,8 +149,10 @@ export default homeProjects.map((project) => {
     ...project,
     label,
     imageScale: project.imageScale ?? 1,
+    awardsIntroduction: project.awardsIntroduction ?? '',
+    memory: project.memory ?? null,
     awards: project.awards ?? [],
-    role: project.advisoryTeams ? 'Advisor & Instructor' : entry.role,
+    role: project.role ?? entry.role,
     advisoryTeams: (project.advisoryTeams ?? []).map((team) => {
       const teamEntry = researchData.find((item) => item.id === team.id)!
       return { ...team, href: `/research/${researchPageSlug(teamEntry)}/` }
